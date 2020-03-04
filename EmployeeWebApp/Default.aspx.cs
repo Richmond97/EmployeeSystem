@@ -18,7 +18,14 @@ namespace EmployeeWebApp
 
         protected void btnLogin_Click(object sender, EventArgs e)
         {
-            ws.Verification(Int32.Parse(txtID.Text), txtPassword.Text);
+            if (ws.Verification(Int32.Parse(txtID.Text), txtPassword.Text))
+            {
+                Response.Redirect("ManageAccount.aspx");
+            }
+            else
+            {
+
+            }
         }
     }
 }
