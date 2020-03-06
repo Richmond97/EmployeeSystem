@@ -46,7 +46,6 @@ namespace EmployeeWebApp
             {
                 if (bkinDate.Contains(e.Day.Date))
                 {
-                    
                     MessageBox.Show(" Holyday already added");
                 }
                 bkinDate.Add(e.Day.Date);
@@ -64,19 +63,11 @@ namespace EmployeeWebApp
 
                 foreach (DateTime dt in newBbkinDate)
                 {
-                    if (newBbkinDate.Contains())
-                    {
-
-                        MessageBox.Show(" Holiday added");
-                    }
-
                     Calendar1.SelectedDates.Add(dt);
-                    Ltrl.Text += (System.Environment.NewLine + " : " + dt.ToString("d"));
-                    Ltrl.Text = "";
-
-
+                    Ltrl.Text = (System.Environment.NewLine + " : " + dt.ToString("d"));
 
                 }
+                
                 //newBbkinDate.Clear();
                 bkinDate.Clear();
                 //Calendar1.SelectedDates.Clear();
