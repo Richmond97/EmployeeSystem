@@ -42,12 +42,11 @@ namespace EmployeeWebApp
                 e.Cell.BackColor = System.Drawing.Color.DimGray;
             }
 
+           
+
             if (e.Day.IsSelected == true )
             {
-                if (bkinDate.Contains(e.Day.Date))
-                {
-                    MessageBox.Show(" Holyday already added");
-                }
+                
                 bkinDate.Add(e.Day.Date);
                 e.Cell.BackColor = System.Drawing.Color.ForestGreen;
                 //e.Day.IsSelectable = false;
@@ -59,12 +58,13 @@ namespace EmployeeWebApp
         {
             if (Session["SelectedDates"] != null)
             {
+
                 List<DateTime> newBbkinDate = (List<DateTime>)Session["SelectedDates"];
 
                 foreach (DateTime dt in newBbkinDate)
                 {
+                    Ltrl.Text += (System.Environment.NewLine + " : " + dt);
                     Calendar1.SelectedDates.Add(dt);
-                    Ltrl.Text = (System.Environment.NewLine + " : " + dt.ToString("d"));
 
                 }
                 

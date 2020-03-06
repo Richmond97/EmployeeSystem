@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Component_A_ClassLibraryTes
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmployeeWebApp", "EmployeeWebApp\EmployeeWebApp.csproj", "{C2721B8D-8B93-4D89-AEB9-FCA2EFDC634A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HolidayManager_ClassLibrary", "HolidayManager_ClassLibrary\HolidayManager_ClassLibrary.csproj", "{EC81A041-92D4-437A-B6E3-6A7BAD144283}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{C2721B8D-8B93-4D89-AEB9-FCA2EFDC634A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C2721B8D-8B93-4D89-AEB9-FCA2EFDC634A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C2721B8D-8B93-4D89-AEB9-FCA2EFDC634A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EC81A041-92D4-437A-B6E3-6A7BAD144283}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EC81A041-92D4-437A-B6E3-6A7BAD144283}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EC81A041-92D4-437A-B6E3-6A7BAD144283}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EC81A041-92D4-437A-B6E3-6A7BAD144283}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

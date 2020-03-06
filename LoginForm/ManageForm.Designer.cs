@@ -95,10 +95,23 @@
             this.createEmployee1 = new Component_A_ClassLibrary.CreateEmployee(this.components);
             this.editEmployee1 = new Component_A_ClassLibrary.EditEmployee(this.components);
             this.deleteEmployee1 = new Component_A_ClassLibrary.DeleteEmployee(this.components);
+            this.btnHolidays = new System.Windows.Forms.Button();
+            this.mngPanel = new System.Windows.Forms.Panel();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.radioButton1 = new System.Windows.Forms.RadioButton();
+            this.radioButton2 = new System.Windows.Forms.RadioButton();
+            this.dataGridView2 = new System.Windows.Forms.DataGridView();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.button3 = new System.Windows.Forms.Button();
+            this.btnAccept = new System.Windows.Forms.Button();
+            this.btnReject = new System.Windows.Forms.Button();
             this.createPanel.SuspendLayout();
             this.editPanel.SuspendLayout();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            this.mngPanel.SuspendLayout();
+            this.groupBox2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
             this.SuspendLayout();
             // 
             // createPanel
@@ -437,7 +450,7 @@
             this.editPanel.Controls.Add(this.txtEFirst);
             this.editPanel.Location = new System.Drawing.Point(72, 70);
             this.editPanel.Name = "editPanel";
-            this.editPanel.Size = new System.Drawing.Size(166, 84);
+            this.editPanel.Size = new System.Drawing.Size(225, 142);
             this.editPanel.TabIndex = 4;
             // 
             // chbxDetails
@@ -777,7 +790,7 @@
             this.btnLogout.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnLogout.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnLogout.ForeColor = System.Drawing.Color.DarkSlateGray;
-            this.btnLogout.Location = new System.Drawing.Point(636, 0);
+            this.btnLogout.Location = new System.Drawing.Point(853, 0);
             this.btnLogout.Name = "btnLogout";
             this.btnLogout.Size = new System.Drawing.Size(217, 37);
             this.btnLogout.TabIndex = 5;
@@ -785,12 +798,129 @@
             this.btnLogout.UseVisualStyleBackColor = false;
             this.btnLogout.Click += new System.EventHandler(this.BtnLogout_Click);
             // 
+            // btnHolidays
+            // 
+            this.btnHolidays.BackColor = System.Drawing.Color.White;
+            this.btnHolidays.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnHolidays.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnHolidays.ForeColor = System.Drawing.Color.DarkSlateGray;
+            this.btnHolidays.Location = new System.Drawing.Point(637, 0);
+            this.btnHolidays.Name = "btnHolidays";
+            this.btnHolidays.Size = new System.Drawing.Size(217, 37);
+            this.btnHolidays.TabIndex = 6;
+            this.btnHolidays.Text = "HOLIDAYS ENQ";
+            this.btnHolidays.UseVisualStyleBackColor = false;
+            this.btnHolidays.Click += new System.EventHandler(this.BtnHolidays_Click);
+            // 
+            // mngPanel
+            // 
+            this.mngPanel.Controls.Add(this.btnReject);
+            this.mngPanel.Controls.Add(this.btnAccept);
+            this.mngPanel.Controls.Add(this.groupBox2);
+            this.mngPanel.Controls.Add(this.dataGridView2);
+            this.mngPanel.Controls.Add(this.textBox1);
+            this.mngPanel.Controls.Add(this.button3);
+            this.mngPanel.Location = new System.Drawing.Point(303, 70);
+            this.mngPanel.Name = "mngPanel";
+            this.mngPanel.Size = new System.Drawing.Size(749, 468);
+            this.mngPanel.TabIndex = 7;
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.radioButton1);
+            this.groupBox2.Controls.Add(this.radioButton2);
+            this.groupBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupBox2.ForeColor = System.Drawing.Color.White;
+            this.groupBox2.Location = new System.Drawing.Point(513, 3);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(225, 36);
+            this.groupBox2.TabIndex = 41;
+            this.groupBox2.TabStop = false;
+            // 
+            // radioButton1
+            // 
+            this.radioButton1.AutoSize = true;
+            this.radioButton1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.radioButton1.ForeColor = System.Drawing.Color.White;
+            this.radioButton1.Location = new System.Drawing.Point(119, 12);
+            this.radioButton1.Name = "radioButton1";
+            this.radioButton1.Size = new System.Drawing.Size(76, 19);
+            this.radioButton1.TabIndex = 1;
+            this.radioButton1.TabStop = true;
+            this.radioButton1.Text = "BOOKED";
+            this.radioButton1.UseVisualStyleBackColor = true;
+            // 
+            // radioButton2
+            // 
+            this.radioButton2.AutoSize = true;
+            this.radioButton2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.radioButton2.ForeColor = System.Drawing.Color.White;
+            this.radioButton2.Location = new System.Drawing.Point(9, 13);
+            this.radioButton2.Name = "radioButton2";
+            this.radioButton2.Size = new System.Drawing.Size(104, 17);
+            this.radioButton2.TabIndex = 0;
+            this.radioButton2.TabStop = true;
+            this.radioButton2.Text = "OUTSTANDING";
+            this.radioButton2.UseVisualStyleBackColor = true;
+            // 
+            // dataGridView2
+            // 
+            this.dataGridView2.AllowUserToAddRows = false;
+            this.dataGridView2.AllowUserToDeleteRows = false;
+            this.dataGridView2.AllowUserToResizeColumns = false;
+            this.dataGridView2.AllowUserToResizeRows = false;
+            this.dataGridView2.BackgroundColor = System.Drawing.Color.DarkSlateGray;
+            this.dataGridView2.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView2.Location = new System.Drawing.Point(213, 54);
+            this.dataGridView2.Name = "dataGridView2";
+            this.dataGridView2.RowHeadersVisible = false;
+            this.dataGridView2.RowHeadersWidth = 62;
+            this.dataGridView2.Size = new System.Drawing.Size(436, 113);
+            this.dataGridView2.TabIndex = 40;
+            // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(213, 12);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(143, 20);
+            this.textBox1.TabIndex = 0;
+            // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(381, 12);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(109, 27);
+            this.button3.TabIndex = 1;
+            this.button3.Text = "SEARCH";
+            this.button3.UseVisualStyleBackColor = true;
+            // 
+            // btnAccept
+            // 
+            this.btnAccept.Location = new System.Drawing.Point(211, 211);
+            this.btnAccept.Name = "btnAccept";
+            this.btnAccept.Size = new System.Drawing.Size(75, 23);
+            this.btnAccept.TabIndex = 42;
+            this.btnAccept.Text = "ACCEPT";
+            this.btnAccept.UseVisualStyleBackColor = true;
+            // 
+            // btnReject
+            // 
+            this.btnReject.Location = new System.Drawing.Point(292, 211);
+            this.btnReject.Name = "btnReject";
+            this.btnReject.Size = new System.Drawing.Size(75, 23);
+            this.btnReject.TabIndex = 43;
+            this.btnReject.Text = "REJECT";
+            this.btnReject.UseVisualStyleBackColor = true;
+            // 
             // ManageForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.DarkSlateGray;
-            this.ClientSize = new System.Drawing.Size(852, 480);
+            this.ClientSize = new System.Drawing.Size(1064, 550);
+            this.Controls.Add(this.mngPanel);
+            this.Controls.Add(this.btnHolidays);
             this.Controls.Add(this.btnLogout);
             this.Controls.Add(this.createPanel);
             this.Controls.Add(this.editPanel);
@@ -808,6 +938,11 @@
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            this.mngPanel.ResumeLayout(false);
+            this.mngPanel.PerformLayout();
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -880,5 +1015,15 @@
         private System.Windows.Forms.Label label20;
         private System.Windows.Forms.Label label23;
         private System.Windows.Forms.Label label19;
+        private System.Windows.Forms.Button btnHolidays;
+        private System.Windows.Forms.Panel mngPanel;
+        private System.Windows.Forms.Button btnReject;
+        private System.Windows.Forms.Button btnAccept;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.RadioButton radioButton1;
+        private System.Windows.Forms.RadioButton radioButton2;
+        private System.Windows.Forms.DataGridView dataGridView2;
+        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.Button button3;
     }
 }

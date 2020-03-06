@@ -44,9 +44,11 @@ namespace LoginForm
         {
             createPanel.Location = new Point(0, 37);
             editPanel.Location = new Point(0, 37);
+            mngPanel.Location = new Point(0, 37);
 
             createPanel.Size = new Size(851, 443);
             editPanel.Size = new Size(851, 443);
+            mngPanel.Size = new Size(851, 443);
 
             // Set search to by name
             rdName.Checked = true;
@@ -70,12 +72,15 @@ namespace LoginForm
 
         private void BtnCreate_Click()
         {
+            
             createPanel.Visible = true;
             btnCreate.BackColor = Color.DarkGray;
             btnEdit.BackColor = Color.White;
             btnDelete.BackColor = Color.White;
+            btnHolidays.BackColor = Color.White;
 
             editPanel.Visible = false;
+            mngPanel.Visible = false;
         }
 
         private void BtnEdit_Click(object sender, EventArgs e)
@@ -84,8 +89,10 @@ namespace LoginForm
             btnCreate.BackColor = Color.White;
             btnEdit.BackColor = Color.DarkGray;
             btnDelete.BackColor = Color.White;
+            btnHolidays.BackColor = Color.White;
 
             createPanel.Visible = false;
+            mngPanel.Visible = false;
             btnEditEmploy.Show();
             btnDeleteEmploy.Hide();
         }
@@ -96,8 +103,10 @@ namespace LoginForm
             btnCreate.BackColor = Color.White;
             btnEdit.BackColor = Color.White;
             btnDelete.BackColor = Color.DarkGray;
+            btnHolidays.BackColor = Color.White;
 
             createPanel.Visible = false;
+            mngPanel.Visible = false;
             btnEditEmploy.Hide();
             btnDeleteEmploy.Show();
         }
@@ -112,6 +121,19 @@ namespace LoginForm
             }
         }
 
+        private void BtnHolidays_Click(object sender, EventArgs e)
+        {
+            mngPanel.Visible = true;
+            btnHolidays.BackColor = Color.Gray;
+            btnCreate.BackColor = Color.White;
+            btnEdit.BackColor = Color.White;
+            btnDelete.BackColor = Color.White;
+
+            createPanel.Visible = false;
+            editPanel.Visible = false;
+            btnEditEmploy.Hide();
+            btnDeleteEmploy.Show();
+        }
         #endregion
 
 
@@ -349,6 +371,8 @@ namespace LoginForm
                 }
             }
 
-        } 
+        }
+
+       
     }
 }

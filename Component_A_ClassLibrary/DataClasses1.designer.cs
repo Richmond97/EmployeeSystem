@@ -22,7 +22,7 @@ namespace Component_A_ClassLibrary
 	using System;
 	
 	
-	[global::System.Data.Linq.Mapping.DatabaseAttribute(Name="ea3996r")]
+	[global::System.Data.Linq.Mapping.DatabaseAttribute(Name="ry9102q")]
 	public partial class DataClasses1DataContext : System.Data.Linq.DataContext
 	{
 		
@@ -33,9 +33,6 @@ namespace Component_A_ClassLibrary
     partial void Insertconstraint(constraint instance);
     partial void Updateconstraint(constraint instance);
     partial void Deleteconstraint(constraint instance);
-    partial void Insertrole(role instance);
-    partial void Updaterole(role instance);
-    partial void Deleterole(role instance);
     partial void Insertdepartment(department instance);
     partial void Updatedepartment(department instance);
     partial void Deletedepartment(department instance);
@@ -51,10 +48,13 @@ namespace Component_A_ClassLibrary
     partial void Insertpeaktime(peaktime instance);
     partial void Updatepeaktime(peaktime instance);
     partial void Deletepeaktime(peaktime instance);
+    partial void Insertrole(role instance);
+    partial void Updaterole(role instance);
+    partial void Deleterole(role instance);
     #endregion
 		
 		public DataClasses1DataContext() : 
-				base(global::Component_A_ClassLibrary.Properties.Settings.Default.ea3996rConnectionString, mappingSource)
+				base(global::Component_A_ClassLibrary.Properties.Settings.Default.ry9102qConnectionString, mappingSource)
 		{
 			OnCreated();
 		}
@@ -88,14 +88,6 @@ namespace Component_A_ClassLibrary
 			get
 			{
 				return this.GetTable<constraint>();
-			}
-		}
-		
-		public System.Data.Linq.Table<role> roles
-		{
-			get
-			{
-				return this.GetTable<role>();
 			}
 		}
 		
@@ -138,6 +130,14 @@ namespace Component_A_ClassLibrary
 				return this.GetTable<peaktime>();
 			}
 		}
+		
+		public System.Data.Linq.Table<role> roles
+		{
+			get
+			{
+				return this.GetTable<role>();
+			}
+		}
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.constraints")]
@@ -148,15 +148,19 @@ namespace Component_A_ClassLibrary
 		
 		private long _ConstraintID;
 		
-		private int _MinimumWorkingStaff;
+		private System.Nullable<int> _MinimumWorkingStaff;
 		
-		private int _HolidayEntitlement;
+		private System.Nullable<int> _HolidayEntitlement;
 		
-		private System.DateTime _ExceptionStartDate;
+		private System.Nullable<System.DateTime> _ExceptionStartDate;
 		
-		private System.DateTime _ExceptionEndDate;
+		private System.Nullable<System.DateTime> _ExceptionEndDate;
 		
-		private System.DateTime _RelaxedMonth;
+		private System.Nullable<System.DateTime> _RelaxedMonth;
+		
+		private string _AvailableDepartments;
+		
+		private string _AvailableRoles;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -164,16 +168,20 @@ namespace Component_A_ClassLibrary
     partial void OnCreated();
     partial void OnConstraintIDChanging(long value);
     partial void OnConstraintIDChanged();
-    partial void OnMinimumWorkingStaffChanging(int value);
+    partial void OnMinimumWorkingStaffChanging(System.Nullable<int> value);
     partial void OnMinimumWorkingStaffChanged();
-    partial void OnHolidayEntitlementChanging(int value);
+    partial void OnHolidayEntitlementChanging(System.Nullable<int> value);
     partial void OnHolidayEntitlementChanged();
-    partial void OnExceptionStartDateChanging(System.DateTime value);
+    partial void OnExceptionStartDateChanging(System.Nullable<System.DateTime> value);
     partial void OnExceptionStartDateChanged();
-    partial void OnExceptionEndDateChanging(System.DateTime value);
+    partial void OnExceptionEndDateChanging(System.Nullable<System.DateTime> value);
     partial void OnExceptionEndDateChanged();
-    partial void OnRelaxedMonthChanging(System.DateTime value);
+    partial void OnRelaxedMonthChanging(System.Nullable<System.DateTime> value);
     partial void OnRelaxedMonthChanged();
+    partial void OnAvailableDepartmentsChanging(string value);
+    partial void OnAvailableDepartmentsChanged();
+    partial void OnAvailableRolesChanging(string value);
+    partial void OnAvailableRolesChanged();
     #endregion
 		
 		public constraint()
@@ -201,8 +209,8 @@ namespace Component_A_ClassLibrary
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MinimumWorkingStaff", DbType="Int NOT NULL")]
-		public int MinimumWorkingStaff
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MinimumWorkingStaff", DbType="Int")]
+		public System.Nullable<int> MinimumWorkingStaff
 		{
 			get
 			{
@@ -221,8 +229,8 @@ namespace Component_A_ClassLibrary
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_HolidayEntitlement", DbType="Int NOT NULL")]
-		public int HolidayEntitlement
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_HolidayEntitlement", DbType="Int")]
+		public System.Nullable<int> HolidayEntitlement
 		{
 			get
 			{
@@ -241,8 +249,8 @@ namespace Component_A_ClassLibrary
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ExceptionStartDate", DbType="Date NOT NULL")]
-		public System.DateTime ExceptionStartDate
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ExceptionStartDate", DbType="Date")]
+		public System.Nullable<System.DateTime> ExceptionStartDate
 		{
 			get
 			{
@@ -261,8 +269,8 @@ namespace Component_A_ClassLibrary
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ExceptionEndDate", DbType="Date NOT NULL")]
-		public System.DateTime ExceptionEndDate
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ExceptionEndDate", DbType="Date")]
+		public System.Nullable<System.DateTime> ExceptionEndDate
 		{
 			get
 			{
@@ -281,8 +289,8 @@ namespace Component_A_ClassLibrary
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RelaxedMonth", DbType="Date NOT NULL")]
-		public System.DateTime RelaxedMonth
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RelaxedMonth", DbType="Date")]
+		public System.Nullable<System.DateTime> RelaxedMonth
 		{
 			get
 			{
@@ -301,218 +309,42 @@ namespace Component_A_ClassLibrary
 			}
 		}
 		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.role")]
-	public partial class role : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private long _RoleID;
-		
-		private System.Nullable<long> _EmployeeID;
-		
-		private System.Nullable<long> _DepartmentID;
-		
-		private string _RoleType;
-		
-		private EntityRef<department> _department;
-		
-		private EntityRef<employee> _employee;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnRoleIDChanging(long value);
-    partial void OnRoleIDChanged();
-    partial void OnEmployeeIDChanging(System.Nullable<long> value);
-    partial void OnEmployeeIDChanged();
-    partial void OnDepartmentIDChanging(System.Nullable<long> value);
-    partial void OnDepartmentIDChanged();
-    partial void OnRoleTypeChanging(string value);
-    partial void OnRoleTypeChanged();
-    #endregion
-		
-		public role()
-		{
-			this._department = default(EntityRef<department>);
-			this._employee = default(EntityRef<employee>);
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RoleID", AutoSync=AutoSync.OnInsert, DbType="BigInt NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public long RoleID
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AvailableDepartments", DbType="NVarChar(MAX)")]
+		public string AvailableDepartments
 		{
 			get
 			{
-				return this._RoleID;
+				return this._AvailableDepartments;
 			}
 			set
 			{
-				if ((this._RoleID != value))
+				if ((this._AvailableDepartments != value))
 				{
-					this.OnRoleIDChanging(value);
+					this.OnAvailableDepartmentsChanging(value);
 					this.SendPropertyChanging();
-					this._RoleID = value;
-					this.SendPropertyChanged("RoleID");
-					this.OnRoleIDChanged();
+					this._AvailableDepartments = value;
+					this.SendPropertyChanged("AvailableDepartments");
+					this.OnAvailableDepartmentsChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EmployeeID", DbType="BigInt")]
-		public System.Nullable<long> EmployeeID
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AvailableRoles", DbType="NVarChar(MAX)")]
+		public string AvailableRoles
 		{
 			get
 			{
-				return this._EmployeeID;
+				return this._AvailableRoles;
 			}
 			set
 			{
-				if ((this._EmployeeID != value))
+				if ((this._AvailableRoles != value))
 				{
-					if (this._employee.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnEmployeeIDChanging(value);
+					this.OnAvailableRolesChanging(value);
 					this.SendPropertyChanging();
-					this._EmployeeID = value;
-					this.SendPropertyChanged("EmployeeID");
-					this.OnEmployeeIDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DepartmentID", DbType="BigInt")]
-		public System.Nullable<long> DepartmentID
-		{
-			get
-			{
-				return this._DepartmentID;
-			}
-			set
-			{
-				if ((this._DepartmentID != value))
-				{
-					if (this._department.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnDepartmentIDChanging(value);
-					this.SendPropertyChanging();
-					this._DepartmentID = value;
-					this.SendPropertyChanged("DepartmentID");
-					this.OnDepartmentIDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RoleType", DbType="VarChar(50)")]
-		public string RoleType
-		{
-			get
-			{
-				return this._RoleType;
-			}
-			set
-			{
-				if ((this._RoleType != value))
-				{
-					this.OnRoleTypeChanging(value);
-					this.SendPropertyChanging();
-					this._RoleType = value;
-					this.SendPropertyChanged("RoleType");
-					this.OnRoleTypeChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="department_role", Storage="_department", ThisKey="DepartmentID", OtherKey="DepartmentID", IsForeignKey=true, DeleteRule="CASCADE")]
-		public department department
-		{
-			get
-			{
-				return this._department.Entity;
-			}
-			set
-			{
-				department previousValue = this._department.Entity;
-				if (((previousValue != value) 
-							|| (this._department.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._department.Entity = null;
-						previousValue.roles.Remove(this);
-					}
-					this._department.Entity = value;
-					if ((value != null))
-					{
-						value.roles.Add(this);
-						this._DepartmentID = value.DepartmentID;
-					}
-					else
-					{
-						this._DepartmentID = default(Nullable<long>);
-					}
-					this.SendPropertyChanged("department");
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="employee_role", Storage="_employee", ThisKey="EmployeeID", OtherKey="EmployeeID", IsForeignKey=true, DeleteRule="CASCADE")]
-		public employee employee
-		{
-			get
-			{
-				return this._employee.Entity;
-			}
-			set
-			{
-				employee previousValue = this._employee.Entity;
-				if (((previousValue != value) 
-							|| (this._employee.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._employee.Entity = null;
-						previousValue.roles = null;
-					}
-					this._employee.Entity = value;
-					if ((value != null))
-					{
-						value.roles = this;
-						this._EmployeeID = value.EmployeeID;
-					}
-					else
-					{
-						this._EmployeeID = default(Nullable<long>);
-					}
-					this.SendPropertyChanged("employee");
+					this._AvailableRoles = value;
+					this.SendPropertyChanged("AvailableRoles");
+					this.OnAvailableRolesChanged();
 				}
 			}
 		}
@@ -676,11 +508,11 @@ namespace Component_A_ClassLibrary
 		
 		private System.DateTime _DateJoined;
 		
-		private EntityRef<role> _roles;
-		
 		private EntitySet<holidaysrequested> _holidaysrequesteds;
 		
 		private EntitySet<holidaystaken> _holidaystakens;
+		
+		private EntitySet<role> _roles;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -708,9 +540,9 @@ namespace Component_A_ClassLibrary
 		
 		public employee()
 		{
-			this._roles = default(EntityRef<role>);
 			this._holidaysrequesteds = new EntitySet<holidaysrequested>(new Action<holidaysrequested>(this.attach_holidaysrequesteds), new Action<holidaysrequested>(this.detach_holidaysrequesteds));
 			this._holidaystakens = new EntitySet<holidaystaken>(new Action<holidaystaken>(this.attach_holidaystakens), new Action<holidaystaken>(this.detach_holidaystakens));
+			this._roles = new EntitySet<role>(new Action<role>(this.attach_roles), new Action<role>(this.detach_roles));
 			OnCreated();
 		}
 		
@@ -894,35 +726,6 @@ namespace Component_A_ClassLibrary
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="employee_role", Storage="_roles", ThisKey="EmployeeID", OtherKey="EmployeeID", IsUnique=true, IsForeignKey=false)]
-		public role roles
-		{
-			get
-			{
-				return this._roles.Entity;
-			}
-			set
-			{
-				role previousValue = this._roles.Entity;
-				if (((previousValue != value) 
-							|| (this._roles.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._roles.Entity = null;
-						previousValue.employee = null;
-					}
-					this._roles.Entity = value;
-					if ((value != null))
-					{
-						value.employee = this;
-					}
-					this.SendPropertyChanged("roles");
-				}
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="employee_holidaysrequested", Storage="_holidaysrequesteds", ThisKey="EmployeeID", OtherKey="EmployeeID")]
 		public EntitySet<holidaysrequested> holidaysrequesteds
 		{
@@ -946,6 +749,19 @@ namespace Component_A_ClassLibrary
 			set
 			{
 				this._holidaystakens.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="employee_role", Storage="_roles", ThisKey="EmployeeID", OtherKey="EmployeeID")]
+		public EntitySet<role> roles
+		{
+			get
+			{
+				return this._roles;
+			}
+			set
+			{
+				this._roles.Assign(value);
 			}
 		}
 		
@@ -992,6 +808,18 @@ namespace Component_A_ClassLibrary
 			this.SendPropertyChanging();
 			entity.employee = null;
 		}
+		
+		private void attach_roles(role entity)
+		{
+			this.SendPropertyChanging();
+			entity.employee = this;
+		}
+		
+		private void detach_roles(role entity)
+		{
+			this.SendPropertyChanging();
+			entity.employee = null;
+		}
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.holidaysrequested")]
@@ -1008,6 +836,8 @@ namespace Component_A_ClassLibrary
 		
 		private System.DateTime _EndDate;
 		
+		private System.Nullable<bool> _Status;
+		
 		private EntityRef<employee> _employee;
 		
     #region Extensibility Method Definitions
@@ -1022,6 +852,8 @@ namespace Component_A_ClassLibrary
     partial void OnStartDateChanged();
     partial void OnEndDateChanging(System.DateTime value);
     partial void OnEndDateChanged();
+    partial void OnStatusChanging(System.Nullable<bool> value);
+    partial void OnStatusChanged();
     #endregion
 		
 		public holidaysrequested()
@@ -1030,7 +862,7 @@ namespace Component_A_ClassLibrary
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RequestID", DbType="BigInt NOT NULL", IsPrimaryKey=true)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RequestID", AutoSync=AutoSync.OnInsert, DbType="BigInt NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
 		public long RequestID
 		{
 			get
@@ -1110,6 +942,26 @@ namespace Component_A_ClassLibrary
 					this._EndDate = value;
 					this.SendPropertyChanged("EndDate");
 					this.OnEndDateChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Status", DbType="Bit")]
+		public System.Nullable<bool> Status
+		{
+			get
+			{
+				return this._Status;
+			}
+			set
+			{
+				if ((this._Status != value))
+				{
+					this.OnStatusChanging(value);
+					this.SendPropertyChanging();
+					this._Status = value;
+					this.SendPropertyChanged("Status");
+					this.OnStatusChanged();
 				}
 			}
 		}
@@ -1453,6 +1305,222 @@ namespace Component_A_ClassLibrary
 					this._EndDate = value;
 					this.SendPropertyChanged("EndDate");
 					this.OnEndDateChanged();
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.role")]
+	public partial class role : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private long _RoleID;
+		
+		private System.Nullable<long> _EmployeeID;
+		
+		private System.Nullable<long> _DepartmentID;
+		
+		private string _RoleType;
+		
+		private EntityRef<department> _department;
+		
+		private EntityRef<employee> _employee;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnRoleIDChanging(long value);
+    partial void OnRoleIDChanged();
+    partial void OnEmployeeIDChanging(System.Nullable<long> value);
+    partial void OnEmployeeIDChanged();
+    partial void OnDepartmentIDChanging(System.Nullable<long> value);
+    partial void OnDepartmentIDChanged();
+    partial void OnRoleTypeChanging(string value);
+    partial void OnRoleTypeChanged();
+    #endregion
+		
+		public role()
+		{
+			this._department = default(EntityRef<department>);
+			this._employee = default(EntityRef<employee>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RoleID", DbType="BigInt NOT NULL", IsPrimaryKey=true)]
+		public long RoleID
+		{
+			get
+			{
+				return this._RoleID;
+			}
+			set
+			{
+				if ((this._RoleID != value))
+				{
+					this.OnRoleIDChanging(value);
+					this.SendPropertyChanging();
+					this._RoleID = value;
+					this.SendPropertyChanged("RoleID");
+					this.OnRoleIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EmployeeID", DbType="BigInt")]
+		public System.Nullable<long> EmployeeID
+		{
+			get
+			{
+				return this._EmployeeID;
+			}
+			set
+			{
+				if ((this._EmployeeID != value))
+				{
+					if (this._employee.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnEmployeeIDChanging(value);
+					this.SendPropertyChanging();
+					this._EmployeeID = value;
+					this.SendPropertyChanged("EmployeeID");
+					this.OnEmployeeIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DepartmentID", DbType="BigInt")]
+		public System.Nullable<long> DepartmentID
+		{
+			get
+			{
+				return this._DepartmentID;
+			}
+			set
+			{
+				if ((this._DepartmentID != value))
+				{
+					if (this._department.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnDepartmentIDChanging(value);
+					this.SendPropertyChanging();
+					this._DepartmentID = value;
+					this.SendPropertyChanged("DepartmentID");
+					this.OnDepartmentIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RoleType", DbType="VarChar(50)")]
+		public string RoleType
+		{
+			get
+			{
+				return this._RoleType;
+			}
+			set
+			{
+				if ((this._RoleType != value))
+				{
+					this.OnRoleTypeChanging(value);
+					this.SendPropertyChanging();
+					this._RoleType = value;
+					this.SendPropertyChanged("RoleType");
+					this.OnRoleTypeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="department_role", Storage="_department", ThisKey="DepartmentID", OtherKey="DepartmentID", IsForeignKey=true)]
+		public department department
+		{
+			get
+			{
+				return this._department.Entity;
+			}
+			set
+			{
+				department previousValue = this._department.Entity;
+				if (((previousValue != value) 
+							|| (this._department.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._department.Entity = null;
+						previousValue.roles.Remove(this);
+					}
+					this._department.Entity = value;
+					if ((value != null))
+					{
+						value.roles.Add(this);
+						this._DepartmentID = value.DepartmentID;
+					}
+					else
+					{
+						this._DepartmentID = default(Nullable<long>);
+					}
+					this.SendPropertyChanged("department");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="employee_role", Storage="_employee", ThisKey="EmployeeID", OtherKey="EmployeeID", IsForeignKey=true)]
+		public employee employee
+		{
+			get
+			{
+				return this._employee.Entity;
+			}
+			set
+			{
+				employee previousValue = this._employee.Entity;
+				if (((previousValue != value) 
+							|| (this._employee.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._employee.Entity = null;
+						previousValue.roles.Remove(this);
+					}
+					this._employee.Entity = value;
+					if ((value != null))
+					{
+						value.roles.Add(this);
+						this._EmployeeID = value.EmployeeID;
+					}
+					else
+					{
+						this._EmployeeID = default(Nullable<long>);
+					}
+					this.SendPropertyChanged("employee");
 				}
 			}
 		}

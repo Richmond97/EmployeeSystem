@@ -33,5 +33,16 @@ namespace Component_A_ClassLibrary.Properties {
                 return ((string)(this["ea3996rConnectionString"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=sql-server;Initial Catalog=ry9102q;Persist Security Info=True;User ID" +
+            "=ry9102q;Password=!1SQLServer")]
+        public string ry9102qConnectionString {
+            get {
+                return ((string)(this["ry9102qConnectionString"]));
+            }
+        }
     }
 }
