@@ -437,7 +437,7 @@
             this.editPanel.Controls.Add(this.txtEFirst);
             this.editPanel.Location = new System.Drawing.Point(72, 70);
             this.editPanel.Name = "editPanel";
-            this.editPanel.Size = new System.Drawing.Size(95, 73);
+            this.editPanel.Size = new System.Drawing.Size(166, 84);
             this.editPanel.TabIndex = 4;
             // 
             // chbxDetails

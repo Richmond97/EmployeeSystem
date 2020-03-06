@@ -126,6 +126,7 @@
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
+    <Content Include="icons\calendar_icon.png" />
     <Content Include="ManageAccount.aspx" />
     <Content Include="WebService.asmx" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
