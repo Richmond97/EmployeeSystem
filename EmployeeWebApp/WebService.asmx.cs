@@ -19,6 +19,7 @@ namespace EmployeeWebApp
     // [System.Web.Script.Services.ScriptService]
     public class WebService : System.Web.Services.WebService
     {
+        private const string sesID = "SESSION_LoggedID";
         private readonly DataClasses1DataContext db = new DataClasses1DataContext();
 
         [WebMethod]
@@ -32,7 +33,13 @@ namespace EmployeeWebApp
                                where a.StaffID == StaffID && a.Password == Password
                                select a.EmployeeID;
 
-                var quer = verQuery.ToList();
+                
+               var quer = verQuery.ToList();
+                Session[sesID] = quer[0];
+                MessageBox.Show("my log in session is" + Session[sesID]);
+
+                //create session for log in
+
 
                 if (verQuery.Any())
                 {

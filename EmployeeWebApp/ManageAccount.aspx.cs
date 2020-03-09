@@ -65,7 +65,7 @@ namespace EmployeeWebApp
                     Ltrl.Text += (System.Environment.NewLine + " : " + dt);
                     Calendar1.SelectedDates.Add(dt);
                     
-                    Console.WriteLine("you have selected"+ Calendar1.SelectedDates.Count());
+                    Console.WriteLine("you have selected"+ Calendar1.SelectedDates.Count);
 
                 }
                 
