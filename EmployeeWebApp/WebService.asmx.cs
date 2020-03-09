@@ -19,7 +19,9 @@ namespace EmployeeWebApp
     // [System.Web.Script.Services.ScriptService]
     public class WebService : System.Web.Services.WebService
     {
-        private const string sesID = "SESSION_LoggedID";
+    
+        
+        
         private readonly DataClasses1DataContext db = new DataClasses1DataContext();
 
         [WebMethod]
@@ -31,12 +33,10 @@ namespace EmployeeWebApp
 
                 var verQuery = from a in db.employees
                                where a.StaffID == StaffID && a.Password == Password
-                               select a.EmployeeID;
+                               select a;
 
                 
                var quer = verQuery.ToList();
-                Session[sesID] = quer[0];
-                MessageBox.Show("my log in session is" + Session[sesID]);
 
                 //create session for log in
 
@@ -44,6 +44,7 @@ namespace EmployeeWebApp
                 if (verQuery.Any())
                 {
                     // If user entered details correctly call auth method
+                    Session["sesID"] = GetID(StaffID);
                     MessageBox.Show("User Exists in DB");
                     return true;
                 }
@@ -67,14 +68,88 @@ namespace EmployeeWebApp
                         return false;
                     }
                 }
+
             }
+            
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
                 throw ex;
             }
         }
+        [WebMethod]
+        public long GetID(long StaffID)
+        {
+            var verQuery = (from a in db.employees
+                           where a.StaffID == StaffID
+                           select a.EmployeeID);
+            var quer = verQuery.ToList();
+            long ID = quer[0];
+            return ID;
 
+        }
+
+
+        [WebMethod]
+        public void OutstandingReq()
+        {
+            var result = (from a in db.holidaysrequesteds
+                          where a.Status == null
+                          select a);
+        }
+        [WebMethod]
+        public void ConfirmedReq()
+        {
+            var result = (from a in db.holidaysrequesteds
+                          where a.Status != null
+                          select a);
+        }
+
+        [WebMethod]
+        public void EmployeeHolidayStatus()
+        {
+            var result = (from a in db.holidaysrequesteds
+                          where a.Status != null
+                          select a);
+        }
+
+        [WebMethod]
+        public bool SubmitHolidayReq(DateTime startH, DateTime endH, long StaffID)
+        {
+            try
+            {
+                var verQuery = from a in db.employees
+                               where a.StaffID == StaffID
+                               select a.EmployeeID;
+
+
+                var quer = verQuery.ToList();
+                long ID = quer[0];
+                holidaysrequested rewHlday = new holidaysrequested
+                {
+                    EmployeeID = ID,
+                    StartDate = startH.Date,
+                    EndDate = endH.Date
+
+                };
+
+                db.SubmitChanges();
+                return true;
+                MessageBox.Show("Booking Completed from: "+ startH ,"To: "+ endH);
+            }
+            catch (Exception ex)
+            {
+                return false;
+                MessageBox.Show(ex.Message);
+                throw;
+                
+            }
+            //Create method in Webservice that returns a session //ws.Session[sesID]; 
+
+            //var result = (from a in db.holidaysrequesteds
+            //              where a.EmployeeID == )
+            
+        }
         internal void Verification(System.Web.UI.WebControls.TextBox txtID, System.Web.UI.WebControls.TextBox txtPassword)
         {
             throw new NotImplementedException();

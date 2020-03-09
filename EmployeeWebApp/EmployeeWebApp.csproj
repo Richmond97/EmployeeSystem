@@ -241,9 +241,8 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Component_A_ClassLibrary\Component_A_ClassLibrary.csproj">
-      <Project>{f5196b04-c896-4418-a8a1-0b012b7564c0}</Project>
+      <Project>{F5196B04-C896-4418-A8A1-0B012B7564C0}</Project>
       <Name>Component_A_ClassLibrary</Name>
-      <Private>True</Private>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

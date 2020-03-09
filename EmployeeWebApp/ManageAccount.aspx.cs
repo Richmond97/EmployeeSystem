@@ -12,9 +12,13 @@ namespace EmployeeWebApp
     {
         
         public static List<DateTime> bkinDate = new List<DateTime>();
+        public static List<DateTime> Dates = new List<DateTime>();
+        WebService ws = new WebService();
+
         protected void Page_Load(object sender, EventArgs e)
         {
-            if(!IsPostBack)
+            Response.Write(Session["sesID"]);
+            if (!IsPostBack)
             {
                 Calendar1.Visible = false;
             }
@@ -68,7 +72,7 @@ namespace EmployeeWebApp
                     Console.WriteLine("you have selected"+ Calendar1.SelectedDates.Count);
 
                 }
-                
+                Dates = (List<DateTime>)Session["SelectedDates"];
                 //newBbkinDate.Clear();
                 bkinDate.Clear();
                 //Calendar1.SelectedDates.Clear();
@@ -87,6 +91,11 @@ namespace EmployeeWebApp
                 //txtbxHolidayStart.Text = " ";
             }
             
+        }
+
+        protected void btnSubmit_Click(object sender, EventArgs e)
+        {
+            ws.SubmitHolidayReq(Dates[0], Dates[Dates.Count-2], long.Parse(Session["sesID"].ToString()));
         }
     }
 }

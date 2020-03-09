@@ -7,6 +7,8 @@
     <asp:TextBox ID="txtbxHolidayEnd" runat="server"></asp:TextBox>
     <asp:ImageButton ID="btnCalender" runat="server" Height="22px" ImageUrl="~/icons/calendar_icon.png" OnClick="btnCalender_Click" Width="31px" />
 
+    <asp:Button ID="btnSubmit" runat="server" OnClick="btnSubmit_Click" Text="SUBMIT" />
+
     <asp:Calendar ID="Calendar1" runat="server" BackColor="White" BorderColor="White" BorderWidth="1px" Font-Names="Verdana" Font-Size="9pt" ForeColor="Black" Height="190px" NextPrevFormat="FullMonth" OnDayRender="Calendar1_DayRender" OnSelectionChanged="Calendar1_SelectionChanged" Width="350px">
         <DayHeaderStyle Font-Bold="True" Font-Size="8pt" />
         <NextPrevStyle Font-Bold="True" Font-Size="8pt" ForeColor="#333333" VerticalAlign="Bottom" />

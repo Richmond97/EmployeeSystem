@@ -35,15 +35,21 @@ namespace HolidayManager_ClassLibrary
                           select a);
         }
 
-        private void SubmitHolidayReq(DateTime startH, DateTime endH)
-        { 
+        private void SubmitHolidayReq(DateTime startH, DateTime endH, long StaffID, string Password)
+        {
             //Create method in Webservice that returns a session //ws.Session[sesID]; 
 
             //var result = (from a in db.holidaysrequesteds
             //              where a.EmployeeID == )
+            var verQuery = from a in db.employees
+                           where a.StaffID == StaffID && a.Password == Password
+                           select a.EmployeeID;
+
+
+            var quer = verQuery.ToList();
             holidaysrequested rewHlday = new holidaysrequested
             {
-                
+                EmployeeID = ws.get_session(quer),
                 StartDate = startH.Date,
                 EndDate = endH.Date
 
