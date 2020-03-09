@@ -123,6 +123,7 @@ namespace LoginForm
 
         private void BtnHolidays_Click(object sender, EventArgs e)
         {
+            rdbOutstanding.Checked = true;
             mngPanel.Visible = true;
             btnHolidays.BackColor = Color.Gray;
             btnCreate.BackColor = Color.White;
@@ -131,8 +132,9 @@ namespace LoginForm
 
             createPanel.Visible = false;
             editPanel.Visible = false;
-            btnEditEmploy.Hide();
-            btnDeleteEmploy.Show();
+            btnAccept.Hide();
+            btnReject.Hide();
+
         }
         #endregion
 
@@ -373,6 +375,19 @@ namespace LoginForm
 
         }
 
-       
+        private void BtnHolidaySrch_Click(object sender, EventArgs e)
+        {
+            if(rdbOutstanding.Checked)
+            {
+               btnAccept.Show();
+               btnReject.Show();
+            }
+            else
+            {
+                btnAccept.Hide();
+                btnReject.Hide();
+            }
+
+        }
     }
 }

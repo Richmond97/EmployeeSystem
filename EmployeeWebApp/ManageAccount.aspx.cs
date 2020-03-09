@@ -25,7 +25,6 @@ namespace EmployeeWebApp
 
         protected void btnCalender_Click(object sender, ImageClickEventArgs e)
         {
-            Console.WriteLine(" Hello World ");
             if (Calendar1.Visible)
             { 
                     Calendar1.Visible = false;
@@ -65,6 +64,8 @@ namespace EmployeeWebApp
                 {
                     Ltrl.Text += (System.Environment.NewLine + " : " + dt);
                     Calendar1.SelectedDates.Add(dt);
+                    
+                    Console.WriteLine("you have selected"+ Calendar1.SelectedDates.Count());
 
                 }
                 
