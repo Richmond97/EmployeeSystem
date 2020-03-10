@@ -12,7 +12,7 @@ namespace EmployeeWebApp
     {
         
         public static List<DateTime> bkinDate = new List<DateTime>();
-        public static List<DateTime> Dates = new List<DateTime>();
+        public static List<DateTime> newBbkinDate = new List<DateTime>();
         WebService ws = new WebService();
 
         protected void Page_Load(object sender, EventArgs e)
@@ -62,17 +62,16 @@ namespace EmployeeWebApp
             if (Session["SelectedDates"] != null)
             {
 
-                List<DateTime> newBbkinDate = (List<DateTime>)Session["SelectedDates"];
+                newBbkinDate = (List<DateTime>)Session["SelectedDates"];
 
                 foreach (DateTime dt in newBbkinDate)
                 {
-                    Ltrl.Text += (System.Environment.NewLine + " : " + dt);
+                    Ltrl.Text += (System.Environment.NewLine + " : " + dt.ToShortDateString());
                     Calendar1.SelectedDates.Add(dt);
                     
-                    Console.WriteLine("you have selected"+ Calendar1.SelectedDates.Count);
 
                 }
-                Dates = (List<DateTime>)Session["SelectedDates"];
+                //Dates = (List<DateTime>)Session["SelectedDates"];
                 //newBbkinDate.Clear();
                 bkinDate.Clear();
                 //Calendar1.SelectedDates.Clear();
@@ -95,7 +94,20 @@ namespace EmployeeWebApp
 
         protected void btnSubmit_Click(object sender, EventArgs e)
         {
-            ws.SubmitHolidayReq(Dates[0], Dates[Dates.Count-2], long.Parse(Session["sesID"].ToString()));
+           
+            DateTime startH = newBbkinDate[0];
+            DateTime endH = newBbkinDate[newBbkinDate.Count - 1];
+            MessageBox.Show("Test: " + startH.ToString("d"), "To: " + endH);
+            if (ws.SubmitHolidayReq(startH, endH, ((long)(Session["sesID"]))))
+            {
+                MessageBox.Show("Booking Completed from: " + newBbkinDate[0].ToString("d"), "To: " + newBbkinDate[newBbkinDate.Count - 1].ToString("d"));
+            }
+
+            else
+            {
+                MessageBox.Show("error");
+            }
+
         }
     }
 }

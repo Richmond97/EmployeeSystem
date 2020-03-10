@@ -8,13 +8,17 @@ using System.Threading.Tasks;
 
 namespace HolidayManager_ClassLibrary
 {
-    
+//• View a list of outstanding holiday requests
+//• Accept/reject a request
+//• View a list of all holiday bookings and filter them by employee
+//• Select a date and show all employees working that day and those
+//on leave that day.
 
     class HolidaysManager
     {
         private readonly DataClasses1DataContext db = new DataClasses1DataContext();
-        private WebService ws = new WebService();
 
+        //• View a list of outstanding holiday requests
         private void OutstandingReq()
         {
             var result = (from a in db.holidaysrequesteds
@@ -23,8 +27,7 @@ namespace HolidayManager_ClassLibrary
         }
         private void ConfirmedReq()
         {
-            var result = (from a in db.holidaysrequesteds
-                          where a.Status != null
+            var result = (from a in db.holidaystakens
                           select a);
         }
 
@@ -35,30 +38,26 @@ namespace HolidayManager_ClassLibrary
                           select a);
         }
 
-        private void SubmitHolidayReq(DateTime startH, DateTime endH, long StaffID, string Password)
+        private void acceptReq(long EmployID)
         {
-            //Create method in Webservice that returns a session //ws.Session[sesID]; 
+            var result = (from a in db.holidaysrequesteds
+                          where a.Status != null && a.EmployeeID == EmployID
+                          select a).SingleOrDefault();
 
-            //var result = (from a in db.holidaysrequesteds
-            //              where a.EmployeeID == )
-            var verQuery = from a in db.employees
-                           where a.StaffID == StaffID && a.Password == Password
-                           select a.EmployeeID;
-
-
-            var quer = verQuery.ToList();
-            holidaysrequested rewHlday = new holidaysrequested
+            holidaystaken hd = new holidaystaken
             {
-                EmployeeID = ws.get_session(quer),
-                StartDate = startH.Date,
-                EndDate = endH.Date
-
+                EmployeeID = result.EmployeeID,
+                StartDate= result.StartDate,
+                EndDate = result.EndDate
             };
-
         }
 
-
-
+        private void EmployeeHolrejectReq()
+        {
+            var result = (from a in db.holidaysrequesteds
+                          where a.Status != null
+                          select a);
+        }
     }
 }
     

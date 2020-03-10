@@ -118,29 +118,29 @@ namespace EmployeeWebApp
         {
             try
             {
-                var verQuery = from a in db.employees
-                               where a.StaffID == StaffID
-                               select a.EmployeeID;
+                //var verQuery = from a in db.employees
+                //               where a.StaffID == StaffID
+                //               select a.EmployeeID;
 
 
-                var quer = verQuery.ToList();
-                long ID = quer[0];
+                //var quer = verQuery.ToList();
+                //long ID = quer[0];
                 holidaysrequested rewHlday = new holidaysrequested
                 {
-                    EmployeeID = ID,
-                    StartDate = startH.Date,
-                    EndDate = endH.Date
+                    EmployeeID = StaffID,
+                    StartDate = Convert.ToDateTime(startH.ToShortDateString()),
+                    EndDate = Convert.ToDateTime(endH.ToShortDateString()),
+                    Status = true
 
                 };
 
                 db.SubmitChanges();
                 return true;
-                MessageBox.Show("Booking Completed from: "+ startH ,"To: "+ endH);
             }
             catch (Exception ex)
             {
-                return false;
                 MessageBox.Show(ex.Message);
+                return false;
                 throw;
                 
             }
