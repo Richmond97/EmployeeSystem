@@ -102,7 +102,7 @@
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.tdbBooked = new System.Windows.Forms.RadioButton();
             this.rdbOutstanding = new System.Windows.Forms.RadioButton();
-            this.dataGridView2 = new System.Windows.Forms.DataGridView();
+            this.holidayReqGridView = new System.Windows.Forms.DataGridView();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.btnHolidaySrch = new System.Windows.Forms.Button();
             this.createPanel.SuspendLayout();
@@ -111,7 +111,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.mngPanel.SuspendLayout();
             this.groupBox2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.holidayReqGridView)).BeginInit();
             this.SuspendLayout();
             // 
             // createPanel
@@ -817,7 +817,7 @@
             this.mngPanel.Controls.Add(this.btnReject);
             this.mngPanel.Controls.Add(this.btnAccept);
             this.mngPanel.Controls.Add(this.groupBox2);
-            this.mngPanel.Controls.Add(this.dataGridView2);
+            this.mngPanel.Controls.Add(this.holidayReqGridView);
             this.mngPanel.Controls.Add(this.textBox1);
             this.mngPanel.Controls.Add(this.btnHolidaySrch);
             this.mngPanel.Location = new System.Drawing.Point(303, 70);
@@ -881,21 +881,21 @@
             this.rdbOutstanding.Text = "OUTSTANDING";
             this.rdbOutstanding.UseVisualStyleBackColor = true;
             // 
-            // dataGridView2
+            // holidayReqGridView
             // 
-            this.dataGridView2.AllowUserToAddRows = false;
-            this.dataGridView2.AllowUserToDeleteRows = false;
-            this.dataGridView2.AllowUserToResizeColumns = false;
-            this.dataGridView2.AllowUserToResizeRows = false;
-            this.dataGridView2.BackgroundColor = System.Drawing.Color.DarkSlateGray;
-            this.dataGridView2.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView2.Location = new System.Drawing.Point(213, 54);
-            this.dataGridView2.Name = "dataGridView2";
-            this.dataGridView2.RowHeadersVisible = false;
-            this.dataGridView2.RowHeadersWidth = 62;
-            this.dataGridView2.Size = new System.Drawing.Size(436, 113);
-            this.dataGridView2.TabIndex = 40;
+            this.holidayReqGridView.AllowUserToAddRows = false;
+            this.holidayReqGridView.AllowUserToDeleteRows = false;
+            this.holidayReqGridView.AllowUserToResizeColumns = false;
+            this.holidayReqGridView.AllowUserToResizeRows = false;
+            this.holidayReqGridView.BackgroundColor = System.Drawing.Color.DarkSlateGray;
+            this.holidayReqGridView.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.holidayReqGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.holidayReqGridView.Location = new System.Drawing.Point(213, 54);
+            this.holidayReqGridView.Name = "holidayReqGridView";
+            this.holidayReqGridView.RowHeadersVisible = false;
+            this.holidayReqGridView.RowHeadersWidth = 62;
+            this.holidayReqGridView.Size = new System.Drawing.Size(436, 113);
+            this.holidayReqGridView.TabIndex = 40;
             // 
             // textBox1
             // 
@@ -943,7 +943,7 @@
             this.mngPanel.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.holidayReqGridView)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1023,7 +1023,7 @@
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.RadioButton tdbBooked;
         private System.Windows.Forms.RadioButton rdbOutstanding;
-        private System.Windows.Forms.DataGridView dataGridView2;
+        private System.Windows.Forms.DataGridView holidayReqGridView;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Button btnHolidaySrch;
     }
