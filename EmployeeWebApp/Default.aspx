@@ -21,7 +21,6 @@
         <div class="col-md-4">
             <h2>Getting started</h2>
             <p>
-                
             </p>
             <p>
                 <a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301948">Learn more &raquo;</a>

@@ -152,11 +152,11 @@ namespace Component_A_ClassLibrary
 		
 		private System.Nullable<int> _HolidayEntitlement;
 		
-		private System.Nullable<System.DateTime> _ExceptionStartDate;
+		private string _ExceptionStartDate;
 		
-		private System.Nullable<System.DateTime> _ExceptionEndDate;
+		private string _ExceptionEndDate;
 		
-		private System.Nullable<System.DateTime> _RelaxedMonth;
+		private string _RelaxedMonth;
 		
 		private string _AvailableDepartments;
 		
@@ -172,11 +172,11 @@ namespace Component_A_ClassLibrary
     partial void OnMinimumWorkingStaffChanged();
     partial void OnHolidayEntitlementChanging(System.Nullable<int> value);
     partial void OnHolidayEntitlementChanged();
-    partial void OnExceptionStartDateChanging(System.Nullable<System.DateTime> value);
+    partial void OnExceptionStartDateChanging(string value);
     partial void OnExceptionStartDateChanged();
-    partial void OnExceptionEndDateChanging(System.Nullable<System.DateTime> value);
+    partial void OnExceptionEndDateChanging(string value);
     partial void OnExceptionEndDateChanged();
-    partial void OnRelaxedMonthChanging(System.Nullable<System.DateTime> value);
+    partial void OnRelaxedMonthChanging(string value);
     partial void OnRelaxedMonthChanged();
     partial void OnAvailableDepartmentsChanging(string value);
     partial void OnAvailableDepartmentsChanged();
@@ -189,7 +189,7 @@ namespace Component_A_ClassLibrary
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ConstraintID", DbType="BigInt NOT NULL", IsPrimaryKey=true)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ConstraintID", AutoSync=AutoSync.OnInsert, DbType="BigInt NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
 		public long ConstraintID
 		{
 			get
@@ -249,8 +249,8 @@ namespace Component_A_ClassLibrary
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ExceptionStartDate", DbType="Date")]
-		public System.Nullable<System.DateTime> ExceptionStartDate
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ExceptionStartDate", DbType="NVarChar(10)")]
+		public string ExceptionStartDate
 		{
 			get
 			{
@@ -269,8 +269,8 @@ namespace Component_A_ClassLibrary
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ExceptionEndDate", DbType="Date")]
-		public System.Nullable<System.DateTime> ExceptionEndDate
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ExceptionEndDate", DbType="NVarChar(10)")]
+		public string ExceptionEndDate
 		{
 			get
 			{
@@ -289,8 +289,8 @@ namespace Component_A_ClassLibrary
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RelaxedMonth", DbType="Date")]
-		public System.Nullable<System.DateTime> RelaxedMonth
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RelaxedMonth", DbType="NVarChar(10)")]
+		public string RelaxedMonth
 		{
 			get
 			{
@@ -418,7 +418,7 @@ namespace Component_A_ClassLibrary
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DeptName", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DeptName", DbType="VarChar(MAX) NOT NULL", CanBeNull=false)]
 		public string DeptName
 		{
 			get
@@ -512,7 +512,7 @@ namespace Component_A_ClassLibrary
 		
 		private EntitySet<holidaystaken> _holidaystakens;
 		
-		private EntitySet<role> _roles;
+		private EntityRef<role> _roles;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -542,7 +542,7 @@ namespace Component_A_ClassLibrary
 		{
 			this._holidaysrequesteds = new EntitySet<holidaysrequested>(new Action<holidaysrequested>(this.attach_holidaysrequesteds), new Action<holidaysrequested>(this.detach_holidaysrequesteds));
 			this._holidaystakens = new EntitySet<holidaystaken>(new Action<holidaystaken>(this.attach_holidaystakens), new Action<holidaystaken>(this.detach_holidaystakens));
-			this._roles = new EntitySet<role>(new Action<role>(this.attach_roles), new Action<role>(this.detach_roles));
+			this._roles = default(EntityRef<role>);
 			OnCreated();
 		}
 		
@@ -646,7 +646,7 @@ namespace Component_A_ClassLibrary
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Address", DbType="VarChar(100) NOT NULL", CanBeNull=false)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Address", DbType="VarChar(MAX) NOT NULL", CanBeNull=false)]
 		public string Address
 		{
 			get
@@ -752,16 +752,32 @@ namespace Component_A_ClassLibrary
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="employee_role", Storage="_roles", ThisKey="EmployeeID", OtherKey="EmployeeID")]
-		public EntitySet<role> roles
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="employee_role", Storage="_roles", ThisKey="EmployeeID", OtherKey="EmployeeID", IsUnique=true, IsForeignKey=false)]
+		public role roles
 		{
 			get
 			{
-				return this._roles;
+				return this._roles.Entity;
 			}
 			set
 			{
-				this._roles.Assign(value);
+				role previousValue = this._roles.Entity;
+				if (((previousValue != value) 
+							|| (this._roles.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._roles.Entity = null;
+						previousValue.employee = null;
+					}
+					this._roles.Entity = value;
+					if ((value != null))
+					{
+						value.employee = this;
+					}
+					this.SendPropertyChanged("roles");
+				}
 			}
 		}
 		
@@ -808,18 +824,6 @@ namespace Component_A_ClassLibrary
 			this.SendPropertyChanging();
 			entity.employee = null;
 		}
-		
-		private void attach_roles(role entity)
-		{
-			this.SendPropertyChanging();
-			entity.employee = this;
-		}
-		
-		private void detach_roles(role entity)
-		{
-			this.SendPropertyChanging();
-			entity.employee = null;
-		}
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.holidaysrequested")]
@@ -836,7 +840,7 @@ namespace Component_A_ClassLibrary
 		
 		private System.DateTime _EndDate;
 		
-		private System.Nullable<bool> _Status;
+		private string _Status;
 		
 		private EntityRef<employee> _employee;
 		
@@ -852,7 +856,7 @@ namespace Component_A_ClassLibrary
     partial void OnStartDateChanged();
     partial void OnEndDateChanging(System.DateTime value);
     partial void OnEndDateChanged();
-    partial void OnStatusChanging(System.Nullable<bool> value);
+    partial void OnStatusChanging(string value);
     partial void OnStatusChanged();
     #endregion
 		
@@ -862,7 +866,7 @@ namespace Component_A_ClassLibrary
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RequestID", AutoSync=AutoSync.OnInsert, DbType="BigInt NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RequestID", DbType="BigInt NOT NULL", IsPrimaryKey=true)]
 		public long RequestID
 		{
 			get
@@ -946,8 +950,8 @@ namespace Component_A_ClassLibrary
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Status", DbType="Bit")]
-		public System.Nullable<bool> Status
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Status", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string Status
 		{
 			get
 			{
@@ -1035,6 +1039,8 @@ namespace Component_A_ClassLibrary
 		
 		private System.DateTime _EndDate;
 		
+		private string _Status;
+		
 		private EntityRef<employee> _employee;
 		
     #region Extensibility Method Definitions
@@ -1049,6 +1055,8 @@ namespace Component_A_ClassLibrary
     partial void OnStartDateChanged();
     partial void OnEndDateChanging(System.DateTime value);
     partial void OnEndDateChanged();
+    partial void OnStatusChanging(string value);
+    partial void OnStatusChanged();
     #endregion
 		
 		public holidaystaken()
@@ -1057,7 +1065,7 @@ namespace Component_A_ClassLibrary
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_HolidayID", DbType="BigInt NOT NULL", IsPrimaryKey=true)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_HolidayID", AutoSync=AutoSync.OnInsert, DbType="BigInt NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
 		public long HolidayID
 		{
 			get
@@ -1137,6 +1145,26 @@ namespace Component_A_ClassLibrary
 					this._EndDate = value;
 					this.SendPropertyChanged("EndDate");
 					this.OnEndDateChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Status", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string Status
+		{
+			get
+			{
+				return this._Status;
+			}
+			set
+			{
+				if ((this._Status != value))
+				{
+					this.OnStatusChanging(value);
+					this.SendPropertyChanging();
+					this._Status = value;
+					this.SendPropertyChanged("Status");
+					this.OnStatusChanged();
 				}
 			}
 		}
@@ -1229,7 +1257,7 @@ namespace Component_A_ClassLibrary
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PeaktimesID", DbType="BigInt NOT NULL", IsPrimaryKey=true)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PeaktimesID", AutoSync=AutoSync.OnInsert, DbType="BigInt NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
 		public long PeaktimesID
 		{
 			get
@@ -1338,9 +1366,9 @@ namespace Component_A_ClassLibrary
 		
 		private long _RoleID;
 		
-		private System.Nullable<long> _EmployeeID;
+		private long _EmployeeID;
 		
-		private System.Nullable<long> _DepartmentID;
+		private long _DepartmentID;
 		
 		private string _RoleType;
 		
@@ -1354,9 +1382,9 @@ namespace Component_A_ClassLibrary
     partial void OnCreated();
     partial void OnRoleIDChanging(long value);
     partial void OnRoleIDChanged();
-    partial void OnEmployeeIDChanging(System.Nullable<long> value);
+    partial void OnEmployeeIDChanging(long value);
     partial void OnEmployeeIDChanged();
-    partial void OnDepartmentIDChanging(System.Nullable<long> value);
+    partial void OnDepartmentIDChanging(long value);
     partial void OnDepartmentIDChanged();
     partial void OnRoleTypeChanging(string value);
     partial void OnRoleTypeChanged();
@@ -1369,7 +1397,7 @@ namespace Component_A_ClassLibrary
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RoleID", DbType="BigInt NOT NULL", IsPrimaryKey=true)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RoleID", AutoSync=AutoSync.OnInsert, DbType="BigInt NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
 		public long RoleID
 		{
 			get
@@ -1389,8 +1417,8 @@ namespace Component_A_ClassLibrary
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EmployeeID", DbType="BigInt")]
-		public System.Nullable<long> EmployeeID
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EmployeeID", DbType="BigInt NOT NULL")]
+		public long EmployeeID
 		{
 			get
 			{
@@ -1413,8 +1441,8 @@ namespace Component_A_ClassLibrary
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DepartmentID", DbType="BigInt")]
-		public System.Nullable<long> DepartmentID
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DepartmentID", DbType="BigInt NOT NULL")]
+		public long DepartmentID
 		{
 			get
 			{
@@ -1437,7 +1465,7 @@ namespace Component_A_ClassLibrary
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RoleType", DbType="VarChar(50)")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RoleType", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
 		public string RoleType
 		{
 			get
@@ -1457,7 +1485,7 @@ namespace Component_A_ClassLibrary
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="department_role", Storage="_department", ThisKey="DepartmentID", OtherKey="DepartmentID", IsForeignKey=true)]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="department_role", Storage="_department", ThisKey="DepartmentID", OtherKey="DepartmentID", IsForeignKey=true, DeleteOnNull=true, DeleteRule="CASCADE")]
 		public department department
 		{
 			get
@@ -1484,14 +1512,14 @@ namespace Component_A_ClassLibrary
 					}
 					else
 					{
-						this._DepartmentID = default(Nullable<long>);
+						this._DepartmentID = default(long);
 					}
 					this.SendPropertyChanged("department");
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="employee_role", Storage="_employee", ThisKey="EmployeeID", OtherKey="EmployeeID", IsForeignKey=true)]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="employee_role", Storage="_employee", ThisKey="EmployeeID", OtherKey="EmployeeID", IsForeignKey=true, DeleteOnNull=true, DeleteRule="CASCADE")]
 		public employee employee
 		{
 			get
@@ -1508,17 +1536,17 @@ namespace Component_A_ClassLibrary
 					if ((previousValue != null))
 					{
 						this._employee.Entity = null;
-						previousValue.roles.Remove(this);
+						previousValue.roles = null;
 					}
 					this._employee.Entity = value;
 					if ((value != null))
 					{
-						value.roles.Add(this);
+						value.roles = this;
 						this._EmployeeID = value.EmployeeID;
 					}
 					else
 					{
-						this._EmployeeID = default(Nullable<long>);
+						this._EmployeeID = default(long);
 					}
 					this.SendPropertyChanged("employee");
 				}

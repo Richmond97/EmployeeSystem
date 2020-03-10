@@ -12,7 +12,7 @@ namespace EmployeeWebApp
     /// <summary>
     /// Summary description for WebService
     /// </summary>
-    [WebService(Namespace = "http://tempuri.org/")]
+    [WebService(Namespace = "http://WebService.org/")]
     [WebServiceBinding(ConformsTo = WsiProfiles.BasicProfile1_1)]
     [System.ComponentModel.ToolboxItem(false)]
     // To allow this Web Service to be called from script, using ASP.NET AJAX, uncomment the following line. 
@@ -35,8 +35,8 @@ namespace EmployeeWebApp
                                where a.StaffID == StaffID && a.Password == Password
                                select a;
 
-                
-               var quer = verQuery.ToList();
+
+                var quer = verQuery.ToList();
 
                 //create session for log in
 
@@ -70,7 +70,7 @@ namespace EmployeeWebApp
                 }
 
             }
-            
+
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
@@ -130,7 +130,7 @@ namespace EmployeeWebApp
                     EmployeeID = StaffID,
                     StartDate = Convert.ToDateTime(startH.ToShortDateString()),
                     EndDate = Convert.ToDateTime(endH.ToShortDateString()),
-                    Status = true
+                    Status = "Pending"
 
                 };
 

@@ -2,12 +2,12 @@
   <Connection Mode="AppSettings" ConnectionString="Data Source=sql-server;Initial Catalog=ry9102q;Persist Security Info=True;User ID=ry9102q" SettingsObjectName="Component_A_ClassLibrary.Properties.Settings" SettingsPropertyName="ry9102qConnectionString" Provider="System.Data.SqlClient" />
   <Table Name="dbo.constraints" Member="constraints">
     <Type Name="constraint">
-      <Column Name="ConstraintID" Type="System.Int64" DbType="BigInt NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="ConstraintID" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="MinimumWorkingStaff" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="HolidayEntitlement" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="ExceptionStartDate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
-      <Column Name="ExceptionEndDate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
-      <Column Name="RelaxedMonth" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="ExceptionStartDate" Type="System.String" DbType="NVarChar(10)" CanBeNull="true" />
+      <Column Name="ExceptionEndDate" Type="System.String" DbType="NVarChar(10)" CanBeNull="true" />
+      <Column Name="RelaxedMonth" Type="System.String" DbType="NVarChar(10)" CanBeNull="true" />
       <Column Name="AvailableDepartments" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
       <Column Name="AvailableRoles" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
     </Type>
@@ -15,7 +15,7 @@
   <Table Name="dbo.department" Member="departments">
     <Type Name="department">
       <Column Name="DepartmentID" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="DeptName" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="DeptName" Type="System.String" DbType="VarChar(MAX) NOT NULL" CanBeNull="false" />
       <Association Name="department_role" Member="roles" ThisKey="DepartmentID" OtherKey="DepartmentID" Type="role" />
     </Type>
   </Table>
@@ -26,37 +26,38 @@
       <Column Name="Password" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
       <Column Name="FirstName" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
       <Column Name="LastName" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="Address" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="Address" Type="System.String" DbType="VarChar(MAX) NOT NULL" CanBeNull="false" />
       <Column Name="Telephone" Type="System.String" DbType="Char(11) NOT NULL" CanBeNull="false" />
       <Column Name="EmailAddress" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
       <Column Name="DateJoined" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
       <Association Name="employee_holidaysrequested" Member="holidaysrequesteds" ThisKey="EmployeeID" OtherKey="EmployeeID" Type="holidaysrequested" />
       <Association Name="employee_holidaystaken" Member="holidaystakens" ThisKey="EmployeeID" OtherKey="EmployeeID" Type="holidaystaken" />
-      <Association Name="employee_role" Member="roles" ThisKey="EmployeeID" OtherKey="EmployeeID" Type="role" />
+      <Association Name="employee_role" Member="roles" ThisKey="EmployeeID" OtherKey="EmployeeID" Type="role" Cardinality="One" />
     </Type>
   </Table>
   <Table Name="dbo.holidaysrequested" Member="holidaysrequesteds">
     <Type Name="holidaysrequested">
-      <Column Name="RequestID" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="RequestID" Type="System.Int64" DbType="BigInt NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
       <Column Name="EmployeeID" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
       <Column Name="StartDate" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
       <Column Name="EndDate" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
-      <Column Name="Status" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="Status" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
       <Association Name="employee_holidaysrequested" Member="employee" ThisKey="EmployeeID" OtherKey="EmployeeID" Type="employee" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.holidaystaken" Member="holidaystakens">
     <Type Name="holidaystaken">
-      <Column Name="HolidayID" Type="System.Int64" DbType="BigInt NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="HolidayID" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="EmployeeID" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
       <Column Name="StartDate" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
       <Column Name="EndDate" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="Status" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
       <Association Name="employee_holidaystaken" Member="employee" ThisKey="EmployeeID" OtherKey="EmployeeID" Type="employee" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.peaktimes" Member="peaktimes">
     <Type Name="peaktime">
-      <Column Name="PeaktimesID" Type="System.Int64" DbType="BigInt NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="PeaktimesID" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="PeaktimesName" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
       <Column Name="StartDate" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
       <Column Name="EndDate" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
@@ -64,12 +65,12 @@
   </Table>
   <Table Name="dbo.role" Member="roles">
     <Type Name="role">
-      <Column Name="RoleID" Type="System.Int64" DbType="BigInt NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="EmployeeID" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
-      <Column Name="DepartmentID" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
-      <Column Name="RoleType" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Association Name="department_role" Member="department" ThisKey="DepartmentID" OtherKey="DepartmentID" Type="department" IsForeignKey="true" />
-      <Association Name="employee_role" Member="employee" ThisKey="EmployeeID" OtherKey="EmployeeID" Type="employee" IsForeignKey="true" />
+      <Column Name="RoleID" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="EmployeeID" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
+      <Column Name="DepartmentID" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
+      <Column Name="RoleType" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Association Name="department_role" Member="department" ThisKey="DepartmentID" OtherKey="DepartmentID" Type="department" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+      <Association Name="employee_role" Member="employee" ThisKey="EmployeeID" OtherKey="EmployeeID" Type="employee" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
     </Type>
   </Table>
 </Database>
