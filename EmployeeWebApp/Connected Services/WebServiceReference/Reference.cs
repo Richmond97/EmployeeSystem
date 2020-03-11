@@ -8,48 +8,48 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace EmployeeWebApp.ServiceReference {
+namespace EmployeeWebApp.WebServiceReference {
     
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ServiceReference.WebServiceSoap")]
+    [System.ServiceModel.ServiceContractAttribute(Namespace="http://Service.org/", ConfigurationName="WebServiceReference.WebServiceSoap")]
     public interface WebServiceSoap {
         
-        // CODEGEN: Generating message contract since element name Password from namespace http://tempuri.org/ is not marked nillable
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/Verification", ReplyAction="*")]
-        EmployeeWebApp.ServiceReference.VerificationResponse Verification(EmployeeWebApp.ServiceReference.VerificationRequest request);
+        // CODEGEN: Generating message contract since element name Password from namespace http://Service.org/ is not marked nillable
+        [System.ServiceModel.OperationContractAttribute(Action="http://Service.org/Verification", ReplyAction="*")]
+        EmployeeWebApp.WebServiceReference.VerificationResponse Verification(EmployeeWebApp.WebServiceReference.VerificationRequest request);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/Verification", ReplyAction="*")]
-        System.Threading.Tasks.Task<EmployeeWebApp.ServiceReference.VerificationResponse> VerificationAsync(EmployeeWebApp.ServiceReference.VerificationRequest request);
+        [System.ServiceModel.OperationContractAttribute(Action="http://Service.org/Verification", ReplyAction="*")]
+        System.Threading.Tasks.Task<EmployeeWebApp.WebServiceReference.VerificationResponse> VerificationAsync(EmployeeWebApp.WebServiceReference.VerificationRequest request);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetID", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://Service.org/GetID", ReplyAction="*")]
         long GetID(long StaffID);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetID", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://Service.org/GetID", ReplyAction="*")]
         System.Threading.Tasks.Task<long> GetIDAsync(long StaffID);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/OutstandingReq", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://Service.org/OutstandingReq", ReplyAction="*")]
         void OutstandingReq();
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/OutstandingReq", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://Service.org/OutstandingReq", ReplyAction="*")]
         System.Threading.Tasks.Task OutstandingReqAsync();
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ConfirmedReq", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://Service.org/ConfirmedReq", ReplyAction="*")]
         void ConfirmedReq();
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ConfirmedReq", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://Service.org/ConfirmedReq", ReplyAction="*")]
         System.Threading.Tasks.Task ConfirmedReqAsync();
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/EmployeeHolidayStatus", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://Service.org/EmployeeHolidayStatus", ReplyAction="*")]
         void EmployeeHolidayStatus();
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/EmployeeHolidayStatus", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://Service.org/EmployeeHolidayStatus", ReplyAction="*")]
         System.Threading.Tasks.Task EmployeeHolidayStatusAsync();
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/SubmitHolidayReq", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://Service.org/SubmitHolidayReq", ReplyAction="*")]
         bool SubmitHolidayReq(System.DateTime startH, System.DateTime endH, long StaffID);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/SubmitHolidayReq", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://Service.org/SubmitHolidayReq", ReplyAction="*")]
         System.Threading.Tasks.Task<bool> SubmitHolidayReqAsync(System.DateTime startH, System.DateTime endH, long StaffID);
     }
     
@@ -59,13 +59,13 @@ namespace EmployeeWebApp.ServiceReference {
     [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
     public partial class VerificationRequest {
         
-        [System.ServiceModel.MessageBodyMemberAttribute(Name="Verification", Namespace="http://tempuri.org/", Order=0)]
-        public EmployeeWebApp.ServiceReference.VerificationRequestBody Body;
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="Verification", Namespace="http://Service.org/", Order=0)]
+        public EmployeeWebApp.WebServiceReference.VerificationRequestBody Body;
         
         public VerificationRequest() {
         }
         
-        public VerificationRequest(EmployeeWebApp.ServiceReference.VerificationRequestBody Body) {
+        public VerificationRequest(EmployeeWebApp.WebServiceReference.VerificationRequestBody Body) {
             this.Body = Body;
         }
     }
@@ -73,7 +73,7 @@ namespace EmployeeWebApp.ServiceReference {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://tempuri.org/")]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://Service.org/")]
     public partial class VerificationRequestBody {
         
         [System.Runtime.Serialization.DataMemberAttribute(Order=0)]
@@ -97,13 +97,13 @@ namespace EmployeeWebApp.ServiceReference {
     [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
     public partial class VerificationResponse {
         
-        [System.ServiceModel.MessageBodyMemberAttribute(Name="VerificationResponse", Namespace="http://tempuri.org/", Order=0)]
-        public EmployeeWebApp.ServiceReference.VerificationResponseBody Body;
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="VerificationResponse", Namespace="http://Service.org/", Order=0)]
+        public EmployeeWebApp.WebServiceReference.VerificationResponseBody Body;
         
         public VerificationResponse() {
         }
         
-        public VerificationResponse(EmployeeWebApp.ServiceReference.VerificationResponseBody Body) {
+        public VerificationResponse(EmployeeWebApp.WebServiceReference.VerificationResponseBody Body) {
             this.Body = Body;
         }
     }
@@ -111,7 +111,7 @@ namespace EmployeeWebApp.ServiceReference {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://tempuri.org/")]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://Service.org/")]
     public partial class VerificationResponseBody {
         
         [System.Runtime.Serialization.DataMemberAttribute(Order=0)]
@@ -126,12 +126,12 @@ namespace EmployeeWebApp.ServiceReference {
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public interface WebServiceSoapChannel : EmployeeWebApp.ServiceReference.WebServiceSoap, System.ServiceModel.IClientChannel {
+    public interface WebServiceSoapChannel : EmployeeWebApp.WebServiceReference.WebServiceSoap, System.ServiceModel.IClientChannel {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public partial class WebServiceSoapClient : System.ServiceModel.ClientBase<EmployeeWebApp.ServiceReference.WebServiceSoap>, EmployeeWebApp.ServiceReference.WebServiceSoap {
+    public partial class WebServiceSoapClient : System.ServiceModel.ClientBase<EmployeeWebApp.WebServiceReference.WebServiceSoap>, EmployeeWebApp.WebServiceReference.WebServiceSoap {
         
         public WebServiceSoapClient() {
         }
@@ -153,30 +153,30 @@ namespace EmployeeWebApp.ServiceReference {
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        EmployeeWebApp.ServiceReference.VerificationResponse EmployeeWebApp.ServiceReference.WebServiceSoap.Verification(EmployeeWebApp.ServiceReference.VerificationRequest request) {
+        EmployeeWebApp.WebServiceReference.VerificationResponse EmployeeWebApp.WebServiceReference.WebServiceSoap.Verification(EmployeeWebApp.WebServiceReference.VerificationRequest request) {
             return base.Channel.Verification(request);
         }
         
         public bool Verification(int StaffID, string Password) {
-            EmployeeWebApp.ServiceReference.VerificationRequest inValue = new EmployeeWebApp.ServiceReference.VerificationRequest();
-            inValue.Body = new EmployeeWebApp.ServiceReference.VerificationRequestBody();
+            EmployeeWebApp.WebServiceReference.VerificationRequest inValue = new EmployeeWebApp.WebServiceReference.VerificationRequest();
+            inValue.Body = new EmployeeWebApp.WebServiceReference.VerificationRequestBody();
             inValue.Body.StaffID = StaffID;
             inValue.Body.Password = Password;
-            EmployeeWebApp.ServiceReference.VerificationResponse retVal = ((EmployeeWebApp.ServiceReference.WebServiceSoap)(this)).Verification(inValue);
+            EmployeeWebApp.WebServiceReference.VerificationResponse retVal = ((EmployeeWebApp.WebServiceReference.WebServiceSoap)(this)).Verification(inValue);
             return retVal.Body.VerificationResult;
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<EmployeeWebApp.ServiceReference.VerificationResponse> EmployeeWebApp.ServiceReference.WebServiceSoap.VerificationAsync(EmployeeWebApp.ServiceReference.VerificationRequest request) {
+        System.Threading.Tasks.Task<EmployeeWebApp.WebServiceReference.VerificationResponse> EmployeeWebApp.WebServiceReference.WebServiceSoap.VerificationAsync(EmployeeWebApp.WebServiceReference.VerificationRequest request) {
             return base.Channel.VerificationAsync(request);
         }
         
-        public System.Threading.Tasks.Task<EmployeeWebApp.ServiceReference.VerificationResponse> VerificationAsync(int StaffID, string Password) {
-            EmployeeWebApp.ServiceReference.VerificationRequest inValue = new EmployeeWebApp.ServiceReference.VerificationRequest();
-            inValue.Body = new EmployeeWebApp.ServiceReference.VerificationRequestBody();
+        public System.Threading.Tasks.Task<EmployeeWebApp.WebServiceReference.VerificationResponse> VerificationAsync(int StaffID, string Password) {
+            EmployeeWebApp.WebServiceReference.VerificationRequest inValue = new EmployeeWebApp.WebServiceReference.VerificationRequest();
+            inValue.Body = new EmployeeWebApp.WebServiceReference.VerificationRequestBody();
             inValue.Body.StaffID = StaffID;
             inValue.Body.Password = Password;
-            return ((EmployeeWebApp.ServiceReference.WebServiceSoap)(this)).VerificationAsync(inValue);
+            return ((EmployeeWebApp.WebServiceReference.WebServiceSoap)(this)).VerificationAsync(inValue);
         }
         
         public long GetID(long StaffID) {

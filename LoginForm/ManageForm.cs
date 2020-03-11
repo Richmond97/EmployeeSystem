@@ -44,11 +44,11 @@ namespace LoginForm
         {
             createPanel.Location = new Point(0, 37);
             editPanel.Location = new Point(0, 37);
-            mngPanel.Location = new Point(0, 37);
+            pnlHolidayBkd.Location = new Point(0, 37);
 
             createPanel.Size = new Size(851, 443);
             editPanel.Size = new Size(851, 443);
-            mngPanel.Size = new Size(851, 443);
+            pnlHolidayBkd.Size = new Size(851, 443);
 
             // Set search to by name
             rdName.Checked = true;
@@ -80,7 +80,7 @@ namespace LoginForm
             btnHolidays.BackColor = Color.White;
 
             editPanel.Visible = false;
-            mngPanel.Visible = false;
+            pnlHolidayBkd.Visible = false;
         }
 
         private void BtnEdit_Click(object sender, EventArgs e)
@@ -92,7 +92,7 @@ namespace LoginForm
             btnHolidays.BackColor = Color.White;
 
             createPanel.Visible = false;
-            mngPanel.Visible = false;
+            pnlHolidayBkd.Visible = false;
             btnEditEmploy.Show();
             btnDeleteEmploy.Hide();
         }
@@ -106,7 +106,7 @@ namespace LoginForm
             btnHolidays.BackColor = Color.White;
 
             createPanel.Visible = false;
-            mngPanel.Visible = false;
+            pnlHolidayBkd.Visible = false;
             btnEditEmploy.Hide();
             btnDeleteEmploy.Show();
         }
@@ -124,7 +124,7 @@ namespace LoginForm
         private void BtnHolidays_Click(object sender, EventArgs e)
         {
             rdbOutstanding.Checked = true;
-            mngPanel.Visible = true;
+            pnlHolidayBkd.Visible = true;
             btnHolidays.BackColor = Color.Gray;
             btnCreate.BackColor = Color.White;
             btnEdit.BackColor = Color.White;
@@ -389,5 +389,17 @@ namespace LoginForm
             }
 
         }
+
+        public void ArrangeHolidaysPanel()
+        {
+            pnlHolidayBkd.Hide();
+            pnlHolidayReq.Hide();
+            pnlHolidayOnDuty.Hide();
+            
+               
+           
+        }
+
+     
     }
 }

@@ -11,7 +11,7 @@ namespace SOAP
     /// <summary>
     /// Summary description for WebService
     /// </summary>
-    [WebService(Namespace = "http://tempuri.org/")]
+    [WebService(Namespace = "http://Service.org/")]
     [WebServiceBinding(ConformsTo = WsiProfiles.BasicProfile1_1)]
     [System.ComponentModel.ToolboxItem(false)]
     // To allow this Web Service to be called from script, using ASP.NET AJAX, uncomment the following line. 
@@ -79,7 +79,7 @@ namespace SOAP
         {
             var verQuery = (from a in db.employees
                             where a.StaffID == StaffID
-                            select a.EmployeeID);
+                            select a.StaffID);
             var quer = verQuery.ToList();
             long ID = quer[0];
             return ID;

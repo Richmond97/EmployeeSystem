@@ -1,30 +1,27 @@
 ﻿using Component_A_ClassLibrary;
+using EmployeeWebApp;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
+using System.Text;
+using System.Threading.Tasks;
 using System.Web.Services;
-using System.Web.UI.WebControls;
 using System.Windows.Forms;
 
-namespace EmployeeWebApp
+
+namespace EmployeeWebApp.HolidayManager
 {
-    /// <summary>
-    /// Summary description for WebService
-    /// </summary>
-    [WebService(Namespace = "http://WebService.org/")]
-    [WebServiceBinding(ConformsTo = WsiProfiles.BasicProfile1_1)]
-    [System.ComponentModel.ToolboxItem(false)]
-    // To allow this Web Service to be called from script, using ASP.NET AJAX, uncomment the following line. 
-    // [System.Web.Script.Services.ScriptService]
-    public class WebService : System.Web.Services.WebService
+    //• View a list of outstanding holiday requests
+    //• Accept/reject a request
+    //• View a list of all holiday bookings and filter them by employee
+    //• Select a date and show all employees working that day and those
+    //on leave that day.
+
+    class HolidaysManager
     {
-    
-        
-        
         private readonly DataClasses1DataContext db = new DataClasses1DataContext();
 
-        [WebMethod]
+        //• View a list of outstanding holiday requests
         public bool Verification(int StaffID, string Password)
         {
             try
@@ -43,9 +40,10 @@ namespace EmployeeWebApp
 
                 if (verQuery.Any())
                 {
+
                     // If user entered details correctly call auth method
-                    Session["sesID"] = GetID(StaffID);
-                    MessageBox.Show("User Exists in DB");
+                    
+                    // MessageBox.Show("User Exists in DB");
                     return true;
                 }
                 else
@@ -58,7 +56,7 @@ namespace EmployeeWebApp
                     if (userQuery.Any())
                     {
                         Console.WriteLine("User Exists in DB, Wrong Password");
-                        MessageBox.Show("Password Incorrect");
+                        // MessageBox.Show("Password Incorrect");
                         return false;
                     }
                     else
@@ -77,27 +75,34 @@ namespace EmployeeWebApp
                 throw ex;
             }
         }
-        [WebMethod]
+        public long GetStaffID(long StaffID)
+        {
+            var verQuery = (from a in db.employees
+                            where a.StaffID == StaffID
+                            select a.EmployeeID);
+            var quer = verQuery.ToList();
+            long staffID = quer[0];
+            return staffID;
+
+        }
+
         public long GetID(long StaffID)
         {
             var verQuery = (from a in db.employees
-                           where a.StaffID == StaffID
-                           select a.EmployeeID);
+                            where a.StaffID == StaffID
+                            select a.EmployeeID);
             var quer = verQuery.ToList();
             long ID = quer[0];
             return ID;
 
         }
 
-
-        [WebMethod]
         public void OutstandingReq()
         {
             var result = (from a in db.holidaysrequesteds
                           where a.Status == null
                           select a);
         }
-        [WebMethod]
         public void ConfirmedReq()
         {
             var result = (from a in db.holidaysrequesteds
@@ -105,35 +110,35 @@ namespace EmployeeWebApp
                           select a);
         }
 
-        [WebMethod]
         public void EmployeeHolidayStatus()
         {
             var result = (from a in db.holidaysrequesteds
                           where a.Status != null
                           select a);
         }
+        public void ViewHolidayReqStatus()
+        {
+            var result = (from a in db.holidaysrequesteds
+                          where a.Status != null
+                          select a);
+        }
 
-        [WebMethod]
-        public bool SubmitHolidayReq(DateTime startH, DateTime endH, long StaffID)
+        public bool SubmitHolidayReq(DateTime startH, DateTime endH, long ID)
         {
             try
             {
-                //var verQuery = from a in db.employees
-                //               where a.StaffID == StaffID
-                //               select a.EmployeeID;
-
-
-                //var quer = verQuery.ToList();
-                //long ID = quer[0];
-                holidaysrequested rewHlday = new holidaysrequested
+               
+                holidaysrequested newHlday = new holidaysrequested
                 {
-                    EmployeeID = StaffID,
+                    EmployeeID = ID,
                     StartDate = Convert.ToDateTime(startH.ToShortDateString()),
                     EndDate = Convert.ToDateTime(endH.ToShortDateString()),
                     Status = "Pending"
+                    
 
                 };
 
+                db.holidaysrequesteds.InsertOnSubmit(newHlday);
                 db.SubmitChanges();
                 return true;
             }
@@ -142,17 +147,9 @@ namespace EmployeeWebApp
                 MessageBox.Show(ex.Message);
                 return false;
                 throw;
-                
-            }
-            //Create method in Webservice that returns a session //ws.Session[sesID]; 
 
-            //var result = (from a in db.holidaysrequesteds
-            //              where a.EmployeeID == )
-            
-        }
-        internal void Verification(System.Web.UI.WebControls.TextBox txtID, System.Web.UI.WebControls.TextBox txtPassword)
-        {
-            throw new NotImplementedException();
+            }
         }
     }
 }
+

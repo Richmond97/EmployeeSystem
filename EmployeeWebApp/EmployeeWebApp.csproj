@@ -110,20 +110,13 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="About.aspx" />
-    <None Include="Connected Services\LoginReference\WebService.disco" />
-    <None Include="Connected Services\LoginReference\configuration91.svcinfo" />
-    <None Include="Connected Services\LoginReference\configuration.svcinfo" />
-    <None Include="Connected Services\LoginReference\Reference.svcmap">
-      <Generator>WCF Proxy Generator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
-    </None>
-    <Content Include="Connected Services\ServiceReference\EmployeeWebApp.ServiceReference.VerificationResponse.datasource">
+    <Content Include="Connected Services\WebServiceReference\EmployeeWebApp.WebServiceReference.VerificationResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
-    <None Include="Connected Services\ServiceReference\WebService.disco" />
-    <None Include="Connected Services\ServiceReference\configuration91.svcinfo" />
-    <None Include="Connected Services\ServiceReference\configuration.svcinfo" />
-    <None Include="Connected Services\ServiceReference\Reference.svcmap">
+    <None Include="Connected Services\WebServiceReference\WebService.disco" />
+    <None Include="Connected Services\WebServiceReference\configuration91.svcinfo" />
+    <None Include="Connected Services\WebServiceReference\configuration.svcinfo" />
+    <None Include="Connected Services\WebServiceReference\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
@@ -147,9 +140,7 @@
     <Content Include="Content\bootstrap-theme.css.map" />
     <Content Include="icons\calendar_icon.png" />
     <Content Include="ManageAccount.aspx" />
-    <Content Include="Wrong.asmx" />
-    <None Include="Connected Services\LoginReference\WebService.wsdl" />
-    <None Include="Connected Services\ServiceReference\WebService.wsdl" />
+    <None Include="Connected Services\WebServiceReference\WebService.wsdl" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -195,12 +186,7 @@
       <DependentUpon>About.aspx</DependentUpon>
     </Compile>
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="Connected Services\LoginReference\Reference.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Compile>
-    <Compile Include="Connected Services\ServiceReference\Reference.cs">
+    <Compile Include="Connected Services\WebServiceReference\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
@@ -222,6 +208,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="HolidayManager\HolidayManager.cs" />
     <Compile Include="ManageAccount.aspx.cs">
       <DependentUpon>ManageAccount.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -251,10 +238,6 @@
     <Compile Include="ViewSwitcher.ascx.designer.cs">
       <DependentUpon>ViewSwitcher.ascx</DependentUpon>
     </Compile>
-    <Compile Include="Wrong.asmx.cs">
-      <DependentUpon>Wrong.asmx</DependentUpon>
-      <SubType>Component</SubType>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -280,8 +263,7 @@
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <ItemGroup>
-    <WCFMetadataStorage Include="Connected Services\LoginReference\" />
-    <WCFMetadataStorage Include="Connected Services\ServiceReference\" />
+    <WCFMetadataStorage Include="Connected Services\WebServiceReference\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

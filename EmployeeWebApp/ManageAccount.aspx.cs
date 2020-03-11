@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using EmployeeWebApp.HolidayManager;
 using System.Windows.Forms;
 
 namespace EmployeeWebApp
@@ -13,7 +14,7 @@ namespace EmployeeWebApp
         
         public static List<DateTime> bkinDate = new List<DateTime>();
         public static List<DateTime> newBbkinDate = new List<DateTime>();
-        WebService ws = new WebService();
+        HolidaysManager hm = new HolidaysManager();
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -98,7 +99,7 @@ namespace EmployeeWebApp
             DateTime startH = newBbkinDate[0];
             DateTime endH = newBbkinDate[newBbkinDate.Count - 1];
             MessageBox.Show("Test: " + startH.ToString("d"), "To: " + endH);
-            if (ws.SubmitHolidayReq(startH, endH, ((long)(Session["sesID"]))))
+            if (hm.SubmitHolidayReq(startH, endH, ((long)(Session["sesID"]))))
             {
                 MessageBox.Show("Booking Completed from: " + newBbkinDate[0].ToString("d"), "To: " + newBbkinDate[newBbkinDate.Count - 1].ToString("d"));
             }
