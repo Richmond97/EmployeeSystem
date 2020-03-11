@@ -18,6 +18,7 @@ namespace LoginForm
         {
             InitializeComponent();
             ArrangePanels();
+            ArrangeHolidaysPanel();
             BtnCreate_Click();            
         }
 
@@ -44,11 +45,23 @@ namespace LoginForm
         {
             createPanel.Location = new Point(0, 37);
             editPanel.Location = new Point(0, 37);
-            pnlHolidayBkd.Location = new Point(0, 37);
+            mainPnlHM.Location = new Point(0, 37);
 
-            createPanel.Size = new Size(851, 443);
-            editPanel.Size = new Size(851, 443);
-            pnlHolidayBkd.Size = new Size(851, 443);
+            createPanel.Size = new Size(1603, 939);
+            editPanel.Size = new Size(1603, 939);
+            mainPnlHM.Size = new Size(1603, 939);
+
+            //Holiday Manager panels
+            pnlHolidayBkd.Location = new Point(240, 110);
+            pnlHolidayOnDuty.Location = new Point(240, 110);
+            pnlHolidayReq.Location = new Point(240, 110);
+
+            pnlHolidayBkd.Size = new Size(1232,671);
+            pnlHolidayOnDuty.Size = new Size(1232, 671);
+            pnlHolidayReq.Size = new Size(1232, 671);
+
+
+
 
             // Set search to by name
             rdName.Checked = true;
@@ -80,7 +93,7 @@ namespace LoginForm
             btnHolidays.BackColor = Color.White;
 
             editPanel.Visible = false;
-            pnlHolidayBkd.Visible = false;
+            mainPnlHM.Visible = false;
         }
 
         private void BtnEdit_Click(object sender, EventArgs e)
@@ -92,7 +105,7 @@ namespace LoginForm
             btnHolidays.BackColor = Color.White;
 
             createPanel.Visible = false;
-            pnlHolidayBkd.Visible = false;
+            mainPnlHM.Visible = false;
             btnEditEmploy.Show();
             btnDeleteEmploy.Hide();
         }
@@ -106,7 +119,7 @@ namespace LoginForm
             btnHolidays.BackColor = Color.White;
 
             createPanel.Visible = false;
-            pnlHolidayBkd.Visible = false;
+            mainPnlHM.Visible = false;
             btnEditEmploy.Hide();
             btnDeleteEmploy.Show();
         }
@@ -124,7 +137,7 @@ namespace LoginForm
         private void BtnHolidays_Click(object sender, EventArgs e)
         {
             rdbOutstanding.Checked = true;
-            pnlHolidayBkd.Visible = true;
+            mainPnlHM.Visible = true;
             btnHolidays.BackColor = Color.Gray;
             btnCreate.BackColor = Color.White;
             btnEdit.BackColor = Color.White;
@@ -392,14 +405,50 @@ namespace LoginForm
 
         public void ArrangeHolidaysPanel()
         {
-            pnlHolidayBkd.Hide();
+            pnlHolidayBkd.Show();
             pnlHolidayReq.Hide();
             pnlHolidayOnDuty.Hide();
-            
-               
-           
+
+            cmbxHM.Items.Add("View Holidays Booked");
+            cmbxHM.Items.Add(" Holidays Requests");
+            cmbxHM.Items.Add("Employee ON/OFF Duty");
+            cmbxHM.DropDownStyle = ComboBoxStyle.DropDownList;
+
         }
 
-     
+        private void CmbxHM_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            switch (cmbxHM.SelectedIndex)
+            {
+                case 0:
+                    pnlHolidayBkd.Show();
+                    pnlHolidayReq.Hide();
+                    pnlHolidayOnDuty.Hide();
+                    break;
+                 case 1:
+                    pnlHolidayBkd.Hide();
+                    pnlHolidayReq.Show();
+                    pnlHolidayOnDuty.Hide();
+                    break;
+                case 2:
+                    pnlHolidayBkd.Hide();
+                    pnlHolidayReq.Hide();
+                    pnlHolidayOnDuty.Show();
+                    break;
+
+            }
+            
+
+        }
+
+
+        private void MonthCalendar_DateChanged(object sender, DateRangeEventArgs e)
+        {
+
+            monthCalendar.MaxSelectionCount = 1;
+            monthCalendar.SelectionRange.Start.ToString("d");
+            //EmployeeOnDuty();
+
+        }
     }
 }

@@ -19,26 +19,26 @@ namespace HolidayManager_ClassLibrary
         private readonly DataClasses1DataContext db = new DataClasses1DataContext();
 
         //• View a list of outstanding holiday requests
-        private void OutstandingReq()
+        public void OutstandingReq()
         {
             var result = (from a in db.holidaysrequesteds
                           where a.Status == null
                           select a);
         }
-        private void ConfirmedReq()
+        public void ConfirmedReq()
         {
             var result = (from a in db.holidaystakens
                           select a);
         }
 
-        private void EmployeeHolidayStatus()
+        public void EmployeeHolidayStatus()
         {
             var result = (from a in db.holidaysrequesteds
                           where a.Status != null
                           select a);
         }
 
-        private void acceptReq(long EmployID)
+        public void acceptReq(long EmployID)
         {
             var result = (from a in db.holidaysrequesteds
                           where a.Status != null && a.EmployeeID == EmployID
@@ -52,7 +52,20 @@ namespace HolidayManager_ClassLibrary
             };
         }
 
-        private void EmployeeHolrejectReq()
+        public void EmployeeHolidayrejectReq()
+        {
+            var result = (from a in db.holidaysrequesteds
+                          where a.Status != null
+                          select a);
+        }
+        public void EmployeeOnDuty(DateTime selectedDate)
+        {
+
+            var result = (from a in db.holidaysrequesteds
+                          where selectedDate >= a.StartDate && selectedDate < a.EndDate
+                          select a);
+        }
+        public void EmployeeOffDuty()
         {
             var result = (from a in db.holidaysrequesteds
                           where a.Status != null

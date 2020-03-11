@@ -93,6 +93,10 @@
       <Project>{f5196b04-c896-4418-a8a1-0b012b7564c0}</Project>
       <Name>Component_A_ClassLibrary</Name>
     </ProjectReference>
+    <ProjectReference Include="..\HolidayManager_ClassLibrary\HolidayManager_ClassLibrary.csproj">
+      <Project>{ec81a041-92d4-437a-b6e3-6a7bad144283}</Project>
+      <Name>HolidayManager_ClassLibrary</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
