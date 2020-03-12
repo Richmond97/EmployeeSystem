@@ -20,7 +20,7 @@ namespace LoginForm
             InitializeComponent();
             ArrangePanels();
             ArrangeHolidaysPanel();
-            BtnCreate_Click();            
+            BtnCreate_Click();
         }
 
         private static readonly object locker = new object();
@@ -60,7 +60,7 @@ namespace LoginForm
             pnlHolidayOnDuty.Location = new Point(240, 110);
             pnlHolidayReq.Location = new Point(240, 110);
 
-            pnlHolidayBkd.Size = new Size(1232,671);
+            pnlHolidayBkd.Size = new Size(1232, 671);
             pnlHolidayOnDuty.Size = new Size(1232, 671);
             pnlHolidayReq.Size = new Size(1232, 671);
 
@@ -89,7 +89,7 @@ namespace LoginForm
 
         private void BtnCreate_Click()
         {
-            
+
             createPanel.Visible = true;
             btnCreate.BackColor = Color.DarkGray;
             btnEdit.BackColor = Color.White;
@@ -127,7 +127,7 @@ namespace LoginForm
             btnEditEmploy.Hide();
             btnDeleteEmploy.Show();
         }
-               
+
         private void BtnLogout_Click(object sender, EventArgs e)
         {
             if ((MessageBox.Show("Log Out", "Please Confirm Your Action", MessageBoxButtons.YesNo, MessageBoxIcon.Question)) == DialogResult.Yes)
@@ -140,7 +140,6 @@ namespace LoginForm
 
         private void BtnHolidays_Click(object sender, EventArgs e)
         {
-            rdbOutstanding.Checked = true;
             mainPnlHM.Visible = true;
             btnHolidays.BackColor = Color.Gray;
             btnCreate.BackColor = Color.White;
@@ -149,8 +148,8 @@ namespace LoginForm
 
             createPanel.Visible = false;
             editPanel.Visible = false;
-            btnAccept.Hide();
-            btnReject.Hide();
+            btnAccept.Show();
+            btnReject.Show();
 
         }
         #endregion
@@ -177,13 +176,13 @@ namespace LoginForm
                 // Clear fields to enter another employee
                 ClearFields(createPanel);
 
-            } 
+            }
 
         }
 
         private void BtnSearch_Click(object sender, EventArgs e)
         {
-            editEmployee1.SearchEmployee(dataGridView1, txtSearch,rdName);
+            editEmployee1.SearchEmployee(dataGridView1, txtSearch, rdName);
         }
 
         private void BtnDeleteEmploy_Click(object sender, EventArgs e)
@@ -196,16 +195,16 @@ namespace LoginForm
                 dataGridView1.CurrentRow.Selected = false;
 
 
-                ClearFields(editPanel);            
+                ClearFields(editPanel);
                 BtnSearch_Click(sender, e);
                 RefreshGrid();
                 SwitchButtons();
                 SetEditableFields(editPanel);
 
-            }                      
+            }
 
-            
-        }              
+
+        }
 
         private void BtnEditEmploy_Click(object sender, EventArgs e)
         {
@@ -218,7 +217,7 @@ namespace LoginForm
             SwitchButtons();
             SetEditableFields(editPanel);
         }
-                
+
 
         #endregion
 
@@ -236,7 +235,7 @@ namespace LoginForm
                 else if (dataGridView1.CurrentCell.Value != null)
                 {
                     SetEditableFields(editPanel);
-                    PopulateTxtBox(dataGridView1, e, txtEFirst, txtELast, txtETele, txtEEmail, txtEStreet, txtECity, txtECounty, txtEPost,cbxEDept, cbxERole, txtEPassword, txtEDateJoined);
+                    PopulateTxtBox(dataGridView1, e, txtEFirst, txtELast, txtETele, txtEEmail, txtEStreet, txtECity, txtECounty, txtEPost, cbxEDept, cbxERole, txtEPassword, txtEDateJoined);
                 }
             }
             catch (ArgumentOutOfRangeException ex)
@@ -252,7 +251,7 @@ namespace LoginForm
                                     )
         {
 
-            table.CurrentRow.Selected = true;           
+            table.CurrentRow.Selected = true;
 
 
             firstNa.Text = table.Rows[e.RowIndex].Cells["FirstName"].FormattedValue.ToString();
@@ -362,7 +361,7 @@ namespace LoginForm
             foreach (Control x in createPanel.Controls)
             {
                 if (x is TextBox && ((TextBox)x).Text == String.Empty)
-                {                   
+                {
                     correctFields = false;
                 }
                 else
@@ -386,38 +385,30 @@ namespace LoginForm
                     else
                     {
                         x.Enabled = true;
-                    }                    
+                    }
                 }
             }
 
         }
 
-        private void BtnHolidaySrch_Click(object sender, EventArgs e)
-        {
-            if(rdbOutstanding.Checked)
-            {
-               btnAccept.Show();
-               btnReject.Show();
-            }
-            else
-            {
-                btnAccept.Hide();
-                btnReject.Hide();
-            }
 
-        }
 
         public void ArrangeHolidaysPanel()
         {
             rdbtnOnDuty.Checked = true;
+            rdbtnID.Checked = true;
+
+            hm.OutstandingReq(holidayReqGridView);
+            hm.ConfirmedReq(dataGridViewBooked);
+
 
             pnlHolidayBkd.Show();
             pnlHolidayReq.Hide();
             pnlHolidayOnDuty.Hide();
 
-            cmbxHM.Items.Add("View Holidays Booked");
-            cmbxHM.Items.Add(" Holidays Requests");
-            cmbxHM.Items.Add("Employee ON/OFF Duty");
+            cmbxHM.Items.Add("HOLIDAYS BOOKED");
+            cmbxHM.Items.Add("HOLIDAYS REQUESTS");
+            cmbxHM.Items.Add("HOLIDAYS ON/OFF");
             cmbxHM.DropDownStyle = ComboBoxStyle.DropDownList;
 
         }
@@ -431,7 +422,7 @@ namespace LoginForm
                     pnlHolidayReq.Hide();
                     pnlHolidayOnDuty.Hide();
                     break;
-                 case 1:
+                case 1:
                     pnlHolidayBkd.Hide();
                     pnlHolidayReq.Show();
                     pnlHolidayOnDuty.Hide();
@@ -443,28 +434,85 @@ namespace LoginForm
                     break;
 
             }
-            
+
 
         }
 
 
         private void MonthCalendar_DateChanged(object sender, DateRangeEventArgs e)
         {
+            //monthCalendar.MaxSelectionCount = 1;
+            //if (rdbtnOnDuty.Checked)
+            //{
+            //    hm.EmployeeOnDuty(monthCalendar.SelectionRange.Start, dataGridOnOffDuty);
+            //}
+            //else if (rdbtnOffDuty.Checked)
+            //{
+            //    hm.EmployeeOffDuty(monthCalendar.SelectionRange.Start, dataGridOnOffDuty);
+            //}
+        }
+
+        private void BtnAccept_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                holidayReqGridView.CurrentRow.Selected = true;
+                string decision = "Approved";
+                var Selected = (long)holidayReqGridView[0, holidayReqGridView.SelectedRows[0].Index].Value;
+                hm.accept_OR_rejectReq(Selected,decision);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                throw;
+            }
+
+
+        }
+
+        private void BtnReject_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                holidayReqGridView.CurrentRow.Selected = true;
+                string decision = "Declined";
+                var Selected = (long)holidayReqGridView[0, holidayReqGridView.SelectedRows[0].Index].Value;
+                hm.accept_OR_rejectReq(Selected,decision);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                throw;
+            }
+
+        }
+
+        private void HolidayReqGridView_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            holidayReqGridView.CurrentRow.Selected = true;
+        }
+        private void dataGridViewBooked_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            dataGridViewBooked.CurrentRow.Selected = true;
+        }
+
+        private void BtnSearchEmployee_Click(object sender, EventArgs e)
+        {
+            
+            hm.SearchEmployee(dataGridViewBooked, txtEmployee, rdbtnName);
+        }
+
+        private void MonthCalendar_DateSelected(object sender, DateRangeEventArgs e)
+        {
             monthCalendar.MaxSelectionCount = 1;
             if (rdbtnOnDuty.Checked)
             {
                 hm.EmployeeOnDuty(monthCalendar.SelectionRange.Start, dataGridOnOffDuty);
             }
-            else if(rdbtnOffDuty.Checked)
+            else if (rdbtnOffDuty.Checked)
             {
                 hm.EmployeeOffDuty(monthCalendar.SelectionRange.Start, dataGridOnOffDuty);
             }
-        }
-
-        private void BtnAccept_Click(object sender, EventArgs e)
-        {
-            var Selected = (long)holidayReqGridView[0, holidayReqGridView.SelectedRows[0].Index].Value;
-            hm.acceptReq(Selected);
         }
     }
 }
