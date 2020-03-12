@@ -88,13 +88,14 @@ namespace HolidayManager_ClassLibrary
         }
         public void EmployeeOffDuty(DateTime selectedDate, DataGridView table)
         {
-            var OffDutyResult = (from a in db.holidaysrequesteds
-                                 join b in  db.employees on new { a.EmployeeID } equals new { b.EmployeeID }
+            var OffDutyResult = (from b in db.holidaysrequesteds
+                                     //join b in  db.employees on new { a.EmployeeID } equals new { b.EmployeeID }
+                                 where selectedDate.Date >= b.StartDate && selectedDate.Date < b.EndDate && b.Status == "Approved"
                                  select new
                                  {
-                                     a.employee.StaffID,
-                                     a.employee.FirstName,
-                                     a.employee.LastName
+                                     b.employee.StaffID,
+                                     b.employee.FirstName,
+                                     b.employee.LastName
                                  }).ToList();
  
 
@@ -109,6 +110,45 @@ namespace HolidayManager_ClassLibrary
                 table.DataSource = "";
                 MessageBox.Show("Employee not working on selcted date NOT found");
             }
+        }
+
+        // Test Method
+        public void TESTONDUTY(DateTime selectedDate, DataGridView table, string choice)
+        {
+
+            var OnDutyResult = (from a in db.employees
+                                join b in db.holidaysrequesteds on a.EmployeeID equals b.EmployeeID
+                                where selectedDate.Date >= b.StartDate && selectedDate.Date < b.EndDate && b.Status == choice
+                                select new
+                                {
+                                    a.StaffID,
+                                    a.FirstName,
+                                    a.LastName
+                                }).ToList();
+
+
+            if (choice == "Approved")
+            {
+
+            }
+            
+            //from c1 in existingItems
+            //join c2 in newItemsLarger
+            //on new { c1.CellId, c1.Content } equals new { c2.CellId, c2.Content }
+            //select c1;
+
+            if (OnDutyResult.Any())
+            {
+                table.DataSource = OnDutyResult;
+                table.Refresh();
+                MessageBox.Show("Employee working on selcted date found");
+            }
+            else
+            {
+                table.DataSource = "";
+                MessageBox.Show("Employee working on selcted date NOT found");
+            }
+
         }
     }
 }

@@ -512,7 +512,7 @@ namespace Component_A_ClassLibrary
 		
 		private EntitySet<holidaystaken> _holidaystakens;
 		
-		private EntityRef<role> _roles;
+		private EntitySet<role> _roles;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -542,7 +542,7 @@ namespace Component_A_ClassLibrary
 		{
 			this._holidaysrequesteds = new EntitySet<holidaysrequested>(new Action<holidaysrequested>(this.attach_holidaysrequesteds), new Action<holidaysrequested>(this.detach_holidaysrequesteds));
 			this._holidaystakens = new EntitySet<holidaystaken>(new Action<holidaystaken>(this.attach_holidaystakens), new Action<holidaystaken>(this.detach_holidaystakens));
-			this._roles = default(EntityRef<role>);
+			this._roles = new EntitySet<role>(new Action<role>(this.attach_roles), new Action<role>(this.detach_roles));
 			OnCreated();
 		}
 		
@@ -752,32 +752,16 @@ namespace Component_A_ClassLibrary
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="employee_role", Storage="_roles", ThisKey="EmployeeID", OtherKey="EmployeeID", IsUnique=true, IsForeignKey=false)]
-		public role roles
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="employee_role", Storage="_roles", ThisKey="EmployeeID", OtherKey="EmployeeID")]
+		public EntitySet<role> roles
 		{
 			get
 			{
-				return this._roles.Entity;
+				return this._roles;
 			}
 			set
 			{
-				role previousValue = this._roles.Entity;
-				if (((previousValue != value) 
-							|| (this._roles.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._roles.Entity = null;
-						previousValue.employee = null;
-					}
-					this._roles.Entity = value;
-					if ((value != null))
-					{
-						value.employee = this;
-					}
-					this.SendPropertyChanged("roles");
-				}
+				this._roles.Assign(value);
 			}
 		}
 		
@@ -824,6 +808,18 @@ namespace Component_A_ClassLibrary
 			this.SendPropertyChanging();
 			entity.employee = null;
 		}
+		
+		private void attach_roles(role entity)
+		{
+			this.SendPropertyChanging();
+			entity.employee = this;
+		}
+		
+		private void detach_roles(role entity)
+		{
+			this.SendPropertyChanging();
+			entity.employee = null;
+		}
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.holidaysrequested")]
@@ -866,7 +862,7 @@ namespace Component_A_ClassLibrary
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RequestID", DbType="BigInt NOT NULL", IsPrimaryKey=true)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RequestID", AutoSync=AutoSync.OnInsert, DbType="BigInt NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
 		public long RequestID
 		{
 			get
@@ -1536,12 +1532,12 @@ namespace Component_A_ClassLibrary
 					if ((previousValue != null))
 					{
 						this._employee.Entity = null;
-						previousValue.roles = null;
+						previousValue.roles.Remove(this);
 					}
 					this._employee.Entity = value;
 					if ((value != null))
 					{
-						value.roles = this;
+						value.roles.Add(this);
 						this._EmployeeID = value.EmployeeID;
 					}
 					else

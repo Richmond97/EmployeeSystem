@@ -37,7 +37,6 @@
             this.telephoneNum.Name = "telephoneNum";
             this.telephoneNum.Size = new System.Drawing.Size(100, 20);
             this.telephoneNum.TabIndex = 0;
-            this.telephoneNum.TextChanged += new System.EventHandler(this.TelephoneNum_TextChanged);
             this.ResumeLayout(false);
 
         }
