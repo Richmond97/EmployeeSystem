@@ -85,6 +85,12 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
+    <Compile Include="TelephoneComp.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="TelephoneComp.Designer.cs">
+      <DependentUpon>TelephoneComp.cs</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
@@ -110,6 +116,9 @@
   <ItemGroup>
     <EmbeddedResource Include="CreateEmployee.resx">
       <DependentUpon>CreateEmployee.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TelephoneComp.resx">
+      <DependentUpon>TelephoneComp.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

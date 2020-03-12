@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using HolidayManager_ClassLibrary;
 
 namespace LoginForm
 {
@@ -24,6 +25,9 @@ namespace LoginForm
 
         private static readonly object locker = new object();
         private static ManageForm instance = null;
+        HolidaysManager hm = new HolidaysManager();
+
+
         public static ManageForm Instance
         {
             get
@@ -405,6 +409,8 @@ namespace LoginForm
 
         public void ArrangeHolidaysPanel()
         {
+            rdbtnOnDuty.Checked = true;
+
             pnlHolidayBkd.Show();
             pnlHolidayReq.Hide();
             pnlHolidayOnDuty.Hide();
@@ -444,11 +450,21 @@ namespace LoginForm
 
         private void MonthCalendar_DateChanged(object sender, DateRangeEventArgs e)
         {
-
             monthCalendar.MaxSelectionCount = 1;
-            monthCalendar.SelectionRange.Start.ToString("d");
-            //EmployeeOnDuty();
+            if (rdbtnOnDuty.Checked)
+            {
+                hm.EmployeeOnDuty(monthCalendar.SelectionRange.Start, dataGridOnOffDuty);
+            }
+            else if(rdbtnOffDuty.Checked)
+            {
+                hm.EmployeeOffDuty(monthCalendar.SelectionRange.Start, dataGridOnOffDuty);
+            }
+        }
 
+        private void BtnAccept_Click(object sender, EventArgs e)
+        {
+            var Selected = (long)holidayReqGridView[0, holidayReqGridView.SelectedRows[0].Index].Value;
+            hm.acceptReq(Selected);
         }
     }
 }
