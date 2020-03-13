@@ -80,7 +80,7 @@ namespace EmployeeWebApp
         {
             end = Calendar2.SelectedDate;
             txtbxHolidayEnd.Text = end.ToString("d");
-            Calendar1.Visible = false;
+            Calendar2.Visible = false;
         }
         protected void btnSubmit_Click(object sender, EventArgs e)
         {
