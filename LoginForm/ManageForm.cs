@@ -197,7 +197,7 @@ namespace LoginForm
 
                 ClearFields(editPanel);
                 BtnSearch_Click(sender, e);
-                RefreshGrid();
+                hm.RefreshGrid(dataGridView1);
                 SwitchButtons();
                 SetEditableFields(editPanel);
 
@@ -213,7 +213,7 @@ namespace LoginForm
 
             ClearFields(editPanel);
             BtnSearch_Click(sender, e);
-            RefreshGrid();
+            hm.RefreshGrid(dataGridView1);
             SwitchButtons();
             SetEditableFields(editPanel);
         }
@@ -303,11 +303,7 @@ namespace LoginForm
             }
         }
 
-        public void RefreshGrid()
-        {
-            dataGridView1.Update();
-            dataGridView1.Refresh();
-        }
+   
 
         public void SwitchButtons()
         {
@@ -395,6 +391,7 @@ namespace LoginForm
 
         public void ArrangeHolidaysPanel()
         {
+            monthCalendar.Size = new Size(380,280);
             rdbtnOnDuty.Checked = true;
             rdbtnID.Checked = true;
 
@@ -439,34 +436,22 @@ namespace LoginForm
         }
 
 
-        private void MonthCalendar_DateChanged(object sender, DateRangeEventArgs e)
-        {
-            //monthCalendar.MaxSelectionCount = 1;
-            //if (rdbtnOnDuty.Checked)
-            //{
-            //    hm.EmployeeOnDuty(monthCalendar.SelectionRange.Start, dataGridOnOffDuty);
-            //}
-            //else if (rdbtnOffDuty.Checked)
-            //{
-            //    hm.EmployeeOffDuty(monthCalendar.SelectionRange.Start, dataGridOnOffDuty);
-            //}
-        }
-
         private void BtnAccept_Click(object sender, EventArgs e)
         {
+               
             try
             {
-                holidayReqGridView.CurrentRow.Selected = true;
                 string decision = "Approved";
                 var Selected = (long)holidayReqGridView[0, holidayReqGridView.SelectedRows[0].Index].Value;
-                hm.accept_OR_rejectReq(Selected,decision);
+                hm.accept_OR_rejectReq(Selected, decision);
+                hm.RefreshGrid(holidayReqGridView);
+                hm.OutstandingReq(holidayReqGridView);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                MessageBox.Show(ex.Message);
-                throw;
+                MessageBox.Show("Pleas selelct Holiday request");
             }
-
+                
 
         }
 
@@ -478,22 +463,50 @@ namespace LoginForm
                 string decision = "Declined";
                 var Selected = (long)holidayReqGridView[0, holidayReqGridView.SelectedRows[0].Index].Value;
                 hm.accept_OR_rejectReq(Selected,decision);
+                hm.RefreshGrid(holidayReqGridView);
+                hm.OutstandingReq(holidayReqGridView);
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
-                throw;
+                MessageBox.Show("Pleas selelct Holiday request");
             }
 
         }
 
         private void HolidayReqGridView_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            holidayReqGridView.CurrentRow.Selected = true;
+            try
+            {
+                holidayReqGridView.CurrentRow.Selected = true;
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Please elect a valid Holiday request");
+            }
+           
+        }
+        private void dataGridOnOffDuty_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            try
+            {
+                dataGridOnOffDuty.CurrentRow.Selected = true;
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Please elect a valid Holiday request");
+            }
+
         }
         private void dataGridViewBooked_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            dataGridViewBooked.CurrentRow.Selected = true;
+            try
+            {
+                dataGridViewBooked.CurrentRow.Selected = true;
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Please elect a valid table row");
+            }
         }
 
         private void BtnSearchEmployee_Click(object sender, EventArgs e)
@@ -505,14 +518,7 @@ namespace LoginForm
         private void MonthCalendar_DateSelected(object sender, DateRangeEventArgs e)
         {
             monthCalendar.MaxSelectionCount = 1;
-            if (rdbtnOnDuty.Checked)
-            {
-                hm.EmployeeOnDuty(monthCalendar.SelectionRange.Start, dataGridOnOffDuty);
-            }
-            else if (rdbtnOffDuty.Checked)
-            {
-                hm.EmployeeOffDuty(monthCalendar.SelectionRange.Start, dataGridOnOffDuty);
-            }
+                hm.EmployeeOffOnDuty(monthCalendar.SelectionRange.Start, dataGridOnOffDuty, rdbtnOffDuty);
         }
     }
 }

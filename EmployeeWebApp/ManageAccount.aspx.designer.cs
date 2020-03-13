@@ -13,6 +13,15 @@ namespace EmployeeWebApp {
     public partial class ManageAccount {
         
         /// <summary>
+        /// Label3 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label Label3;
+        
+        /// <summary>
         /// Label1 control.
         /// </summary>
         /// <remarks>
@@ -40,6 +49,15 @@ namespace EmployeeWebApp {
         protected global::System.Web.UI.WebControls.Label Label2;
         
         /// <summary>
+        /// btnCalenderGo control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ImageButton btnCalenderGo;
+        
+        /// <summary>
         /// txtbxHolidayEnd control.
         /// </summary>
         /// <remarks>
@@ -49,13 +67,13 @@ namespace EmployeeWebApp {
         protected global::System.Web.UI.WebControls.TextBox txtbxHolidayEnd;
         
         /// <summary>
-        /// btnCalender control.
+        /// btnReturn control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ImageButton btnCalender;
+        protected global::System.Web.UI.WebControls.ImageButton btnReturn;
         
         /// <summary>
         /// btnSubmit control.
@@ -76,12 +94,12 @@ namespace EmployeeWebApp {
         protected global::System.Web.UI.WebControls.Calendar Calendar1;
         
         /// <summary>
-        /// Ltrl control.
+        /// Calendar2 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Literal Ltrl;
+        protected global::System.Web.UI.WebControls.Calendar Calendar2;
     }
 }

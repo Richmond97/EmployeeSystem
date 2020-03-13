@@ -17,7 +17,7 @@ namespace EmployeeWebApp.HolidayManager
     //• Select a date and show all employees working that day and those
     //on leave that day.
 
-    class HolidaysManager
+    public class HolidaysManager
     {
         private readonly DataClasses1DataContext db = new DataClasses1DataContext();
 
@@ -97,25 +97,6 @@ namespace EmployeeWebApp.HolidayManager
 
         }
 
-        public void OutstandingReq()
-        {
-            var result = (from a in db.holidaysrequesteds
-                          where a.Status == null
-                          select a);
-        }
-        public void ConfirmedReq()
-        {
-            var result = (from a in db.holidaysrequesteds
-                          where a.Status != null
-                          select a);
-        }
-
-        public void EmployeeHolidayStatus()
-        {
-            var result = (from a in db.holidaysrequesteds
-                          where a.Status != null
-                          select a);
-        }
         public void ViewHolidayReqStatus()
         {
             var result = (from a in db.holidaysrequesteds
@@ -134,8 +115,6 @@ namespace EmployeeWebApp.HolidayManager
                     StartDate = Convert.ToDateTime(startH.ToShortDateString()),
                     EndDate = Convert.ToDateTime(endH.ToShortDateString()),
                     Status = "Pending"
-                    
-
                 };
 
                 db.holidaysrequesteds.InsertOnSubmit(newHlday);

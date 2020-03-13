@@ -15,9 +15,7 @@ namespace HolidayManager_ClassLibrary
   public  class HolidaysManager
     {
         private readonly DataClasses1DataContext db = new DataClasses1DataContext();
-        List<object> OffDutyResult;
 
-        //• View a list of outstanding holiday requests
         public void OutstandingReq(DataGridView table)
         {
             var result = (from a in db.holidaysrequesteds
@@ -39,7 +37,7 @@ namespace HolidayManager_ClassLibrary
                           where a.Status == "Approved"
                           select new
                           {
-                              a.employee.StaffID,
+                              a.RequestID,
                               a.employee.FirstName,
                               a.employee.LastName,
                               a.StartDate,
@@ -47,63 +45,39 @@ namespace HolidayManager_ClassLibrary
                           }).ToList();
             table.DataSource = result;
         }
-
         public void EmployeeHolidayStatus()
         {
             var result = (from a in db.holidaysrequesteds
                           where a.Status != null
                           select a);
         }
-
         public void accept_OR_rejectReq(long holidayReqID, string decision)
         {
-            var result = (from a in db.holidaysrequesteds
-                          //where a.Status != null && a.EmployeeID == EmployID
-                          where a.Status != null || a.Status == "Pending" && a.RequestID == holidayReqID
-                          select a).ToList();
-            foreach (var s in result)
+            if (MessageBox.Show("Finalise Action", "Please Confirm Your Action", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
-                s.Status = decision;
+                try
+                {
+                    var result = (from a in db.holidaysrequesteds
+                                      //where a.Status != null && a.EmployeeID == EmployID
+                                  where ((a.Status == "Pending") && (a.RequestID == holidayReqID))
+                                  select a).ToList();
+
+                    foreach (var s in result)
+                    {
+                        s.Status = decision;
+                    }
+                    db.SubmitChanges();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                    throw;
+                }
             }
-            db.SubmitChanges();
+           
 
         }
-
-        
-        public void EmployeeOnDuty(DateTime selectedDate, DataGridView table)
-        {
-                var OnDutyResult = (from a in db.holidaysrequesteds
-                                    join b in db.employees on a.EmployeeID equals b.EmployeeID
-                                    where (((a.Status != "Approved") || (a.StartDate > selectedDate) || (a.EndDate < selectedDate)) || (!b.EmployeeID.Equals(a.EmployeeID)))
-                                    //where ((selectedDate.Date >= a.StartDate &&  selectedDate.Date <= a.EndDate)  && a.Status == "Pending") //|| db.holidaysrequesteds.Any(t => t.Status == list.EntityID)
-
-
-                                    //join b in db.employees on a.EmployeeID equals b.EmployeeID
-                                    select new 
-                                    {
-                                        b.StaffID,
-                                        b.FirstName,
-                                        b.LastName
-                                    }).ToList();
-            //from c1 in existingItems
-            //join c2 in newItemsLarger
-            //on new { c1.CellId, c1.Content } equals new { c2.CellId, c2.Content }
-            //select c1;
-
-            if (OnDutyResult.Any())
-                {
-                    table.DataSource = OnDutyResult;
-                    table.Refresh();
-                    MessageBox.Show("Employee working on selcted date found");
-                }
-                else
-                {
-                    table.DataSource = "";
-                    MessageBox.Show("Employee working on selcted date NOT found");
-                }
-
-        }
-        public void EmployeeOffDuty(DateTime selectedDate, DataGridView table )
+        public void EmployeeOffOnDuty(DateTime selectedDate, DataGridView table, RadioButton off )
         {
             var OffDutyResult = (from a in db.employees
                                 join b in db.holidaysrequesteds on a.EmployeeID equals b.EmployeeID
@@ -115,27 +89,8 @@ namespace HolidayManager_ClassLibrary
                                     a.LastName
                                 }).ToList();
 
-
-            if (OffDutyResult.Any())
-            {
-                table.DataSource = OffDutyResult;
-                table.Refresh();
-                MessageBox.Show("Employee not working on selcted date found");
-            }
-            else
-            {
-                table.DataSource = "";
-                MessageBox.Show("Employee not working on selcted date NOT found");
-            }
-        }
-
-        // Test Method
-        public void TESTONDUTY(DateTime selectedDate, DataGridView table, string choice)
-        {
-
-            var OnDutyResult = (from a in db.employees
-                                join b in db.holidaysrequesteds on a.EmployeeID equals b.EmployeeID
-                                where selectedDate.Date >= b.StartDate && selectedDate.Date <= b.EndDate && b.Status == choice
+            var allEmployees = (from a in db.employees
+                                where a.FirstName != "admin" && a.LastName != "admin"
                                 select new
                                 {
                                     a.StaffID,
@@ -143,25 +98,43 @@ namespace HolidayManager_ClassLibrary
                                     a.LastName
                                 }).ToList();
 
-            //from c1 in existingItems
-            //join c2 in newItemsLarger
-            //on new { c1.CellId, c1.Content } equals new { c2.CellId, c2.Content }
-            //select c1;
+            foreach (var item in OffDutyResult)
+            {
+                if (!allEmployees.Contains(item))
+                {
+                    continue;
+                }
+                allEmployees.Remove(item);
+            }
+            if (off.Checked)
+            {
+                if (OffDutyResult.Any())
+                {
+                    table.DataSource = OffDutyResult.Distinct().ToList(); ;
+                    table.Refresh();
+                }
+                else
+                {
+                    table.DataSource = "";
+                    MessageBox.Show("Employee not working on selcted date NOT found");
+                }
+            }
+            else
+            {
+                if (allEmployees.Any())
+                {
+                    table.DataSource = allEmployees.Distinct().ToList(); ;
+                    table.Refresh();
+                }
+                else
+                {
+                    table.DataSource = "";
+                    MessageBox.Show("Employee not working on selcted date NOT found");
+                }
+            }
 
-            //if (OnDutyResult.Any())
-            //{
-            //    table.DataSource = OnDutyResult;
-            //    table.Refresh();
-            //    MessageBox.Show("Employee working on selcted date found");
-            //}
-            //else
-            //{
-            //    table.DataSource = "";
-            //    MessageBox.Show("Employee working on selcted date NOT found");
-            //}
 
         }
-
         public void SearchEmployee(DataGridView table, TextBox searchQ, RadioButton searchName)
         {
             try
@@ -170,11 +143,13 @@ namespace HolidayManager_ClassLibrary
                 if (searchName.Checked)
                 {
                     var varQueryName = (from a in db.holidaysrequesteds
-                                        where (String.IsNullOrWhiteSpace(searchQ.Text) && a.employee.FirstName != "admin")
-                                        || (a.employee.FirstName.Contains(searchQ.Text.Trim())&& (a.employee.FirstName != "admin")) 
+                                        join c in db.employees on a.EmployeeID equals c.EmployeeID
+                                        where (String.IsNullOrWhiteSpace(searchQ.Text) && c.FirstName != "admin") && (a.Status == "Approved")
+                                        || (c.FirstName.Contains(searchQ.Text.Trim())&& (c.FirstName != "admin")) 
                                         &&( a.Status == "Approved")
                                         select new
                                         {
+                                            a.RequestID,
                                             a.employee.StaffID,
                                             a.employee.FirstName,
                                             a.employee.LastName,
@@ -187,11 +162,13 @@ namespace HolidayManager_ClassLibrary
                 else
                 {
                     var varQueryID = (from a in db.holidaysrequesteds
-                                      where String.IsNullOrWhiteSpace(searchQ.Text) && a.employee.StaffID != 111111
-                                      || a.employee.StaffID.ToString().Contains(searchQ.Text.Trim()) && a.employee.StaffID != 111111
-                                       && (a.Status == "Approved")
+                                      join c in db.employees on a.EmployeeID equals c.EmployeeID
+                                      where (String.IsNullOrWhiteSpace(searchQ.Text) && (c.StaffID != 111111) && (a.Status == "Approved"))
+                                      ||(( c.StaffID.ToString().Contains(searchQ.Text.Trim())) && (c.StaffID != 111111)
+                                       && (a.Status == "Approved"))
                                       select new
                                       {
+                                          a.RequestID,
                                           a.employee.StaffID,
                                           a.employee.FirstName,
                                           a.employee.LastName,
@@ -207,6 +184,12 @@ namespace HolidayManager_ClassLibrary
                 MessageBox.Show(ex.Message);
                 throw ex;
             }
+        }
+        public void RefreshGrid(DataGridView table)
+        {
+            table.DataSource = null;
+            table.Update();
+            table.Refresh();
         }
     }
 }

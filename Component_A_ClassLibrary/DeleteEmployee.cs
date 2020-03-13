@@ -42,10 +42,7 @@ namespace Component_A_ClassLibrary
 
                 if (MessageBox.Show("Delete Employee", "Please Confirm Your Action", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
-                    
                     // Delete department entity
-
-
                 try
                 {
                     var varQueryDelete = (from a in db.employees
