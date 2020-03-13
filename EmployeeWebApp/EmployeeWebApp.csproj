@@ -258,6 +258,10 @@
       <Project>{F5196B04-C896-4418-A8A1-0B012B7564C0}</Project>
       <Name>Component_A_ClassLibrary</Name>
     </ProjectReference>
+    <ProjectReference Include="..\HolidayManager_ClassLibrary\HolidayManager_ClassLibrary.csproj">
+      <Project>{ec81a041-92d4-437a-b6e3-6a7bad144283}</Project>
+      <Name>HolidayManager_ClassLibrary</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />

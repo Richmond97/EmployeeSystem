@@ -5,6 +5,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using Component_A_ClassLibrary;
 
 namespace HolidayManager_ClassLibrary
@@ -38,11 +39,13 @@ namespace HolidayManager_ClassLibrary
 
     public partial class ConstrainsComponent : Component
     {
+       
         private readonly DataClasses1DataContext db = new DataClasses1DataContext();
+        int holidaysLeft = 30;
+        int taken;
         public ConstrainsComponent()
         {
             InitializeComponent();
-            testDate();
         }
 
         public ConstrainsComponent(IContainer container)
@@ -53,44 +56,46 @@ namespace HolidayManager_ClassLibrary
 
         }
 
-        public void EntitleForHoliday(long EmployeeID)
+        public int HolidaysLeft(long EmployeeID)
         {
-            int holidaysLeft = 30;
-
+            
 
             var daysEntiled = (from a in db.employees
                                where a.EmployeeID == EmployeeID
                                select a.DateJoined).Single();
-            DateTime zeroTime = new DateTime(1, 1, 1);
 
+
+            //calculate holidays bonus based on year joined 
+            DateTime zeroTime = new DateTime(1, 1, 1);
             DateTime today = DateTime.Now;
             DateTime dateJoined = daysEntiled.Date;
             TimeSpan span = today - dateJoined;
-            
-
             int bonus = (zeroTime + span).Year - 1;
 
-            var holidaysTaken = (from a in db.holidaysrequesteds
-                                 where (a.EmployeeID == EmployeeID && a.Status == "Approved")
-                                 select a).SingleOrDefault();
 
-            //holidaysTaken.StartDate
-            int taken = (holidaysTaken.EndDate - holidaysTaken.StartDate).Days;
-            holidaysLeft = (holidaysLeft + bonus) - taken;
+            var holidaysTaken = (from a in db.holidaysrequesteds
+                                 where ((a.EmployeeID == EmployeeID && a.Status == "Approved") 
+                                 && (a.StartDate.Year == DateTime.Today.Year))
+                                 select a).ToList();
+
+            foreach (var date in holidaysTaken)
+            {
+                taken = (date.EndDate - date.StartDate).Days;
+                taken = +taken;
+            }
+            return  holidaysLeft = (holidaysLeft + bonus) - taken;
 
         }
-        public void testDate()
+        public bool IsValidHolidayRequest(long ID, DateTime start, DateTime end)
         {
-            DateTime zeroTime = new DateTime(1, 1, 1);
-
-            DateTime A = new DateTime(2007, 1, 1);
-            DateTime B = new DateTime(2008, 1, 1);
-            TimeSpan span = B - A;
-            // Because we start at year 1 for the Gregorian
-            // calendar, we must subtract a year here.
-            //int years = (zeroTime + span).Year - 1;
-            // 1, where my other algorithm resulted in 0.
-            Console.WriteLine("Yrs elapsed: " + years);
+           int daysLeft = HolidaysLeft(ID);
+           int daysRequested = (end - start).Days;
+            if (daysLeft - daysRequested<0)
+            {
+                MessageBox.Show("Sorry, not enough holidays left to procced with you request, you only have " + daysLeft + "left");
+                return true;
+            }
+            return false;
         }
     }
 }

@@ -16,6 +16,8 @@ namespace EmployeeWebApp
         public DateTime end;
 
         HolidaysManager hm = new HolidaysManager();
+        ConstrainsComponent cc = new ConstrainsComponent();
+        
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -85,15 +87,19 @@ namespace EmployeeWebApp
         protected void btnSubmit_Click(object sender, EventArgs e)
         {
             MessageBox.Show("holiday from: " + start.ToString("d"), "To: " + end);
-            if (hm.SubmitHolidayReq(start, end, ((long)(Session["sesID"]))))
-            {
-                MessageBox.Show("Booking Completed from: " + start.ToString("d"), "To: " + end.ToString("d"));
-            }
+            //if ()
+            //{
+                if (hm.SubmitHolidayReq(start, end, ((long)(Session["sesID"]))))
+                {
+                    MessageBox.Show("Booking Completed from: " + start.ToString("d"), "To: " + end.ToString("d"));
+                }
 
-            else
-            {
-                MessageBox.Show("error");
-            }
+                else
+                {
+                    MessageBox.Show("error");
+                }
+            //}
+          
 
         }
 

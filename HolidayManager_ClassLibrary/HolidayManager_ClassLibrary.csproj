@@ -59,10 +59,6 @@
       <Project>{F5196B04-C896-4418-A8A1-0B012B7564C0}</Project>
       <Name>Component_A_ClassLibrary</Name>
     </ProjectReference>
-    <ProjectReference Include="..\EmployeeWebApp\EmployeeWebApp.csproj">
-      <Project>{C2721B8D-8B93-4D89-AEB9-FCA2EFDC634A}</Project>
-      <Name>EmployeeWebApp</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />
