@@ -25,7 +25,7 @@ namespace LoginForm
 
         private static readonly object locker = new object();
         private static ManageForm instance = null;
-        HolidaysManager hm = new HolidaysManager();
+        HolidayManager_ClassLibrary.Functionality_A.HolidayManagerDesktop hm = new HolidayManager_ClassLibrary.Functionality_A.HolidayManagerDesktop();
 
 
         public static ManageForm Instance

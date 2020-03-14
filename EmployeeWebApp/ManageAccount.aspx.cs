@@ -4,8 +4,9 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using EmployeeWebApp.HolidayManager;
+
 using System.Windows.Forms;
+using HolidayManager_ClassLibrary;
 
 namespace EmployeeWebApp
 {
@@ -15,14 +16,12 @@ namespace EmployeeWebApp
         public DateTime start;
         public DateTime end;
 
-        HolidaysManager hm = new HolidaysManager();
-        ConstrainsComponent cc = new ConstrainsComponent();
         
+        HolidayManager_ClassLibrary.Functionality_A.HolidayManagerWeb hm = new HolidayManager_ClassLibrary.Functionality_A.HolidayManagerWeb();
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            Response.Write(Session["sesID"]);
-
+            
             if (!IsPostBack)
             {
                 Calendar1.Visible = false;
@@ -110,6 +109,22 @@ namespace EmployeeWebApp
                 Calendar2.Visible = false;
             }
             Calendar2.Visible = true;
+        }
+         private void printInfo()
+        {
+            string script = String.Format(@"<script>alert('{0}\r\n{1}\r\n{2}\r\n{3}\r\n{4});</script>",
+                Session["staffID"].ToString(), Session["name"].ToString(), Session["surname"].ToString(), Session["role"].ToString(), Session["surname"].ToString());
+            Response.Write(script);
+            //Response.Write);
+            //Response.Write("Employee Name: " + Session["name"]);
+            //Response.Write("Employee Surname: " + Session["surname"]);
+            //Response.Write("Employee Role" + Session["role"]);
+            //Response.Write("Employee Departmet: " + Session["surname"]);
+        }
+
+        protected void btnPersonalDet_Click(object sender, EventArgs e)
+        {
+            Response.Write("<script>alert('" + Session["staffID"].ToString() + "\\r\\n" + Session["name"].ToString() + "\\r\\n" + Session["surname"].ToString() + "\\r\\n" + Session["role"].ToString() + "');</script>");
         }
     }
 }//dsgtsd

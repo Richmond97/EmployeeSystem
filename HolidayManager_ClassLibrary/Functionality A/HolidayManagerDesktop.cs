@@ -1,18 +1,14 @@
-﻿using Component_A_ClassLibrary;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
+using Component_A_ClassLibrary;
 
-namespace HolidayManager_ClassLibrary
+namespace HolidayManager_ClassLibrary.Functionality_A
 {
-    //• View a list of outstanding holiday requests done
-    //• Accept/reject a request done
-    //• View a list of all holiday bookings and filter them by employee
-    //• Select a date and show all employees working that day and those
-    //on leave that day.
-
-  public  class HolidaysManager
+    public class HolidayManagerDesktop
     {
         private readonly DataClasses1DataContext db = new DataClasses1DataContext();
 
@@ -74,20 +70,20 @@ namespace HolidayManager_ClassLibrary
                     throw;
                 }
             }
-           
+
 
         }
-        public void EmployeeOffOnDuty(DateTime selectedDate, DataGridView table, RadioButton off )
+        public void EmployeeOffOnDuty(DateTime selectedDate, DataGridView table, RadioButton off)
         {
             var OffDutyResult = (from a in db.employees
-                                join b in db.holidaysrequesteds on a.EmployeeID equals b.EmployeeID
-                                where selectedDate.Date >= b.StartDate && selectedDate.Date <= b.EndDate && (b.Status == "Approved")
-                                select new
-                                {
-                                    a.StaffID,
-                                    a.FirstName,
-                                    a.LastName
-                                }).ToList();
+                                 join b in db.holidaysrequesteds on a.EmployeeID equals b.EmployeeID
+                                 where selectedDate.Date >= b.StartDate && selectedDate.Date <= b.EndDate && (b.Status == "Approved")
+                                 select new
+                                 {
+                                     a.StaffID,
+                                     a.FirstName,
+                                     a.LastName
+                                 }).ToList();
 
             var allEmployees = (from a in db.employees
                                 where a.FirstName != "admin" && a.LastName != "admin"
@@ -145,8 +141,8 @@ namespace HolidayManager_ClassLibrary
                     var varQueryName = (from a in db.holidaysrequesteds
                                         join c in db.employees on a.EmployeeID equals c.EmployeeID
                                         where (String.IsNullOrWhiteSpace(searchQ.Text) && c.FirstName != "admin") && (a.Status == "Approved")
-                                        || (c.FirstName.Contains(searchQ.Text.Trim())&& (c.FirstName != "admin")) 
-                                        &&( a.Status == "Approved")
+                                        || (c.FirstName.Contains(searchQ.Text.Trim()) && (c.FirstName != "admin"))
+                                        && (a.Status == "Approved")
                                         select new
                                         {
                                             a.RequestID,
@@ -156,7 +152,7 @@ namespace HolidayManager_ClassLibrary
                                             a.StartDate,
                                             a.EndDate
                                         }).ToList();
-                    
+
                     table.DataSource = varQueryName;
                 }
                 else
@@ -164,7 +160,7 @@ namespace HolidayManager_ClassLibrary
                     var varQueryID = (from a in db.holidaysrequesteds
                                       join c in db.employees on a.EmployeeID equals c.EmployeeID
                                       where (String.IsNullOrWhiteSpace(searchQ.Text) && (c.StaffID != 111111) && (a.Status == "Approved"))
-                                      ||(( c.StaffID.ToString().Contains(searchQ.Text.Trim())) && (c.StaffID != 111111)
+                                      || ((c.StaffID.ToString().Contains(searchQ.Text.Trim())) && (c.StaffID != 111111)
                                        && (a.Status == "Approved"))
                                       select new
                                       {
@@ -193,7 +189,3 @@ namespace HolidayManager_ClassLibrary
         }
     }
 }
-            
-            
-     
-    

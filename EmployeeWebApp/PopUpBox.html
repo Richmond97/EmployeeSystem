@@ -1,0 +1,41 @@
+﻿<%@ Page Language="C#" CodeFile="ManageAccount.aspx.cs" Inherits="Demo" %>
+<!DOCTYPE html>
+<html>
+<head runat="server">
+    < meta charset="UTF-8" />
+    <title>Message Box Demo</title>
+    <style type="text/css">
+        .alertBox {
+            position: absolute;
+            top: 100px;
+            left: 50%;
+            width: 500px;
+            margin-left: -250px;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            padding: 4px 8px;
+        }
+    </style>
+    <script type="text/javascript">
+        function closeAlert(e) {
+            e.preventDefault();
+            this.parentNode.style.display = "none";
+        }
+
+/**/</script>
+</head>
+<body>
+    <form runat="server">
+        < div >
+        [Regular page content here]
+        </ div >
+        < div runat="server" id="AlertBox" class="alertBox" Visible="false">
+        <div runat="server" id="AlertBoxMessage"></div>
+        <button onclick="closeAlert.call(this, event)">
+            Ok </ button >
+            </ div >
+            </ form >
+            </ body >
+            </ html >

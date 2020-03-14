@@ -45,13 +45,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Functionality A\HolidayManagerWeb.cs" />
     <Compile Include="Functionality B\ConstrainsComponent.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Functionality B\ConstrainsComponent.Designer.cs">
       <DependentUpon>ConstrainsComponent.cs</DependentUpon>
     </Compile>
-    <Compile Include="Functionality A\HolidaysManager.cs" />
+    <Compile Include="Functionality A\HolidayManagerDesktop.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

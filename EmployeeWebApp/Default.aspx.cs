@@ -4,13 +4,13 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using EmployeeWebApp.HolidayManager;
-using EmployeeWebApp.WebServiceReference;
+using HolidayManager_ClassLibrary;
+
 namespace EmployeeWebApp
 {
     public partial class _Default : Page
     {
-        readonly HolidaysManager hm = new HolidaysManager();
+        readonly HolidayManager_ClassLibrary.Functionality_A.HolidayManagerWeb hm = new HolidayManager_ClassLibrary.Functionality_A.HolidayManagerWeb();
         protected void Page_Load(object sender, EventArgs e)
         {
             
@@ -22,6 +22,10 @@ namespace EmployeeWebApp
             if (hm.Verification(Int32.Parse(txtID.Text), txtPassword.Text))
             {
                 Session["sesID"] = hm.GetID(Int32.Parse(txtID.Text));
+                Session["role"] = hm.GetEmployee(Int32.Parse(txtID.Text)).roles;
+                Session["name"] = hm.GetEmployee(Int32.Parse(txtID.Text)).FirstName;
+                Session["surname"] = hm.GetEmployee(Int32.Parse(txtID.Text)).LastName;
+                Session["staffID"] = hm.GetEmployee(Int32.Parse(txtID.Text)).StaffID;
                 Response.Redirect("ManageAccount.aspx");
                 
 

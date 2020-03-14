@@ -1,23 +1,32 @@
-﻿using Component_A_ClassLibrary;
-using EmployeeWebApp;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Web.Services;
 using System.Windows.Forms;
+using Component_A_ClassLibrary;
 
 
-namespace EmployeeWebApp.HolidayManager
+#region Log in Details
+
+//134637	Richmond
+//957991	Mark
+//594929	Peter
+//274691	Sadia
+//895795	Onur
+//526599	Maya
+//560776	Matilda
+//408738	Emmanuel 
+//195139	Leo
+//865694	Karenvir
+//220749	Melani
+
+#endregion
+
+
+namespace HolidayManager_ClassLibrary.Functionality_A
 {
-    //• View a list of outstanding holiday requests
-    //• Accept/reject a request
-    //• View a list of all holiday bookings and filter them by employee
-    //• Select a date and show all employees working that day and those
-    //on leave that day.
-
-    public class HolidaysManager
+    public class HolidayManagerWeb
     {
         private readonly DataClasses1DataContext db = new DataClasses1DataContext();
 
@@ -42,7 +51,7 @@ namespace EmployeeWebApp.HolidayManager
                 {
 
                     // If user entered details correctly call auth method
-                    
+
                     // MessageBox.Show("User Exists in DB");
                     return true;
                 }
@@ -97,6 +106,16 @@ namespace EmployeeWebApp.HolidayManager
 
         }
 
+        public employee GetEmployee(long StaffID)
+        {
+            var employee = (from a in db.employees
+                            where a.StaffID == StaffID
+                            select a).Single();
+            
+            return employee;
+
+        }
+
         public void ViewHolidayReqStatus()
         {
             var result = (from a in db.holidaysrequesteds
@@ -108,7 +127,7 @@ namespace EmployeeWebApp.HolidayManager
         {
             try
             {
-               
+
                 holidaysrequested newHlday = new holidaysrequested
                 {
                     EmployeeID = ID,
@@ -131,4 +150,3 @@ namespace EmployeeWebApp.HolidayManager
         }
     }
 }
-

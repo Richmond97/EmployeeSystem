@@ -51,8 +51,23 @@
         </tr>
     </table>
     <p>
-    </p>
+        </p>
     <p>
     </p>
-</asp:Content>
+    <table class="nav-justified">
+        <tr>
+            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;</td>
+            <td>
+                <asp:Button ID="btnPersonalDet" runat="server" BackColor="#2616E9" BorderColor="White" BorderStyle="None" ForeColor="White" OnClick="btnPersonalDet_Click" Text="VIEW MY PERSONAL DETAILS " Width="386px" />
+            </td>
+            <td>&nbsp;</td>
+        </tr>
+    </table>
+    </p>
+        <div runat="server" id="AlertBox" class="alertBox" Visible="false">
+    <div runat="server" id="AlertBoxMessage"></div>
+    <button onclick="closeAlert.call(this, event)">Ok</button>
+</div>
 
+    
+</asp:Content>
