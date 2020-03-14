@@ -43,6 +43,7 @@ namespace HolidayManager_ClassLibrary
         private readonly DataClasses1DataContext db = new DataClasses1DataContext();
         int holidaysLeft = 30;
         int taken;
+        int bonus = 0;
         public ConstrainsComponent()
         {
             InitializeComponent();
@@ -70,14 +71,22 @@ namespace HolidayManager_ClassLibrary
             DateTime today = DateTime.Now;
             DateTime dateJoined = daysEntiled.Date;
             TimeSpan span = today - dateJoined;
-            int bonus = (zeroTime + span).Year - 1;
-
+            int years = (zeroTime + span).Year - 1;
 
             var holidaysTaken = (from a in db.holidaysrequesteds
                                  where ((a.EmployeeID == EmployeeID && a.Status == "Approved") 
                                  && (a.StartDate.Year == DateTime.Today.Year))
                                  select a).ToList();
-
+            int count=0;
+            
+            for (int i = 0; i < years; i++)
+            {
+                if (count==5)
+                {
+                    bonus += 1;
+                }
+                count += 1;
+            }
             foreach (var date in holidaysTaken)
             {
                 taken = (date.EndDate - date.StartDate).Days;
@@ -86,16 +95,16 @@ namespace HolidayManager_ClassLibrary
             return  holidaysLeft = (holidaysLeft + bonus) - taken;
 
         }
-        public bool IsValidHolidayRequest(long ID, DateTime start, DateTime end)
+        public bool IsValidHolidayRequest(DateTime start, DateTime end, long ID)
         {
            int daysLeft = HolidaysLeft(ID);
            int daysRequested = (end - start).Days;
             if (daysLeft - daysRequested<0)
             {
-                MessageBox.Show("Sorry, not enough holidays left to procced with you request, you only have " + daysLeft + "left");
-                return true;
+                MessageBox.Show("Sorry, not enough holidays left to procced with you request, you only have: " + daysLeft + " days left");
+                return false;
             }
-            return false;
+            return true;
         }
     }
 }

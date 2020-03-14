@@ -13,15 +13,18 @@ namespace EmployeeWebApp
     public partial class ManageAccount : System.Web.UI.Page
     {
         public int dateCount = 0;
-        public DateTime start;
-        public DateTime end;
+        
 
         
         HolidayManager_ClassLibrary.Functionality_A.HolidayManagerWeb hm = new HolidayManager_ClassLibrary.Functionality_A.HolidayManagerWeb();
+        ConstrainsComponent cc = new ConstrainsComponent();
+        long holidaysLeft;
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            
+            holidaysLeft = cc.HolidaysLeft((long)Session["sesID"]);
+
+
             if (!IsPostBack)
             {
                 Calendar1.Visible = false;
@@ -73,32 +76,36 @@ namespace EmployeeWebApp
         }
         protected void Calendar1_SelectionChanged(object sender, EventArgs e)
         {
-            start = Calendar1.SelectedDate;
-            txtbxHolidayStart.Text = start.ToString("d");
+
+            txtbxHolidayStart.Text = Calendar1.SelectedDate.ToString("d");
             Calendar1.Visible = false;
         }
         protected void Calendar2_SelectionChanged(object sender, EventArgs e)
         {
-            end = Calendar2.SelectedDate;
-            txtbxHolidayEnd.Text = end.ToString("d");
+            txtbxHolidayEnd.Text = Calendar2.SelectedDate.ToString("d");
             Calendar2.Visible = false;
         }
         protected void btnSubmit_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("holiday from: " + start.ToString("d"), "To: " + end);
-            //if ()
-            //{
+         DateTime start = Calendar1.SelectedDate;
+         DateTime end = Calendar2.SelectedDate;
+
+        MessageBox.Show("holidays from: " + start.ToString("d"), "To: " + end);
+            if (end <start || start<DateTime.Today || end<DateTime.Today)
+            {
+                Response.Write("<script>alert('" +"The end date of your Holiday can not be before the start date, or before today"+ "');</script>");
+            }
+            else if (cc.IsValidHolidayRequest(start, end, ((long)(Session["sesID"]))))
+            {
                 if (hm.SubmitHolidayReq(start, end, ((long)(Session["sesID"]))))
                 {
                     MessageBox.Show("Booking Completed from: " + start.ToString("d"), "To: " + end.ToString("d"));
                 }
-
                 else
                 {
-                    MessageBox.Show("error");
+                    MessageBox.Show("We couldn't completer yor request this time, please try later");
                 }
-            //}
-          
+            }
 
         }
 
@@ -110,21 +117,10 @@ namespace EmployeeWebApp
             }
             Calendar2.Visible = true;
         }
-         private void printInfo()
-        {
-            string script = String.Format(@"<script>alert('{0}\r\n{1}\r\n{2}\r\n{3}\r\n{4});</script>",
-                Session["staffID"].ToString(), Session["name"].ToString(), Session["surname"].ToString(), Session["role"].ToString(), Session["surname"].ToString());
-            Response.Write(script);
-            //Response.Write);
-            //Response.Write("Employee Name: " + Session["name"]);
-            //Response.Write("Employee Surname: " + Session["surname"]);
-            //Response.Write("Employee Role" + Session["role"]);
-            //Response.Write("Employee Departmet: " + Session["surname"]);
-        }
 
         protected void btnPersonalDet_Click(object sender, EventArgs e)
         {
-            Response.Write("<script>alert('" + Session["staffID"].ToString() + "\\r\\n" + Session["name"].ToString() + "\\r\\n" + Session["surname"].ToString() + "\\r\\n" + Session["role"].ToString() + "');</script>");
+            Response.Write("<script>alert('" + "Identification Number: "+ Session["staffID"].ToString() + "\\r\\n" + "Name: " + Session["name"].ToString() + "\\r\\n" + "Surname " + Session["surname"].ToString() + "\\r\\n"  + "Holidays Remainig: "+holidaysLeft + "');</script>");
         }
     }
 }//dsgtsd

@@ -18,11 +18,14 @@ namespace EmployeeWebApp
 
         protected void btnLogin_Click(object sender, EventArgs e)
         {
+            if(Int32.Parse(txtID.Text) == 0 || txtPassword.Text == "")
+            {
+                Response.Write("<script>alert('" + "Login fields can not be empty" + "');</script>");
+            }
             
-            if (hm.Verification(Int32.Parse(txtID.Text), txtPassword.Text))
+            else if(hm.Verification(Int32.Parse(txtID.Text), txtPassword.Text))
             {
                 Session["sesID"] = hm.GetID(Int32.Parse(txtID.Text));
-                Session["role"] = hm.GetEmployee(Int32.Parse(txtID.Text)).roles;
                 Session["name"] = hm.GetEmployee(Int32.Parse(txtID.Text)).FirstName;
                 Session["surname"] = hm.GetEmployee(Int32.Parse(txtID.Text)).LastName;
                 Session["staffID"] = hm.GetEmployee(Int32.Parse(txtID.Text)).StaffID;
@@ -32,8 +35,8 @@ namespace EmployeeWebApp
             }
             else
             {
-
-            }
+                    Response.Write("<script>alert('" + "Wrong credentials, Try again" + "');</script>");
+                }
         }
     }
 }

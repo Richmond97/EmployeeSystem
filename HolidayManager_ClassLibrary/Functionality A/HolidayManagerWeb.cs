@@ -33,6 +33,7 @@ namespace HolidayManager_ClassLibrary.Functionality_A
         //• View a list of outstanding holiday requests
         public bool Verification(int StaffID, string Password)
         {
+            
             try
             {
                 // Query to find matching staffid and password in DB
