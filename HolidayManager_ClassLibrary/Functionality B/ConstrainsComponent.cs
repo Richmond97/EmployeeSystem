@@ -83,6 +83,7 @@ namespace HolidayManager_ClassLibrary
             {
                 if (count==5)
                 {
+                    count = 0;
                     bonus += 1;
                 }
                 count += 1;
@@ -95,16 +96,35 @@ namespace HolidayManager_ClassLibrary
             return  holidaysLeft = (holidaysLeft + bonus) - taken;
 
         }
-        public bool IsValidHolidayRequest(DateTime start, DateTime end, long ID)
+        public bool IsValidHolidayRequest(DateTime start, DateTime end, long EmployeeID)
         {
-           int daysLeft = HolidaysLeft(ID);
+           int daysLeft = HolidaysLeft(EmployeeID);
            int daysRequested = (end - start).Days;
             if (daysLeft - daysRequested<0)
             {
-                MessageBox.Show("Sorry, not enough holidays left to procced with you request, you only have: " + daysLeft + " days left");
+                MessageBox.Show("Sorry, not enough holidays left to procced with you request");
                 return false;
             }
             return true;
+        }
+        public void departmentConstrains(long EmployeeID, string deptName, string role)
+        {
+            if(role == "Head" )
+            {
+                string myRole = "Head";
+            }
+            else if(role == "Head Deputy" )
+            {
+                string myRole = "Head Deputy";
+
+
+            }
+            var existingHead = (from a in db.roles
+                                join b in db.holidaysrequesteds on a.EmployeeID equals b.EmployeeID
+                                where (b.Status == "Approved") && (a.RoleType == "Head")
+                                select a).ToList();
+
+
         }
     }
 }

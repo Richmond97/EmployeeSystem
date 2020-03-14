@@ -18,7 +18,7 @@ namespace EmployeeWebApp
 
         protected void btnLogin_Click(object sender, EventArgs e)
         {
-            if(Int32.Parse(txtID.Text) == 0 || txtPassword.Text == "")
+            if((txtID.Text) == "" || txtPassword.Text == "")
             {
                 Response.Write("<script>alert('" + "Login fields can not be empty" + "');</script>");
             }
@@ -29,9 +29,7 @@ namespace EmployeeWebApp
                 Session["name"] = hm.GetEmployee(Int32.Parse(txtID.Text)).FirstName;
                 Session["surname"] = hm.GetEmployee(Int32.Parse(txtID.Text)).LastName;
                 Session["staffID"] = hm.GetEmployee(Int32.Parse(txtID.Text)).StaffID;
-                Response.Redirect("ManageAccount.aspx");
-                
-
+                Response.Redirect("ManageAccount.aspx");   
             }
             else
             {
