@@ -116,6 +116,14 @@ namespace HolidayManager_ClassLibrary.Functionality_A
             return employee;
 
         }
+        public role GetRole(long StaffID)
+        {
+            var role = (from a in db.roles
+                        where a.employee.StaffID == StaffID
+                        select a).Single();
+
+            return role;
+        }
 
         public void ViewHolidayReqStatus()
         {

@@ -39,14 +39,44 @@ namespace HolidayManager_ClassLibrary
 
     public partial class ConstrainsComponent : Component
     {
-       
+        //public static DateTime EasterSunday(int year)
+        //{
+        //    int day = 0;
+        //    int month = 0;
+
+        //    int g = year % 19;
+        //    int c = year / 100;
+        //    int h = (c - (int)(c / 4) - (int)((8 * c + 13) / 25) + 19 * g + 15) % 30;
+        //    int i = h - (int)(h / 28) * (1 - (int)(h / 28) * (int)(29 / (h + 1)) * (int)((21 - g) / 11));
+
+        //    day = i - ((year + (int)(year / 4) + i + 2 - c + (int)(c / 4)) % 7) + 28;
+        //    month = 3;
+
+        //    if (day > 31)
+        //    {
+        //        month++;
+        //        day -= 31;
+        //    }
+
+        //    return new DateTime(year, month, day);
+        //}
+
         private readonly DataClasses1DataContext db = new DataClasses1DataContext();
-        int holidaysLeft = 30;
+        int holidaysLeft = 0;
         int taken;
         int bonus = 0;
+        string roles = "";
+        string department = "";
+
+        public string Roles { get => roles; set => roles = value; }
+        public string Department { get => department; set => department = value; }
+
         public ConstrainsComponent()
         {
             InitializeComponent();
+            Roles = GetConstraint().AvailableRoles;
+            Department = GetConstraint().AvailableDepartments;
+            
         }
 
         public ConstrainsComponent(IContainer container)
@@ -57,9 +87,17 @@ namespace HolidayManager_ClassLibrary
 
         }
 
+        public constraint GetConstraint()
+        {
+            var constraint = (from a in db.constraints
+                              select a).Single();
+            return constraint;
+        }
+        
         public int HolidaysLeft(long EmployeeID)
         {
-            
+          //  holidaysLeft = GetConstraint().HolidayEntitlement;
+
 
             var daysEntiled = (from a in db.employees
                                where a.EmployeeID == EmployeeID
@@ -107,24 +145,67 @@ namespace HolidayManager_ClassLibrary
             }
             return true;
         }
-        public void departmentConstrains(long EmployeeID, string deptName, string role)
+
+        public role GetRole(long StaffID)
         {
-            if(role == "Head" )
+            var role = (from a in db.roles
+                        where a.employee.StaffID == StaffID
+                        select a).Single();
+
+            return role;
+        }
+
+        public holidaysrequested GetHoliday(long holiID)
+        {
+            var holiday = (from a in db.holidaysrequesteds
+                        where a.RequestID == holiID
+                           select a).Single();
+
+            return holiday;
+        }
+
+        public bool managerReq( role role, holidaysrequested holi)
+        {
+            //return if the manager request pass the constrains, false if not
+            bool validReq = true;
+            string myRole = "";
+            string roleType = role.RoleType.ToString();
+            switch (roleType)
             {
-                string myRole = "Head";
+                case "Head":
+                   roleType = "Head";
+                    break;
+                case "Head Deputy":
+                    roleType = "Head Deputy";
+                    break;
+                case "Manager":
+                    roleType = "Manager";
+                    break;
+                case "Senior Member":
+                    roleType = "Senior Member";
+                    break;
+                default:
+                    Console.WriteLine("Default case");
+                    break;
+        
             }
-            else if(role == "Head Deputy" )
+            string departmentName = role.department.DeptName.ToString();
+            var holidays = (from b in db.holidaysrequesteds
+                                where ((b.Status == "Approved") && (role.RoleType == myRole) 
+                                && (role.department.DeptName == departmentName))
+                                select b).ToList();
+
+            holidaysrequested currHoliday = GetHoliday(holi.RequestID);
+            foreach (var h in holidays)
             {
-                string myRole = "Head Deputy";
-
-
+               
+                if(currHoliday.StartDate < h.EndDate && h.StartDate> currHoliday.EndDate)
+                {
+                     validReq = false;
+                }
             }
-            var existingHead = (from a in db.roles
-                                join b in db.holidaysrequesteds on a.EmployeeID equals b.EmployeeID
-                                where (b.Status == "Approved") && (a.RoleType == "Head")
-                                select a).ToList();
 
-
+            return validReq;
         }
     }
 }

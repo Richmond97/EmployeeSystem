@@ -291,6 +291,21 @@ namespace LoginForm
 
         }
 
+        public List<string> Split(string words)
+        {
+            // Fomrat the address string into an array
+            try
+            {
+                return words.Split('-').ToList(); 
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw e;
+            }
+
+        }
+
         public void ClearFields(Panel panel)
         {
             // Clear Panel fields

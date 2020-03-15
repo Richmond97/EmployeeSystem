@@ -109,11 +109,6 @@
             this.title = new System.Windows.Forms.Label();
             this.cmbxHM = new System.Windows.Forms.ComboBox();
             this.dataGridView3 = new System.Windows.Forms.DataGridView();
-            this.pnlHolidayReq = new System.Windows.Forms.Panel();
-            this.label28 = new System.Windows.Forms.Label();
-            this.btnReject = new System.Windows.Forms.Button();
-            this.btnAccept = new System.Windows.Forms.Button();
-            this.holidayReqGridView = new System.Windows.Forms.DataGridView();
             this.pnlHolidayOnDuty = new System.Windows.Forms.Panel();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.rdbtnOffDuty = new System.Windows.Forms.RadioButton();
@@ -121,7 +116,13 @@
             this.monthCalendar = new System.Windows.Forms.MonthCalendar();
             this.label27 = new System.Windows.Forms.Label();
             this.dataGridOnOffDuty = new System.Windows.Forms.DataGridView();
+            this.pnlHolidayReq = new System.Windows.Forms.Panel();
+            this.label28 = new System.Windows.Forms.Label();
+            this.btnReject = new System.Windows.Forms.Button();
+            this.btnAccept = new System.Windows.Forms.Button();
+            this.holidayReqGridView = new System.Windows.Forms.DataGridView();
             this.loginComponent1 = new Component_A_ClassLibrary.LoginComponent(this.components);
+            this.constrainsComponent1 = new HolidayManager_ClassLibrary.ConstrainsComponent(this.components);
             this.createPanel.SuspendLayout();
             this.editPanel.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -131,11 +132,11 @@
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewBooked)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView3)).BeginInit();
-            this.pnlHolidayReq.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.holidayReqGridView)).BeginInit();
             this.pnlHolidayOnDuty.SuspendLayout();
             this.groupBox3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridOnOffDuty)).BeginInit();
+            this.pnlHolidayReq.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.holidayReqGridView)).BeginInit();
             this.SuspendLayout();
             // 
             // createPanel
@@ -871,7 +872,7 @@
             this.pnlHolidayBkd.Controls.Add(this.dataGridViewBooked);
             this.pnlHolidayBkd.Controls.Add(this.label24);
             this.pnlHolidayBkd.Location = new System.Drawing.Point(423, 173);
-            this.pnlHolidayBkd.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.pnlHolidayBkd.Margin = new System.Windows.Forms.Padding(2);
             this.pnlHolidayBkd.Name = "pnlHolidayBkd";
             this.pnlHolidayBkd.Size = new System.Drawing.Size(86, 364);
             this.pnlHolidayBkd.TabIndex = 55;
@@ -879,7 +880,7 @@
             // btnSearchEmployee
             // 
             this.btnSearchEmployee.Location = new System.Drawing.Point(181, 39);
-            this.btnSearchEmployee.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnSearchEmployee.Margin = new System.Windows.Forms.Padding(2);
             this.btnSearchEmployee.Name = "btnSearchEmployee";
             this.btnSearchEmployee.Size = new System.Drawing.Size(98, 21);
             this.btnSearchEmployee.TabIndex = 60;
@@ -890,7 +891,7 @@
             // txtEmployee
             // 
             this.txtEmployee.Location = new System.Drawing.Point(15, 39);
-            this.txtEmployee.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtEmployee.Margin = new System.Windows.Forms.Padding(2);
             this.txtEmployee.Name = "txtEmployee";
             this.txtEmployee.Size = new System.Drawing.Size(175, 20);
             this.txtEmployee.TabIndex = 59;
@@ -979,7 +980,7 @@
             // 
             this.cmbxHM.FormattingEnabled = true;
             this.cmbxHM.Location = new System.Drawing.Point(13, 120);
-            this.cmbxHM.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.cmbxHM.Margin = new System.Windows.Forms.Padding(2);
             this.cmbxHM.Name = "cmbxHM";
             this.cmbxHM.Size = new System.Drawing.Size(195, 21);
             this.cmbxHM.TabIndex = 47;
@@ -1001,6 +1002,93 @@
             this.dataGridView3.Size = new System.Drawing.Size(88, 63);
             this.dataGridView3.TabIndex = 53;
             // 
+            // pnlHolidayOnDuty
+            // 
+            this.pnlHolidayOnDuty.Controls.Add(this.groupBox3);
+            this.pnlHolidayOnDuty.Controls.Add(this.monthCalendar);
+            this.pnlHolidayOnDuty.Controls.Add(this.label27);
+            this.pnlHolidayOnDuty.Controls.Add(this.dataGridOnOffDuty);
+            this.pnlHolidayOnDuty.Location = new System.Drawing.Point(124, 157);
+            this.pnlHolidayOnDuty.Margin = new System.Windows.Forms.Padding(2);
+            this.pnlHolidayOnDuty.Name = "pnlHolidayOnDuty";
+            this.pnlHolidayOnDuty.Size = new System.Drawing.Size(95, 386);
+            this.pnlHolidayOnDuty.TabIndex = 45;
+            // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.rdbtnOffDuty);
+            this.groupBox3.Controls.Add(this.rdbtnOnDuty);
+            this.groupBox3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupBox3.ForeColor = System.Drawing.Color.White;
+            this.groupBox3.Location = new System.Drawing.Point(588, 3);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(180, 34);
+            this.groupBox3.TabIndex = 57;
+            this.groupBox3.TabStop = false;
+            // 
+            // rdbtnOffDuty
+            // 
+            this.rdbtnOffDuty.AutoSize = true;
+            this.rdbtnOffDuty.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rdbtnOffDuty.ForeColor = System.Drawing.Color.White;
+            this.rdbtnOffDuty.Location = new System.Drawing.Point(92, 11);
+            this.rdbtnOffDuty.Name = "rdbtnOffDuty";
+            this.rdbtnOffDuty.Size = new System.Drawing.Size(75, 19);
+            this.rdbtnOffDuty.TabIndex = 1;
+            this.rdbtnOffDuty.TabStop = true;
+            this.rdbtnOffDuty.Text = "OFF Duty";
+            this.rdbtnOffDuty.UseVisualStyleBackColor = true;
+            // 
+            // rdbtnOnDuty
+            // 
+            this.rdbtnOnDuty.AutoSize = true;
+            this.rdbtnOnDuty.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rdbtnOnDuty.ForeColor = System.Drawing.Color.White;
+            this.rdbtnOnDuty.Location = new System.Drawing.Point(9, 13);
+            this.rdbtnOnDuty.Name = "rdbtnOnDuty";
+            this.rdbtnOnDuty.Size = new System.Drawing.Size(66, 17);
+            this.rdbtnOnDuty.TabIndex = 0;
+            this.rdbtnOnDuty.TabStop = true;
+            this.rdbtnOnDuty.Text = "ON Duty";
+            this.rdbtnOnDuty.UseVisualStyleBackColor = true;
+            // 
+            // monthCalendar
+            // 
+            this.monthCalendar.Location = new System.Drawing.Point(6, 103);
+            this.monthCalendar.Margin = new System.Windows.Forms.Padding(6);
+            this.monthCalendar.Name = "monthCalendar";
+            this.monthCalendar.TabIndex = 56;
+            this.monthCalendar.DateSelected += new System.Windows.Forms.DateRangeEventHandler(this.MonthCalendar_DateSelected);
+            // 
+            // label27
+            // 
+            this.label27.AutoSize = true;
+            this.label27.Cursor = System.Windows.Forms.Cursors.Arrow;
+            this.label27.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label27.ForeColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.label27.Location = new System.Drawing.Point(23, 0);
+            this.label27.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label27.Name = "label27";
+            this.label27.Size = new System.Drawing.Size(188, 29);
+            this.label27.TabIndex = 55;
+            this.label27.Text = "On Duty Off Duty";
+            // 
+            // dataGridOnOffDuty
+            // 
+            this.dataGridOnOffDuty.AllowUserToAddRows = false;
+            this.dataGridOnOffDuty.AllowUserToDeleteRows = false;
+            this.dataGridOnOffDuty.AllowUserToResizeColumns = false;
+            this.dataGridOnOffDuty.AllowUserToResizeRows = false;
+            this.dataGridOnOffDuty.BackgroundColor = System.Drawing.Color.DarkSlateGray;
+            this.dataGridOnOffDuty.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.dataGridOnOffDuty.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridOnOffDuty.Location = new System.Drawing.Point(497, 77);
+            this.dataGridOnOffDuty.Name = "dataGridOnOffDuty";
+            this.dataGridOnOffDuty.RowHeadersVisible = false;
+            this.dataGridOnOffDuty.RowHeadersWidth = 62;
+            this.dataGridOnOffDuty.Size = new System.Drawing.Size(323, 254);
+            this.dataGridOnOffDuty.TabIndex = 52;
+            // 
             // pnlHolidayReq
             // 
             this.pnlHolidayReq.Controls.Add(this.label28);
@@ -1008,7 +1096,7 @@
             this.pnlHolidayReq.Controls.Add(this.btnAccept);
             this.pnlHolidayReq.Controls.Add(this.holidayReqGridView);
             this.pnlHolidayReq.Location = new System.Drawing.Point(269, 171);
-            this.pnlHolidayReq.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.pnlHolidayReq.Margin = new System.Windows.Forms.Padding(2);
             this.pnlHolidayReq.Name = "pnlHolidayReq";
             this.pnlHolidayReq.Size = new System.Drawing.Size(88, 348);
             this.pnlHolidayReq.TabIndex = 44;
@@ -1073,93 +1161,6 @@
             this.holidayReqGridView.TabIndex = 46;
             this.holidayReqGridView.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.HolidayReqGridView_CellClick);
             // 
-            // pnlHolidayOnDuty
-            // 
-            this.pnlHolidayOnDuty.Controls.Add(this.groupBox3);
-            this.pnlHolidayOnDuty.Controls.Add(this.monthCalendar);
-            this.pnlHolidayOnDuty.Controls.Add(this.label27);
-            this.pnlHolidayOnDuty.Controls.Add(this.dataGridOnOffDuty);
-            this.pnlHolidayOnDuty.Location = new System.Drawing.Point(124, 157);
-            this.pnlHolidayOnDuty.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.pnlHolidayOnDuty.Name = "pnlHolidayOnDuty";
-            this.pnlHolidayOnDuty.Size = new System.Drawing.Size(95, 386);
-            this.pnlHolidayOnDuty.TabIndex = 45;
-            // 
-            // groupBox3
-            // 
-            this.groupBox3.Controls.Add(this.rdbtnOffDuty);
-            this.groupBox3.Controls.Add(this.rdbtnOnDuty);
-            this.groupBox3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox3.ForeColor = System.Drawing.Color.White;
-            this.groupBox3.Location = new System.Drawing.Point(588, 3);
-            this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(180, 34);
-            this.groupBox3.TabIndex = 57;
-            this.groupBox3.TabStop = false;
-            // 
-            // rdbtnOffDuty
-            // 
-            this.rdbtnOffDuty.AutoSize = true;
-            this.rdbtnOffDuty.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rdbtnOffDuty.ForeColor = System.Drawing.Color.White;
-            this.rdbtnOffDuty.Location = new System.Drawing.Point(92, 11);
-            this.rdbtnOffDuty.Name = "rdbtnOffDuty";
-            this.rdbtnOffDuty.Size = new System.Drawing.Size(75, 19);
-            this.rdbtnOffDuty.TabIndex = 1;
-            this.rdbtnOffDuty.TabStop = true;
-            this.rdbtnOffDuty.Text = "OFF Duty";
-            this.rdbtnOffDuty.UseVisualStyleBackColor = true;
-            // 
-            // rdbtnOnDuty
-            // 
-            this.rdbtnOnDuty.AutoSize = true;
-            this.rdbtnOnDuty.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rdbtnOnDuty.ForeColor = System.Drawing.Color.White;
-            this.rdbtnOnDuty.Location = new System.Drawing.Point(9, 13);
-            this.rdbtnOnDuty.Name = "rdbtnOnDuty";
-            this.rdbtnOnDuty.Size = new System.Drawing.Size(66, 17);
-            this.rdbtnOnDuty.TabIndex = 0;
-            this.rdbtnOnDuty.TabStop = true;
-            this.rdbtnOnDuty.Text = "ON Duty";
-            this.rdbtnOnDuty.UseVisualStyleBackColor = true;
-            // 
-            // monthCalendar
-            // 
-            this.monthCalendar.Location = new System.Drawing.Point(6, 103);
-            this.monthCalendar.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
-            this.monthCalendar.Name = "monthCalendar";
-            this.monthCalendar.TabIndex = 56;
-            this.monthCalendar.DateSelected += new System.Windows.Forms.DateRangeEventHandler(this.MonthCalendar_DateSelected);
-            // 
-            // label27
-            // 
-            this.label27.AutoSize = true;
-            this.label27.Cursor = System.Windows.Forms.Cursors.Arrow;
-            this.label27.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label27.ForeColor = System.Drawing.SystemColors.GradientActiveCaption;
-            this.label27.Location = new System.Drawing.Point(23, 0);
-            this.label27.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label27.Name = "label27";
-            this.label27.Size = new System.Drawing.Size(188, 29);
-            this.label27.TabIndex = 55;
-            this.label27.Text = "On Duty Off Duty";
-            // 
-            // dataGridOnOffDuty
-            // 
-            this.dataGridOnOffDuty.AllowUserToAddRows = false;
-            this.dataGridOnOffDuty.AllowUserToDeleteRows = false;
-            this.dataGridOnOffDuty.AllowUserToResizeColumns = false;
-            this.dataGridOnOffDuty.AllowUserToResizeRows = false;
-            this.dataGridOnOffDuty.BackgroundColor = System.Drawing.Color.DarkSlateGray;
-            this.dataGridOnOffDuty.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.dataGridOnOffDuty.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridOnOffDuty.Location = new System.Drawing.Point(497, 77);
-            this.dataGridOnOffDuty.Name = "dataGridOnOffDuty";
-            this.dataGridOnOffDuty.RowHeadersVisible = false;
-            this.dataGridOnOffDuty.RowHeadersWidth = 62;
-            this.dataGridOnOffDuty.Size = new System.Drawing.Size(323, 254);
-            this.dataGridOnOffDuty.TabIndex = 52;
-            // 
             // loginComponent1
             // 
             this.loginComponent1.EmployeeLevel = "";
@@ -1200,14 +1201,14 @@
             this.groupBox2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewBooked)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView3)).EndInit();
-            this.pnlHolidayReq.ResumeLayout(false);
-            this.pnlHolidayReq.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.holidayReqGridView)).EndInit();
             this.pnlHolidayOnDuty.ResumeLayout(false);
             this.pnlHolidayOnDuty.PerformLayout();
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridOnOffDuty)).EndInit();
+            this.pnlHolidayReq.ResumeLayout(false);
+            this.pnlHolidayReq.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.holidayReqGridView)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1307,5 +1308,6 @@
         private System.Windows.Forms.RadioButton rdbtnID;
         private System.Windows.Forms.TextBox txtEmployee;
         private System.Windows.Forms.Button btnSearchEmployee;
+        private HolidayManager_ClassLibrary.ConstrainsComponent constrainsComponent1;
     }
 }
