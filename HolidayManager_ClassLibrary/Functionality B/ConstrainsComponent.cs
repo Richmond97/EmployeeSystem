@@ -45,8 +45,8 @@ namespace HolidayManager_ClassLibrary
         int holidaysLeft = 0;
         int taken;
         int bonus = 0;
-        string Roles = GetRoles();
-        string Departement =GetDepartment();
+        string Roles = GetConstraint().AvailableRoles;
+        string Departement = GetConstraint().AvailableDepartments;
 
         public  string Roles1 { get => Roles; set => Roles = value; }
         public string Departement1 { get => Departement; set => Departement = value; }
@@ -63,17 +63,24 @@ namespace HolidayManager_ClassLibrary
         }
 
         
-        private static string GetRoles()
-        {
-            var Qconstraint = (from a in db.constraints
-                               select a.AvailableRoles).Single();
-            return Qconstraint;
-        }
+        //private static string GetRoles()
+        //{
+        //    var Qconstraint = (from a in db.constraints
+        //                       select a.AvailableRoles).Single();
+        //    return Qconstraint;
+        //}
 
-        private static  string GetDepartment()
+        //private static  string GetDepartment()
+        //{
+        //    var Qconstraint = (from a in db.constraints
+        //                      select a.AvailableDepartments).Single();
+        //    return Qconstraint;
+        //}
+
+        public static constraint GetConstraint()
         {
             var Qconstraint = (from a in db.constraints
-                              select a.AvailableDepartments).Single();
+                               select a).Single();
             return Qconstraint;
         }
 
@@ -129,33 +136,26 @@ namespace HolidayManager_ClassLibrary
             return true;
         }
 
-        //public role GetRole(long StaffID)
-        //{
-        //    var role = (from a in db.roles
-        //                where a.employee.StaffID == StaffID
-        //                select a).Single();
-        //    return role;
-        //}
-
-        //public holidaysrequested GetHoliday(long holiID)
-        //{
-        //    var holiday = (from a in db.holidaysrequesteds
-        //                where a.RequestID == holiID
-        //                   select a).Single();
-        //    return holiday;
-        //}
-
-        public bool validHolidayReqManagerHead( long requestID, long EmployeeID)
+        public role GetRole(long StaffID)
         {
+            var role = (from a in db.roles
+                        where a.employee.StaffID == StaffID
+                        select a).Single();
+            return role;
+        }
 
-                var person = (from a in db.roles
-                            where a.employee.EmployeeID == EmployeeID
-                            select a).Single();
+        public holidaysrequested GetHoliday(long holiID)
+        {
+            var holiday = (from a in db.holidaysrequesteds
+                           where a.RequestID == holiID
+                           select a).Single();
+            return holiday;
+        }
 
-                var holiday = (from a in db.holidaysrequesteds
-                               where a.RequestID == requestID
-                               select a).Single();
-
+        public bool validHolidayReqManagerHead( long requestID, long StaffID)
+        {
+            role person = GetRole(StaffID);
+            holidaysrequested holiday = GetHoliday(requestID);
             //return if the manager request pass the constrains, false if not
             bool validReq = true;
             string myRole = "";
@@ -216,6 +216,70 @@ namespace HolidayManager_ClassLibrary
             }
 
             return new DateTime(year, month, day);
+        }
+
+        public bool IsEasterHoliday(long requestID, DateTime start, DateTime end)
+        {
+            bool validReq = false;
+            DateTime easter = EasterSunday(DateTime.Today.Year);
+            DateTime startEaster = easter.AddDays( - 7);
+            DateTime endEaster = easter.AddDays(7);
+
+            var holiday = (from a in db.holidaysrequesteds
+                           where a.RequestID == requestID
+                           select a).Single();
+
+            if (startEaster< end && start > endEaster)
+            {
+                validReq = false;
+            }
+            else
+            {
+                validReq = true;
+            }
+            return validReq;
+
+        }
+
+        public void enoughStaff(long StaffID, long holiID)
+        {
+
+            role person = GetRole(StaffID);
+            holidaysrequested holi = GetHoliday(holiID);
+
+            //Returns a list people that have requested a holidays of the same department 
+            var takenKHolidays = (from b in db.holidaysrequesteds
+                                  join a in db.roles
+                                  on b.EmployeeID equals a.EmployeeID
+                                  where (b.Status == "Approved") && a.department.DeptName == person.department.DeptName
+                                  select b).ToList();
+
+
+
+            var totalEmployees = (from b in db.roles
+                                  where b.department.DeptName == person.department.DeptName
+                                  select b).ToList().Count();
+
+            foreach (var h in takenKHolidays)
+            {
+                if (holi.StartDate < h.EndDate && h.StartDate > holi.EndDate)
+                {
+                    int percentBooked = (int)Math.Round((double)(100 * takenKHolidays.Count()/ totalEmployees));
+                    if (percentBooked < GetConstraint().MinimumWorkingStaff)
+                    {
+                        return true;
+                    }
+                    {
+                        return false;
+                    }
+
+                }
+            }
+           
+            
+
+           
+
         }
     }
 }
