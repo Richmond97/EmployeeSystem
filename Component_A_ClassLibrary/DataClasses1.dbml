@@ -5,11 +5,12 @@
       <Column Name="ConstraintID" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="MinimumWorkingStaff" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="HolidayEntitlement" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="ExceptionStartDate" Type="System.String" DbType="NVarChar(10)" CanBeNull="true" />
-      <Column Name="ExceptionEndDate" Type="System.String" DbType="NVarChar(10)" CanBeNull="true" />
-      <Column Name="RelaxedMonth" Type="System.String" DbType="NVarChar(10)" CanBeNull="true" />
+      <Column Name="ExceptionStartDate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="ExceptionEndDate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="RelaxedMonth" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="AvailableDepartments" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
       <Column Name="AvailableRoles" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="MinimumWorkingStaffRelaxed" Type="System.Int32" DbType="Int" CanBeNull="true" />
     </Type>
   </Table>
   <Table Name="dbo.department" Member="departments">

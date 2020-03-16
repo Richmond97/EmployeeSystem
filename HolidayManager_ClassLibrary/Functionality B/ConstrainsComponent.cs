@@ -39,61 +39,44 @@ namespace HolidayManager_ClassLibrary
 
     public partial class ConstrainsComponent : Component
     {
-        //public static DateTime EasterSunday(int year)
-        //{
-        //    int day = 0;
-        //    int month = 0;
+       
 
-        //    int g = year % 19;
-        //    int c = year / 100;
-        //    int h = (c - (int)(c / 4) - (int)((8 * c + 13) / 25) + 19 * g + 15) % 30;
-        //    int i = h - (int)(h / 28) * (1 - (int)(h / 28) * (int)(29 / (h + 1)) * (int)((21 - g) / 11));
-
-        //    day = i - ((year + (int)(year / 4) + i + 2 - c + (int)(c / 4)) % 7) + 28;
-        //    month = 3;
-
-        //    if (day > 31)
-        //    {
-        //        month++;
-        //        day -= 31;
-        //    }
-
-        //    return new DateTime(year, month, day);
-        //}
-
-        private readonly DataClasses1DataContext db = new DataClasses1DataContext();
+        private static readonly DataClasses1DataContext db = new DataClasses1DataContext();
         int holidaysLeft = 0;
         int taken;
         int bonus = 0;
-        string roles = "";
-        string department = "";
+        string Roles = GetRoles();
+        string Departement =GetDepartment();
 
-        public string Roles { get => roles; set => roles = value; }
-        public string Department { get => department; set => department = value; }
+        public  string Roles1 { get => Roles; set => Roles = value; }
+        public string Departement1 { get => Departement; set => Departement = value; }
 
         public ConstrainsComponent()
         {
             InitializeComponent();
-            Roles = GetConstraint().AvailableRoles;
-            Department = GetConstraint().AvailableDepartments;
-            
+
         }
 
-        public ConstrainsComponent(IContainer container)
+    public ConstrainsComponent(IContainer container)
         {
             container.Add(this);
-
-            InitializeComponent();
-
         }
 
-        public constraint GetConstraint()
-        {
-            var constraint = (from a in db.constraints
-                              select a).Single();
-            return constraint;
-        }
         
+        private static string GetRoles()
+        {
+            var Qconstraint = (from a in db.constraints
+                               select a.AvailableRoles).Single();
+            return Qconstraint;
+        }
+
+        private static  string GetDepartment()
+        {
+            var Qconstraint = (from a in db.constraints
+                              select a.AvailableDepartments).Single();
+            return Qconstraint;
+        }
+
         public int HolidaysLeft(long EmployeeID)
         {
           //  holidaysLeft = GetConstraint().HolidayEntitlement;
@@ -146,30 +129,37 @@ namespace HolidayManager_ClassLibrary
             return true;
         }
 
-        public role GetRole(long StaffID)
+        //public role GetRole(long StaffID)
+        //{
+        //    var role = (from a in db.roles
+        //                where a.employee.StaffID == StaffID
+        //                select a).Single();
+        //    return role;
+        //}
+
+        //public holidaysrequested GetHoliday(long holiID)
+        //{
+        //    var holiday = (from a in db.holidaysrequesteds
+        //                where a.RequestID == holiID
+        //                   select a).Single();
+        //    return holiday;
+        //}
+
+        public bool validHolidayReqManagerHead( long requestID, long EmployeeID)
         {
-            var role = (from a in db.roles
-                        where a.employee.StaffID == StaffID
-                        select a).Single();
 
-            return role;
-        }
+                var person = (from a in db.roles
+                            where a.employee.EmployeeID == EmployeeID
+                            select a).Single();
 
-        public holidaysrequested GetHoliday(long holiID)
-        {
-            var holiday = (from a in db.holidaysrequesteds
-                        where a.RequestID == holiID
-                           select a).Single();
+                var holiday = (from a in db.holidaysrequesteds
+                               where a.RequestID == requestID
+                               select a).Single();
 
-            return holiday;
-        }
-
-        public bool managerReq( role role, holidaysrequested holi)
-        {
             //return if the manager request pass the constrains, false if not
             bool validReq = true;
             string myRole = "";
-            string roleType = role.RoleType.ToString();
+            string roleType = person.RoleType.ToString();
             switch (roleType)
             {
                 case "Head":
@@ -184,28 +174,48 @@ namespace HolidayManager_ClassLibrary
                 case "Senior Member":
                     roleType = "Senior Member";
                     break;
-                default:
-                    Console.WriteLine("Default case");
-                    break;
         
             }
-            string departmentName = role.department.DeptName.ToString();
+            string departmentName = person.department.DeptName.ToString();
+
             var holidays = (from b in db.holidaysrequesteds
-                                where ((b.Status == "Approved") && (role.RoleType == myRole) 
-                                && (role.department.DeptName == departmentName))
+                                where ((b.Status == "Approved") && (person.RoleType == myRole) 
+                                && (person.department.DeptName == departmentName) /*&& b.EndDate > DateTime.Today*/ )
                                 select b).ToList();
 
-            holidaysrequested currHoliday = GetHoliday(holi.RequestID);
+            
             foreach (var h in holidays)
             {
-               
-                if(currHoliday.StartDate < h.EndDate && h.StartDate> currHoliday.EndDate)
+               //Chech if the holiday request overlaps with an existing holiday
+                if(holiday.StartDate < h.EndDate && h.StartDate> holiday.EndDate)
                 {
                      validReq = false;
                 }
             }
 
             return validReq;
+        }
+
+        public static DateTime EasterSunday(int year)
+        {
+            int day = 0;
+            int month = 0;
+
+            int g = year % 19;
+            int c = year / 100;
+            int h = (c - (int)(c / 4) - (int)((8 * c + 13) / 25) + 19 * g + 15) % 30;
+            int i = h - (int)(h / 28) * (1 - (int)(h / 28) * (int)(29 / (h + 1)) * (int)((21 - g) / 11));
+
+            day = i - ((year + (int)(year / 4) + i + 2 - c + (int)(c / 4)) % 7) + 28;
+            month = 3;
+
+            if (day > 31)
+            {
+                month++;
+                day -= 31;
+            }
+
+            return new DateTime(year, month, day);
         }
     }
 }

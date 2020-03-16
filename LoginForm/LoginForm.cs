@@ -15,7 +15,6 @@ namespace LoginForm
     {
         public LoginForm()
         {
-            testDate();
             InitializeComponent();
             
         }
@@ -52,25 +51,5 @@ namespace LoginForm
             // Onlu allows the keyboard to enter in numbers  
             e.Handled = !char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar);            
         }
-
-        public void testDate()
-        {
-            DateTime zeroTime = new DateTime(1, 1, 1);
-
-            DateTime A = new DateTime(2007, 1, 1);
-            DateTime B = new DateTime(2007, 1, 10);
-            TimeSpan span = B - A;
-            // Because we start at year 1 for the Gregorian
-            // calendar, we must subtract a year here.
-            int days = (B - A).Days;
-            // Because we start at year 1 for the Gregorian
-            // calendar, we must subtract a year here.
-            //int years = (zeroTime + span).Year - 1;
-            //double days = (A - B).Days;
-
-            // 1, where my other algorithm resulted in 0.
-            MessageBox.Show("Yrs elapsed: " + days);
-        }
-
     }
 }

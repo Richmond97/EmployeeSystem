@@ -14,6 +14,7 @@ namespace LoginForm
 {
     public partial class ManageForm : Form
     {
+        object Selected = 0;
 
         private ManageForm()
         {
@@ -71,11 +72,11 @@ namespace LoginForm
             rdName.Checked = true;
 
             // Make combobox hold values of relevant enums
-            cbxDept.DataSource = Enum.GetValues(typeof(DepartmentType));
-            cbxEDept.DataSource = Enum.GetValues(typeof(DepartmentType));
+            cbxDept.DataSource = SplitList(constrainsComponent2.Departement1);
+            cbxEDept.DataSource = SplitList(constrainsComponent2.Departement1);
+            cbxRole.DataSource = SplitList(constrainsComponent2.Roles1);
+            cbxERole.DataSource = SplitList(constrainsComponent2.Roles1);
 
-            cbxRole.DataSource = Enum.GetValues(typeof(Roletype));
-            cbxERole.DataSource = Enum.GetValues(typeof(Roletype));
 
             // Only allow delete/edit when an emply has been selected
             SwitchButtons();
@@ -291,7 +292,7 @@ namespace LoginForm
 
         }
 
-        public List<string> Split(string words)
+        private List<string> SplitList(string words)
         {
             // Fomrat the address string into an array
             try
@@ -306,7 +307,7 @@ namespace LoginForm
 
         }
 
-        public void ClearFields(Panel panel)
+        private void ClearFields(Panel panel)
         {
             // Clear Panel fields
             foreach (Control x in panel.Controls)
@@ -320,7 +321,7 @@ namespace LoginForm
 
    
 
-        public void SwitchButtons()
+        private void SwitchButtons()
         {
             if (btnDeleteEmploy.Enabled == true)
             {
@@ -402,15 +403,18 @@ namespace LoginForm
 
         }
 
+        private long getSelectedRow(DataGridView dgv)
+        {
+          return (long)dgv[0, dgv.SelectedRows[0].Index].Value;
+        }
 
-
-        public void ArrangeHolidaysPanel()
+        private void ArrangeHolidaysPanel()
         {
             monthCalendar.Size = new Size(380,280);
             rdbtnOnDuty.Checked = true;
             rdbtnID.Checked = true;
 
-            hm.OutstandingReq(holidayReqGridView);
+            hm.OutstandingReq(validHolidayReqGridView, notValidHolidayReqGridView);
             hm.ConfirmedReq(dataGridViewBooked);
 
 
@@ -453,46 +457,65 @@ namespace LoginForm
 
         private void BtnAccept_Click(object sender, EventArgs e)
         {
-               
             try
             {
+
+                if (getSelectedRow(validHolidayReqGridView) != 0)
+                {
+                    Selected = (getSelectedRow(validHolidayReqGridView));
+                }
+                else if (getSelectedRow(notValidHolidayReqGridView) != 0)
+                {
+                    Selected = getSelectedRow(notValidHolidayReqGridView);
+                }
+
+                //holidayReqGridView.CurrentRow.Selected = true;
                 string decision = "Approved";
-                var Selected = (long)holidayReqGridView[0, holidayReqGridView.SelectedRows[0].Index].Value;
-                hm.accept_OR_rejectReq(Selected, decision);
-                hm.RefreshGrid(holidayReqGridView);
-                hm.OutstandingReq(holidayReqGridView);
-            }
-            catch (Exception)
-            {
-                MessageBox.Show("Pleas selelct Holiday request");
-            }
-                
-
-        }
-
-        private void BtnReject_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                holidayReqGridView.CurrentRow.Selected = true;
-                string decision = "Declined";
-                var Selected = (long)holidayReqGridView[0, holidayReqGridView.SelectedRows[0].Index].Value;
-                hm.accept_OR_rejectReq(Selected,decision);
-                hm.RefreshGrid(holidayReqGridView);
-                hm.OutstandingReq(holidayReqGridView);
+                //var Selected = (long)holidayReqGridView[0, holidayReqGridView.SelectedRows[0].Index].Value;
+                hm.accept_OR_rejectReq((long)Selected, decision);
+                hm.RefreshGrid(validHolidayReqGridView);
+                hm.OutstandingReq(validHolidayReqGridView, notValidHolidayReqGridView);
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Pleas selelct Holiday request");
             }
 
+
         }
 
-        private void HolidayReqGridView_CellClick(object sender, DataGridViewCellEventArgs e)
+        private void BtnReject_Click(object sender, EventArgs e)
+        {
+            try
+            { 
+                 
+                if ( getSelectedRow(validHolidayReqGridView) != 0)
+                {
+                    Selected = getSelectedRow(validHolidayReqGridView);
+                }
+                else if (getSelectedRow(notValidHolidayReqGridView) != 0)
+                {
+                    Selected = getSelectedRow(notValidHolidayReqGridView);
+                }
+                //holidayReqGridView.CurrentRow.Selected = true;
+                string decision = "Declined";
+                //var Selected = (long)holidayReqGridView[0, holidayReqGridView.SelectedRows[0].Index].Value;
+                hm.accept_OR_rejectReq((long)Selected,decision);
+                hm.RefreshGrid(validHolidayReqGridView);
+                hm.OutstandingReq(validHolidayReqGridView, notValidHolidayReqGridView);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Pleas selelct Holiday request" );
+            }
+
+        }
+
+        private void ValidHolidayReqGridView_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             try
             {
-                holidayReqGridView.CurrentRow.Selected = true;
+                validHolidayReqGridView.CurrentRow.Selected = true;
             }
             catch (Exception)
             {
@@ -534,6 +557,18 @@ namespace LoginForm
         {
             monthCalendar.MaxSelectionCount = 1;
                 hm.EmployeeOffOnDuty(monthCalendar.SelectionRange.Start, dataGridOnOffDuty, rdbtnOffDuty);
+        }
+
+        private void NotValidHolidayReqGridView_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            try
+            {
+                notValidHolidayReqGridView.CurrentRow.Selected = true;
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Please elect a valid Holiday request");
+            }
         }
     }
 }

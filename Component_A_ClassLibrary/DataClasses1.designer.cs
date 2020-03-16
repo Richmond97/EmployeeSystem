@@ -152,15 +152,17 @@ namespace Component_A_ClassLibrary
 		
 		private System.Nullable<int> _HolidayEntitlement;
 		
-		private string _ExceptionStartDate;
+		private System.Nullable<System.DateTime> _ExceptionStartDate;
 		
-		private string _ExceptionEndDate;
+		private System.Nullable<System.DateTime> _ExceptionEndDate;
 		
-		private string _RelaxedMonth;
+		private System.Nullable<int> _RelaxedMonth;
 		
 		private string _AvailableDepartments;
 		
 		private string _AvailableRoles;
+		
+		private System.Nullable<int> _MinimumWorkingStaffRelaxed;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -172,16 +174,18 @@ namespace Component_A_ClassLibrary
     partial void OnMinimumWorkingStaffChanged();
     partial void OnHolidayEntitlementChanging(System.Nullable<int> value);
     partial void OnHolidayEntitlementChanged();
-    partial void OnExceptionStartDateChanging(string value);
+    partial void OnExceptionStartDateChanging(System.Nullable<System.DateTime> value);
     partial void OnExceptionStartDateChanged();
-    partial void OnExceptionEndDateChanging(string value);
+    partial void OnExceptionEndDateChanging(System.Nullable<System.DateTime> value);
     partial void OnExceptionEndDateChanged();
-    partial void OnRelaxedMonthChanging(string value);
+    partial void OnRelaxedMonthChanging(System.Nullable<int> value);
     partial void OnRelaxedMonthChanged();
     partial void OnAvailableDepartmentsChanging(string value);
     partial void OnAvailableDepartmentsChanged();
     partial void OnAvailableRolesChanging(string value);
     partial void OnAvailableRolesChanged();
+    partial void OnMinimumWorkingStaffRelaxedChanging(System.Nullable<int> value);
+    partial void OnMinimumWorkingStaffRelaxedChanged();
     #endregion
 		
 		public constraint()
@@ -249,8 +253,8 @@ namespace Component_A_ClassLibrary
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ExceptionStartDate", DbType="NVarChar(10)")]
-		public string ExceptionStartDate
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ExceptionStartDate", DbType="Date")]
+		public System.Nullable<System.DateTime> ExceptionStartDate
 		{
 			get
 			{
@@ -269,8 +273,8 @@ namespace Component_A_ClassLibrary
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ExceptionEndDate", DbType="NVarChar(10)")]
-		public string ExceptionEndDate
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ExceptionEndDate", DbType="Date")]
+		public System.Nullable<System.DateTime> ExceptionEndDate
 		{
 			get
 			{
@@ -289,8 +293,8 @@ namespace Component_A_ClassLibrary
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RelaxedMonth", DbType="NVarChar(10)")]
-		public string RelaxedMonth
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RelaxedMonth", DbType="Int")]
+		public System.Nullable<int> RelaxedMonth
 		{
 			get
 			{
@@ -345,6 +349,26 @@ namespace Component_A_ClassLibrary
 					this._AvailableRoles = value;
 					this.SendPropertyChanged("AvailableRoles");
 					this.OnAvailableRolesChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MinimumWorkingStaffRelaxed", DbType="Int")]
+		public System.Nullable<int> MinimumWorkingStaffRelaxed
+		{
+			get
+			{
+				return this._MinimumWorkingStaffRelaxed;
+			}
+			set
+			{
+				if ((this._MinimumWorkingStaffRelaxed != value))
+				{
+					this.OnMinimumWorkingStaffRelaxedChanging(value);
+					this.SendPropertyChanging();
+					this._MinimumWorkingStaffRelaxed = value;
+					this.SendPropertyChanged("MinimumWorkingStaffRelaxed");
+					this.OnMinimumWorkingStaffRelaxedChanged();
 				}
 			}
 		}
