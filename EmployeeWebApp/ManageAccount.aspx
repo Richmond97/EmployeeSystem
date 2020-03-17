@@ -37,7 +37,7 @@
     </asp:Calendar>
         
             </td>
-            <td>
+            <td style="width: 314px">
     <asp:Calendar ID="Calendar2" runat="server" BackColor="White" BorderColor="Black" BorderStyle="Solid" CellSpacing="1" Font-Names="Verdana" Font-Size="9pt" ForeColor="Black" Height="220px" NextPrevFormat="ShortMonth" Width="292px" OnDayRender="Calendar2_DayRender" OnSelectionChanged="Calendar2_SelectionChanged">
         <DayHeaderStyle Font-Bold="True" Font-Size="8pt" ForeColor="#333333" Height="8pt" />
         <DayStyle BackColor="#CCCCCC" />
@@ -48,6 +48,8 @@
         <TodayDayStyle BackColor="#999999" ForeColor="White" />
     </asp:Calendar>
             </td>
+            <td>
+                &nbsp;</td>
         </tr>
     </table>
     <p>
@@ -59,11 +61,13 @@
             <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;</td>
             <td>
                 <asp:Button ID="btnPersonalDet" runat="server" BackColor="#2616E9" BorderColor="White" BorderStyle="None" ForeColor="White" OnClick="btnPersonalDet_Click" Text="VIEW MY PERSONAL DETAILS " Width="386px" />
+                <asp:Button ID="btnViewReq" runat="server" BackColor="#2616E9" BorderColor="White" BorderStyle="None" ForeColor="White" OnClick="btnViewReq_Click" Text="VIEW MY REQUEST" Width="386px" />
             </td>
             <td>&nbsp;</td>
         </tr>
     </table>
-    </p>
+    <asp:GridView ID="GridViewrRequest" runat="server" BorderStyle="Double" CaptionAlign="Top" Height="179px" Width="660px" AutoGenerateColumns ="true">
+    </asp:GridView>
         <div runat="server" id="AlertBox" class="alertBox" Visible="false">
     <div runat="server" id="AlertBoxMessage"></div>
     <button onclick="closeAlert.call(this, event)">Ok</button>

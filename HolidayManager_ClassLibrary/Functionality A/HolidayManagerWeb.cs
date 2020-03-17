@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web.UI;
 using System.Windows.Forms;
 using Component_A_ClassLibrary;
 
@@ -29,6 +30,7 @@ namespace HolidayManager_ClassLibrary.Functionality_A
     public class HolidayManagerWeb
     {
         private readonly DataClasses1DataContext db = new DataClasses1DataContext();
+        HolidayManager_ClassLibrary.Functionality_C.PeakTimeComponent pt = new Functionality_C.PeakTimeComponent();
 
         //• View a list of outstanding holiday requests
         public bool Verification(int StaffID, string Password)
@@ -125,37 +127,69 @@ namespace HolidayManager_ClassLibrary.Functionality_A
             return role;
         }
 
-        public void ViewHolidayReqStatus()
+        public List<holidaysrequested> ViewHolidayReqStatus(long EmployeeID)
         {
             var result = (from a in db.holidaysrequesteds
-                          where a.Status != null
-                          select a);
+                          where a.EmployeeID == EmployeeID
+                          select a).ToList();
+            return result;
         }
 
-        public bool SubmitHolidayReq(DateTime startH, DateTime endH, long ID)
+        
+        //public bool SubmitHolidayReq(DateTime startH, DateTime endH, long ID)
+        //{
+        //    int peakValue = pt.IsPeakTime(startH, endH);            
+            
+        //    if (peakValue == 1)
+        //    {
+
+        //        List<DateTime> newdates = pt.newSuggestion()
+
+        //        MsgBox("Your request happends to be on " + holiday + " holiday", this.Page, this);
+        //        //pt.newSuggestion(startH, endH );
+        //    }
+        //    else if (peakValue == 2)
+        //    {
+
+        //    }
+        //    else if (peakValue == 3)
+        //    {
+
+        //    }
+        //    else 
+        //    {
+        //        try
+        //        {
+
+        //            holidaysrequested newHlday = new holidaysrequested
+        //            {
+        //                EmployeeID = ID,
+        //                StartDate = Convert.ToDateTime(startH.ToShortDateString()),
+        //                EndDate = Convert.ToDateTime(endH.ToShortDateString()),
+        //                Status = "Pending"
+        //            };
+
+        //            db.holidaysrequesteds.InsertOnSubmit(newHlday);
+        //            db.SubmitChanges();
+        //            return true;
+        //        }
+        //        catch (Exception ex)
+        //        {
+        //            MessageBox.Show(ex.Message);
+        //            return false;
+        //            throw;
+
+        //        }
+        //    }
+
+        //}
+
+        public void MsgBox(String ex, Page pg, Object obj)
         {
-            try
-            {
-
-                holidaysrequested newHlday = new holidaysrequested
-                {
-                    EmployeeID = ID,
-                    StartDate = Convert.ToDateTime(startH.ToShortDateString()),
-                    EndDate = Convert.ToDateTime(endH.ToShortDateString()),
-                    Status = "Pending"
-                };
-
-                db.holidaysrequesteds.InsertOnSubmit(newHlday);
-                db.SubmitChanges();
-                return true;
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-                return false;
-                throw;
-
-            }
+            string s = "<SCRIPT language='javascript'>alert('" + ex.Replace("\r\n", "\\n").Replace("'", "") + "'); </SCRIPT>";
+            Type cstype = obj.GetType();
+            ClientScriptManager cs = pg.ClientScript;
+            cs.RegisterClientScriptBlock(cstype, s, s.ToString());
         }
     }
 }

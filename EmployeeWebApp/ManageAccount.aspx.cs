@@ -23,12 +23,13 @@ namespace EmployeeWebApp
         protected void Page_Load(object sender, EventArgs e)
         {
             holidaysLeft = cc.HolidaysLeft((long)Session["sesID"]);
-
+            
 
             if (!IsPostBack)
             {
                 Calendar1.Visible = false;
                 Calendar2.Visible = false;
+               // GridViewrRequest.Visible = false;
             }
 
 
@@ -121,6 +122,28 @@ namespace EmployeeWebApp
         protected void btnPersonalDet_Click(object sender, EventArgs e)
         {
             Response.Write("<script>alert('" + "Identification Number: "+ Session["staffID"].ToString() + "\\r\\n" + "Name: " + Session["name"].ToString() + "\\r\\n" + "Surname " + Session["surname"].ToString() + "\\r\\n"  + "Holidays Remainig: "+holidaysLeft + "');</script>");
+        }
+
+        protected void btnViewReq_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                GridViewrRequest.DataSource = hm.ViewHolidayReqStatus((long)Session["sesID"]);
+               // GridViewrRequest.Columns[1].Visible = false;
+                GridViewrRequest.DataBind();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+
+            if (GridViewrRequest.Visible)
+            {
+               GridViewrRequest.Visible = false;
+            }
+            GridViewrRequest.Visible = true;
+
+            
         }
     }
 }//dsgtsd

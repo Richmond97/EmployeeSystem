@@ -53,6 +53,12 @@
       <DependentUpon>ConstrainsComponent.cs</DependentUpon>
     </Compile>
     <Compile Include="Functionality A\HolidayManagerDesktop.cs" />
+    <Compile Include="Functionality C\PeakTimeComponent.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Functionality C\PeakTimeComponent.Designer.cs">
+      <DependentUpon>PeakTimeComponent.cs</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -64,5 +70,6 @@
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

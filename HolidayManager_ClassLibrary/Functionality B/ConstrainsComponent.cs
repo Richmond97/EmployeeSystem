@@ -42,7 +42,7 @@ namespace HolidayManager_ClassLibrary
        
 
         private static readonly DataClasses1DataContext db = new DataClasses1DataContext();
-        int holidaysLeft = 0;
+        int holidaysLeft = (int)GetConstraint().HolidayEntitlement;
         int taken;
         int bonus = 0;
         string Roles = GetConstraint().AvailableRoles;
@@ -297,6 +297,7 @@ namespace HolidayManager_ClassLibrary
             return valid;
 
         }
+
 
         //• 15th of July to 31st of August
         //• 15th of December to 22nd of December
