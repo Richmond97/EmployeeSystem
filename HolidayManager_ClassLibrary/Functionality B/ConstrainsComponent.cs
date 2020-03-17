@@ -139,7 +139,7 @@ namespace HolidayManager_ClassLibrary
         public role GetRole(long StaffID)
         {
             var role = (from a in db.roles
-                        where a.employee.StaffID == StaffID
+                        where a.employee.EmployeeID == StaffID
                         select a).Single();
             return role;
         }
@@ -147,7 +147,7 @@ namespace HolidayManager_ClassLibrary
         public holidaysrequested GetHoliday(long holiID)
         {
             var holiday = (from a in db.holidaysrequesteds
-                           where a.RequestID == holiID
+                           where a.RequestID == holiID && a.Status == "Pending"
                            select a).Single();
             return holiday;
         }
@@ -218,18 +218,30 @@ namespace HolidayManager_ClassLibrary
             return new DateTime(year, month, day);
         }
 
-        public bool IsEasterHoliday(long requestID, DateTime start, DateTime end)
+        public bool IsEasterHoliday(long requestID)
         {
-            bool validReq = false;
+            DateTime start = GetHoliday(requestID).StartDate;
+            DateTime end = GetHoliday(requestID).EndDate;
             DateTime easter = EasterSunday(DateTime.Today.Year);
             DateTime startEaster = easter.AddDays( - 7);
             DateTime endEaster = easter.AddDays(7);
 
-            var holiday = (from a in db.holidaysrequesteds
-                           where a.RequestID == requestID
-                           select a).Single();
+            bool validReq;
 
-            if (startEaster< end && start > endEaster)
+
+            //• 15th of July to 31st of August
+            //• 15th of December to 22nd of December
+            var xmasQ = (from a in db.peaktimes
+                         where a.PeaktimesName == "peakTimesXmas"
+                         select a).Single();
+
+            var summerQ = (from a in db.peaktimes
+                         where a.PeaktimesName == "peakTimesSummer"
+                         select a).Single();
+
+            if ((startEaster > end && start < endEaster) 
+                || (xmasQ.StartDate > end && start < xmasQ.EndDate) 
+                || (summerQ.StartDate> end && start < summerQ.EndDate))
             {
                 validReq = false;
             }
@@ -241,45 +253,52 @@ namespace HolidayManager_ClassLibrary
 
         }
 
-        public void enoughStaff(long StaffID, long holiID)
+        public bool enoughStaff(long StaffID, long holiID)
         {
-
+            bool valid = true;
             role person = GetRole(StaffID);
             holidaysrequested holi = GetHoliday(holiID);
 
-            //Returns a list people that have requested a holidays of the same department 
+            //Returns a list people that have requested a holidays of the same department in the same period of the request
             var takenKHolidays = (from b in db.holidaysrequesteds
                                   join a in db.roles
                                   on b.EmployeeID equals a.EmployeeID
                                   where (b.Status == "Approved") && a.department.DeptName == person.department.DeptName
+                                  && holi.StartDate < b.EndDate && b.StartDate > holi.EndDate
                                   select b).ToList();
-
-
 
             var totalEmployees = (from b in db.roles
                                   where b.department.DeptName == person.department.DeptName
                                   select b).ToList().Count();
 
+            // for each person that has requested holidays in the same department on the same period
+            // if the total number of employee of the same departments that have taken holidays is greater than 40 or 60
+            // the holiday can not be approved 
+
             foreach (var h in takenKHolidays)
             {
-                if (holi.StartDate < h.EndDate && h.StartDate > holi.EndDate)
+                int percentBooked = (int)Math.Round((double)(100 * takenKHolidays.Count()/ totalEmployees));
+                int minWorkingStaff = 0;
+                int relaxadeMonth = (int)GetConstraint().RelaxedMonth;
+                if (holi.StartDate.Month == relaxadeMonth)
                 {
-                    int percentBooked = (int)Math.Round((double)(100 * takenKHolidays.Count()/ totalEmployees));
-                    if (percentBooked < GetConstraint().MinimumWorkingStaff)
-                    {
-                        return true;
-                    }
-                    {
-                        return false;
-                    }
-
+                    minWorkingStaff = (int)GetConstraint().MinimumWorkingStaff;
+                }
+                else
+                {
+                    minWorkingStaff = (int)GetConstraint().MinimumWorkingStaffRelaxed;
+                }
+                if (percentBooked < GetConstraint().MinimumWorkingStaff)
+                {
+                   valid = false;
                 }
             }
-           
-            
 
-           
+            return valid;
 
         }
+
+        //• 15th of July to 31st of August
+        //• 15th of December to 22nd of December
     }
 }
