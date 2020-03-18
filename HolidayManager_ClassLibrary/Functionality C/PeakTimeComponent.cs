@@ -47,6 +47,13 @@ namespace HolidayManager_ClassLibrary.Functionality_C
 
         private readonly DataClasses1DataContext db = new DataClasses1DataContext();
         private readonly Page Page;
+        DateTime starPeak;
+        DateTime endPeak;
+        string holiday = "";
+
+        public DateTime StarPeak { get => starPeak; set => starPeak = value; }
+        public DateTime EndPeak { get => endPeak; set => endPeak = value; }
+        public string Holiday { get => holiday; set => holiday = value; }
 
         public PeakTimeComponent()
         {
@@ -104,32 +111,38 @@ namespace HolidayManager_ClassLibrary.Functionality_C
             //• 15th of July to 31st of August
             //• 15th of December to 22nd of December
             var xmasQ = (from a in db.peaktimes
-                         where a.PeaktimesName == "peakTimesXmas"
+                         where a.PeaktimesName == "peakTimeXmas"
                          select a).Single();
 
             var summerQ = (from a in db.peaktimes
-                           where a.PeaktimesName == "peakTimesSummer"
+                           where a.PeaktimesName == "peakTimeSummer"
                            select a).Single();
 
-            if (startEaster > end && start < endEaster)
+            if (startEaster < end && start < endEaster)
             {
-                string holiday = "Easter";
+                Holiday = "Easter";
                 peakValue = 1;
-                newSuggestion(start, end, startEaster, endEaster, holiday);
-                //DateTime peaktimeS =
+                StarPeak = startEaster;
+                EndPeak = endEaster;               
             }
-            else if (xmasQ.StartDate > end && start < xmasQ.EndDate)
+            else if (xmasQ.StartDate < end && start < xmasQ.EndDate)
             {
                 peakValue = 2;
+                Holiday = "Xmas";
+                StarPeak = xmasQ.StartDate;
+                EndPeak = xmasQ.EndDate;
             }
-           else if (summerQ.StartDate > end && start < summerQ.EndDate)
+           else if (summerQ.StartDate < end && start < summerQ.EndDate)
             {
                 peakValue = 3;
+                Holiday = "Summer";
+                StarPeak = summerQ.StartDate;
+                EndPeak = summerQ.EndDate;
             }
             return peakValue;
 
         }
-        public List<DateTime> newSuggestion(DateTime start, DateTime end,DateTime peakS, DateTime peakE, string holiday)
+        public List<DateTime> newSuggestion(DateTime start, DateTime end,DateTime peakS, DateTime peakE)
         {
             int lengthH = (int)(end - start).TotalDays;
             if ((peakS - start).TotalDays < (end - peakS).TotalDays)
@@ -140,7 +153,7 @@ namespace HolidayManager_ClassLibrary.Functionality_C
             start = peakE;
             end = start.AddDays(lengthH);
 
-            MsgBox("Your request happends to be on " + holiday + " holiday", this.Page, this); 
+           // MsgBox("Your request happends to be on " + holiday + " holiday", this.Page, this); 
 
             List<DateTime> newDate = new List<DateTime>();
             newDate.Add(start);
@@ -149,13 +162,13 @@ namespace HolidayManager_ClassLibrary.Functionality_C
 
             
         }
-        public void MsgBox(String ex, Page pg, Object obj)
-        {
-            string s = "<SCRIPT language='javascript'>alert('" + ex.Replace("\r\n", "\\n").Replace("'", "") + "'); </SCRIPT>";
-            Type cstype = obj.GetType();
-            ClientScriptManager cs = pg.ClientScript;
-            cs.RegisterClientScriptBlock(cstype, s, s.ToString());
-        }
+        //public void MsgBox(String ex, Page pg, Object obj)
+        //{
+        //    string s = "<SCRIPT language='javascript'>alert('" + ex.Replace("\r\n", "\\n").Replace("'", "") + "'); </SCRIPT>";
+        //    Type cstype = obj.GetType();
+        //    ClientScriptManager cs = pg.ClientScript;
+        //    cs.RegisterClientScriptBlock(cstype, s, s.ToString());
+        //}
 
     }
 }

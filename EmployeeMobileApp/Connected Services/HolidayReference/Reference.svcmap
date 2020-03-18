@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="71e2021b-ae16-4251-8420-de06154410f3" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="37e6285d-61d6-4ac3-940b-307b8a23c9f8" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
   <ClientOptions>
     <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
     <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
@@ -19,11 +19,11 @@
     <ServiceContractMappings />
   </ClientOptions>
   <MetadataSources>
-    <MetadataSource Address="http://localhost:55125/WebServiceFuncionality.asmx" Protocol="http" SourceId="1" />
+    <MetadataSource Address="http://localhost:55125/BookinFunctionality.asmx" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="WebServiceFuncionality.wsdl" MetadataType="Wsdl" ID="7f3b98c2-b536-41be-a177-187f07d8a70a" SourceId="1" SourceUrl="http://localhost:55125/WebServiceFuncionality.asmx?wsdl" />
-    <MetadataFile FileName="WebServiceFuncionality.disco" MetadataType="Disco" ID="0dff57e7-dbb1-43e0-ab44-ec0b62c01cfb" SourceId="1" SourceUrl="http://localhost:55125/WebServiceFuncionality.asmx?disco" />
+    <MetadataFile FileName="BookinFunctionality.wsdl" MetadataType="Wsdl" ID="88ed2cf4-26de-49b5-af5e-a57d7017533b" SourceId="1" SourceUrl="http://localhost:55125/BookinFunctionality.asmx?wsdl" />
+    <MetadataFile FileName="BookinFunctionality.disco" MetadataType="Disco" ID="5ea0ded1-d886-4d2d-be46-629079c3582f" SourceId="1" SourceUrl="http://localhost:55125/BookinFunctionality.asmx?disco" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

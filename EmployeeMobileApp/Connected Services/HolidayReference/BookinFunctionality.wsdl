@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="VerificationLogin">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="StaffID" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="Password" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="VerificationLoginResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="VerificationLoginResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetID">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="StaffID" type="s:long" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetIDResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="GetIDResult" type="s:long" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ViewHolidayReqStatus">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="staffID" type="s:long" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ViewHolidayReqStatusResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ViewHolidayReqStatusResult" type="tns:ArrayOfString" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfString">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="string" nillable="true" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="SubmitHolidayReq">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="startH" type="s:dateTime" />
+            <s:element minOccurs="1" maxOccurs="1" name="endH" type="s:dateTime" />
+            <s:element minOccurs="1" maxOccurs="1" name="StaffID" type="s:long" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SubmitHolidayReqResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="SubmitHolidayReqResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="VerificationLoginSoapIn">
+    <wsdl:part name="parameters" element="tns:VerificationLogin" />
+  </wsdl:message>
+  <wsdl:message name="VerificationLoginSoapOut">
+    <wsdl:part name="parameters" element="tns:VerificationLoginResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetIDSoapIn">
+    <wsdl:part name="parameters" element="tns:GetID" />
+  </wsdl:message>
+  <wsdl:message name="GetIDSoapOut">
+    <wsdl:part name="parameters" element="tns:GetIDResponse" />
+  </wsdl:message>
+  <wsdl:message name="ViewHolidayReqStatusSoapIn">
+    <wsdl:part name="parameters" element="tns:ViewHolidayReqStatus" />
+  </wsdl:message>
+  <wsdl:message name="ViewHolidayReqStatusSoapOut">
+    <wsdl:part name="parameters" element="tns:ViewHolidayReqStatusResponse" />
+  </wsdl:message>
+  <wsdl:message name="SubmitHolidayReqSoapIn">
+    <wsdl:part name="parameters" element="tns:SubmitHolidayReq" />
+  </wsdl:message>
+  <wsdl:message name="SubmitHolidayReqSoapOut">
+    <wsdl:part name="parameters" element="tns:SubmitHolidayReqResponse" />
+  </wsdl:message>
+  <wsdl:portType name="BookinFunctionalitySoap">
+    <wsdl:operation name="VerificationLogin">
+      <wsdl:input message="tns:VerificationLoginSoapIn" />
+      <wsdl:output message="tns:VerificationLoginSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetID">
+      <wsdl:input message="tns:GetIDSoapIn" />
+      <wsdl:output message="tns:GetIDSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ViewHolidayReqStatus">
+      <wsdl:input message="tns:ViewHolidayReqStatusSoapIn" />
+      <wsdl:output message="tns:ViewHolidayReqStatusSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SubmitHolidayReq">
+      <wsdl:input message="tns:SubmitHolidayReqSoapIn" />
+      <wsdl:output message="tns:SubmitHolidayReqSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="BookinFunctionalitySoap" type="tns:BookinFunctionalitySoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="VerificationLogin">
+      <soap:operation soapAction="http://tempuri.org/VerificationLogin" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetID">
+      <soap:operation soapAction="http://tempuri.org/GetID" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ViewHolidayReqStatus">
+      <soap:operation soapAction="http://tempuri.org/ViewHolidayReqStatus" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SubmitHolidayReq">
+      <soap:operation soapAction="http://tempuri.org/SubmitHolidayReq" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="BookinFunctionalitySoap12" type="tns:BookinFunctionalitySoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="VerificationLogin">
+      <soap12:operation soapAction="http://tempuri.org/VerificationLogin" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetID">
+      <soap12:operation soapAction="http://tempuri.org/GetID" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ViewHolidayReqStatus">
+      <soap12:operation soapAction="http://tempuri.org/ViewHolidayReqStatus" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SubmitHolidayReq">
+      <soap12:operation soapAction="http://tempuri.org/SubmitHolidayReq" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="BookinFunctionality">
+    <wsdl:port name="BookinFunctionalitySoap" binding="tns:BookinFunctionalitySoap">
+      <soap:address location="http://localhost:55125/BookinFunctionality.asmx" />
+    </wsdl:port>
+    <wsdl:port name="BookinFunctionalitySoap12" binding="tns:BookinFunctionalitySoap12">
+      <soap12:address location="http://localhost:55125/BookinFunctionality.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

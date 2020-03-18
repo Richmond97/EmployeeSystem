@@ -59,6 +59,12 @@
     <Compile Include="Functionality C\PeakTimeComponent.Designer.cs">
       <DependentUpon>PeakTimeComponent.cs</DependentUpon>
     </Compile>
+    <Compile Include="Functionality D\PriorityComponent.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Functionality D\PriorityComponent.Designer.cs">
+      <DependentUpon>PriorityComponent.cs</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -70,6 +76,8 @@
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Functionality\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

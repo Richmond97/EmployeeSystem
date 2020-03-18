@@ -49,7 +49,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Connected Services\ServiceReference\Reference.cs">
+    <Compile Include="Connected Services\HolidayReference\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
@@ -74,10 +74,16 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <None Include="Connected Services\ServiceReference\EmployeeMobileApp.ServiceReference.HelloWorldResponse.datasource">
+    <None Include="Connected Services\HolidayReference\BookinFunctionality.wsdl" />
+    <None Include="Connected Services\HolidayReference\EmployeeMobileApp.HolidayReference.ArrayOfString.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Connected Services\ServiceReference\WebServiceFuncionality.wsdl" />
+    <None Include="Connected Services\HolidayReference\EmployeeMobileApp.HolidayReference.VerificationLoginResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\HolidayReference\EmployeeMobileApp.HolidayReference.ViewHolidayReqStatusResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -101,19 +107,19 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <WCFMetadataStorage Include="Connected Services\ServiceReference\" />
+    <WCFMetadataStorage Include="Connected Services\HolidayReference\" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Connected Services\ServiceReference\WebServiceFuncionality.disco" />
+    <None Include="Connected Services\HolidayReference\BookinFunctionality.disco" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Connected Services\ServiceReference\configuration91.svcinfo" />
+    <None Include="Connected Services\HolidayReference\configuration91.svcinfo" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Connected Services\ServiceReference\configuration.svcinfo" />
+    <None Include="Connected Services\HolidayReference\configuration.svcinfo" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Connected Services\ServiceReference\Reference.svcmap">
+    <None Include="Connected Services\HolidayReference\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>

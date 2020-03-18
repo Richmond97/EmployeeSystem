@@ -62,21 +62,6 @@ namespace HolidayManager_ClassLibrary
             container.Add(this);
         }
 
-        
-        //private static string GetRoles()
-        //{
-        //    var Qconstraint = (from a in db.constraints
-        //                       select a.AvailableRoles).Single();
-        //    return Qconstraint;
-        //}
-
-        //private static  string GetDepartment()
-        //{
-        //    var Qconstraint = (from a in db.constraints
-        //                      select a.AvailableDepartments).Single();
-        //    return Qconstraint;
-        //}
-
         public static constraint GetConstraint()
         {
             var Qconstraint = (from a in db.constraints
@@ -180,14 +165,14 @@ namespace HolidayManager_ClassLibrary
 
             var holidays = (from b in db.holidaysrequesteds
                                 where ((b.Status == "Approved") && (person.RoleType == myRole) 
-                                && (person.department.DeptName == departmentName) /*&& b.EndDate > DateTime.Today*/ )
+                                && (person.department.DeptName == departmentName) /*&& b.EndDate  DateTime.Today*/ )
                                 select b).ToList();
 
             
             foreach (var h in holidays)
             {
                //Chech if the holiday request overlaps with an existing holiday
-                if(holiday.StartDate < h.EndDate && h.StartDate> holiday.EndDate)
+                if(holiday.StartDate < h.EndDate && h.StartDate < holiday.EndDate)
                 {
                      validReq = false;
                 }

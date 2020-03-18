@@ -1,35 +1,33 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using SOAP;
 
 namespace EmployeeMobileApp
 {
     public partial class LoginForm : Form
     {
-        WebServiceFuncionality ws = new WebServiceFuncionality();
-        
         public LoginForm()
         {
             InitializeComponent();
             arrangelPanels();
         }
+        HolidayReference.BookinFunctionalitySoapClient soap = new HolidayReference.BookinFunctionalitySoapClient();
+        long staffID = 0;
 
         //Arange buttons 
 
         private void BtnLogin_Click(object sender, EventArgs e)
         {
-            if (ws.Verification(int.Parse(txtID.Text),txtPassword.Text))
+            if (txtID.Text == "" || txtPassword.Text == "")
+            {
+                MessageBox.Show("Fields can not be empty");
+            }
+            else if (soap.VerificationLogin(Int32.Parse(txtID.Text), txtPassword.Text))
             {
                 pnlLogin.Hide();
                 pnlHolidayReq.Show();
-
+                staffID = (long)Int32.Parse(txtID.Text);
+                showButtons();
             }
         }
 
@@ -51,7 +49,8 @@ namespace EmployeeMobileApp
         {
             btnView.BackColor = System.Drawing.Color.SeaGreen;
             pnlHolidayReq.Hide();
-                }
+            dataGridView1.DataSource = soap.ViewHolidayReqStatus(staffID);
+        }
         public void arrangelPanels()
         {
             pnlHolidayReq.Size = new Size(348, 616);
@@ -64,15 +63,90 @@ namespace EmployeeMobileApp
             pnlView.Location = new Point(0, 0);
 
             btnHome.Hide();
-            btnReqHoli.Hide();
             btnLogout.Hide();
+            btnView.Hide();
+
+            monthCalendar1.Visible = false;
+            monthCalendar2.Visible = false;
         }
 
         private void showButtons()
         {
             btnHome.Show();
-            btnReqHoli.Show();
+            btnView.Show();
             btnLogout.Show();
+        }
+
+        private void BtnLogout_Click_1(object sender, EventArgs e)
+        {
+            btnLogout.BackColor = System.Drawing.Color.SeaGreen;
+            pnlHolidayReq.Hide();
+            pnlView.Hide();
+            pnlLogin.Show();
+
+        }
+
+        private void BtnHome_Click_1(object sender, EventArgs e)
+        {
+            btnHome.BackColor = System.Drawing.Color.SeaGreen;
+            pnlHolidayReq.Show();
+            pnlView.Hide();
+            dataGridView1.DataSource = soap.ViewHolidayReqStatus(staffID);
+        }
+
+        private void BtnView_Click_1(object sender, EventArgs e)
+        {
+            btnView.BackColor = System.Drawing.Color.SeaGreen;
+            pnlHolidayReq.Hide();
+            pnlLogin.Hide();
+            dataGridView1.DataSource = soap.ViewHolidayReqStatus(staffID);
+        }
+
+        private void Button4_Click(object sender, EventArgs e)
+        {
+            if (monthCalendar1.Visible)
+            {
+                monthCalendar1.Visible = false;
+            }
+            monthCalendar1.Visible = true;
+
+        }
+
+        private void Button5_Click(object sender, EventArgs e)
+        {
+            if (monthCalendar2.Visible)
+            {
+                monthCalendar2.Visible = false;
+            }
+            monthCalendar2.Visible = true;
+
+        }
+
+        private void MonthCalendar1_DateSelected(object sender, DateRangeEventArgs e)
+        {
+            monthCalendar1.Visible = false;
+            txtStart.Text = monthCalendar1.SelectionRange.Start.ToString("d");
+        }
+
+        private void MonthCalendar2_DateSelected(object sender, DateRangeEventArgs e)
+        {
+            monthCalendar2.Visible = false;
+            txtEnd.Text = monthCalendar2.SelectionRange.Start.ToString("d");
+
+        }
+
+        private void BtnReqHoli_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                soap.SubmitHolidayReq(monthCalendar1.SelectionRange.Start, monthCalendar2.SelectionRange.Start, staffID);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
     }
 }
+
+          

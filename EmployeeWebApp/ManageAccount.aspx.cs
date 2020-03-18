@@ -4,7 +4,6 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-
 using System.Windows.Forms;
 using HolidayManager_ClassLibrary;
 
@@ -17,7 +16,10 @@ namespace EmployeeWebApp
 
         
         HolidayManager_ClassLibrary.Functionality_A.HolidayManagerWeb hm = new HolidayManager_ClassLibrary.Functionality_A.HolidayManagerWeb();
+        HolidayManager_ClassLibrary.Functionality_C.PeakTimeComponent pt = new HolidayManager_ClassLibrary.Functionality_C.PeakTimeComponent();
         ConstrainsComponent cc = new ConstrainsComponent();
+        
+
         long holidaysLeft;
 
         protected void Page_Load(object sender, EventArgs e)
@@ -90,23 +92,52 @@ namespace EmployeeWebApp
         {
          DateTime start = Calendar1.SelectedDate;
          DateTime end = Calendar2.SelectedDate;
+         int peakValue = pt.IsPeakTime(start, end);
 
-        MessageBox.Show("holidays from: " + start.ToString("d"), "To: " + end);
-            if (end <start || start<DateTime.Today || end<DateTime.Today)
+            MessageBox.Show("holidays from: " + start.ToString("d"), "To: " + end);
+            if (end < start || start < DateTime.Today || end < DateTime.Today)
             {
-                Response.Write("<script>alert('" +"The end date of your Holiday can not be before the start date, or before today"+ "');</script>");
+                Response.Write("<script>alert('" + "The end date of your Holiday can not be before the start date, or before today" + "');</script>");
             }
-            else if (cc.IsValidHolidayRequest(start, end, ((long)(Session["sesID"]))))
+
+            else if (peakValue != 0)
             {
-                if (hm.SubmitHolidayReq(start, end, ((long)(Session["sesID"]))))
+                bool valid;
+                List<DateTime> newdates = new List<DateTime>();
+                if (peakValue == 1)
                 {
-                    MessageBox.Show("Booking Completed from: " + start.ToString("d"), "To: " + end.ToString("d"));
+                    newdates = pt.newSuggestion(start, end, pt.StarPeak, pt.StarPeak);
+                    // MsgBox("Your request happends to be on " + pt.Holiday + " holiday", this.Page, this);
                 }
-                else
+                else if (peakValue == 2)
                 {
-                    MessageBox.Show("We couldn't completer yor request this time, please try later");
+                    newdates = pt.newSuggestion(start, end, pt.StarPeak, pt.StarPeak);
                 }
+                else if (peakValue == 3)
+                {
+                    newdates = pt.newSuggestion(start, end, pt.StarPeak, pt.StarPeak);
+                }
+
+                MsgBox("Your request happends to be on " + pt.Holiday + " holiday we suggest " + newdates[0].ToString("d") + "  To  " + newdates[1].ToString("d"), this.Page, this);
+                txtbxHolidayStart.Text = newdates[0].ToString("d");
+                txtbxHolidayEnd.Text = newdates[1].ToString("d");
             }
+            else
+            {
+                if (cc.IsValidHolidayRequest(start, end, ((long)(Session["sesID"]))))
+                {
+                    if (hm.SubmitHolidayReq(start, end, ((long)(Session["sesID"]))))
+                    {
+                        MessageBox.Show("Booking from: " + start.ToString("d"), "To: " + end.ToString("d"));
+                    }
+                    else
+                    {
+                        MessageBox.Show("We couldn't completer yor request this time, please try later");
+                    }
+                }
+
+            }
+           
 
         }
 
@@ -123,7 +154,6 @@ namespace EmployeeWebApp
         {
             Response.Write("<script>alert('" + "Identification Number: "+ Session["staffID"].ToString() + "\\r\\n" + "Name: " + Session["name"].ToString() + "\\r\\n" + "Surname " + Session["surname"].ToString() + "\\r\\n"  + "Holidays Remainig: "+holidaysLeft + "');</script>");
         }
-
         protected void btnViewReq_Click(object sender, EventArgs e)
         {
             try
@@ -144,6 +174,13 @@ namespace EmployeeWebApp
             GridViewrRequest.Visible = true;
 
             
+        }
+        public void MsgBox(String ex, Page pg, Object obj)
+        {
+            string s = "<SCRIPT language='javascript'>alert('" + ex.Replace("\r\n", "\\n").Replace("'", "") + "'); </SCRIPT>";
+            Type cstype = obj.GetType();
+            ClientScriptManager cs = pg.ClientScript;
+            cs.RegisterClientScriptBlock(cstype, s, s.ToString());
         }
     }
 }//dsgtsd
