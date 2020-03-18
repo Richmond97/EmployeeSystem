@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -137,14 +138,23 @@ namespace EmployeeMobileApp
 
         private void BtnReqHoli_Click(object sender, EventArgs e)
         {
-            try
-            {
-                soap.SubmitHolidayReq(monthCalendar1.SelectionRange.Start, monthCalendar2.SelectionRange.Start, staffID);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
+            //try
+            //{
+            //    soap.SubmitHolidayReq(monthCalendar1.SelectionRange.Start, monthCalendar2.SelectionRange.Start, staffID);
+
+            //    List<string> holis = soap.ViewHolidayReqStatus(78349734);
+
+            //    foreach (var item in holis)
+            //    {
+            //        string[] indivudal = item.Split('*');
+
+            //        data.rows.add(indivudal);
+            //    };
+
+            //catch (Exception ex)
+            //{
+            //    MessageBox.Show(ex.Message);
+            //}
         }
     }
 }

@@ -93,19 +93,26 @@ namespace SOAP
         [WebMethod]
         public List<string> ViewHolidayReqStatus(long staffID)
         {
+            List<string> ENTIRES = new List<string>();
+
             var result = (from a in db.holidaysrequesteds
                           where a.employee.StaffID == staffID
                           select a).ToList();
 
 
-
+            foreach (var item in result)
+            {
+                string entry = item.RequestID + "*" +item.employee.FirstName;// + other stuff 
+                ENTIRES.Add(entry);
+            }
             //List<string> holidays;
-            string holiday = string.Join("*", result);
-            return holiday.Split(('*')).ToList();
+            //string holiday = string.Join("*", result);
+            //return holiday.Split(('*')).ToList();
             //foreach (var item in result)
             //{
 
             //}
+            return ENTIRES;
 
         }
 
