@@ -13,43 +13,47 @@ namespace HolidayManager_ClassLibrary.Functionality_A
         private readonly DataClasses1DataContext db = new DataClasses1DataContext();
         ConstrainsComponent cc = new ConstrainsComponent();
 
-        public void OutstandingReq(DataGridView validDG, DataGridView inValidDG)
+        public void OutstandingReq(DataGridView validDG, DataGridView inValidDG, string type)
         {
 
             var result = (from a in db.holidaysrequesteds
                           where a.Status == "Pending"
                           select a
-                          //{
-                          //    a.RequestID,
-                          //    a.EmployeeID,
-                          //    a.employee.FirstName,
-                          //    a.employee.LastName,
-                          //    a.StartDate,
-                          //    a.EndDate
-                          //}
                           ).ToList();
+            if(type == "Priority")
+            {
+                validDG.DataSource = result;
+                validDG.Columns["employee"].Visible = false;
+                validDG.Columns["Status"].Visible = false;
 
-            List <holidaysrequested> validReq = new List <holidaysrequested>();
-            List<holidaysrequested> notValidReq = new List<holidaysrequested>();
+
+            }
+            else
+            {
+                List<holidaysrequested> validReq = new List<holidaysrequested>();
+                List<holidaysrequested> notValidReq = new List<holidaysrequested>();
 
                 foreach (var holiday in result)
                 {
-                   if( cc.validHolidayReqManagerHead(holiday.RequestID, holiday.EmployeeID))
-                   {
-                       validReq.Add(holiday);
+                    if (cc.validHolidayReqManagerHead(holiday.RequestID, holiday.EmployeeID))
+                    {
+                        validReq.Add(holiday);
                     }
                     else
                     {
-                       notValidReq.Add(holiday);
+                        notValidReq.Add(holiday);
                     }
-                } 
+                }
+
+                validDG.DataSource = validReq;
+                inValidDG.DataSource = notValidReq;
+                validDG.Columns["employee"].Visible = false;
+                validDG.Columns["Status"].Visible = false;
+                inValidDG.Columns["employee"].Visible = false;
+                inValidDG.Columns["Status"].Visible = false;
+            }
+
             
-            validDG.DataSource = validReq;
-            inValidDG.DataSource = notValidReq;
-            validDG.Columns["employee"].Visible = false;
-            validDG.Columns["Status"].Visible = false;
-            inValidDG.Columns["employee"].Visible = false;
-            inValidDG.Columns["Status"].Visible = false;
         }
         public void ConfirmedReq(DataGridView table)
         {
@@ -205,5 +209,13 @@ namespace HolidayManager_ClassLibrary.Functionality_A
             table.Update();
             table.Refresh();
         }
+        public holidaysrequested HighlightBooked( long requestID)
+        {
+            var holiday = (from a in db.holidaysrequesteds
+                           where  a.RequestID == requestID
+                           select a).Single();
+            return holiday;
+        }
+
     }
 }

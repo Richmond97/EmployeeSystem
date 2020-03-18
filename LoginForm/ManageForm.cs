@@ -51,6 +51,7 @@ namespace LoginForm
             createPanel.Location = new Point(0, 37);
             editPanel.Location = new Point(0, 37);
             mainPnlHM.Location = new Point(0, 37);
+ 
 
             createPanel.Size = new Size(1603, 939);
             editPanel.Size = new Size(1603, 939);
@@ -60,10 +61,12 @@ namespace LoginForm
             pnlHolidayBkd.Location = new Point(240, 110);
             pnlHolidayOnDuty.Location = new Point(240, 110);
             pnlHolidayReq.Location = new Point(240, 110);
+            panelPriority.Location = new Point(240, 110);
 
             pnlHolidayBkd.Size = new Size(1232, 671);
             pnlHolidayOnDuty.Size = new Size(1232, 671);
             pnlHolidayReq.Size = new Size(1232, 671);
+            panelPriority.Size = new Size(1232, 671);
 
 
 
@@ -403,19 +406,26 @@ namespace LoginForm
 
         }
 
-        private long getSelectedRow(DataGridView dgv)
+        private long getSelectedRow(DataGridView dgv, int i)
         {
-          return (long)dgv[0, dgv.SelectedRows[0].Index].Value;
+          return (long)dgv[i, dgv.SelectedRows[i].Index].Value;
         }
+        //private DateTime getDate(DataGridView dgv, int i)
+        //{
+        //    return (DateTime)dgv[i, dgv.CurrentRow.Cells[i].Index].Value;
+        //}
 
         private void ArrangeHolidaysPanel()
         {
+            string type = "nonPriority";
+            string typeP = "Priority";
             monthCalendar.Size = new Size(380,280);
             rdbtnOnDuty.Checked = true;
             rdbtnID.Checked = true;
 
-            hm.OutstandingReq(validHolidayReqGridView, notValidHolidayReqGridView);
+            hm.OutstandingReq(validHolidayReqGridView, notValidHolidayReqGridView,type);
             hm.ConfirmedReq(dataGridViewBooked);
+            hm.OutstandingReq(dataGridSorted,notValidHolidayReqGridView, typeP);
 
 
             pnlHolidayBkd.Show();
@@ -425,6 +435,7 @@ namespace LoginForm
             cmbxHM.Items.Add("HOLIDAYS BOOKED");
             cmbxHM.Items.Add("HOLIDAYS REQUESTS");
             cmbxHM.Items.Add("HOLIDAYS ON/OFF");
+            cmbxHM.Items.Add("HOLIDAY PRIORITY");
             cmbxHM.DropDownStyle = ComboBoxStyle.DropDownList;
 
         }
@@ -437,16 +448,25 @@ namespace LoginForm
                     pnlHolidayBkd.Show();
                     pnlHolidayReq.Hide();
                     pnlHolidayOnDuty.Hide();
+                    panelPriority.Hide();
                     break;
                 case 1:
                     pnlHolidayBkd.Hide();
                     pnlHolidayReq.Show();
                     pnlHolidayOnDuty.Hide();
+                    panelPriority.Hide();
                     break;
                 case 2:
                     pnlHolidayBkd.Hide();
                     pnlHolidayReq.Hide();
                     pnlHolidayOnDuty.Show();
+                    panelPriority.Hide();
+                    break;
+                case 3:
+                    pnlHolidayBkd.Hide();
+                    pnlHolidayReq.Hide();
+                    pnlHolidayOnDuty.Hide();
+                    panelPriority.Show();
                     break;
 
             }
@@ -460,21 +480,22 @@ namespace LoginForm
             try
             {
 
-                if (getSelectedRow(validHolidayReqGridView) != 0)
+                if (getSelectedRow(validHolidayReqGridView,0) != 0)
                 {
-                    Selected = (getSelectedRow(validHolidayReqGridView));
+                    Selected = (getSelectedRow(validHolidayReqGridView,0));
                 }
-                else if (getSelectedRow(notValidHolidayReqGridView) != 0)
+                else if (getSelectedRow(notValidHolidayReqGridView,0) != 0)
                 {
-                    Selected = getSelectedRow(notValidHolidayReqGridView);
+                    Selected = getSelectedRow(notValidHolidayReqGridView,0);
                 }
 
                 //holidayReqGridView.CurrentRow.Selected = true;
                 string decision = "Approved";
+                string type = "noPriority";
                 //var Selected = (long)holidayReqGridView[0, holidayReqGridView.SelectedRows[0].Index].Value;
                 hm.accept_OR_rejectReq((long)Selected, decision);
                 hm.RefreshGrid(validHolidayReqGridView);
-                hm.OutstandingReq(validHolidayReqGridView, notValidHolidayReqGridView);
+                hm.OutstandingReq(validHolidayReqGridView, notValidHolidayReqGridView, type);
             }
             catch (Exception ex)
             {
@@ -489,20 +510,21 @@ namespace LoginForm
             try
             { 
                  
-                if ( getSelectedRow(validHolidayReqGridView) != 0)
+                if ( getSelectedRow(validHolidayReqGridView,0) != 0)
                 {
-                    Selected = getSelectedRow(validHolidayReqGridView);
+                    Selected = getSelectedRow(validHolidayReqGridView,0);
                 }
-                else if (getSelectedRow(notValidHolidayReqGridView) != 0)
+                else if (getSelectedRow(notValidHolidayReqGridView,0) != 0)
                 {
-                    Selected = getSelectedRow(notValidHolidayReqGridView);
+                    Selected = getSelectedRow(notValidHolidayReqGridView,0);
                 }
                 //holidayReqGridView.CurrentRow.Selected = true;
                 string decision = "Declined";
+                string type = "noPriority";
                 //var Selected = (long)holidayReqGridView[0, holidayReqGridView.SelectedRows[0].Index].Value;
                 hm.accept_OR_rejectReq((long)Selected,decision);
                 hm.RefreshGrid(validHolidayReqGridView);
-                hm.OutstandingReq(validHolidayReqGridView, notValidHolidayReqGridView);
+                hm.OutstandingReq(validHolidayReqGridView, notValidHolidayReqGridView,type);
             }
             catch (Exception ex)
             {
@@ -540,6 +562,7 @@ namespace LoginForm
             try
             {
                 dataGridViewBooked.CurrentRow.Selected = true;
+                HighlightBooked();
             }
             catch (Exception)
             {
@@ -569,6 +592,103 @@ namespace LoginForm
             {
                 MessageBox.Show("Please elect a valid Holiday request");
             }
+        }
+
+        private void HighlightBooked()
+        {
+            try
+            {
+                long req = getSelectedRow(dataGridViewBooked,0);
+
+                //DateTime start = Convert.ToDateTime(dataGridView1[3, dataGridView1.SelectedRows[0].Index].Value);
+                //DateTime end = Convert.ToDateTime(dataGridView1[4, dataGridView1.SelectedRows[0].Index].Value);
+                DateTime start = hm.HighlightBooked(req).StartDate;
+                DateTime end = hm.HighlightBooked(req).EndDate;
+                calenderHighlight.highlightBook(start, end);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+           
+        }
+
+        private void BtnAcceptP_Click(object sender, EventArgs e)
+        {
+            try
+            {
+
+                if (getSelectedRow(validHolidayReqGridView, 0) != 0)
+                {
+                    Selected = (getSelectedRow(validHolidayReqGridView, 0));
+                }
+                else if (getSelectedRow(notValidHolidayReqGridView, 0) != 0)
+                {
+                    Selected = getSelectedRow(notValidHolidayReqGridView, 0);
+                }
+
+                //holidayReqGridView.CurrentRow.Selected = true;
+                string decision = "Approved";
+                string type = "Priority";
+                //var Selected = (long)holidayReqGridView[0, holidayReqGridView.SelectedRows[0].Index].Value;
+                hm.accept_OR_rejectReq((long)Selected, decision);
+                hm.RefreshGrid(validHolidayReqGridView);
+                hm.OutstandingReq(validHolidayReqGridView, notValidHolidayReqGridView,type);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Pleas selelct Holiday request");
+            }
+        }
+
+        private void BtnRejectP_Click(object sender, EventArgs e)
+        {
+            try
+            {
+
+                if (getSelectedRow(validHolidayReqGridView, 0) != 0)
+                {
+                    Selected = getSelectedRow(validHolidayReqGridView, 0);
+                }
+                else if (getSelectedRow(notValidHolidayReqGridView, 0) != 0)
+                {
+                    Selected = getSelectedRow(notValidHolidayReqGridView, 0);
+                }
+                //holidayReqGridView.CurrentRow.Selected = true;
+                string decision = "Declined";
+                string type = "Priority";
+                //var Selected = (long)holidayReqGridView[0, holidayReqGridView.SelectedRows[0].Index].Value;
+                hm.accept_OR_rejectReq((long)Selected, decision);
+                hm.RefreshGrid(validHolidayReqGridView);
+                hm.OutstandingReq(validHolidayReqGridView, notValidHolidayReqGridView,type);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Pleas selelct Holiday request");
+            }
+        }
+
+        private void Rdbtn_CheckedChanged(object sender, EventArgs e)
+        {
+            dataGridSorted.DataSource = priorityComponent.sortPeak();
+
+            //foreach (var rows in dataGridSorted.Rows)
+            //{
+            //    if (dataGridSorted.Rows.Count > priorityComponent.Holidays1.Count())
+            //    {
+            //        dataGridSorted[.Index, row.Index].Style.BackColor = Color.LemonChiffon;
+            //    }
+            //    else
+            //    {
+            //        dataGridSorted[col.Index, row.Index].Style.BackColor = Color.GreenYellow;
+            //    }
+               
+            //}
+           
+            //foreach (var rows in dataGridSorted.Rows)
+            //{
+            //    i
+            //}
         }
     }
 }

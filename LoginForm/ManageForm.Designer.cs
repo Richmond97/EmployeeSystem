@@ -96,6 +96,7 @@
             this.mainPnlHM = new System.Windows.Forms.Panel();
             this.label29 = new System.Windows.Forms.Label();
             this.pnlHolidayBkd = new System.Windows.Forms.Panel();
+            this.calenderHighlight = new HolidayManager_ClassLibrary.Functionality_E.calenderHighlight(this.components);
             this.btnSearchEmployee = new System.Windows.Forms.Button();
             this.txtEmployee = new System.Windows.Forms.TextBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
@@ -123,6 +124,15 @@
             this.editEmployee1 = new Component_A_ClassLibrary.EditEmployee(this.components);
             this.deleteEmployee1 = new Component_A_ClassLibrary.DeleteEmployee(this.components);
             this.constrainsComponent2 = new HolidayManager_ClassLibrary.ConstrainsComponent(this.components);
+            this.panelPriority = new System.Windows.Forms.Panel();
+            this.createEmployee2 = new Component_A_ClassLibrary.CreateEmployee(this.components);
+            this.label30 = new System.Windows.Forms.Label();
+            this.dataGridSorted = new System.Windows.Forms.DataGridView();
+            this.btnRejectP = new System.Windows.Forms.Button();
+            this.btnAcceptP = new System.Windows.Forms.Button();
+            this.rdbtn = new System.Windows.Forms.RadioButton();
+            this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.priorityComponent = new HolidayManager_ClassLibrary.Functionality_D.PriorityComponent(this.components);
             this.createPanel.SuspendLayout();
             this.editPanel.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -138,6 +148,9 @@
             this.pnlHolidayReq.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.notValidHolidayReqGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.validHolidayReqGridView)).BeginInit();
+            this.panelPriority.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridSorted)).BeginInit();
+            this.groupBox4.SuspendLayout();
             this.SuspendLayout();
             // 
             // createPanel
@@ -840,6 +853,7 @@
             // 
             // mainPnlHM
             // 
+            this.mainPnlHM.Controls.Add(this.panelPriority);
             this.mainPnlHM.Controls.Add(this.label29);
             this.mainPnlHM.Controls.Add(this.pnlHolidayBkd);
             this.mainPnlHM.Controls.Add(this.title);
@@ -847,9 +861,9 @@
             this.mainPnlHM.Controls.Add(this.dataGridView3);
             this.mainPnlHM.Controls.Add(this.pnlHolidayOnDuty);
             this.mainPnlHM.Controls.Add(this.pnlHolidayReq);
-            this.mainPnlHM.Location = new System.Drawing.Point(37, 43);
+            this.mainPnlHM.Location = new System.Drawing.Point(15, 22);
             this.mainPnlHM.Name = "mainPnlHM";
-            this.mainPnlHM.Size = new System.Drawing.Size(1014, 541);
+            this.mainPnlHM.Size = new System.Drawing.Size(1036, 562);
             this.mainPnlHM.TabIndex = 7;
             // 
             // label29
@@ -867,16 +881,23 @@
             // 
             // pnlHolidayBkd
             // 
+            this.pnlHolidayBkd.Controls.Add(this.calenderHighlight);
             this.pnlHolidayBkd.Controls.Add(this.btnSearchEmployee);
             this.pnlHolidayBkd.Controls.Add(this.txtEmployee);
             this.pnlHolidayBkd.Controls.Add(this.groupBox2);
             this.pnlHolidayBkd.Controls.Add(this.dataGridViewBooked);
             this.pnlHolidayBkd.Controls.Add(this.label24);
-            this.pnlHolidayBkd.Location = new System.Drawing.Point(987, 16);
+            this.pnlHolidayBkd.Location = new System.Drawing.Point(27, 451);
             this.pnlHolidayBkd.Margin = new System.Windows.Forms.Padding(2);
             this.pnlHolidayBkd.Name = "pnlHolidayBkd";
-            this.pnlHolidayBkd.Size = new System.Drawing.Size(186, 239);
+            this.pnlHolidayBkd.Size = new System.Drawing.Size(241, 72);
             this.pnlHolidayBkd.TabIndex = 55;
+            // 
+            // calenderHighlight
+            // 
+            this.calenderHighlight.Location = new System.Drawing.Point(564, 139);
+            this.calenderHighlight.Name = "calenderHighlight";
+            this.calenderHighlight.TabIndex = 61;
             // 
             // btnSearchEmployee
             // 
@@ -950,6 +971,7 @@
             this.dataGridViewBooked.RowHeadersWidth = 62;
             this.dataGridViewBooked.Size = new System.Drawing.Size(505, 233);
             this.dataGridViewBooked.TabIndex = 56;
+            this.dataGridViewBooked.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewBooked_CellClick);
             // 
             // label24
             // 
@@ -1009,10 +1031,10 @@
             this.pnlHolidayOnDuty.Controls.Add(this.monthCalendar);
             this.pnlHolidayOnDuty.Controls.Add(this.label27);
             this.pnlHolidayOnDuty.Controls.Add(this.dataGridOnOffDuty);
-            this.pnlHolidayOnDuty.Location = new System.Drawing.Point(49, 251);
+            this.pnlHolidayOnDuty.Location = new System.Drawing.Point(13, 221);
             this.pnlHolidayOnDuty.Margin = new System.Windows.Forms.Padding(2);
             this.pnlHolidayOnDuty.Name = "pnlHolidayOnDuty";
-            this.pnlHolidayOnDuty.Size = new System.Drawing.Size(101, 131);
+            this.pnlHolidayOnDuty.Size = new System.Drawing.Size(296, 177);
             this.pnlHolidayOnDuty.TabIndex = 45;
             // 
             // groupBox3
@@ -1097,10 +1119,10 @@
             this.pnlHolidayReq.Controls.Add(this.btnReject);
             this.pnlHolidayReq.Controls.Add(this.btnAccept);
             this.pnlHolidayReq.Controls.Add(this.validHolidayReqGridView);
-            this.pnlHolidayReq.Location = new System.Drawing.Point(120, 65);
+            this.pnlHolidayReq.Location = new System.Drawing.Point(330, 428);
             this.pnlHolidayReq.Margin = new System.Windows.Forms.Padding(2);
             this.pnlHolidayReq.Name = "pnlHolidayReq";
-            this.pnlHolidayReq.Size = new System.Drawing.Size(901, 418);
+            this.pnlHolidayReq.Size = new System.Drawing.Size(293, 76);
             this.pnlHolidayReq.TabIndex = 44;
             // 
             // label28
@@ -1183,6 +1205,93 @@
             this.constrainsComponent2.Departement1 = "Engineering-Plumbing-Roofing-Carpentry- Bricklaying-Office";
             this.constrainsComponent2.Roles1 = "Head-Deputy Head- Manager-Apprentice-Junior Member-Senior Member";
             // 
+            // panelPriority
+            // 
+            this.panelPriority.Controls.Add(this.groupBox4);
+            this.panelPriority.Controls.Add(this.btnRejectP);
+            this.panelPriority.Controls.Add(this.btnAcceptP);
+            this.panelPriority.Controls.Add(this.dataGridSorted);
+            this.panelPriority.Controls.Add(this.label30);
+            this.panelPriority.Location = new System.Drawing.Point(213, 120);
+            this.panelPriority.Name = "panelPriority";
+            this.panelPriority.Size = new System.Drawing.Size(782, 400);
+            this.panelPriority.TabIndex = 58;
+            // 
+            // label30
+            // 
+            this.label30.AutoSize = true;
+            this.label30.Cursor = System.Windows.Forms.Cursors.Arrow;
+            this.label30.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label30.ForeColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.label30.Location = new System.Drawing.Point(24, 17);
+            this.label30.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label30.Name = "label30";
+            this.label30.Size = new System.Drawing.Size(167, 29);
+            this.label30.TabIndex = 58;
+            this.label30.Text = "Priority Queue";
+            // 
+            // dataGridSorted
+            // 
+            this.dataGridSorted.BackgroundColor = System.Drawing.Color.DarkSlateGray;
+            this.dataGridSorted.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridSorted.Location = new System.Drawing.Point(15, 88);
+            this.dataGridSorted.Name = "dataGridSorted";
+            this.dataGridSorted.Size = new System.Drawing.Size(705, 246);
+            this.dataGridSorted.TabIndex = 59;
+            // 
+            // btnRejectP
+            // 
+            this.btnRejectP.BackColor = System.Drawing.Color.White;
+            this.btnRejectP.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.btnRejectP.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnRejectP.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnRejectP.ForeColor = System.Drawing.Color.Red;
+            this.btnRejectP.Location = new System.Drawing.Point(396, 346);
+            this.btnRejectP.Name = "btnRejectP";
+            this.btnRejectP.Size = new System.Drawing.Size(87, 38);
+            this.btnRejectP.TabIndex = 61;
+            this.btnRejectP.Text = "REJECT";
+            this.btnRejectP.UseVisualStyleBackColor = false;
+            this.btnRejectP.Click += new System.EventHandler(this.BtnRejectP_Click);
+            // 
+            // btnAcceptP
+            // 
+            this.btnAcceptP.BackColor = System.Drawing.Color.White;
+            this.btnAcceptP.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.btnAcceptP.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAcceptP.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAcceptP.ForeColor = System.Drawing.Color.LimeGreen;
+            this.btnAcceptP.Location = new System.Drawing.Point(283, 346);
+            this.btnAcceptP.Name = "btnAcceptP";
+            this.btnAcceptP.Size = new System.Drawing.Size(83, 38);
+            this.btnAcceptP.TabIndex = 60;
+            this.btnAcceptP.Text = "ACCEPT";
+            this.btnAcceptP.UseVisualStyleBackColor = false;
+            this.btnAcceptP.Click += new System.EventHandler(this.BtnAcceptP_Click);
+            // 
+            // rdbtn
+            // 
+            this.rdbtn.AutoSize = true;
+            this.rdbtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rdbtn.ForeColor = System.Drawing.Color.White;
+            this.rdbtn.Location = new System.Drawing.Point(33, 10);
+            this.rdbtn.Name = "rdbtn";
+            this.rdbtn.Size = new System.Drawing.Size(105, 33);
+            this.rdbtn.TabIndex = 62;
+            this.rdbtn.TabStop = true;
+            this.rdbtn.Text = "SORT ";
+            this.rdbtn.UseVisualStyleBackColor = true;
+            this.rdbtn.CheckedChanged += new System.EventHandler(this.Rdbtn_CheckedChanged);
+            // 
+            // groupBox4
+            // 
+            this.groupBox4.Controls.Add(this.rdbtn);
+            this.groupBox4.Location = new System.Drawing.Point(558, 341);
+            this.groupBox4.Name = "groupBox4";
+            this.groupBox4.Size = new System.Drawing.Size(162, 50);
+            this.groupBox4.TabIndex = 63;
+            this.groupBox4.TabStop = false;
+            // 
             // ManageForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1225,6 +1334,11 @@
             this.pnlHolidayReq.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.notValidHolidayReqGridView)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.validHolidayReqGridView)).EndInit();
+            this.panelPriority.ResumeLayout(false);
+            this.panelPriority.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridSorted)).EndInit();
+            this.groupBox4.ResumeLayout(false);
+            this.groupBox4.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -1326,5 +1440,15 @@
         private HolidayManager_ClassLibrary.ConstrainsComponent constrainsComponent1;
         private HolidayManager_ClassLibrary.ConstrainsComponent constrainsComponent2;
         private System.Windows.Forms.DataGridView notValidHolidayReqGridView;
+        private HolidayManager_ClassLibrary.Functionality_E.calenderHighlight calenderHighlight;
+        private System.Windows.Forms.Panel panelPriority;
+        private System.Windows.Forms.GroupBox groupBox4;
+        private System.Windows.Forms.RadioButton rdbtn;
+        private System.Windows.Forms.Button btnRejectP;
+        private System.Windows.Forms.Button btnAcceptP;
+        private System.Windows.Forms.DataGridView dataGridSorted;
+        private System.Windows.Forms.Label label30;
+        private Component_A_ClassLibrary.CreateEmployee createEmployee2;
+        private HolidayManager_ClassLibrary.Functionality_D.PriorityComponent priorityComponent;
     }
 }
