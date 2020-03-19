@@ -28,6 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.pnlLogin = new System.Windows.Forms.Panel();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -81,9 +84,9 @@
             this.pnlLogin.Controls.Add(this.groupBox1);
             this.pnlLogin.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.pnlLogin.ForeColor = System.Drawing.Color.White;
-            this.pnlLogin.Location = new System.Drawing.Point(183, 523);
+            this.pnlLogin.Location = new System.Drawing.Point(210, 460);
             this.pnlLogin.Name = "pnlLogin";
-            this.pnlLogin.Size = new System.Drawing.Size(147, 78);
+            this.pnlLogin.Size = new System.Drawing.Size(120, 141);
             this.pnlLogin.TabIndex = 0;
             // 
             // label3
@@ -178,9 +181,9 @@
             this.pnlHolidayReq.Controls.Add(this.groupBox2);
             this.pnlHolidayReq.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.pnlHolidayReq.ForeColor = System.Drawing.Color.White;
-            this.pnlHolidayReq.Location = new System.Drawing.Point(99, 246);
+            this.pnlHolidayReq.Location = new System.Drawing.Point(0, 1);
             this.pnlHolidayReq.Name = "pnlHolidayReq";
-            this.pnlHolidayReq.Size = new System.Drawing.Size(105, 286);
+            this.pnlHolidayReq.Size = new System.Drawing.Size(350, 628);
             this.pnlHolidayReq.TabIndex = 8;
             // 
             // monthCalendar2
@@ -230,7 +233,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(139, 159);
+            this.label4.Location = new System.Drawing.Point(205, 165);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(43, 29);
             this.label4.TabIndex = 7;
@@ -240,7 +243,7 @@
             // 
             this.label5.AutoSize = true;
             this.label5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.label5.Location = new System.Drawing.Point(3, 157);
+            this.label5.Location = new System.Drawing.Point(17, 163);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(72, 31);
             this.label5.TabIndex = 6;
@@ -267,7 +270,6 @@
             this.txtEnd.Location = new System.Drawing.Point(192, 197);
             this.txtEnd.MaxLength = 20;
             this.txtEnd.Name = "txtEnd";
-            this.txtEnd.PasswordChar = '*';
             this.txtEnd.Size = new System.Drawing.Size(99, 35);
             this.txtEnd.TabIndex = 4;
             // 
@@ -316,20 +318,44 @@
             this.pnlView.Controls.Add(this.groupBox3);
             this.pnlView.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.pnlView.ForeColor = System.Drawing.Color.White;
-            this.pnlView.Location = new System.Drawing.Point(12, 31);
+            this.pnlView.Location = new System.Drawing.Point(139, 541);
             this.pnlView.Name = "pnlView";
-            this.pnlView.Size = new System.Drawing.Size(162, 63);
+            this.pnlView.Size = new System.Drawing.Size(207, 69);
             this.pnlView.TabIndex = 13;
             // 
             // dataGridView1
             // 
+            dataGridViewCellStyle4.Format = "d";
+            dataGridViewCellStyle4.NullValue = null;
+            this.dataGridView1.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle4;
             this.dataGridView1.BackgroundColor = System.Drawing.Color.SeaGreen;
             this.dataGridView1.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.dataGridView1.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.EnableWithoutHeaderText;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle5.BackColor = System.Drawing.Color.SeaGreen;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft New Tai Lue", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle5.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle5.Format = "d";
+            dataGridViewCellStyle5.NullValue = null;
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.Color.YellowGreen;
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(19, 162);
+            this.dataGridView1.GridColor = System.Drawing.Color.ForestGreen;
+            this.dataGridView1.Location = new System.Drawing.Point(6, 146);
             this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(468, 311);
+            dataGridViewCellStyle6.BackColor = System.Drawing.Color.SeaGreen;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft New Tai Lue", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle6.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle6.Format = "d";
+            dataGridViewCellStyle6.NullValue = null;
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
+            this.dataGridView1.RowsDefaultCellStyle = dataGridViewCellStyle6;
+            this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dataGridView1.Size = new System.Drawing.Size(330, 255);
             this.dataGridView1.TabIndex = 13;
+            this.dataGridView1.TabStop = false;
             // 
             // button1
             // 
@@ -457,7 +483,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(484, 689);
+            this.ClientSize = new System.Drawing.Size(348, 661);
             this.Controls.Add(this.pnlLogin);
             this.Controls.Add(this.btnHome);
             this.Controls.Add(this.btnLogout);

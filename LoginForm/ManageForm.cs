@@ -587,6 +587,13 @@ namespace LoginForm
             try
             {
                 notValidHolidayReqGridView.CurrentRow.Selected = true;
+                if (getSelectedRow(validHolidayReqGridView, 0) != 0)
+                {
+                    Selected = (getSelectedRow(validHolidayReqGridView, 0));
+                    hm.TypeConstrainBroken((long)Selected);
+                }
+
+                
             }
             catch (Exception)
             {
@@ -689,6 +696,19 @@ namespace LoginForm
             //{
             //    i
             //}
+        }
+
+        private void DataGridSorted_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            try
+            {
+                dataGridSorted.CurrentRow.Selected = true;
+                
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Please elect a valid table row");
+            }
         }
     }
 }

@@ -238,9 +238,9 @@ namespace HolidayManager_ClassLibrary
 
         }
 
-        public bool enoughStaff(long StaffID, long holiID)
+        public int enoughStaff(long StaffID, long holiID)
         {
-            bool valid = true;
+            int valid = 0;
             role person = GetRole(StaffID);
             holidaysrequested holi = GetHoliday(holiID);
 
@@ -249,7 +249,7 @@ namespace HolidayManager_ClassLibrary
                                   join a in db.roles
                                   on b.EmployeeID equals a.EmployeeID
                                   where (b.Status == "Approved") && a.department.DeptName == person.department.DeptName
-                                  && holi.StartDate < b.EndDate && b.StartDate > holi.EndDate
+                                  && holi.StartDate < b.EndDate && b.StartDate < holi.EndDate
                                   select b).ToList();
 
             var totalEmployees = (from b in db.roles
@@ -257,7 +257,7 @@ namespace HolidayManager_ClassLibrary
                                   select b).ToList().Count();
 
             // for each person that has requested holidays in the same department on the same period
-            // if the total number of employee of the same departments that have taken holidays is greater than 40 or 60
+            // if the total number of employee of the same departments that have taken holidays is greater than 40 or 60 depends
             // the holiday can not be approved 
 
             foreach (var h in takenKHolidays)
@@ -267,24 +267,21 @@ namespace HolidayManager_ClassLibrary
                 int relaxadeMonth = (int)GetConstraint().RelaxedMonth;
                 if (holi.StartDate.Month == relaxadeMonth)
                 {
+                    //only 40% on duty required
                     minWorkingStaff = (int)GetConstraint().MinimumWorkingStaff;
+                    valid = 1;
                 }
                 else
                 {
                     minWorkingStaff = (int)GetConstraint().MinimumWorkingStaffRelaxed;
                 }
-                if (percentBooked < GetConstraint().MinimumWorkingStaff)
+                if (percentBooked < minWorkingStaff)
                 {
-                   valid = false;
+                    valid = 2;
                 }
             }
-
             return valid;
 
         }
-
-
-        //• 15th of July to 31st of August
-        //• 15th of December to 22nd of December
     }
 }

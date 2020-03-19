@@ -33,25 +33,6 @@ namespace EmployeeMobileApp
         }
 
         //Arange buttons and Panels
-        private void BtnLogout_Click(object sender, EventArgs e)
-        {
-            btnLogout.BackColor = System.Drawing.Color.SeaGreen;
-            pnlHolidayReq.Hide();
-            pnlLogin.Show();
-        }
-
-        private void BtnHome_Click(object sender, EventArgs e)
-        {
-            btnHome.BackColor = System.Drawing.Color.SeaGreen;
-            pnlHolidayReq.Show();
-        }
-
-        private void BtnView_Click(object sender, EventArgs e)
-        {
-            btnView.BackColor = System.Drawing.Color.SeaGreen;
-            pnlHolidayReq.Hide();
-            dataGridView1.DataSource = soap.ViewHolidayReqStatus(staffID);
-        }
         public void arrangelPanels()
         {
             pnlHolidayReq.Size = new Size(348, 616);
@@ -69,6 +50,13 @@ namespace EmployeeMobileApp
 
             monthCalendar1.Visible = false;
             monthCalendar2.Visible = false;
+
+            //setting DataGridView for Holidays requested
+            dataGridView1.ColumnCount = 4;
+            dataGridView1.Columns[0].Name = "Request ID";
+            dataGridView1.Columns[1].Name = "Start Date";
+            dataGridView1.Columns[2].Name = "End Date";
+            dataGridView1.Columns[3].Name = "Status";
         }
 
         private void showButtons()
@@ -77,30 +65,53 @@ namespace EmployeeMobileApp
             btnView.Show();
             btnLogout.Show();
         }
+        private void hideButtons()
+        {
+            btnHome.Hide();
+            btnView.Hide();
+            btnLogout.Hide();
+        }
 
         private void BtnLogout_Click_1(object sender, EventArgs e)
         {
-            btnLogout.BackColor = System.Drawing.Color.SeaGreen;
             pnlHolidayReq.Hide();
             pnlView.Hide();
             pnlLogin.Show();
+            hideButtons();
+            
 
         }
 
         private void BtnHome_Click_1(object sender, EventArgs e)
         {
-            btnHome.BackColor = System.Drawing.Color.SeaGreen;
             pnlHolidayReq.Show();
             pnlView.Hide();
+            pnlLogin.Hide();
             dataGridView1.DataSource = soap.ViewHolidayReqStatus(staffID);
         }
 
         private void BtnView_Click_1(object sender, EventArgs e)
         {
-            btnView.BackColor = System.Drawing.Color.SeaGreen;
             pnlHolidayReq.Hide();
             pnlLogin.Hide();
-            dataGridView1.DataSource = soap.ViewHolidayReqStatus(staffID);
+
+            List<string> holis = soap.ViewHolidayReqStatus(staffID);
+            try
+            {
+               
+                foreach (var item in holis)
+                {
+                    string[] indivudal = item.Split('*');
+                    dataGridView1.Rows.Add(indivudal);
+                }
+                //dataGridView1.DataSource = soap.ViewHolidayReqStatus(staffID);
+                dataGridView1.RowHeadersVisible = false;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            
         }
 
         private void Button4_Click(object sender, EventArgs e)
@@ -138,23 +149,19 @@ namespace EmployeeMobileApp
 
         private void BtnReqHoli_Click(object sender, EventArgs e)
         {
-            //try
-            //{
-            //    soap.SubmitHolidayReq(monthCalendar1.SelectionRange.Start, monthCalendar2.SelectionRange.Start, staffID);
+            try
+            {
+                MessageBox.Show("from " + monthCalendar1.SelectionRange.Start.ToString("d") + "To" + monthCalendar1.SelectionRange.Start.ToString("d"));
+                if(soap.SubmitHolidayReq(monthCalendar1.SelectionRange.Start, monthCalendar2.SelectionRange.Start, staffID))
+                {
+                    MessageBox.Show("Holiday Booking Completed sucesfully");
+                }
+            }
 
-            //    List<string> holis = soap.ViewHolidayReqStatus(78349734);
-
-            //    foreach (var item in holis)
-            //    {
-            //        string[] indivudal = item.Split('*');
-
-            //        data.rows.add(indivudal);
-            //    };
-
-            //catch (Exception ex)
-            //{
-            //    MessageBox.Show(ex.Message);
-            //}
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
     }
 }

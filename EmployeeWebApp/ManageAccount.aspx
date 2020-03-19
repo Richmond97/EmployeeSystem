@@ -1,16 +1,19 @@
-﻿<%@ Page Title="Holyday Request" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="ManageAccount.aspx.cs" Inherits="EmployeeWebApp.ManageAccount" %>
+﻿<%@ Page Title="AMD" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="ManageAccount.aspx.cs" Inherits="EmployeeWebApp.ManageAccount" %>
 <asp:Content ID="BodyContent" ContentPlaceHolderID="UserContent" runat="server">
    
 </asp:Content>
 <asp:Content ID="Content1" runat="server" contentplaceholderid="MainContent">
     <p>
         <br />
-        <asp:Label ID="Label4" runat="server" Text="Holiday Booking" ForeColor="Blue" Height="136px" Width="1215px" Font-Size="55pt"></asp:Label>
+        <asp:Label ID="Label4" runat="server" Text="Holiday Booking" ForeColor="Blue" Height="136px" Width="1215px" Font-Size="55pt" style="margin-top: 16px"></asp:Label>
     </p>
     <p>
 
+    &nbsp;&nbsp;&nbsp;
+
     <asp:Label ID="Label1" runat="server" Text="   From      "></asp:Label>
     <asp:TextBox ID="txtbxHolidayStart" runat="server"></asp:TextBox>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
     <asp:Label ID="Label2" runat="server" Text="To    "></asp:Label>
     <asp:ImageButton ID="btnCalenderGo" runat="server" Height="28px" ImageUrl="~/icons/calendar_icon.png" Width="39px" OnClick="calenderGo_Click" />
     <asp:TextBox ID="txtbxHolidayEnd" runat="server"></asp:TextBox>
@@ -70,7 +73,6 @@
     </asp:GridView>
         <div runat="server" id="AlertBox" class="alertBox" Visible="false">
     <div runat="server" id="AlertBoxMessage"></div>
-    <button onclick="closeAlert.call(this, event)">Ok</button>
 </div>
 
     

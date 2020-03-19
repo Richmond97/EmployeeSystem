@@ -35,7 +35,7 @@ namespace HolidayManager_ClassLibrary.Functionality_A
 
                 foreach (var holiday in result)
                 {
-                    if (cc.validHolidayReqManagerHead(holiday.RequestID, holiday.EmployeeID))
+                    if (cc.validHolidayReqManagerHead(holiday.RequestID, holiday.EmployeeID) || (cc.enoughStaff(holiday.EmployeeID ,holiday.RequestID) ==  0))
                     {
                         validReq.Add(holiday);
                     }
@@ -52,8 +52,24 @@ namespace HolidayManager_ClassLibrary.Functionality_A
                 inValidDG.Columns["employee"].Visible = false;
                 inValidDG.Columns["Status"].Visible = false;
             }
+        }
+        public void TypeConstrainBroken(long reqID)
+        {
+            string message = "";
+            var result = (from a in db.holidaysrequesteds
+                          where a.Status == "Pending" && reqID == a.RequestID
+                          select a
+                          ).Single();
+            if (cc.enoughStaff(result.EmployeeID, result.RequestID) == 0)
+            {
+                message = " Constraint broke [ %40 of statt requireed for department ] " ;
+                if(cc.validHolidayReqManagerHead(result.RequestID, result.EmployeeID) == false)
+                {
+                    message += "  ___  Constraint broke[ Either Head Deputy or Manager or Senior member mus be on duty ] ";
+                }
+                MessageBox.Show(message);
+            }
 
-            
         }
         public void ConfirmedReq(DataGridView table)
         {
