@@ -90,6 +90,12 @@
     <Compile Include="TelephoneComp.Designer.cs">
       <DependentUpon>TelephoneComp.cs</DependentUpon>
     </Compile>
+    <Compile Include="TelephoneDigit.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="TelephoneDigit.Designer.cs">
+      <DependentUpon>TelephoneDigit.cs</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />

@@ -323,7 +323,8 @@ namespace LoginForm
         }
 
    
-
+        //Two panles are used for Edit and Delet Employee 
+        //As both of them show the same content only the dufferent buttons are used
         private void SwitchButtons()
         {
             if (btnDeleteEmploy.Enabled == true)
@@ -410,10 +411,7 @@ namespace LoginForm
         {
           return (long)dgv[i, dgv.SelectedRows[i].Index].Value;
         }
-        //private DateTime getDate(DataGridView dgv, int i)
-        //{
-        //    return (DateTime)dgv[i, dgv.CurrentRow.Cells[i].Index].Value;
-        //}
+ 
 
         private void ArrangeHolidaysPanel()
         {
@@ -427,6 +425,7 @@ namespace LoginForm
             hm.ConfirmedReq(dataGridViewBooked);
             hm.OutstandingReq(dataGridSorted,notValidHolidayReqGridView, typeP);
 
+            rdbtn.Checked = true;
 
             pnlHolidayBkd.Show();
             pnlHolidayReq.Hide();
@@ -492,7 +491,6 @@ namespace LoginForm
                 //holidayReqGridView.CurrentRow.Selected = true;
                 string decision = "Approved";
                 string type = "noPriority";
-                //var Selected = (long)holidayReqGridView[0, holidayReqGridView.SelectedRows[0].Index].Value;
                 hm.accept_OR_rejectReq((long)Selected, decision);
                 hm.RefreshGrid(validHolidayReqGridView);
                 hm.OutstandingReq(validHolidayReqGridView, notValidHolidayReqGridView, type);
@@ -587,17 +585,18 @@ namespace LoginForm
             try
             {
                 notValidHolidayReqGridView.CurrentRow.Selected = true;
-                if (getSelectedRow(validHolidayReqGridView, 0) != 0)
+                if (getSelectedRow(notValidHolidayReqGridView, 0) != 0)
                 {
-                    Selected = (getSelectedRow(validHolidayReqGridView, 0));
+                    Selected = (getSelectedRow(notValidHolidayReqGridView, 0));
                     hm.TypeConstrainBroken((long)Selected);
                 }
 
-                
+                MessageBox.Show("Please slect a valid Holiday request");
+
             }
-            catch (Exception)
+            catch (Exception ec)
             {
-                MessageBox.Show("Please elect a valid Holiday request");
+                MessageBox.Show(ec.Message);
             }
         }
 
@@ -625,13 +624,13 @@ namespace LoginForm
             try
             {
 
-                if (getSelectedRow(validHolidayReqGridView, 0) != 0)
+                if (getSelectedRow(dataGridSorted, 0) != 0)
                 {
-                    Selected = (getSelectedRow(validHolidayReqGridView, 0));
+                    Selected = (getSelectedRow(dataGridSorted, 0));
                 }
-                else if (getSelectedRow(notValidHolidayReqGridView, 0) != 0)
+                else if (getSelectedRow(dataGridSorted, 0) != 0)
                 {
-                    Selected = getSelectedRow(notValidHolidayReqGridView, 0);
+                    Selected = getSelectedRow(dataGridSorted, 0);
                 }
 
                 //holidayReqGridView.CurrentRow.Selected = true;
@@ -639,8 +638,8 @@ namespace LoginForm
                 string type = "Priority";
                 //var Selected = (long)holidayReqGridView[0, holidayReqGridView.SelectedRows[0].Index].Value;
                 hm.accept_OR_rejectReq((long)Selected, decision);
-                hm.RefreshGrid(validHolidayReqGridView);
-                hm.OutstandingReq(validHolidayReqGridView, notValidHolidayReqGridView,type);
+                hm.RefreshGrid(dataGridSorted);
+                hm.OutstandingReq(dataGridSorted, dataGridSorted, type);
             }
             catch (Exception ex)
             {
@@ -653,13 +652,13 @@ namespace LoginForm
             try
             {
 
-                if (getSelectedRow(validHolidayReqGridView, 0) != 0)
+                if (getSelectedRow(dataGridSorted, 0) != 0)
                 {
-                    Selected = getSelectedRow(validHolidayReqGridView, 0);
+                    Selected = getSelectedRow(dataGridSorted, 0);
                 }
-                else if (getSelectedRow(notValidHolidayReqGridView, 0) != 0)
+                else if (getSelectedRow(dataGridSorted, 0) != 0)
                 {
-                    Selected = getSelectedRow(notValidHolidayReqGridView, 0);
+                    Selected = getSelectedRow(dataGridSorted, 0);
                 }
                 //holidayReqGridView.CurrentRow.Selected = true;
                 string decision = "Declined";
@@ -667,7 +666,7 @@ namespace LoginForm
                 //var Selected = (long)holidayReqGridView[0, holidayReqGridView.SelectedRows[0].Index].Value;
                 hm.accept_OR_rejectReq((long)Selected, decision);
                 hm.RefreshGrid(validHolidayReqGridView);
-                hm.OutstandingReq(validHolidayReqGridView, notValidHolidayReqGridView,type);
+                hm.OutstandingReq(dataGridSorted, notValidHolidayReqGridView,type);
             }
             catch (Exception ex)
             {
@@ -675,29 +674,8 @@ namespace LoginForm
             }
         }
 
-        private void Rdbtn_CheckedChanged(object sender, EventArgs e)
-        {
-            dataGridSorted.DataSource = priorityComponent.sortPeak();
 
-            //foreach (var rows in dataGridSorted.Rows)
-            //{
-            //    if (dataGridSorted.Rows.Count > priorityComponent.Holidays1.Count())
-            //    {
-            //        dataGridSorted[.Index, row.Index].Style.BackColor = Color.LemonChiffon;
-            //    }
-            //    else
-            //    {
-            //        dataGridSorted[col.Index, row.Index].Style.BackColor = Color.GreenYellow;
-            //    }
-               
-            //}
-           
-            //foreach (var rows in dataGridSorted.Rows)
-            //{
-            //    i
-            //}
-        }
-
+        
         private void DataGridSorted_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             try
@@ -709,6 +687,20 @@ namespace LoginForm
             {
                 MessageBox.Show("Please elect a valid table row");
             }
+        }
+
+        private void RdbtnUndo_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rdbtnUndo.Checked)
+            {
+                string typeP = "Priority";
+                hm.OutstandingReq(dataGridSorted, notValidHolidayReqGridView, typeP);
+            }
+            else if (rdbtn.Checked)
+            {
+                dataGridSorted.DataSource = priorityComponent.sortPeak();
+            }
+
         }
     }
 }

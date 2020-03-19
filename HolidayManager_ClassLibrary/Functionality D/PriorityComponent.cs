@@ -29,15 +29,7 @@ namespace HolidayManager_ClassLibrary.Functionality_D
             InitializeComponent();
         }
 
-        private void Formula(holidaysrequested holi)
-        {
-            var query = (from a in dbc.holidaysrequesteds
-                         where holi.RequestID == a.RequestID
-                         select a).Single();
-        }
-
-
-
+ 
         private void BubbleSort(string[] args)
         {
             int[] a = { 30, 20, 50, 40, 10 };
@@ -84,28 +76,27 @@ namespace HolidayManager_ClassLibrary.Functionality_D
                 {
                     Holidays.Add(h);
                 }
-
-                //Bubble Sort
-                holidaysrequested t;
-                for (int j = 0; j <= peakHolidays.Count - 3; j++)
+                      
+            }
+            //Bubble Sort
+            holidaysrequested t;
+            for (int j = 0; j <= peakHolidays.Count - 3; j++)
+            {
+                for (int i = 0; i <= peakHolidays.Count - 3; i++)
                 {
-                    for (int i = 0; i <= peakHolidays.Count - 3; i++)
+                    if (alg(peakHolidays[i]) > alg(peakHolidays[i + 1]))
                     {
-                        if (alg(peakHolidays[i]) > alg(peakHolidays[i+1]))
-                        {
-                            t = peakHolidays[i + 1];
-                            peakHolidays[i + 1] = peakHolidays[i];
-                            peakHolidays[i] = t;
-                        }
+                        t = peakHolidays[i + 1];
+                        peakHolidays[i + 1] = peakHolidays[i];
+                        peakHolidays[i] = t;
                     }
-                } 
+                }
             }
             Holidays.AddRange(peakHolidays);
 
 
             return Holidays;
         }
-
 
         private int alg(holidaysrequested holi)
         {
@@ -136,7 +127,8 @@ namespace HolidayManager_ClassLibrary.Functionality_D
 
         }
 
-        public static DateTime EasterSunday(int year)
+       
+        public static DateTime EasterSunday(int year)  //https://www.codeproject.com/Articles/10860/Calculating-Christian-Holidays
         {
             int day = 0;
             int month = 0;

@@ -29,13 +29,13 @@ namespace HolidayManager_ClassLibrary.Functionality_A
 
             }
             else
-            {
+            {   //two List  fro valid and none valid holiday request 
                 List<holidaysrequested> validReq = new List<holidaysrequested>();
                 List<holidaysrequested> notValidReq = new List<holidaysrequested>();
 
                 foreach (var holiday in result)
-                {
-                    if (cc.validHolidayReqManagerHead(holiday.RequestID, holiday.EmployeeID) || (cc.enoughStaff(holiday.EmployeeID ,holiday.RequestID) ==  0))
+                { //if 
+                    if (cc.validHolidayReqManagerHead(holiday.RequestID, holiday.EmployeeID) && (cc.enoughStaff(holiday.EmployeeID ,holiday.RequestID) ==  0))
                     {
                         validReq.Add(holiday);
                     }
@@ -60,12 +60,21 @@ namespace HolidayManager_ClassLibrary.Functionality_A
                           where a.Status == "Pending" && reqID == a.RequestID
                           select a
                           ).Single();
-            if (cc.enoughStaff(result.EmployeeID, result.RequestID) == 0)
+            if (cc.enoughStaff(result.EmployeeID, result.RequestID) == 1)
             {
-                message = " Constraint broke [ %40 of statt requireed for department ] " ;
+                message = " Constraint broken [ %40 of staff requireed for department ] " ;
                 if(cc.validHolidayReqManagerHead(result.RequestID, result.EmployeeID) == false)
                 {
-                    message += "  ___  Constraint broke[ Either Head Deputy or Manager or Senior member mus be on duty ] ";
+                    message += "  And  Constraint broken [ Either Head, Head Deputy or Manager,  Senior member must be on duty ] ";
+                }
+                MessageBox.Show(message);
+            }
+            else if (cc.enoughStaff(result.EmployeeID, result.RequestID) == 2)
+            {
+                message = " Constraint broken [ %60 of statt requireed for department ] ";
+                if (cc.validHolidayReqManagerHead(result.RequestID, result.EmployeeID) == false)
+                {
+                    message += "  And Constraint broken [ Either Head Deputy or Manager or Senior member must be on duty ] ";
                 }
                 MessageBox.Show(message);
             }

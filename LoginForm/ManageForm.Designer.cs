@@ -51,7 +51,6 @@
             this.label19 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.txtEmail = new System.Windows.Forms.TextBox();
-            this.txtNumber = new System.Windows.Forms.TextBox();
             this.txtSurname = new System.Windows.Forms.TextBox();
             this.txtPostcode = new System.Windows.Forms.TextBox();
             this.txtName = new System.Windows.Forms.TextBox();
@@ -97,6 +96,7 @@
             this.mainPnlHM = new System.Windows.Forms.Panel();
             this.panelPriority = new System.Windows.Forms.Panel();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.rdbtnUndo = new System.Windows.Forms.RadioButton();
             this.rdbtn = new System.Windows.Forms.RadioButton();
             this.btnRejectP = new System.Windows.Forms.Button();
             this.btnAcceptP = new System.Windows.Forms.Button();
@@ -104,7 +104,6 @@
             this.label30 = new System.Windows.Forms.Label();
             this.label29 = new System.Windows.Forms.Label();
             this.pnlHolidayBkd = new System.Windows.Forms.Panel();
-            this.calenderHighlight = new HolidayManager_ClassLibrary.Functionality_E.calenderHighlight(this.components);
             this.btnSearchEmployee = new System.Windows.Forms.Button();
             this.txtEmployee = new System.Windows.Forms.TextBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
@@ -131,14 +130,30 @@
             this.btnReject = new System.Windows.Forms.Button();
             this.btnAccept = new System.Windows.Forms.Button();
             this.validHolidayReqGridView = new System.Windows.Forms.DataGridView();
+            this.btnSettings = new System.Windows.Forms.Button();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.label37 = new System.Windows.Forms.Label();
+            this.label36 = new System.Windows.Forms.Label();
+            this.txtRole = new System.Windows.Forms.TextBox();
+            this.txtDep = new System.Windows.Forms.TextBox();
+            this.label35 = new System.Windows.Forms.Label();
+            this.label34 = new System.Windows.Forms.Label();
+            this.btnAddRole = new System.Windows.Forms.Button();
+            this.btnAddDepartment = new System.Windows.Forms.Button();
+            this.cmbBXDepartment = new System.Windows.Forms.ComboBox();
+            this.cmbBXRoles = new System.Windows.Forms.ComboBox();
+            this.dateTimePicker4 = new System.Windows.Forms.DateTimePicker();
+            this.dateTimePicker3 = new System.Windows.Forms.DateTimePicker();
+            this.dateTimePicker2 = new System.Windows.Forms.DateTimePicker();
+            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
+            this.txtNumber = new Component_A_ClassLibrary.TelephoneDigit(this.components);
             this.createEmployee1 = new Component_A_ClassLibrary.CreateEmployee(this.components);
             this.editEmployee1 = new Component_A_ClassLibrary.EditEmployee(this.components);
             this.deleteEmployee1 = new Component_A_ClassLibrary.DeleteEmployee(this.components);
-            this.constrainsComponent2 = new HolidayManager_ClassLibrary.ConstrainsComponent(this.components);
             this.createEmployee2 = new Component_A_ClassLibrary.CreateEmployee(this.components);
+            this.calenderHighlight = new HolidayManager_ClassLibrary.Functionality_E.calenderHighlight(this.components);
+            this.constrainsComponent2 = new HolidayManager_ClassLibrary.ConstrainsComponent(this.components);
             this.priorityComponent = new HolidayManager_ClassLibrary.Functionality_D.PriorityComponent(this.components);
-            this.btnSettings = new System.Windows.Forms.Button();
-            this.panel1 = new System.Windows.Forms.Panel();
             this.createPanel.SuspendLayout();
             this.editPanel.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -157,10 +172,12 @@
             this.pnlHolidayReq.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.notValidHolidayReqGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.validHolidayReqGridView)).BeginInit();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // createPanel
             // 
+            this.createPanel.Controls.Add(this.txtNumber);
             this.createPanel.Controls.Add(this.cbxRole);
             this.createPanel.Controls.Add(this.cbxDept);
             this.createPanel.Controls.Add(this.btnCreateEmploy);
@@ -181,13 +198,12 @@
             this.createPanel.Controls.Add(this.label19);
             this.createPanel.Controls.Add(this.label1);
             this.createPanel.Controls.Add(this.txtEmail);
-            this.createPanel.Controls.Add(this.txtNumber);
             this.createPanel.Controls.Add(this.txtSurname);
             this.createPanel.Controls.Add(this.txtPostcode);
             this.createPanel.Controls.Add(this.txtName);
-            this.createPanel.Location = new System.Drawing.Point(72, 431);
+            this.createPanel.Location = new System.Drawing.Point(47, 64);
             this.createPanel.Name = "createPanel";
-            this.createPanel.Size = new System.Drawing.Size(348, 141);
+            this.createPanel.Size = new System.Drawing.Size(958, 508);
             this.createPanel.TabIndex = 0;
             // 
             // cbxRole
@@ -388,14 +404,6 @@
             this.txtEmail.Name = "txtEmail";
             this.txtEmail.Size = new System.Drawing.Size(150, 20);
             this.txtEmail.TabIndex = 3;
-            // 
-            // txtNumber
-            // 
-            this.txtNumber.Location = new System.Drawing.Point(50, 241);
-            this.txtNumber.MaxLength = 11;
-            this.txtNumber.Name = "txtNumber";
-            this.txtNumber.Size = new System.Drawing.Size(150, 20);
-            this.txtNumber.TabIndex = 2;
             // 
             // txtSurname
             // 
@@ -867,9 +875,9 @@
             this.mainPnlHM.Controls.Add(this.dataGridView3);
             this.mainPnlHM.Controls.Add(this.pnlHolidayOnDuty);
             this.mainPnlHM.Controls.Add(this.pnlHolidayReq);
-            this.mainPnlHM.Location = new System.Drawing.Point(890, 467);
+            this.mainPnlHM.Location = new System.Drawing.Point(97, 12);
             this.mainPnlHM.Name = "mainPnlHM";
-            this.mainPnlHM.Size = new System.Drawing.Size(161, 117);
+            this.mainPnlHM.Size = new System.Drawing.Size(954, 572);
             this.mainPnlHM.TabIndex = 7;
             // 
             // panelPriority
@@ -879,33 +887,47 @@
             this.panelPriority.Controls.Add(this.btnAcceptP);
             this.panelPriority.Controls.Add(this.dataGridSorted);
             this.panelPriority.Controls.Add(this.label30);
-            this.panelPriority.Location = new System.Drawing.Point(785, 409);
+            this.panelPriority.Location = new System.Drawing.Point(707, 413);
             this.panelPriority.Name = "panelPriority";
-            this.panelPriority.Size = new System.Drawing.Size(210, 111);
+            this.panelPriority.Size = new System.Drawing.Size(288, 107);
             this.panelPriority.TabIndex = 58;
             // 
             // groupBox4
             // 
+            this.groupBox4.Controls.Add(this.rdbtnUndo);
             this.groupBox4.Controls.Add(this.rdbtn);
-            this.groupBox4.Location = new System.Drawing.Point(558, 341);
+            this.groupBox4.Location = new System.Drawing.Point(495, 334);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(162, 50);
+            this.groupBox4.Size = new System.Drawing.Size(225, 50);
             this.groupBox4.TabIndex = 63;
             this.groupBox4.TabStop = false;
+            // 
+            // rdbtnUndo
+            // 
+            this.rdbtnUndo.AutoSize = true;
+            this.rdbtnUndo.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rdbtnUndo.ForeColor = System.Drawing.Color.White;
+            this.rdbtnUndo.Location = new System.Drawing.Point(125, 15);
+            this.rdbtnUndo.Name = "rdbtnUndo";
+            this.rdbtnUndo.Size = new System.Drawing.Size(91, 29);
+            this.rdbtnUndo.TabIndex = 63;
+            this.rdbtnUndo.TabStop = true;
+            this.rdbtnUndo.Text = "UNDO";
+            this.rdbtnUndo.UseVisualStyleBackColor = true;
+            this.rdbtnUndo.CheckedChanged += new System.EventHandler(this.RdbtnUndo_CheckedChanged);
             // 
             // rdbtn
             // 
             this.rdbtn.AutoSize = true;
             this.rdbtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.rdbtn.ForeColor = System.Drawing.Color.White;
-            this.rdbtn.Location = new System.Drawing.Point(33, 10);
+            this.rdbtn.Location = new System.Drawing.Point(14, 10);
             this.rdbtn.Name = "rdbtn";
             this.rdbtn.Size = new System.Drawing.Size(105, 33);
             this.rdbtn.TabIndex = 62;
             this.rdbtn.TabStop = true;
             this.rdbtn.Text = "SORT ";
             this.rdbtn.UseVisualStyleBackColor = true;
-            this.rdbtn.CheckedChanged += new System.EventHandler(this.Rdbtn_CheckedChanged);
             // 
             // btnRejectP
             // 
@@ -941,9 +963,10 @@
             // 
             this.dataGridSorted.BackgroundColor = System.Drawing.Color.DarkSlateGray;
             this.dataGridSorted.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridSorted.Location = new System.Drawing.Point(15, 88);
+            this.dataGridSorted.Location = new System.Drawing.Point(283, 88);
             this.dataGridSorted.Name = "dataGridSorted";
-            this.dataGridSorted.Size = new System.Drawing.Size(705, 246);
+            this.dataGridSorted.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dataGridSorted.Size = new System.Drawing.Size(438, 246);
             this.dataGridSorted.TabIndex = 59;
             this.dataGridSorted.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DataGridSorted_CellContentClick);
             // 
@@ -981,17 +1004,11 @@
             this.pnlHolidayBkd.Controls.Add(this.groupBox2);
             this.pnlHolidayBkd.Controls.Add(this.dataGridViewBooked);
             this.pnlHolidayBkd.Controls.Add(this.label24);
-            this.pnlHolidayBkd.Location = new System.Drawing.Point(27, 451);
+            this.pnlHolidayBkd.Location = new System.Drawing.Point(27, 440);
             this.pnlHolidayBkd.Margin = new System.Windows.Forms.Padding(2);
             this.pnlHolidayBkd.Name = "pnlHolidayBkd";
-            this.pnlHolidayBkd.Size = new System.Drawing.Size(241, 72);
+            this.pnlHolidayBkd.Size = new System.Drawing.Size(282, 83);
             this.pnlHolidayBkd.TabIndex = 55;
-            // 
-            // calenderHighlight
-            // 
-            this.calenderHighlight.Location = new System.Drawing.Point(564, 139);
-            this.calenderHighlight.Name = "calenderHighlight";
-            this.calenderHighlight.TabIndex = 61;
             // 
             // btnSearchEmployee
             // 
@@ -1063,6 +1080,7 @@
             this.dataGridViewBooked.Name = "dataGridViewBooked";
             this.dataGridViewBooked.RowHeadersVisible = false;
             this.dataGridViewBooked.RowHeadersWidth = 62;
+            this.dataGridViewBooked.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridViewBooked.Size = new System.Drawing.Size(505, 233);
             this.dataGridViewBooked.TabIndex = 56;
             this.dataGridViewBooked.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewBooked_CellClick);
@@ -1125,10 +1143,10 @@
             this.pnlHolidayOnDuty.Controls.Add(this.monthCalendar);
             this.pnlHolidayOnDuty.Controls.Add(this.label27);
             this.pnlHolidayOnDuty.Controls.Add(this.dataGridOnOffDuty);
-            this.pnlHolidayOnDuty.Location = new System.Drawing.Point(13, 221);
+            this.pnlHolidayOnDuty.Location = new System.Drawing.Point(27, 185);
             this.pnlHolidayOnDuty.Margin = new System.Windows.Forms.Padding(2);
             this.pnlHolidayOnDuty.Name = "pnlHolidayOnDuty";
-            this.pnlHolidayOnDuty.Size = new System.Drawing.Size(296, 177);
+            this.pnlHolidayOnDuty.Size = new System.Drawing.Size(174, 139);
             this.pnlHolidayOnDuty.TabIndex = 45;
             // 
             // groupBox3
@@ -1203,6 +1221,7 @@
             this.dataGridOnOffDuty.Name = "dataGridOnOffDuty";
             this.dataGridOnOffDuty.RowHeadersVisible = false;
             this.dataGridOnOffDuty.RowHeadersWidth = 62;
+            this.dataGridOnOffDuty.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridOnOffDuty.Size = new System.Drawing.Size(323, 254);
             this.dataGridOnOffDuty.TabIndex = 52;
             // 
@@ -1216,10 +1235,10 @@
             this.pnlHolidayReq.Controls.Add(this.btnReject);
             this.pnlHolidayReq.Controls.Add(this.btnAccept);
             this.pnlHolidayReq.Controls.Add(this.validHolidayReqGridView);
-            this.pnlHolidayReq.Location = new System.Drawing.Point(659, 140);
+            this.pnlHolidayReq.Location = new System.Drawing.Point(357, 438);
             this.pnlHolidayReq.Margin = new System.Windows.Forms.Padding(2);
             this.pnlHolidayReq.Name = "pnlHolidayReq";
-            this.pnlHolidayReq.Size = new System.Drawing.Size(146, 161);
+            this.pnlHolidayReq.Size = new System.Drawing.Size(207, 89);
             this.pnlHolidayReq.TabIndex = 44;
             // 
             // label33
@@ -1285,6 +1304,7 @@
             this.notValidHolidayReqGridView.Name = "notValidHolidayReqGridView";
             this.notValidHolidayReqGridView.RowHeadersVisible = false;
             this.notValidHolidayReqGridView.RowHeadersWidth = 62;
+            this.notValidHolidayReqGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.notValidHolidayReqGridView.Size = new System.Drawing.Size(383, 212);
             this.notValidHolidayReqGridView.TabIndex = 56;
             this.notValidHolidayReqGridView.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.NotValidHolidayReqGridView_CellClick);
@@ -1331,14 +1351,10 @@
             this.validHolidayReqGridView.Name = "validHolidayReqGridView";
             this.validHolidayReqGridView.RowHeadersVisible = false;
             this.validHolidayReqGridView.RowHeadersWidth = 62;
+            this.validHolidayReqGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.validHolidayReqGridView.Size = new System.Drawing.Size(378, 212);
             this.validHolidayReqGridView.TabIndex = 46;
             this.validHolidayReqGridView.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.ValidHolidayReqGridView_CellClick);
-            // 
-            // constrainsComponent2
-            // 
-            this.constrainsComponent2.Departement1 = "Engineering-Plumbing-Roofing-Carpentry- Bricklaying-Office";
-            this.constrainsComponent2.Roles1 = "Head-Deputy Head- Manager-Apprentice-Junior Member-Senior Member";
             // 
             // btnSettings
             // 
@@ -1349,16 +1365,177 @@
             this.btnSettings.ForeColor = System.Drawing.Color.DarkSlateGray;
             this.btnSettings.Location = new System.Drawing.Point(1003, 0);
             this.btnSettings.Name = "btnSettings";
-            this.btnSettings.Size = new System.Drawing.Size(62, 37);
+            this.btnSettings.Size = new System.Drawing.Size(63, 37);
             this.btnSettings.TabIndex = 8;
             this.btnSettings.UseVisualStyleBackColor = false;
             // 
             // panel1
             // 
-            this.panel1.Location = new System.Drawing.Point(46, 76);
+            this.panel1.Controls.Add(this.label37);
+            this.panel1.Controls.Add(this.label36);
+            this.panel1.Controls.Add(this.txtRole);
+            this.panel1.Controls.Add(this.txtDep);
+            this.panel1.Controls.Add(this.label35);
+            this.panel1.Controls.Add(this.label34);
+            this.panel1.Controls.Add(this.btnAddRole);
+            this.panel1.Controls.Add(this.btnAddDepartment);
+            this.panel1.Controls.Add(this.cmbBXDepartment);
+            this.panel1.Controls.Add(this.cmbBXRoles);
+            this.panel1.Controls.Add(this.dateTimePicker4);
+            this.panel1.Controls.Add(this.dateTimePicker3);
+            this.panel1.Controls.Add(this.dateTimePicker2);
+            this.panel1.Controls.Add(this.dateTimePicker1);
+            this.panel1.Location = new System.Drawing.Point(942, 50);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1005, 499);
+            this.panel1.Size = new System.Drawing.Size(115, 48);
             this.panel1.TabIndex = 9;
+            // 
+            // label37
+            // 
+            this.label37.AutoSize = true;
+            this.label37.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label37.ForeColor = System.Drawing.Color.White;
+            this.label37.Location = new System.Drawing.Point(45, 339);
+            this.label37.Name = "label37";
+            this.label37.Size = new System.Drawing.Size(102, 20);
+            this.label37.TabIndex = 17;
+            this.label37.Text = "Departments";
+            // 
+            // label36
+            // 
+            this.label36.AutoSize = true;
+            this.label36.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label36.ForeColor = System.Drawing.Color.White;
+            this.label36.Location = new System.Drawing.Point(40, 276);
+            this.label36.Name = "label36";
+            this.label36.Size = new System.Drawing.Size(116, 20);
+            this.label36.TabIndex = 16;
+            this.label36.Text = "Relaxed Month";
+            // 
+            // txtRole
+            // 
+            this.txtRole.Location = new System.Drawing.Point(692, 58);
+            this.txtRole.Name = "txtRole";
+            this.txtRole.Size = new System.Drawing.Size(100, 20);
+            this.txtRole.TabIndex = 15;
+            // 
+            // txtDep
+            // 
+            this.txtDep.Location = new System.Drawing.Point(479, 58);
+            this.txtDep.Name = "txtDep";
+            this.txtDep.Size = new System.Drawing.Size(100, 20);
+            this.txtDep.TabIndex = 14;
+            // 
+            // label35
+            // 
+            this.label35.AutoSize = true;
+            this.label35.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label35.ForeColor = System.Drawing.Color.White;
+            this.label35.Location = new System.Drawing.Point(742, 92);
+            this.label35.Name = "label35";
+            this.label35.Size = new System.Drawing.Size(50, 20);
+            this.label35.TabIndex = 13;
+            this.label35.Text = "Roles";
+            // 
+            // label34
+            // 
+            this.label34.AutoSize = true;
+            this.label34.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label34.ForeColor = System.Drawing.Color.White;
+            this.label34.Location = new System.Drawing.Point(483, 92);
+            this.label34.Name = "label34";
+            this.label34.Size = new System.Drawing.Size(102, 20);
+            this.label34.TabIndex = 12;
+            this.label34.Text = "Departments";
+            // 
+            // btnAddRole
+            // 
+            this.btnAddRole.BackColor = System.Drawing.Color.White;
+            this.btnAddRole.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAddRole.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAddRole.ForeColor = System.Drawing.Color.DarkSlateGray;
+            this.btnAddRole.Location = new System.Drawing.Point(798, 58);
+            this.btnAddRole.Name = "btnAddRole";
+            this.btnAddRole.Size = new System.Drawing.Size(103, 27);
+            this.btnAddRole.TabIndex = 11;
+            this.btnAddRole.Text = "ADD";
+            this.btnAddRole.UseVisualStyleBackColor = false;
+            // 
+            // btnAddDepartment
+            // 
+            this.btnAddDepartment.BackColor = System.Drawing.Color.White;
+            this.btnAddDepartment.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAddDepartment.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAddDepartment.ForeColor = System.Drawing.Color.DarkSlateGray;
+            this.btnAddDepartment.Location = new System.Drawing.Point(585, 58);
+            this.btnAddDepartment.Name = "btnAddDepartment";
+            this.btnAddDepartment.Size = new System.Drawing.Size(103, 27);
+            this.btnAddDepartment.TabIndex = 10;
+            this.btnAddDepartment.Text = "ADD";
+            this.btnAddDepartment.UseVisualStyleBackColor = false;
+            // 
+            // cmbBXDepartment
+            // 
+            this.cmbBXDepartment.FormattingEnabled = true;
+            this.cmbBXDepartment.Location = new System.Drawing.Point(567, 91);
+            this.cmbBXDepartment.Name = "cmbBXDepartment";
+            this.cmbBXDepartment.Size = new System.Drawing.Size(121, 21);
+            this.cmbBXDepartment.TabIndex = 5;
+            // 
+            // cmbBXRoles
+            // 
+            this.cmbBXRoles.FormattingEnabled = true;
+            this.cmbBXRoles.Location = new System.Drawing.Point(798, 91);
+            this.cmbBXRoles.Name = "cmbBXRoles";
+            this.cmbBXRoles.Size = new System.Drawing.Size(103, 21);
+            this.cmbBXRoles.TabIndex = 4;
+            // 
+            // dateTimePicker4
+            // 
+            this.dateTimePicker4.Location = new System.Drawing.Point(326, 368);
+            this.dateTimePicker4.Name = "dateTimePicker4";
+            this.dateTimePicker4.Size = new System.Drawing.Size(200, 20);
+            this.dateTimePicker4.TabIndex = 3;
+            // 
+            // dateTimePicker3
+            // 
+            this.dateTimePicker3.Location = new System.Drawing.Point(44, 368);
+            this.dateTimePicker3.Name = "dateTimePicker3";
+            this.dateTimePicker3.Size = new System.Drawing.Size(200, 20);
+            this.dateTimePicker3.TabIndex = 2;
+            // 
+            // dateTimePicker2
+            // 
+            this.dateTimePicker2.Location = new System.Drawing.Point(326, 305);
+            this.dateTimePicker2.Name = "dateTimePicker2";
+            this.dateTimePicker2.Size = new System.Drawing.Size(200, 20);
+            this.dateTimePicker2.TabIndex = 1;
+            // 
+            // dateTimePicker1
+            // 
+            this.dateTimePicker1.Location = new System.Drawing.Point(44, 305);
+            this.dateTimePicker1.Name = "dateTimePicker1";
+            this.dateTimePicker1.Size = new System.Drawing.Size(200, 20);
+            this.dateTimePicker1.TabIndex = 0;
+            // 
+            // txtNumber
+            // 
+            this.txtNumber.BackColor = System.Drawing.Color.White;
+            this.txtNumber.Location = new System.Drawing.Point(54, 239);
+            this.txtNumber.Name = "txtNumber";
+            this.txtNumber.Size = new System.Drawing.Size(146, 20);
+            this.txtNumber.TabIndex = 20;
+            // 
+            // calenderHighlight
+            // 
+            this.calenderHighlight.Location = new System.Drawing.Point(564, 139);
+            this.calenderHighlight.Name = "calenderHighlight";
+            this.calenderHighlight.TabIndex = 61;
+            // 
+            // constrainsComponent2
+            // 
+            this.constrainsComponent2.Departement1 = "Engineering-Plumbing-Roofing-Carpentry- Bricklaying-Office";
+            this.constrainsComponent2.Roles1 = "Head-Deputy Head- Manager-Apprentice-Junior Member-Senior Member";
             // 
             // ManageForm
             // 
@@ -1409,6 +1586,8 @@
             this.pnlHolidayReq.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.notValidHolidayReqGridView)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.validHolidayReqGridView)).EndInit();
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -1432,7 +1611,6 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox txtEmail;
-        private System.Windows.Forms.TextBox txtNumber;
         private System.Windows.Forms.TextBox txtSurname;
         private System.Windows.Forms.TextBox txtPostcode;
         private System.Windows.Forms.Button btnCreateEmploy;
@@ -1525,5 +1703,21 @@
         private System.Windows.Forms.Label label31;
         private System.Windows.Forms.Button btnSettings;
         private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Label label35;
+        private System.Windows.Forms.Label label34;
+        private System.Windows.Forms.Button btnAddRole;
+        private System.Windows.Forms.Button btnAddDepartment;
+        private System.Windows.Forms.ComboBox cmbBXDepartment;
+        private System.Windows.Forms.ComboBox cmbBXRoles;
+        private System.Windows.Forms.DateTimePicker dateTimePicker4;
+        private System.Windows.Forms.DateTimePicker dateTimePicker3;
+        private System.Windows.Forms.DateTimePicker dateTimePicker2;
+        private System.Windows.Forms.DateTimePicker dateTimePicker1;
+        private System.Windows.Forms.Label label37;
+        private System.Windows.Forms.Label label36;
+        private System.Windows.Forms.TextBox txtRole;
+        private System.Windows.Forms.TextBox txtDep;
+        private System.Windows.Forms.RadioButton rdbtnUndo;
+        private Component_A_ClassLibrary.TelephoneDigit txtNumber;
     }
 }

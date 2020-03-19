@@ -40,7 +40,6 @@ namespace HolidayManager_ClassLibrary.Functionality_A
             try
             {
                 // Query to find matching staffid and password in DB
-
                 var verQuery = from a in db.employees
                                where a.StaffID == StaffID && a.Password == Password
                                select a;

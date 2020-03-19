@@ -1,20 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using Component_A_ClassLibrary;
-
-
-
-namespace HolidayManager_ClassLibrary.Functionality_D
+﻿namespace Component_A_ClassLibrary
 {
-    partial class PriorityComponent
+    partial class TelephoneDigit
     {
-        private readonly DataClasses1DataContext db = new DataClasses1DataContext();
         /// <summary>
         /// Required designer variable.
         /// </summary>
@@ -45,7 +32,5 @@ namespace HolidayManager_ClassLibrary.Functionality_D
         }
 
         #endregion
-
-        
     }
 }

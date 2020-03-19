@@ -102,12 +102,10 @@ namespace EmployeeWebApp
 
             else if (peakValue != 0)
             {
-                bool valid;
                 List<DateTime> newdates = new List<DateTime>();
                 if (peakValue == 1)
                 {
                     newdates = pt.newSuggestion(start, end, pt.StarPeak, pt.StarPeak);
-                    // MsgBox("Your request happends to be on " + pt.Holiday + " holiday", this.Page, this);
                 }
                 else if (peakValue == 2)
                 {
@@ -117,10 +115,28 @@ namespace EmployeeWebApp
                 {
                     newdates = pt.newSuggestion(start, end, pt.StarPeak, pt.StarPeak);
                 }
-
-                MsgBox("Your request happends to be on " + pt.Holiday + " holiday we suggest " + newdates[0].ToString("d") + "  To  " + newdates[1].ToString("d"), this.Page, this);
-                txtbxHolidayStart.Text = newdates[0].ToString("d");
-                txtbxHolidayEnd.Text = newdates[1].ToString("d");
+                if (MessageBox.Show("Accept suggestion", "Your request happends to be on " + pt.Holiday + " holiday we suggest " + newdates[0].ToString("d") + "  To  " + newdates[1].ToString("d"), MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                {
+                    if (hm.SubmitHolidayReq(newdates[0], newdates[1], ((long)(Session["sesID"]))))
+                    {
+                        MessageBox.Show("Booking from: " + newdates[0].ToString("d"), "To: " + end.ToString("d"));
+                    }
+                    else
+                    {
+                        MessageBox.Show("We couldn't completer yor request this time, please try later");
+                    }
+                }
+                else
+                {
+                    if (hm.SubmitHolidayReq(start, end, ((long)(Session["sesID"]))))
+                    {
+                        MessageBox.Show("Booking from: " + start.ToString("d"), "To: " + end.ToString("d"));
+                    }
+                    else
+                    {
+                        MessageBox.Show("We couldn't completer yor request this time, please try later");
+                    }
+                }   
             }
             else
             {

@@ -57,7 +57,7 @@ namespace HolidayManager_ClassLibrary
 
         }
 
-    public ConstrainsComponent(IContainer container)
+        public ConstrainsComponent(IContainer container)
         {
             container.Add(this);
         }
@@ -71,7 +71,6 @@ namespace HolidayManager_ClassLibrary
 
         public int HolidaysLeft(long EmployeeID)
         {
-          //  holidaysLeft = GetConstraint().HolidayEntitlement;
 
 
             var daysEntiled = (from a in db.employees
@@ -92,6 +91,7 @@ namespace HolidayManager_ClassLibrary
                                  select a).ToList();
             int count=0;
             
+            //for evry five years add one to bonus 
             for (int i = 0; i < years; i++)
             {
                 if (count==5)
@@ -142,7 +142,7 @@ namespace HolidayManager_ClassLibrary
             role person = GetRole(StaffID);
             holidaysrequested holiday = GetHoliday(requestID);
             //return if the manager request pass the constrains, false if not
-            bool validReq = true;
+            bool validReq = false;
             string myRole = "";
             string roleType = person.RoleType.ToString();
             switch (roleType)
@@ -168,15 +168,21 @@ namespace HolidayManager_ClassLibrary
                                 && (person.department.DeptName == departmentName) /*&& b.EndDate  DateTime.Today*/ )
                                 select b).ToList();
 
-            
             foreach (var h in holidays)
             {
                //Chech if the holiday request overlaps with an existing holiday
                 if(holiday.StartDate < h.EndDate && h.StartDate < holiday.EndDate)
                 {
-                     validReq = false;
+                    validReq = true;
+
                 }
+                else
+                {
+                    
+                }
+                
             }
+            
 
             return validReq;
         }
@@ -273,6 +279,7 @@ namespace HolidayManager_ClassLibrary
                 }
                 else
                 {
+                    //only 60% on duty required
                     minWorkingStaff = (int)GetConstraint().MinimumWorkingStaffRelaxed;
                 }
                 if (percentBooked < minWorkingStaff)

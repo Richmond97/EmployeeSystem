@@ -72,7 +72,7 @@ namespace EmployeeMobileApp
             btnLogout.Hide();
         }
 
-        private void BtnLogout_Click_1(object sender, EventArgs e)
+        private void BtnLogout_Click(object sender, EventArgs e)
         {
             pnlHolidayReq.Hide();
             pnlView.Hide();
@@ -82,16 +82,17 @@ namespace EmployeeMobileApp
 
         }
 
-        private void BtnHome_Click_1(object sender, EventArgs e)
+        private void BtnHome_Click(object sender, EventArgs e)
         {
             pnlHolidayReq.Show();
             pnlView.Hide();
             pnlLogin.Hide();
-            dataGridView1.DataSource = soap.ViewHolidayReqStatus(staffID);
+            //dataGridView1.DataSource = soap.ViewHolidayReqStatus(staffID);
         }
 
-        private void BtnView_Click_1(object sender, EventArgs e)
+        private void BtnView_Click(object sender, EventArgs e)
         {
+            pnlView.Show();
             pnlHolidayReq.Hide();
             pnlLogin.Hide();
 
@@ -104,7 +105,6 @@ namespace EmployeeMobileApp
                     string[] indivudal = item.Split('*');
                     dataGridView1.Rows.Add(indivudal);
                 }
-                //dataGridView1.DataSource = soap.ViewHolidayReqStatus(staffID);
                 dataGridView1.RowHeadersVisible = false;
             }
             catch (Exception ex)
