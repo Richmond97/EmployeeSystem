@@ -31,7 +31,6 @@ namespace Component_A_ClassLibrary.Tests
         public void VerificationTest()
         {
             lc.Verification("Admin");
-            string level = "Admin";
             long id = lc.StaffID = 111111;
             string pass = lc.Password = "111111";
             bool actual;
@@ -45,7 +44,6 @@ namespace Component_A_ClassLibrary.Tests
         public void VerificationTest1()
         {
             lc.Verification("Admin");
-            string level = "Admin";
             long id = lc.StaffID = 111101;
             string pass = lc.Password = "111111";
             bool actual;

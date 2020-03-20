@@ -18,9 +18,9 @@ namespace HolidayManager_ClassLibrary.Functionality_D
         {
             InitializeComponent();
         }
+        int validHolidayCount = 0;
 
-      //  public List<holidaysrequested> Holidays1 { get; set; } = new List<holidaysrequested>();
-
+        public int ValidHolidayCount { get => validHolidayCount; set => validHolidayCount = value; }
 
         public PriorityComponent(IContainer container)
         {
@@ -29,33 +29,6 @@ namespace HolidayManager_ClassLibrary.Functionality_D
             InitializeComponent();
         }
 
- 
-        private void BubbleSort(string[] args)
-        {
-            int[] a = { 30, 20, 50, 40, 10 };
-            int t;
-            Console.WriteLine("The Array is : ");
-            for (int i = 0; i < a.Length; i++)
-            {
-                Console.WriteLine(a[i]);
-            }
-            for (int j = 0; j <= a.Length - 2; j++)
-            {
-                for (int i = 0; i <= a.Length - 2; i++)
-                {
-                    if (a[i] > a[i + 1])
-                    {
-                        t = a[i + 1];
-                        a[i + 1] = a[i];
-                        a[i] = t;
-                    }
-                }
-            }
-            Console.WriteLine("The Sorted Array :");
-            foreach (int aray in a)
-                Console.Write(aray + " ");
-            Console.ReadLine();
-        }
 
         public List<holidaysrequested> sortPeak()
         {
@@ -64,10 +37,12 @@ namespace HolidayManager_ClassLibrary.Functionality_D
                          select a);
             List<holidaysrequested> peakHolidays = new List<holidaysrequested>();
             List<holidaysrequested> Holidays = new List<holidaysrequested>();
-
             foreach (var h in query)
             {
+               //the method IsPeakTime return zero if the holiday is in peak period
+               //otherwise it returns 1,2, and 3 each rapressenting a peak time 
                 int peakValue = pk.IsPeakTime(h.StartDate, h.EndDate);
+                //we popolare the the acording lists
                 if (peakValue != 0)
                 {
                     peakHolidays.Add(h);
@@ -75,10 +50,14 @@ namespace HolidayManager_ClassLibrary.Functionality_D
                 else
                 {
                     Holidays.Add(h);
-                }
-                      
+                }     
             }
+            //the value of the lenth of the list of the holidays that brake any constrain will be used
+            //to create a visualixation of the sorted list
+            ValidHolidayCount = Holidays.Count - 1;
+
             //Bubble Sort
+            //
             holidaysrequested t;
             for (int j = 0; j <= peakHolidays.Count - 3; j++)
             {
@@ -98,13 +77,14 @@ namespace HolidayManager_ClassLibrary.Functionality_D
             return Holidays;
         }
 
-        private int alg(holidaysrequested holi)
+        private double alg(holidaysrequested holi)
         {
+            //find the total number of Holidays taken
             var totHol = (from a in db.holidaysrequesteds
                           where holi.EmployeeID == a.EmployeeID && a.Status == "Approved"
                           select a).ToList().Count();
 
-
+            //getting peaktime dates from database
             var xmasQ = (from a in db.peaktimes
                          where a.PeaktimesName == "peakTimeXmas"
                          select a).Single();
@@ -117,18 +97,24 @@ namespace HolidayManager_ClassLibrary.Functionality_D
             DateTime startEaster = easter.AddDays(-7);
             DateTime endEaster = easter.AddDays(7);
 
+            //Find the total number fo holidays requested in peakTime
             var totPeak = (from a in db.holidaysrequesteds
                            where (holi.EmployeeID == a.EmployeeID && a.Status == "Approved") && ((startEaster < a.EndDate && a.StartDate < endEaster)
                            || (xmasQ.StartDate < a.EndDate && a.StartDate < xmasQ.EndDate)
                            || (summerQ.StartDate < a.EndDate && a.StartDate < summerQ.EndDate))
                            select a).ToList().Count();
 
-            return (totHol / 30) + (totPeak / 30);
+            // devide the total number of holidays taken   by the max holidays aavailable [ bonus holidays not taken in consderation ]
+            // devide the total number of holidays taken in Peak period  by the max holidays aavailable [ bonus holidays not taken in consderation ]
+            //add the two numbes toghter 
+            // 1.3 is used aa a  weight to balance, the weght is applied on the total number
+            //of holidays because a higher scsore means the person comes befor on the list 
+            return (1.35 * ((double)totHol / 30.0)) + ((double)totPeak / 30.0);
 
         }
 
        
-        public static DateTime EasterSunday(int year)  //https://www.codeproject.com/Articles/10860/Calculating-Christian-Holidays
+        public static DateTime EasterSunday(int year)  
         {
             int day = 0;
             int month = 0;
@@ -149,6 +135,17 @@ namespace HolidayManager_ClassLibrary.Functionality_D
 
             return new DateTime(year, month, day);
         }
+
+
+        /***************************************************************************************
+        *    Title: <Easter Sunday>
+        *    Author: <author(s) names>
+        *    Date: <13/03/20>
+        *    Code version: <code version>
+        *    Availability: https://www.codeproject.com/Articles/10860/Calculating-Christian-Holidays
+        *
+        ***************************************************************************************/
+
 
     }
 

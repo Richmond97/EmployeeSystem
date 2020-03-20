@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using HolidayManager_ClassLibrary;
+using System.Globalization;
 
 namespace LoginForm
 {
@@ -51,11 +52,13 @@ namespace LoginForm
             createPanel.Location = new Point(0, 37);
             editPanel.Location = new Point(0, 37);
             mainPnlHM.Location = new Point(0, 37);
- 
+            settingsPnl.Location = new Point(0, 37);
+
 
             createPanel.Size = new Size(1603, 939);
             editPanel.Size = new Size(1603, 939);
             mainPnlHM.Size = new Size(1603, 939);
+            settingsPnl.Size = new Size(1603, 939);
 
             //Holiday Manager panels
             pnlHolidayBkd.Location = new Point(240, 110);
@@ -74,7 +77,7 @@ namespace LoginForm
             // Set search to by name
             rdName.Checked = true;
 
-            // Make combobox hold values of relevant enums
+            // Make combobox hold values of Department, and Roles 
             cbxDept.DataSource = SplitList(constrainsComponent2.Departement1);
             cbxEDept.DataSource = SplitList(constrainsComponent2.Departement1);
             cbxRole.DataSource = SplitList(constrainsComponent2.Roles1);
@@ -99,9 +102,11 @@ namespace LoginForm
             btnEdit.BackColor = Color.White;
             btnDelete.BackColor = Color.White;
             btnHolidays.BackColor = Color.White;
+            btnSettings.BackColor = Color.White;
 
             editPanel.Visible = false;
             mainPnlHM.Visible = false;
+            settingsPnl.Visible = false;
         }
 
         private void BtnEdit_Click(object sender, EventArgs e)
@@ -111,9 +116,11 @@ namespace LoginForm
             btnEdit.BackColor = Color.DarkGray;
             btnDelete.BackColor = Color.White;
             btnHolidays.BackColor = Color.White;
+            btnSettings.BackColor = Color.White;
 
             createPanel.Visible = false;
             mainPnlHM.Visible = false;
+            settingsPnl.Visible = false;
             btnEditEmploy.Show();
             btnDeleteEmploy.Hide();
         }
@@ -125,9 +132,11 @@ namespace LoginForm
             btnEdit.BackColor = Color.White;
             btnDelete.BackColor = Color.DarkGray;
             btnHolidays.BackColor = Color.White;
+            btnSettings.BackColor = Color.White;
 
             createPanel.Visible = false;
             mainPnlHM.Visible = false;
+            settingsPnl.Visible = false;
             btnEditEmploy.Hide();
             btnDeleteEmploy.Show();
         }
@@ -155,6 +164,20 @@ namespace LoginForm
             btnAccept.Show();
             btnReject.Show();
 
+        }
+
+        private void BtnSettings_Click(object sender, EventArgs e)
+        {
+            settingsPnl.Visible = true;
+            btnHolidays.BackColor = Color.Gray;
+            btnCreate.BackColor = Color.White;
+            btnEdit.BackColor = Color.White;
+            btnDelete.BackColor = Color.White;
+
+            createPanel.Visible = false;
+            editPanel.Visible = false;
+            mainPnlHM.Visible = false;
+            HolidaySettingPanel();
         }
         #endregion
 
@@ -412,7 +435,6 @@ namespace LoginForm
           return (long)dgv[i, dgv.SelectedRows[i].Index].Value;
         }
  
-
         private void ArrangeHolidaysPanel()
         {
             string type = "nonPriority";
@@ -425,7 +447,7 @@ namespace LoginForm
             hm.ConfirmedReq(dataGridViewBooked);
             hm.OutstandingReq(dataGridSorted,notValidHolidayReqGridView, typeP);
 
-            rdbtn.Checked = true;
+            rdbtnUndo.Checked = true;
 
             pnlHolidayBkd.Show();
             pnlHolidayReq.Hide();
@@ -472,7 +494,6 @@ namespace LoginForm
 
 
         }
-
 
         private void BtnAccept_Click(object sender, EventArgs e)
         {
@@ -576,7 +597,7 @@ namespace LoginForm
 
         private void MonthCalendar_DateSelected(object sender, DateRangeEventArgs e)
         {
-            monthCalendar.MaxSelectionCount = 1;
+                monthCalendar.MaxSelectionCount = 1;
                 hm.EmployeeOffOnDuty(monthCalendar.SelectionRange.Start, dataGridOnOffDuty, rdbtnOffDuty);
         }
 
@@ -591,8 +612,7 @@ namespace LoginForm
                     hm.TypeConstrainBroken((long)Selected);
                 }
 
-                MessageBox.Show("Please slect a valid Holiday request");
-
+          
             }
             catch (Exception ec)
             {
@@ -605,9 +625,6 @@ namespace LoginForm
             try
             {
                 long req = getSelectedRow(dataGridViewBooked,0);
-
-                //DateTime start = Convert.ToDateTime(dataGridView1[3, dataGridView1.SelectedRows[0].Index].Value);
-                //DateTime end = Convert.ToDateTime(dataGridView1[4, dataGridView1.SelectedRows[0].Index].Value);
                 DateTime start = hm.HighlightBooked(req).StartDate;
                 DateTime end = hm.HighlightBooked(req).EndDate;
                 calenderHighlight.highlightBook(start, end);
@@ -628,15 +645,12 @@ namespace LoginForm
                 {
                     Selected = (getSelectedRow(dataGridSorted, 0));
                 }
-                else if (getSelectedRow(dataGridSorted, 0) != 0)
-                {
-                    Selected = getSelectedRow(dataGridSorted, 0);
-                }
-
-                //holidayReqGridView.CurrentRow.Selected = true;
+                //else if (getSelectedRow(dataGridSorted, 0) != 0)
+                //{
+                //    Selected = getSelectedRow(dataGridSorted, 0);
+                //}
                 string decision = "Approved";
                 string type = "Priority";
-                //var Selected = (long)holidayReqGridView[0, holidayReqGridView.SelectedRows[0].Index].Value;
                 hm.accept_OR_rejectReq((long)Selected, decision);
                 hm.RefreshGrid(dataGridSorted);
                 hm.OutstandingReq(dataGridSorted, dataGridSorted, type);
@@ -656,14 +670,12 @@ namespace LoginForm
                 {
                     Selected = getSelectedRow(dataGridSorted, 0);
                 }
-                else if (getSelectedRow(dataGridSorted, 0) != 0)
-                {
-                    Selected = getSelectedRow(dataGridSorted, 0);
-                }
-                //holidayReqGridView.CurrentRow.Selected = true;
+                //else if (getSelectedRow(dataGridSorted, 0) != 0)
+                //{
+                //    Selected = getSelectedRow(dataGridSorted, 0);
+                //}
                 string decision = "Declined";
                 string type = "Priority";
-                //var Selected = (long)holidayReqGridView[0, holidayReqGridView.SelectedRows[0].Index].Value;
                 hm.accept_OR_rejectReq((long)Selected, decision);
                 hm.RefreshGrid(validHolidayReqGridView);
                 hm.OutstandingReq(dataGridSorted, notValidHolidayReqGridView,type);
@@ -699,8 +711,55 @@ namespace LoginForm
             else if (rdbtn.Checked)
             {
                 dataGridSorted.DataSource = priorityComponent.sortPeak();
-            }
+                int Count = dataGridSorted.RowCount-1;
+                foreach (DataGridViewRow row in dataGridSorted.Rows)
+                {
+                    if (Count < priorityComponent.ValidHolidayCount)
+                    {
+                        row.DefaultCellStyle.BackColor = Color.PeachPuff;
+                    }
+                    else
+                    {
+                        row.DefaultCellStyle.BackColor = Color.GreenYellow;
+                    }
+                    Count--;
+                }
+                   
 
+
+            }
+                    
+        }
+
+        private void HolidaySettingPanel()
+        {
+
+            var months = System.Globalization.DateTimeFormatInfo.InvariantInfo.MonthNames;
+            cmbxMonths.DataSource = months;
+
+            constraint constraints = hm.getConstraints();
+
+            cmbBXRoles.DataSource = SplitList(constraints.AvailableRoles);
+            cmbBXDepartment.DataSource = SplitList(constraints.AvailableDepartments);
+            numDaysEnt.Value = (decimal)constraints.HolidayEntitlement;
+            numRelaxed.Value = (decimal)constraints.MinimumWorkingStaffRelaxed;
+            numStaffReq.Value = (decimal)constraints.MinimumWorkingStaff;
+            cmbxMonths.SelectedIndex = (int)constraints.RelaxedMonth;
+
+            peaktime Xpeak = hm.getXmasPeakT();
+            peaktime Speak = hm.getSummerPeakT();
+            dtpStartXmas.Value = Xpeak.StartDate;
+            dtpEndXmas.Value = Xpeak.EndDate;
+            dtpStartSummer.Value = Speak.StartDate;
+            dtpSummerEnd.Value = Speak.StartDate;
+
+            
+        }
+
+        private void Button1_Click(object sender, EventArgs e)
+        {
+            hm.SettingsChanges(dtpStartXmas.Value, dtpEndXmas.Value, dtpStartSummer.Value, dtpSummerEnd.Value, cmbBXRoles, cmbBXDepartment, numDaysEnt, numRelaxed, numStaffReq, cmbxMonths);
+            //HolidaySettingPanel();
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,29 +14,34 @@ namespace HolidayManager_ClassLibrary.Functionality_A
         private readonly DataClasses1DataContext db = new DataClasses1DataContext();
         ConstrainsComponent cc = new ConstrainsComponent();
 
-        public void OutstandingReq(DataGridView validDG, DataGridView inValidDG, string type)
-        {
 
+        
+        public void OutstandingReq(DataGridView validDG, DataGridView inValidDG, string type)
+        {//In Order to add versatility, the variable type is added
+         //When type == Priority, is used for the sorted datagrid of request
+         //Otherwise is used to fill --> validRequest Datagrid and nonValid request datagrid
+
+
+         //Get all outstanding requests
             var result = (from a in db.holidaysrequesteds
                           where a.Status == "Pending"
                           select a
                           ).ToList();
+
             if(type == "Priority")
             {
                 validDG.DataSource = result;
                 validDG.Columns["employee"].Visible = false;
                 validDG.Columns["Status"].Visible = false;
-
-
             }
             else
-            {   //two List  fro valid and none valid holiday request 
+            {   //two List  valid and none valid holiday request 
                 List<holidaysrequested> validReq = new List<holidaysrequested>();
                 List<holidaysrequested> notValidReq = new List<holidaysrequested>();
 
                 foreach (var holiday in result)
-                { //if 
-                    if (cc.validHolidayReqManagerHead(holiday.RequestID, holiday.EmployeeID) && (cc.enoughStaff(holiday.EmployeeID ,holiday.RequestID) ==  0))
+                {
+                    if (!cc.validHolidayReqManagerHead(holiday.RequestID, holiday.EmployeeID) && (cc.enoughStaff(holiday.EmployeeID ,holiday.RequestID) ==  0))
                     {
                         validReq.Add(holiday);
                     }
@@ -46,9 +52,12 @@ namespace HolidayManager_ClassLibrary.Functionality_A
                 }
 
                 validDG.DataSource = validReq;
-                inValidDG.DataSource = notValidReq;
+                validDG.DefaultCellStyle.BackColor = Color.GreenYellow;
                 validDG.Columns["employee"].Visible = false;
                 validDG.Columns["Status"].Visible = false;
+
+                inValidDG.DataSource = notValidReq;
+                inValidDG.DefaultCellStyle.BackColor = Color.PeachPuff;
                 inValidDG.Columns["employee"].Visible = false;
                 inValidDG.Columns["Status"].Visible = false;
             }
@@ -60,12 +69,13 @@ namespace HolidayManager_ClassLibrary.Functionality_A
                           where a.Status == "Pending" && reqID == a.RequestID
                           select a
                           ).Single();
+
             if (cc.enoughStaff(result.EmployeeID, result.RequestID) == 1)
             {
                 message = " Constraint broken [ %40 of staff requireed for department ] " ;
                 if(cc.validHolidayReqManagerHead(result.RequestID, result.EmployeeID) == false)
                 {
-                    message += "  And  Constraint broken [ Either Head, Head Deputy or Manager,  Senior member must be on duty ] ";
+                    message += "  And  Constraint broken [ Either Head, Head Deputy or Manager,  Senior member must be on duty ]";
                 }
                 MessageBox.Show(message);
             }
@@ -159,7 +169,7 @@ namespace HolidayManager_ClassLibrary.Functionality_A
                 else
                 {
                     table.DataSource = "";
-                    MessageBox.Show("Employee not working on selcted date NOT found");
+                    MessageBox.Show("No Employee will be working on selcted date");
                 }
             }
             else
@@ -172,7 +182,7 @@ namespace HolidayManager_ClassLibrary.Functionality_A
                 else
                 {
                     table.DataSource = "";
-                    MessageBox.Show("Employee not working on selcted date NOT found");
+                    MessageBox.Show("No Employee will be on live on selected date");
                 }
             }
 
@@ -242,5 +252,63 @@ namespace HolidayManager_ClassLibrary.Functionality_A
             return holiday;
         }
 
+        public constraint getConstraints()
+        {
+            var Qconstraint = (from a in db.constraints
+                              select a).Single();
+            return Qconstraint;
+        }
+        public peaktime getXmasPeakT()
+        {
+            var xmasQ = (from a in db.peaktimes
+                         where a.PeaktimesName == "peakTimeXmas"
+                         select a).Single();
+            return xmasQ;
+        }
+        public peaktime getSummerPeakT()
+        {
+            var xmasQ = (from a in db.peaktimes
+                         where a.PeaktimesName == "peakTimeXmas"
+                         select a).Single();
+            return xmasQ;
+        }
+
+
+        //cmbBXRoles.DataSource = SplitList(constraints.AvailableRoles);
+        //cmbBXDepartment.DataSource = SplitList(constraints.AvailableDepartments);
+        //numDaysEnt.Value = (decimal) constraints.HolidayEntitlement;
+        //numRelaxed.Value = (decimal) constraints.MinimumWorkingStaffRelaxed;
+        //numStaffReq.Value = (decimal) constraints.MinimumWorkingStaff;
+        //cmbxMonths.SelectedIndex = (int) constraints.RelaxedMonth;
+
+        //peaktime Xpeak = hm.getXmasPeakT();
+        //peaktime Speak = hm.getSummerPeakT();
+        //dtpStartXmas.Value = Xpeak.StartDate;
+        //    dtpEndXmas.Value = Xpeak.EndDate;
+        //    dtpStartSummer.Value = Speak.StartDate;
+        //    dtpSummerEnd.Value = Speak.StartDate;
+        public void SettingsChanges(DateTime dtpStartXmas, DateTime dtpEndXmas, DateTime dtpStartSummer, DateTime dtpSummerEnd, ComboBox cmbBXRoles, ComboBox cmbBXDepartment, NumericUpDown numDaysEnt, NumericUpDown numRelaxed, NumericUpDown numStaffReq,ComboBox cmbxMonths)
+        {
+            peaktime Xpeak = getXmasPeakT();
+            peaktime Speak = getSummerPeakT();
+            constraint constraints = getConstraints();
+            if (MessageBox.Show("Save changes", "Please Confirm Your Action", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            {
+                Xpeak.StartDate = dtpStartXmas;
+                Xpeak.EndDate = dtpEndXmas;
+                Speak.StartDate = dtpStartSummer;
+                Speak.EndDate = dtpSummerEnd;
+                constraints.AvailableRoles = cmbBXRoles.ToString();
+                constraints.AvailableDepartments = cmbBXDepartment.ToString();
+                constraints.HolidayEntitlement = (int)numDaysEnt.Value;
+                constraints.MinimumWorkingStaffRelaxed = (int)numRelaxed.Value;
+                constraints.MinimumWorkingStaff = (int)numStaffReq.Value;
+                constraints.RelaxedMonth = cmbxMonths.SelectedIndex;
+
+                db.SubmitChanges();
+
+            }
+        }
+      
     }
 }

@@ -31,6 +31,7 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ManageForm));
             this.createPanel = new System.Windows.Forms.Panel();
+            this.txtNumber = new Component_A_ClassLibrary.TelephoneDigit(this.components);
             this.cbxRole = new System.Windows.Forms.ComboBox();
             this.cbxDept = new System.Windows.Forms.ComboBox();
             this.btnCreateEmploy = new System.Windows.Forms.Button();
@@ -131,29 +132,36 @@
             this.btnAccept = new System.Windows.Forms.Button();
             this.validHolidayReqGridView = new System.Windows.Forms.DataGridView();
             this.btnSettings = new System.Windows.Forms.Button();
-            this.panel1 = new System.Windows.Forms.Panel();
+            this.settingsPnl = new System.Windows.Forms.Panel();
+            this.label42 = new System.Windows.Forms.Label();
+            this.label43 = new System.Windows.Forms.Label();
+            this.label41 = new System.Windows.Forms.Label();
+            this.numStaffReq = new System.Windows.Forms.NumericUpDown();
+            this.label40 = new System.Windows.Forms.Label();
+            this.label39 = new System.Windows.Forms.Label();
+            this.label38 = new System.Windows.Forms.Label();
+            this.numDaysEnt = new System.Windows.Forms.NumericUpDown();
+            this.numRelaxed = new System.Windows.Forms.NumericUpDown();
             this.label37 = new System.Windows.Forms.Label();
             this.label36 = new System.Windows.Forms.Label();
-            this.txtRole = new System.Windows.Forms.TextBox();
-            this.txtDep = new System.Windows.Forms.TextBox();
             this.label35 = new System.Windows.Forms.Label();
             this.label34 = new System.Windows.Forms.Label();
-            this.btnAddRole = new System.Windows.Forms.Button();
-            this.btnAddDepartment = new System.Windows.Forms.Button();
             this.cmbBXDepartment = new System.Windows.Forms.ComboBox();
             this.cmbBXRoles = new System.Windows.Forms.ComboBox();
-            this.dateTimePicker4 = new System.Windows.Forms.DateTimePicker();
-            this.dateTimePicker3 = new System.Windows.Forms.DateTimePicker();
-            this.dateTimePicker2 = new System.Windows.Forms.DateTimePicker();
-            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
-            this.txtNumber = new Component_A_ClassLibrary.TelephoneDigit(this.components);
+            this.dtpSummerEnd = new System.Windows.Forms.DateTimePicker();
+            this.dtpStartSummer = new System.Windows.Forms.DateTimePicker();
+            this.dtpEndXmas = new System.Windows.Forms.DateTimePicker();
+            this.dtpStartXmas = new System.Windows.Forms.DateTimePicker();
             this.createEmployee1 = new Component_A_ClassLibrary.CreateEmployee(this.components);
             this.editEmployee1 = new Component_A_ClassLibrary.EditEmployee(this.components);
             this.deleteEmployee1 = new Component_A_ClassLibrary.DeleteEmployee(this.components);
             this.createEmployee2 = new Component_A_ClassLibrary.CreateEmployee(this.components);
+            this.cmbxMonths = new System.Windows.Forms.ComboBox();
+            this.label44 = new System.Windows.Forms.Label();
             this.calenderHighlight = new HolidayManager_ClassLibrary.Functionality_E.calenderHighlight(this.components);
             this.constrainsComponent2 = new HolidayManager_ClassLibrary.ConstrainsComponent(this.components);
             this.priorityComponent = new HolidayManager_ClassLibrary.Functionality_D.PriorityComponent(this.components);
+            this.button1 = new System.Windows.Forms.Button();
             this.createPanel.SuspendLayout();
             this.editPanel.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -172,7 +180,10 @@
             this.pnlHolidayReq.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.notValidHolidayReqGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.validHolidayReqGridView)).BeginInit();
-            this.panel1.SuspendLayout();
+            this.settingsPnl.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numStaffReq)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numDaysEnt)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numRelaxed)).BeginInit();
             this.SuspendLayout();
             // 
             // createPanel
@@ -205,6 +216,14 @@
             this.createPanel.Name = "createPanel";
             this.createPanel.Size = new System.Drawing.Size(958, 508);
             this.createPanel.TabIndex = 0;
+            // 
+            // txtNumber
+            // 
+            this.txtNumber.BackColor = System.Drawing.Color.White;
+            this.txtNumber.Location = new System.Drawing.Point(54, 239);
+            this.txtNumber.Name = "txtNumber";
+            this.txtNumber.Size = new System.Drawing.Size(146, 20);
+            this.txtNumber.TabIndex = 20;
             // 
             // cbxRole
             // 
@@ -434,7 +453,7 @@
             this.btnCreate.ForeColor = System.Drawing.Color.DarkSlateGray;
             this.btnCreate.Location = new System.Drawing.Point(-2, 0);
             this.btnCreate.Name = "btnCreate";
-            this.btnCreate.Size = new System.Drawing.Size(203, 37);
+            this.btnCreate.Size = new System.Drawing.Size(210, 37);
             this.btnCreate.TabIndex = 1;
             this.btnCreate.Text = "ADD EMPLOYEE";
             this.btnCreate.UseVisualStyleBackColor = false;
@@ -448,7 +467,7 @@
             this.btnEdit.ForeColor = System.Drawing.Color.DarkSlateGray;
             this.btnEdit.Location = new System.Drawing.Point(198, 0);
             this.btnEdit.Name = "btnEdit";
-            this.btnEdit.Size = new System.Drawing.Size(208, 37);
+            this.btnEdit.Size = new System.Drawing.Size(210, 37);
             this.btnEdit.TabIndex = 2;
             this.btnEdit.Text = "EDIT EMPLOYEE";
             this.btnEdit.UseVisualStyleBackColor = false;
@@ -462,7 +481,7 @@
             this.btnDelete.ForeColor = System.Drawing.Color.DarkSlateGray;
             this.btnDelete.Location = new System.Drawing.Point(402, 0);
             this.btnDelete.Name = "btnDelete";
-            this.btnDelete.Size = new System.Drawing.Size(211, 37);
+            this.btnDelete.Size = new System.Drawing.Size(210, 37);
             this.btnDelete.TabIndex = 3;
             this.btnDelete.Text = "DELETE EMPLOYEE";
             this.btnDelete.UseVisualStyleBackColor = false;
@@ -843,9 +862,9 @@
             this.btnLogout.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnLogout.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnLogout.ForeColor = System.Drawing.Color.DarkSlateGray;
-            this.btnLogout.Location = new System.Drawing.Point(805, 0);
+            this.btnLogout.Location = new System.Drawing.Point(808, 0);
             this.btnLogout.Name = "btnLogout";
-            this.btnLogout.Size = new System.Drawing.Size(200, 37);
+            this.btnLogout.Size = new System.Drawing.Size(210, 37);
             this.btnLogout.TabIndex = 5;
             this.btnLogout.Text = "LOG OUT";
             this.btnLogout.UseVisualStyleBackColor = false;
@@ -857,9 +876,9 @@
             this.btnHolidays.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnHolidays.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnHolidays.ForeColor = System.Drawing.Color.DarkSlateGray;
-            this.btnHolidays.Location = new System.Drawing.Point(613, 0);
+            this.btnHolidays.Location = new System.Drawing.Point(611, 0);
             this.btnHolidays.Name = "btnHolidays";
-            this.btnHolidays.Size = new System.Drawing.Size(194, 37);
+            this.btnHolidays.Size = new System.Drawing.Size(210, 37);
             this.btnHolidays.TabIndex = 6;
             this.btnHolidays.Text = "HOLIDAYS ENQ";
             this.btnHolidays.UseVisualStyleBackColor = false;
@@ -875,9 +894,9 @@
             this.mainPnlHM.Controls.Add(this.dataGridView3);
             this.mainPnlHM.Controls.Add(this.pnlHolidayOnDuty);
             this.mainPnlHM.Controls.Add(this.pnlHolidayReq);
-            this.mainPnlHM.Location = new System.Drawing.Point(97, 12);
+            this.mainPnlHM.Location = new System.Drawing.Point(97, 128);
             this.mainPnlHM.Name = "mainPnlHM";
-            this.mainPnlHM.Size = new System.Drawing.Size(954, 572);
+            this.mainPnlHM.Size = new System.Drawing.Size(859, 456);
             this.mainPnlHM.TabIndex = 7;
             // 
             // panelPriority
@@ -887,16 +906,16 @@
             this.panelPriority.Controls.Add(this.btnAcceptP);
             this.panelPriority.Controls.Add(this.dataGridSorted);
             this.panelPriority.Controls.Add(this.label30);
-            this.panelPriority.Location = new System.Drawing.Point(707, 413);
+            this.panelPriority.Location = new System.Drawing.Point(40, 294);
             this.panelPriority.Name = "panelPriority";
-            this.panelPriority.Size = new System.Drawing.Size(288, 107);
+            this.panelPriority.Size = new System.Drawing.Size(590, 226);
             this.panelPriority.TabIndex = 58;
             // 
             // groupBox4
             // 
             this.groupBox4.Controls.Add(this.rdbtnUndo);
             this.groupBox4.Controls.Add(this.rdbtn);
-            this.groupBox4.Location = new System.Drawing.Point(495, 334);
+            this.groupBox4.Location = new System.Drawing.Point(301, 19);
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.Size = new System.Drawing.Size(225, 50);
             this.groupBox4.TabIndex = 63;
@@ -907,7 +926,7 @@
             this.rdbtnUndo.AutoSize = true;
             this.rdbtnUndo.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.rdbtnUndo.ForeColor = System.Drawing.Color.White;
-            this.rdbtnUndo.Location = new System.Drawing.Point(125, 15);
+            this.rdbtnUndo.Location = new System.Drawing.Point(128, 16);
             this.rdbtnUndo.Name = "rdbtnUndo";
             this.rdbtnUndo.Size = new System.Drawing.Size(91, 29);
             this.rdbtnUndo.TabIndex = 63;
@@ -921,7 +940,7 @@
             this.rdbtn.AutoSize = true;
             this.rdbtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.rdbtn.ForeColor = System.Drawing.Color.White;
-            this.rdbtn.Location = new System.Drawing.Point(14, 10);
+            this.rdbtn.Location = new System.Drawing.Point(17, 11);
             this.rdbtn.Name = "rdbtn";
             this.rdbtn.Size = new System.Drawing.Size(105, 33);
             this.rdbtn.TabIndex = 62;
@@ -936,7 +955,7 @@
             this.btnRejectP.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnRejectP.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnRejectP.ForeColor = System.Drawing.Color.Red;
-            this.btnRejectP.Location = new System.Drawing.Point(396, 346);
+            this.btnRejectP.Location = new System.Drawing.Point(301, 361);
             this.btnRejectP.Name = "btnRejectP";
             this.btnRejectP.Size = new System.Drawing.Size(87, 38);
             this.btnRejectP.TabIndex = 61;
@@ -951,7 +970,7 @@
             this.btnAcceptP.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnAcceptP.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnAcceptP.ForeColor = System.Drawing.Color.LimeGreen;
-            this.btnAcceptP.Location = new System.Drawing.Point(283, 346);
+            this.btnAcceptP.Location = new System.Drawing.Point(188, 361);
             this.btnAcceptP.Name = "btnAcceptP";
             this.btnAcceptP.Size = new System.Drawing.Size(83, 38);
             this.btnAcceptP.TabIndex = 60;
@@ -963,7 +982,7 @@
             // 
             this.dataGridSorted.BackgroundColor = System.Drawing.Color.DarkSlateGray;
             this.dataGridSorted.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridSorted.Location = new System.Drawing.Point(283, 88);
+            this.dataGridSorted.Location = new System.Drawing.Point(88, 91);
             this.dataGridSorted.Name = "dataGridSorted";
             this.dataGridSorted.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridSorted.Size = new System.Drawing.Size(438, 246);
@@ -976,7 +995,7 @@
             this.label30.Cursor = System.Windows.Forms.Cursors.Arrow;
             this.label30.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label30.ForeColor = System.Drawing.SystemColors.GradientActiveCaption;
-            this.label30.Location = new System.Drawing.Point(24, 17);
+            this.label30.Location = new System.Drawing.Point(99, 25);
             this.label30.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label30.Name = "label30";
             this.label30.Size = new System.Drawing.Size(167, 29);
@@ -1358,80 +1377,161 @@
             // 
             // btnSettings
             // 
-            this.btnSettings.BackColor = System.Drawing.Color.White;
+            this.btnSettings.BackColor = System.Drawing.Color.Transparent;
             this.btnSettings.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnSettings.BackgroundImage")));
             this.btnSettings.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSettings.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSettings.ForeColor = System.Drawing.Color.DarkSlateGray;
-            this.btnSettings.Location = new System.Drawing.Point(1003, 0);
+            this.btnSettings.Location = new System.Drawing.Point(1009, 0);
             this.btnSettings.Name = "btnSettings";
-            this.btnSettings.Size = new System.Drawing.Size(63, 37);
+            this.btnSettings.Size = new System.Drawing.Size(59, 37);
             this.btnSettings.TabIndex = 8;
             this.btnSettings.UseVisualStyleBackColor = false;
+            this.btnSettings.Click += new System.EventHandler(this.BtnSettings_Click);
             // 
-            // panel1
+            // settingsPnl
             // 
-            this.panel1.Controls.Add(this.label37);
-            this.panel1.Controls.Add(this.label36);
-            this.panel1.Controls.Add(this.txtRole);
-            this.panel1.Controls.Add(this.txtDep);
-            this.panel1.Controls.Add(this.label35);
-            this.panel1.Controls.Add(this.label34);
-            this.panel1.Controls.Add(this.btnAddRole);
-            this.panel1.Controls.Add(this.btnAddDepartment);
-            this.panel1.Controls.Add(this.cmbBXDepartment);
-            this.panel1.Controls.Add(this.cmbBXRoles);
-            this.panel1.Controls.Add(this.dateTimePicker4);
-            this.panel1.Controls.Add(this.dateTimePicker3);
-            this.panel1.Controls.Add(this.dateTimePicker2);
-            this.panel1.Controls.Add(this.dateTimePicker1);
-            this.panel1.Location = new System.Drawing.Point(942, 50);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(115, 48);
-            this.panel1.TabIndex = 9;
+            this.settingsPnl.Controls.Add(this.button1);
+            this.settingsPnl.Controls.Add(this.label44);
+            this.settingsPnl.Controls.Add(this.cmbxMonths);
+            this.settingsPnl.Controls.Add(this.label42);
+            this.settingsPnl.Controls.Add(this.label43);
+            this.settingsPnl.Controls.Add(this.label41);
+            this.settingsPnl.Controls.Add(this.numStaffReq);
+            this.settingsPnl.Controls.Add(this.label40);
+            this.settingsPnl.Controls.Add(this.label39);
+            this.settingsPnl.Controls.Add(this.label38);
+            this.settingsPnl.Controls.Add(this.numDaysEnt);
+            this.settingsPnl.Controls.Add(this.numRelaxed);
+            this.settingsPnl.Controls.Add(this.label37);
+            this.settingsPnl.Controls.Add(this.label36);
+            this.settingsPnl.Controls.Add(this.label35);
+            this.settingsPnl.Controls.Add(this.label34);
+            this.settingsPnl.Controls.Add(this.cmbBXDepartment);
+            this.settingsPnl.Controls.Add(this.cmbBXRoles);
+            this.settingsPnl.Controls.Add(this.dtpSummerEnd);
+            this.settingsPnl.Controls.Add(this.dtpStartSummer);
+            this.settingsPnl.Controls.Add(this.dtpEndXmas);
+            this.settingsPnl.Controls.Add(this.dtpStartXmas);
+            this.settingsPnl.Location = new System.Drawing.Point(29, 12);
+            this.settingsPnl.Name = "settingsPnl";
+            this.settingsPnl.Size = new System.Drawing.Size(1028, 586);
+            this.settingsPnl.TabIndex = 9;
+            // 
+            // label42
+            // 
+            this.label42.AutoSize = true;
+            this.label42.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label42.ForeColor = System.Drawing.Color.White;
+            this.label42.Location = new System.Drawing.Point(422, 449);
+            this.label42.Name = "label42";
+            this.label42.Size = new System.Drawing.Size(0, 20);
+            this.label42.TabIndex = 26;
+            // 
+            // label43
+            // 
+            this.label43.AutoSize = true;
+            this.label43.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label43.ForeColor = System.Drawing.Color.White;
+            this.label43.Location = new System.Drawing.Point(419, 389);
+            this.label43.Name = "label43";
+            this.label43.Size = new System.Drawing.Size(0, 20);
+            this.label43.TabIndex = 25;
+            // 
+            // label41
+            // 
+            this.label41.AutoSize = true;
+            this.label41.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label41.ForeColor = System.Drawing.Color.White;
+            this.label41.Location = new System.Drawing.Point(32, 453);
+            this.label41.Name = "label41";
+            this.label41.Size = new System.Drawing.Size(158, 20);
+            this.label41.TabIndex = 24;
+            this.label41.Text = "Summer Peak Period";
+            // 
+            // numStaffReq
+            // 
+            this.numStaffReq.BackColor = System.Drawing.SystemColors.Window;
+            this.numStaffReq.Location = new System.Drawing.Point(151, 257);
+            this.numStaffReq.Name = "numStaffReq";
+            this.numStaffReq.Size = new System.Drawing.Size(36, 20);
+            this.numStaffReq.TabIndex = 23;
+            // 
+            // label40
+            // 
+            this.label40.AutoSize = true;
+            this.label40.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label40.ForeColor = System.Drawing.Color.White;
+            this.label40.Location = new System.Drawing.Point(29, 257);
+            this.label40.Name = "label40";
+            this.label40.Size = new System.Drawing.Size(116, 20);
+            this.label40.TabIndex = 22;
+            this.label40.Text = "Relaxed Month";
+            // 
+            // label39
+            // 
+            this.label39.AutoSize = true;
+            this.label39.Font = new System.Drawing.Font("Microsoft Sans Serif", 36F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label39.ForeColor = System.Drawing.Color.White;
+            this.label39.Location = new System.Drawing.Point(229, 38);
+            this.label39.Name = "label39";
+            this.label39.Size = new System.Drawing.Size(483, 55);
+            this.label39.TabIndex = 21;
+            this.label39.Text = "Holiday Configuration";
+            // 
+            // label38
+            // 
+            this.label38.AutoSize = true;
+            this.label38.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label38.ForeColor = System.Drawing.Color.White;
+            this.label38.Location = new System.Drawing.Point(28, 212);
+            this.label38.Name = "label38";
+            this.label38.Size = new System.Drawing.Size(88, 20);
+            this.label38.TabIndex = 20;
+            this.label38.Text = "Entitilment ";
+            // 
+            // numDaysEnt
+            // 
+            this.numDaysEnt.Location = new System.Drawing.Point(150, 210);
+            this.numDaysEnt.Name = "numDaysEnt";
+            this.numDaysEnt.Size = new System.Drawing.Size(36, 20);
+            this.numDaysEnt.TabIndex = 19;
+            // 
+            // numRelaxed
+            // 
+            this.numRelaxed.Location = new System.Drawing.Point(150, 167);
+            this.numRelaxed.Name = "numRelaxed";
+            this.numRelaxed.Size = new System.Drawing.Size(36, 20);
+            this.numRelaxed.TabIndex = 18;
             // 
             // label37
             // 
             this.label37.AutoSize = true;
             this.label37.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label37.ForeColor = System.Drawing.Color.White;
-            this.label37.Location = new System.Drawing.Point(45, 339);
+            this.label37.Location = new System.Drawing.Point(30, 393);
             this.label37.Name = "label37";
-            this.label37.Size = new System.Drawing.Size(102, 20);
+            this.label37.Size = new System.Drawing.Size(139, 20);
             this.label37.TabIndex = 17;
-            this.label37.Text = "Departments";
+            this.label37.Text = "Xmas Peak Period";
             // 
             // label36
             // 
             this.label36.AutoSize = true;
             this.label36.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label36.ForeColor = System.Drawing.Color.White;
-            this.label36.Location = new System.Drawing.Point(40, 276);
+            this.label36.Location = new System.Drawing.Point(28, 167);
             this.label36.Name = "label36";
             this.label36.Size = new System.Drawing.Size(116, 20);
             this.label36.TabIndex = 16;
             this.label36.Text = "Relaxed Month";
-            // 
-            // txtRole
-            // 
-            this.txtRole.Location = new System.Drawing.Point(692, 58);
-            this.txtRole.Name = "txtRole";
-            this.txtRole.Size = new System.Drawing.Size(100, 20);
-            this.txtRole.TabIndex = 15;
-            // 
-            // txtDep
-            // 
-            this.txtDep.Location = new System.Drawing.Point(479, 58);
-            this.txtDep.Name = "txtDep";
-            this.txtDep.Size = new System.Drawing.Size(100, 20);
-            this.txtDep.TabIndex = 14;
             // 
             // label35
             // 
             this.label35.AutoSize = true;
             this.label35.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label35.ForeColor = System.Drawing.Color.White;
-            this.label35.Location = new System.Drawing.Point(742, 92);
+            this.label35.Location = new System.Drawing.Point(840, 201);
             this.label35.Name = "label35";
             this.label35.Size = new System.Drawing.Size(50, 20);
             this.label35.TabIndex = 13;
@@ -1442,42 +1542,16 @@
             this.label34.AutoSize = true;
             this.label34.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label34.ForeColor = System.Drawing.Color.White;
-            this.label34.Location = new System.Drawing.Point(483, 92);
+            this.label34.Location = new System.Drawing.Point(581, 201);
             this.label34.Name = "label34";
             this.label34.Size = new System.Drawing.Size(102, 20);
             this.label34.TabIndex = 12;
             this.label34.Text = "Departments";
             // 
-            // btnAddRole
-            // 
-            this.btnAddRole.BackColor = System.Drawing.Color.White;
-            this.btnAddRole.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnAddRole.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAddRole.ForeColor = System.Drawing.Color.DarkSlateGray;
-            this.btnAddRole.Location = new System.Drawing.Point(798, 58);
-            this.btnAddRole.Name = "btnAddRole";
-            this.btnAddRole.Size = new System.Drawing.Size(103, 27);
-            this.btnAddRole.TabIndex = 11;
-            this.btnAddRole.Text = "ADD";
-            this.btnAddRole.UseVisualStyleBackColor = false;
-            // 
-            // btnAddDepartment
-            // 
-            this.btnAddDepartment.BackColor = System.Drawing.Color.White;
-            this.btnAddDepartment.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnAddDepartment.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAddDepartment.ForeColor = System.Drawing.Color.DarkSlateGray;
-            this.btnAddDepartment.Location = new System.Drawing.Point(585, 58);
-            this.btnAddDepartment.Name = "btnAddDepartment";
-            this.btnAddDepartment.Size = new System.Drawing.Size(103, 27);
-            this.btnAddDepartment.TabIndex = 10;
-            this.btnAddDepartment.Text = "ADD";
-            this.btnAddDepartment.UseVisualStyleBackColor = false;
-            // 
             // cmbBXDepartment
             // 
             this.cmbBXDepartment.FormattingEnabled = true;
-            this.cmbBXDepartment.Location = new System.Drawing.Point(567, 91);
+            this.cmbBXDepartment.Location = new System.Drawing.Point(665, 200);
             this.cmbBXDepartment.Name = "cmbBXDepartment";
             this.cmbBXDepartment.Size = new System.Drawing.Size(121, 21);
             this.cmbBXDepartment.TabIndex = 5;
@@ -1485,46 +1559,57 @@
             // cmbBXRoles
             // 
             this.cmbBXRoles.FormattingEnabled = true;
-            this.cmbBXRoles.Location = new System.Drawing.Point(798, 91);
+            this.cmbBXRoles.Location = new System.Drawing.Point(896, 200);
             this.cmbBXRoles.Name = "cmbBXRoles";
             this.cmbBXRoles.Size = new System.Drawing.Size(103, 21);
             this.cmbBXRoles.TabIndex = 4;
             // 
-            // dateTimePicker4
+            // dtpSummerEnd
             // 
-            this.dateTimePicker4.Location = new System.Drawing.Point(326, 368);
-            this.dateTimePicker4.Name = "dateTimePicker4";
-            this.dateTimePicker4.Size = new System.Drawing.Size(200, 20);
-            this.dateTimePicker4.TabIndex = 3;
+            this.dtpSummerEnd.Location = new System.Drawing.Point(460, 451);
+            this.dtpSummerEnd.Name = "dtpSummerEnd";
+            this.dtpSummerEnd.Size = new System.Drawing.Size(200, 20);
+            this.dtpSummerEnd.TabIndex = 3;
             // 
-            // dateTimePicker3
+            // dtpStartSummer
             // 
-            this.dateTimePicker3.Location = new System.Drawing.Point(44, 368);
-            this.dateTimePicker3.Name = "dateTimePicker3";
-            this.dateTimePicker3.Size = new System.Drawing.Size(200, 20);
-            this.dateTimePicker3.TabIndex = 2;
+            this.dtpStartSummer.Location = new System.Drawing.Point(191, 452);
+            this.dtpStartSummer.Name = "dtpStartSummer";
+            this.dtpStartSummer.Size = new System.Drawing.Size(200, 20);
+            this.dtpStartSummer.TabIndex = 2;
             // 
-            // dateTimePicker2
+            // dtpEndXmas
             // 
-            this.dateTimePicker2.Location = new System.Drawing.Point(326, 305);
-            this.dateTimePicker2.Name = "dateTimePicker2";
-            this.dateTimePicker2.Size = new System.Drawing.Size(200, 20);
-            this.dateTimePicker2.TabIndex = 1;
+            this.dtpEndXmas.Location = new System.Drawing.Point(460, 389);
+            this.dtpEndXmas.Name = "dtpEndXmas";
+            this.dtpEndXmas.Size = new System.Drawing.Size(200, 20);
+            this.dtpEndXmas.TabIndex = 1;
             // 
-            // dateTimePicker1
+            // dtpStartXmas
             // 
-            this.dateTimePicker1.Location = new System.Drawing.Point(44, 305);
-            this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(200, 20);
-            this.dateTimePicker1.TabIndex = 0;
+            this.dtpStartXmas.Location = new System.Drawing.Point(191, 392);
+            this.dtpStartXmas.Name = "dtpStartXmas";
+            this.dtpStartXmas.Size = new System.Drawing.Size(200, 20);
+            this.dtpStartXmas.TabIndex = 0;
             // 
-            // txtNumber
+            // cmbxMonths
             // 
-            this.txtNumber.BackColor = System.Drawing.Color.White;
-            this.txtNumber.Location = new System.Drawing.Point(54, 239);
-            this.txtNumber.Name = "txtNumber";
-            this.txtNumber.Size = new System.Drawing.Size(146, 20);
-            this.txtNumber.TabIndex = 20;
+            this.cmbxMonths.FormattingEnabled = true;
+            this.cmbxMonths.Location = new System.Drawing.Point(385, 200);
+            this.cmbxMonths.Name = "cmbxMonths";
+            this.cmbxMonths.Size = new System.Drawing.Size(121, 21);
+            this.cmbxMonths.TabIndex = 27;
+            // 
+            // label44
+            // 
+            this.label44.AutoSize = true;
+            this.label44.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label44.ForeColor = System.Drawing.Color.White;
+            this.label44.Location = new System.Drawing.Point(263, 198);
+            this.label44.Name = "label44";
+            this.label44.Size = new System.Drawing.Size(116, 20);
+            this.label44.TabIndex = 28;
+            this.label44.Text = "Relaxed Month";
             // 
             // calenderHighlight
             // 
@@ -1537,13 +1622,31 @@
             this.constrainsComponent2.Departement1 = "Engineering-Plumbing-Roofing-Carpentry- Bricklaying-Office";
             this.constrainsComponent2.Roles1 = "Head-Deputy Head- Manager-Apprentice-Junior Member-Senior Member";
             // 
+            // priorityComponent
+            // 
+            this.priorityComponent.ValidHolidayCount = 0;
+            // 
+            // button1
+            // 
+            this.button1.BackColor = System.Drawing.Color.White;
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button1.ForeColor = System.Drawing.Color.DarkSlateGray;
+            this.button1.Location = new System.Drawing.Point(779, 413);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(210, 37);
+            this.button1.TabIndex = 10;
+            this.button1.Text = "SUBMIT CHANGES";
+            this.button1.UseVisualStyleBackColor = false;
+            this.button1.Click += new System.EventHandler(this.Button1_Click);
+            // 
             // ManageForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.DarkSlateGray;
             this.ClientSize = new System.Drawing.Size(1069, 610);
-            this.Controls.Add(this.panel1);
+            this.Controls.Add(this.settingsPnl);
             this.Controls.Add(this.btnSettings);
             this.Controls.Add(this.mainPnlHM);
             this.Controls.Add(this.btnHolidays);
@@ -1586,8 +1689,11 @@
             this.pnlHolidayReq.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.notValidHolidayReqGridView)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.validHolidayReqGridView)).EndInit();
-            this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
+            this.settingsPnl.ResumeLayout(false);
+            this.settingsPnl.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numStaffReq)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numDaysEnt)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numRelaxed)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1702,22 +1808,30 @@
         private System.Windows.Forms.Label label32;
         private System.Windows.Forms.Label label31;
         private System.Windows.Forms.Button btnSettings;
-        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Panel settingsPnl;
         private System.Windows.Forms.Label label35;
         private System.Windows.Forms.Label label34;
-        private System.Windows.Forms.Button btnAddRole;
-        private System.Windows.Forms.Button btnAddDepartment;
         private System.Windows.Forms.ComboBox cmbBXDepartment;
         private System.Windows.Forms.ComboBox cmbBXRoles;
-        private System.Windows.Forms.DateTimePicker dateTimePicker4;
-        private System.Windows.Forms.DateTimePicker dateTimePicker3;
-        private System.Windows.Forms.DateTimePicker dateTimePicker2;
-        private System.Windows.Forms.DateTimePicker dateTimePicker1;
+        private System.Windows.Forms.DateTimePicker dtpSummerEnd;
+        private System.Windows.Forms.DateTimePicker dtpStartSummer;
+        private System.Windows.Forms.DateTimePicker dtpEndXmas;
+        private System.Windows.Forms.DateTimePicker dtpStartXmas;
         private System.Windows.Forms.Label label37;
         private System.Windows.Forms.Label label36;
-        private System.Windows.Forms.TextBox txtRole;
-        private System.Windows.Forms.TextBox txtDep;
         private System.Windows.Forms.RadioButton rdbtnUndo;
         private Component_A_ClassLibrary.TelephoneDigit txtNumber;
+        private System.Windows.Forms.NumericUpDown numStaffReq;
+        private System.Windows.Forms.Label label40;
+        private System.Windows.Forms.Label label39;
+        private System.Windows.Forms.Label label38;
+        private System.Windows.Forms.NumericUpDown numDaysEnt;
+        private System.Windows.Forms.NumericUpDown numRelaxed;
+        private System.Windows.Forms.Label label42;
+        private System.Windows.Forms.Label label43;
+        private System.Windows.Forms.Label label41;
+        private System.Windows.Forms.Label label44;
+        private System.Windows.Forms.ComboBox cmbxMonths;
+        private System.Windows.Forms.Button button1;
     }
 }
