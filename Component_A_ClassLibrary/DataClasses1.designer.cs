@@ -42,9 +42,6 @@ namespace Component_A_ClassLibrary
     partial void Insertholidaysrequested(holidaysrequested instance);
     partial void Updateholidaysrequested(holidaysrequested instance);
     partial void Deleteholidaysrequested(holidaysrequested instance);
-    partial void Insertholidaystaken(holidaystaken instance);
-    partial void Updateholidaystaken(holidaystaken instance);
-    partial void Deleteholidaystaken(holidaystaken instance);
     partial void Insertpeaktime(peaktime instance);
     partial void Updatepeaktime(peaktime instance);
     partial void Deletepeaktime(peaktime instance);
@@ -112,14 +109,6 @@ namespace Component_A_ClassLibrary
 			get
 			{
 				return this.GetTable<holidaysrequested>();
-			}
-		}
-		
-		public System.Data.Linq.Table<holidaystaken> holidaystakens
-		{
-			get
-			{
-				return this.GetTable<holidaystaken>();
 			}
 		}
 		
@@ -534,8 +523,6 @@ namespace Component_A_ClassLibrary
 		
 		private EntitySet<holidaysrequested> _holidaysrequesteds;
 		
-		private EntitySet<holidaystaken> _holidaystakens;
-		
 		private EntitySet<role> _roles;
 		
     #region Extensibility Method Definitions
@@ -565,7 +552,6 @@ namespace Component_A_ClassLibrary
 		public employee()
 		{
 			this._holidaysrequesteds = new EntitySet<holidaysrequested>(new Action<holidaysrequested>(this.attach_holidaysrequesteds), new Action<holidaysrequested>(this.detach_holidaysrequesteds));
-			this._holidaystakens = new EntitySet<holidaystaken>(new Action<holidaystaken>(this.attach_holidaystakens), new Action<holidaystaken>(this.detach_holidaystakens));
 			this._roles = new EntitySet<role>(new Action<role>(this.attach_roles), new Action<role>(this.detach_roles));
 			OnCreated();
 		}
@@ -763,19 +749,6 @@ namespace Component_A_ClassLibrary
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="employee_holidaystaken", Storage="_holidaystakens", ThisKey="EmployeeID", OtherKey="EmployeeID")]
-		public EntitySet<holidaystaken> holidaystakens
-		{
-			get
-			{
-				return this._holidaystakens;
-			}
-			set
-			{
-				this._holidaystakens.Assign(value);
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="employee_role", Storage="_roles", ThisKey="EmployeeID", OtherKey="EmployeeID")]
 		public EntitySet<role> roles
 		{
@@ -816,18 +789,6 @@ namespace Component_A_ClassLibrary
 		}
 		
 		private void detach_holidaysrequesteds(holidaysrequested entity)
-		{
-			this.SendPropertyChanging();
-			entity.employee = null;
-		}
-		
-		private void attach_holidaystakens(holidaystaken entity)
-		{
-			this.SendPropertyChanging();
-			entity.employee = this;
-		}
-		
-		private void detach_holidaystakens(holidaystaken entity)
 		{
 			this.SendPropertyChanging();
 			entity.employee = null;
@@ -1013,205 +974,6 @@ namespace Component_A_ClassLibrary
 					if ((value != null))
 					{
 						value.holidaysrequesteds.Add(this);
-						this._EmployeeID = value.EmployeeID;
-					}
-					else
-					{
-						this._EmployeeID = default(long);
-					}
-					this.SendPropertyChanged("employee");
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.holidaystaken")]
-	public partial class holidaystaken : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private long _HolidayID;
-		
-		private long _EmployeeID;
-		
-		private System.DateTime _StartDate;
-		
-		private System.DateTime _EndDate;
-		
-		private string _Status;
-		
-		private EntityRef<employee> _employee;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnHolidayIDChanging(long value);
-    partial void OnHolidayIDChanged();
-    partial void OnEmployeeIDChanging(long value);
-    partial void OnEmployeeIDChanged();
-    partial void OnStartDateChanging(System.DateTime value);
-    partial void OnStartDateChanged();
-    partial void OnEndDateChanging(System.DateTime value);
-    partial void OnEndDateChanged();
-    partial void OnStatusChanging(string value);
-    partial void OnStatusChanged();
-    #endregion
-		
-		public holidaystaken()
-		{
-			this._employee = default(EntityRef<employee>);
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_HolidayID", AutoSync=AutoSync.OnInsert, DbType="BigInt NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public long HolidayID
-		{
-			get
-			{
-				return this._HolidayID;
-			}
-			set
-			{
-				if ((this._HolidayID != value))
-				{
-					this.OnHolidayIDChanging(value);
-					this.SendPropertyChanging();
-					this._HolidayID = value;
-					this.SendPropertyChanged("HolidayID");
-					this.OnHolidayIDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EmployeeID", DbType="BigInt NOT NULL")]
-		public long EmployeeID
-		{
-			get
-			{
-				return this._EmployeeID;
-			}
-			set
-			{
-				if ((this._EmployeeID != value))
-				{
-					if (this._employee.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnEmployeeIDChanging(value);
-					this.SendPropertyChanging();
-					this._EmployeeID = value;
-					this.SendPropertyChanged("EmployeeID");
-					this.OnEmployeeIDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_StartDate", DbType="Date NOT NULL")]
-		public System.DateTime StartDate
-		{
-			get
-			{
-				return this._StartDate;
-			}
-			set
-			{
-				if ((this._StartDate != value))
-				{
-					this.OnStartDateChanging(value);
-					this.SendPropertyChanging();
-					this._StartDate = value;
-					this.SendPropertyChanged("StartDate");
-					this.OnStartDateChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EndDate", DbType="Date NOT NULL")]
-		public System.DateTime EndDate
-		{
-			get
-			{
-				return this._EndDate;
-			}
-			set
-			{
-				if ((this._EndDate != value))
-				{
-					this.OnEndDateChanging(value);
-					this.SendPropertyChanging();
-					this._EndDate = value;
-					this.SendPropertyChanged("EndDate");
-					this.OnEndDateChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Status", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
-		public string Status
-		{
-			get
-			{
-				return this._Status;
-			}
-			set
-			{
-				if ((this._Status != value))
-				{
-					this.OnStatusChanging(value);
-					this.SendPropertyChanging();
-					this._Status = value;
-					this.SendPropertyChanged("Status");
-					this.OnStatusChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="employee_holidaystaken", Storage="_employee", ThisKey="EmployeeID", OtherKey="EmployeeID", IsForeignKey=true)]
-		public employee employee
-		{
-			get
-			{
-				return this._employee.Entity;
-			}
-			set
-			{
-				employee previousValue = this._employee.Entity;
-				if (((previousValue != value) 
-							|| (this._employee.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._employee.Entity = null;
-						previousValue.holidaystakens.Remove(this);
-					}
-					this._employee.Entity = value;
-					if ((value != null))
-					{
-						value.holidaystakens.Add(this);
 						this._EmployeeID = value.EmployeeID;
 					}
 					else

@@ -41,7 +41,7 @@ namespace HolidayManager_ClassLibrary.Functionality_A
 
                 foreach (var holiday in result)
                 {
-                    if (!cc.validHolidayReqManagerHead(holiday.RequestID, holiday.EmployeeID) && (cc.enoughStaff(holiday.EmployeeID ,holiday.RequestID) ==  0))
+                    if (cc.validHolidayReqManagerHead(holiday.RequestID, holiday.EmployeeID) && (cc.enoughStaff(holiday.EmployeeID ,holiday.RequestID) == 0))
                     {
                         validReq.Add(holiday);
                     }
@@ -72,8 +72,8 @@ namespace HolidayManager_ClassLibrary.Functionality_A
 
             if (cc.enoughStaff(result.EmployeeID, result.RequestID) == 1)
             {
-                message = " Constraint broken [ %40 of staff requireed for department ] " ;
-                if(cc.validHolidayReqManagerHead(result.RequestID, result.EmployeeID) == false)
+                message = " Constraint broken [ %40 of staff requireed for department ] ";
+                if (cc.validHolidayReqManagerHead(result.RequestID, result.EmployeeID) == false)
                 {
                     message += "  And  Constraint broken [ Either Head, Head Deputy or Manager,  Senior member must be on duty ]";
                 }
@@ -88,7 +88,20 @@ namespace HolidayManager_ClassLibrary.Functionality_A
                 }
                 MessageBox.Show(message);
             }
+            else if (cc.validHolidayReqManagerHead(result.RequestID, result.EmployeeID) == false)
+            {
+                message = "Constraint broken [ Either Head, Head Deputy or Manager,  Senior member must be on duty ]";
+                if (cc.enoughStaff(result.EmployeeID, result.RequestID) == 1)
+                {
+                    message += "  Constraint broken [ %40 of staff requireed for department ] ";
+                }
+                else if (cc.enoughStaff(result.EmployeeID, result.RequestID) == 2)
+                {
+                    message += "  Constraint broken [ %40 of staff requireed for department ] ";
+                }
 
+                MessageBox.Show(message);
+            }
         }
         public void ConfirmedReq(DataGridView table)
         {
@@ -169,7 +182,7 @@ namespace HolidayManager_ClassLibrary.Functionality_A
                 else
                 {
                     table.DataSource = "";
-                    MessageBox.Show("No Employee will be working on selcted date");
+                    MessageBox.Show("No Employee will be on Leave on selcted date");
                 }
             }
             else
@@ -272,26 +285,12 @@ namespace HolidayManager_ClassLibrary.Functionality_A
                          select a).Single();
             return xmasQ;
         }
-
-
-        //cmbBXRoles.DataSource = SplitList(constraints.AvailableRoles);
-        //cmbBXDepartment.DataSource = SplitList(constraints.AvailableDepartments);
-        //numDaysEnt.Value = (decimal) constraints.HolidayEntitlement;
-        //numRelaxed.Value = (decimal) constraints.MinimumWorkingStaffRelaxed;
-        //numStaffReq.Value = (decimal) constraints.MinimumWorkingStaff;
-        //cmbxMonths.SelectedIndex = (int) constraints.RelaxedMonth;
-
-        //peaktime Xpeak = hm.getXmasPeakT();
-        //peaktime Speak = hm.getSummerPeakT();
-        //dtpStartXmas.Value = Xpeak.StartDate;
-        //    dtpEndXmas.Value = Xpeak.EndDate;
-        //    dtpStartSummer.Value = Speak.StartDate;
-        //    dtpSummerEnd.Value = Speak.StartDate;
         public void SettingsChanges(DateTime dtpStartXmas, DateTime dtpEndXmas, DateTime dtpStartSummer, DateTime dtpSummerEnd, ComboBox cmbBXRoles, ComboBox cmbBXDepartment, NumericUpDown numDaysEnt, NumericUpDown numRelaxed, NumericUpDown numStaffReq,ComboBox cmbxMonths)
         {
             peaktime Xpeak = getXmasPeakT();
             peaktime Speak = getSummerPeakT();
             constraint constraints = getConstraints();
+
             if (MessageBox.Show("Save changes", "Please Confirm Your Action", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
                 Xpeak.StartDate = dtpStartXmas;

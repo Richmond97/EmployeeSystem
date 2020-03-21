@@ -40,6 +40,7 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.label1 = new System.Windows.Forms.Label();
             this.pnlHolidayReq = new System.Windows.Forms.Panel();
+            this.button6 = new System.Windows.Forms.Button();
             this.monthCalendar2 = new System.Windows.Forms.MonthCalendar();
             this.button5 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
@@ -84,9 +85,9 @@
             this.pnlLogin.Controls.Add(this.groupBox1);
             this.pnlLogin.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.pnlLogin.ForeColor = System.Drawing.Color.White;
-            this.pnlLogin.Location = new System.Drawing.Point(97, 464);
+            this.pnlLogin.Location = new System.Drawing.Point(0, 567);
             this.pnlLogin.Name = "pnlLogin";
-            this.pnlLogin.Size = new System.Drawing.Size(123, 134);
+            this.pnlLogin.Size = new System.Drawing.Size(92, 31);
             this.pnlLogin.TabIndex = 0;
             // 
             // label3
@@ -168,6 +169,7 @@
             // pnlHolidayReq
             // 
             this.pnlHolidayReq.BackColor = System.Drawing.Color.SeaGreen;
+            this.pnlHolidayReq.Controls.Add(this.button6);
             this.pnlHolidayReq.Controls.Add(this.monthCalendar2);
             this.pnlHolidayReq.Controls.Add(this.button5);
             this.pnlHolidayReq.Controls.Add(this.button4);
@@ -181,10 +183,24 @@
             this.pnlHolidayReq.Controls.Add(this.groupBox2);
             this.pnlHolidayReq.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.pnlHolidayReq.ForeColor = System.Drawing.Color.White;
-            this.pnlHolidayReq.Location = new System.Drawing.Point(139, 317);
+            this.pnlHolidayReq.Location = new System.Drawing.Point(3, 5);
             this.pnlHolidayReq.Name = "pnlHolidayReq";
-            this.pnlHolidayReq.Size = new System.Drawing.Size(211, 293);
+            this.pnlHolidayReq.Size = new System.Drawing.Size(352, 605);
             this.pnlHolidayReq.TabIndex = 8;
+            // 
+            // button6
+            // 
+            this.button6.BackColor = System.Drawing.Color.SeaGreen;
+            this.button6.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.button6.Font = new System.Drawing.Font("Microsoft Sans Serif", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button6.ForeColor = System.Drawing.Color.White;
+            this.button6.Location = new System.Drawing.Point(27, 542);
+            this.button6.Name = "button6";
+            this.button6.Size = new System.Drawing.Size(286, 48);
+            this.button6.TabIndex = 15;
+            this.button6.Text = "MY DETAILS";
+            this.button6.UseVisualStyleBackColor = false;
+            this.button6.Click += new System.EventHandler(this.BtnPerDetails_Click);
             // 
             // monthCalendar2
             // 
@@ -201,7 +217,7 @@
             this.button5.TabIndex = 13;
             this.button5.Text = "button5";
             this.button5.UseVisualStyleBackColor = true;
-            this.button5.Click += new System.EventHandler(this.Button5_Click);
+            this.button5.Click += new System.EventHandler(this.BtnDateEnd_Click);
             // 
             // button4
             // 
@@ -211,7 +227,7 @@
             this.button4.TabIndex = 12;
             this.button4.Text = "button4";
             this.button4.UseVisualStyleBackColor = true;
-            this.button4.Click += new System.EventHandler(this.Button4_Click);
+            this.button4.Click += new System.EventHandler(this.btnDateStart_Click);
             // 
             // monthCalendar1
             // 
@@ -224,7 +240,7 @@
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(33, 91);
+            this.label7.Location = new System.Drawing.Point(33, 114);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(271, 39);
             this.label7.TabIndex = 10;
@@ -320,7 +336,7 @@
             this.pnlView.ForeColor = System.Drawing.Color.White;
             this.pnlView.Location = new System.Drawing.Point(12, -8);
             this.pnlView.Name = "pnlView";
-            this.pnlView.Size = new System.Drawing.Size(334, 618);
+            this.pnlView.Size = new System.Drawing.Size(10, 135);
             this.pnlView.TabIndex = 13;
             // 
             // dataGridView1
@@ -544,6 +560,7 @@
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Button button5;
         private System.Windows.Forms.MonthCalendar monthCalendar2;
+        private System.Windows.Forms.Button button6;
     }
 }
 

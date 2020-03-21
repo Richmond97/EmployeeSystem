@@ -32,7 +32,6 @@
       <Column Name="EmailAddress" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
       <Column Name="DateJoined" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
       <Association Name="employee_holidaysrequested" Member="holidaysrequesteds" ThisKey="EmployeeID" OtherKey="EmployeeID" Type="holidaysrequested" />
-      <Association Name="employee_holidaystaken" Member="holidaystakens" ThisKey="EmployeeID" OtherKey="EmployeeID" Type="holidaystaken" />
       <Association Name="employee_role" Member="roles" ThisKey="EmployeeID" OtherKey="EmployeeID" Type="role" />
     </Type>
   </Table>
@@ -44,16 +43,6 @@
       <Column Name="EndDate" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
       <Column Name="Status" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
       <Association Name="employee_holidaysrequested" Member="employee" ThisKey="EmployeeID" OtherKey="EmployeeID" Type="employee" IsForeignKey="true" />
-    </Type>
-  </Table>
-  <Table Name="dbo.holidaystaken" Member="holidaystakens">
-    <Type Name="holidaystaken">
-      <Column Name="HolidayID" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="EmployeeID" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
-      <Column Name="StartDate" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
-      <Column Name="EndDate" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
-      <Column Name="Status" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
-      <Association Name="employee_holidaystaken" Member="employee" ThisKey="EmployeeID" OtherKey="EmployeeID" Type="employee" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.peaktimes" Member="peaktimes">

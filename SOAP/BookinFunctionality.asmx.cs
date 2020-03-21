@@ -109,8 +109,22 @@ namespace SOAP
 
         }
 
+        [WebMethod]
+        public string GetEmployee(long StaffID)
+        {
+            string Person ="";
+            var role = (from a in db.roles
+                        where a.employee.StaffID == StaffID
+                        select a).ToList();
 
-  
+            foreach (var p in role)
+            {
+                Person = "StaffID: " + p.employee.StaffID + "*" + "Name: " + p.employee.FirstName + "*" + "Surname: " + p.employee.LastName + "*" + "Department: " + p.department.DeptName + "*" + "Role: " + p.RoleType;
+            }
+            return Person;
+        }
+
+
         [WebMethod]
         public bool SubmitHolidayReq(DateTime startH, DateTime endH, long StaffID)
         {
@@ -125,7 +139,6 @@ namespace SOAP
                     Status = "Pending"
 
                 };
-
                 db.SubmitChanges();
                 return true;
             }

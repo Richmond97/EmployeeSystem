@@ -100,51 +100,57 @@ namespace EmployeeWebApp
                 Response.Write("<script>alert('" + "The end date of your Holiday can not be before the start date, or before today" + "');</script>");
             }
 
-            else if (peakValue != 0)
+            else if (cc.IsValidHolidayRequest(start, end, ((long)(Session["sesID"]))))
             {
-                List<DateTime> newdates = new List<DateTime>();
-                if (peakValue == 1)
+                if (peakValue != 0)
                 {
-                    newdates = pt.newSuggestion(start, end, pt.StarPeak, pt.StarPeak);
-                }
-                else if (peakValue == 2)
-                {
-                    newdates = pt.newSuggestion(start, end, pt.StarPeak, pt.StarPeak);
-                }
-                else if (peakValue == 3)
-                {
-                    newdates = pt.newSuggestion(start, end, pt.StarPeak, pt.StarPeak);
-                }
-                if (MessageBox.Show("Accept suggestion", "Your request happends to be on " + pt.Holiday + " holiday we suggest " + newdates[0].ToString("d") + "  To  " + newdates[1].ToString("d"), MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
-                {
-                    if (hm.SubmitHolidayReq(newdates[0], newdates[1], ((long)(Session["sesID"]))))
+                    List<DateTime> newdates = new List<DateTime>();
+                    if (peakValue == 1)
                     {
-                        MessageBox.Show("Booking from: " + newdates[0].ToString("d"), "To: " + end.ToString("d"));
+                        newdates = pt.newSuggestion(start, end, pt.StarPeak, pt.StarPeak);
+                    }
+                    else if (peakValue == 2)
+                    {
+                        newdates = pt.newSuggestion(start, end, pt.StarPeak, pt.StarPeak);
+                    }
+                    else if (peakValue == 3)
+                    {
+                        newdates = pt.newSuggestion(start, end, pt.StarPeak, pt.StarPeak);
+                    }
+                    if (MessageBox.Show("Your request happends to be on " + pt.Holiday + " holiday we suggest " + newdates[0].ToString("d") + "  To  " + newdates[1].ToString("d"),"Accept suggestion", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                    {
+                        if (cc.IsValidHolidayRequest(newdates[0], newdates[1], ((long)(Session["sesID"]))))
+                        {
+                            if (hm.SubmitHolidayReq(newdates[0], newdates[1], ((long)(Session["sesID"]))))
+                            {
+                                MessageBox.Show("Booking from: " + newdates[0].ToString("d") + "\n" + "To: " + newdates[1].ToString("d"), "New Suggestion");
+                            }
+                            else
+                            {
+                                MessageBox.Show("We couldn't completer yor request this time, please try later");
+                            }
+                        }
                     }
                     else
                     {
-                        MessageBox.Show("We couldn't completer yor request this time, please try later");
+                        if (cc.IsValidHolidayRequest(start, end, ((long)(Session["sesID"]))))
+                        {
+                            if (hm.SubmitHolidayReq(start, end, ((long)(Session["sesID"]))))
+                            {
+                                MessageBox.Show("Booking from: " + start.ToString("d") + "\n" + "To: " + end.ToString("d"), "BOOKING");
+                            }
+                            else
+                            {
+                                MessageBox.Show("We couldn't completer yor request this time, please try later");
+                            }
+                        }
                     }
                 }
                 else
                 {
                     if (hm.SubmitHolidayReq(start, end, ((long)(Session["sesID"]))))
                     {
-                        MessageBox.Show("Booking from: " + start.ToString("d"), "To: " + end.ToString("d"));
-                    }
-                    else
-                    {
-                        MessageBox.Show("We couldn't completer yor request this time, please try later");
-                    }
-                }   
-            }
-            else
-            {
-                if (cc.IsValidHolidayRequest(start, end, ((long)(Session["sesID"]))))
-                {
-                    if (hm.SubmitHolidayReq(start, end, ((long)(Session["sesID"]))))
-                    {
-                        MessageBox.Show("Booking from: " + start.ToString("d"), "To: " + end.ToString("d"));
+                        MessageBox.Show("Booking from: " + start.ToString("d") + "\n" + "To: " + end.ToString("d"), "BOOKING");
                     }
                     else
                     {
@@ -153,8 +159,6 @@ namespace EmployeeWebApp
                 }
 
             }
-           
-
         }
 
         protected void btnReturn_Click(object sender, ImageClickEventArgs e)

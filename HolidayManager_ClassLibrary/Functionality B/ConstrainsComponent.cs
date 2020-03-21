@@ -124,6 +124,7 @@ namespace HolidayManager_ClassLibrary
             return true;
         }
 
+        //Used to get all user personal details 
         public role GetRole(long StaffID)
         {
             var role = (from a in db.roles
@@ -151,37 +152,38 @@ namespace HolidayManager_ClassLibrary
             switch (roleType)
             {
                 case "Head":
-                   roleType = "Head";
+                    myRole = "Head";
                     break;
                 case "Head Deputy":
-                    roleType = "Head Deputy";
+                    myRole = "Head Deputy";
                     break;
                 case "Manager":
-                    roleType = "Manager";
+                    myRole = "Manager";
                     break;
                 case "Senior Member":
-                    roleType = "Senior Member";
+                    myRole = "Senior Member";
                     break;
         
             }
             string departmentName = person.department.DeptName.ToString();
 
             var holidays = (from b in db.holidaysrequesteds
-                                where ((b.Status == "Approved") && (person.RoleType == myRole) 
+                            join c in db.roles on b.EmployeeID equals c.EmployeeID
+                                where ((b.Status == "Approved") && (person.RoleType == c.RoleType) && (person.RoleType == myRole)
                                 && (person.department.DeptName == departmentName) &&  b.EndDate.Year ==  holiday.StartDate.Year )
                                 select b).ToList();
 
             foreach (var h in holidays)
             {
                //Chech if the holiday request overlaps with an existing holiday
-                if(holiday.StartDate < h.EndDate && h.StartDate < holiday.EndDate)
+                if(holiday.StartDate > h.EndDate && h.StartDate > holiday.EndDate)
                 {
                     
                     //if it does overalps is not valid [already set to false]
                 }
                 else
                 {
-                    //else set to false
+                    //else set to true
                     validReq = true;
                 }
                 
@@ -190,62 +192,6 @@ namespace HolidayManager_ClassLibrary
 
             return validReq;
         }
-
-        //public static DateTime EasterSunday(int year)
-        //{
-        //    int day = 0;
-        //    int month = 0;
-
-        //    int g = year % 19;
-        //    int c = year / 100;
-        //    int h = (c - (int)(c / 4) - (int)((8 * c + 13) / 25) + 19 * g + 15) % 30;
-        //    int i = h - (int)(h / 28) * (1 - (int)(h / 28) * (int)(29 / (h + 1)) * (int)((21 - g) / 11));
-
-        //    day = i - ((year + (int)(year / 4) + i + 2 - c + (int)(c / 4)) % 7) + 28;
-        //    month = 3;
-
-        //    if (day > 31)
-        //    {
-        //        month++;
-        //        day -= 31;
-        //    }
-
-        //    return new DateTime(year, month, day);
-        //}
-
-        //public bool IsHolidayPeriod(long requestID)
-        //{
-        //    DateTime start = GetHoliday(requestID).StartDate;
-        //    DateTime end = GetHoliday(requestID).EndDate;
-        //    DateTime easter = EasterSunday(DateTime.Today.Year);
-        //    DateTime startEaster = easter.AddDays( - 7);
-        //    DateTime endEaster = easter.AddDays(7);
-
-        //    bool validReq;
-            
-        //    //get xmas holiday peak request period
-        //    var xmasQ = (from a in db.peaktimes
-        //                 where a.PeaktimesName == "peakTimesXmas"
-        //                 select a).Single();
-
-        //    //get summer peak request persiod
-        //    var summerQ = (from a in db.peaktimes
-        //                 where a.PeaktimesName == "peakTimesSummer"
-        //                 select a).Single();
-
-        //    if ((startEaster > end && start < endEaster) 
-        //        || (xmasQ.StartDate > end && start < xmasQ.EndDate) 
-        //        || (summerQ.StartDate> end && start < summerQ.EndDate))
-        //    {
-        //        validReq = false;
-        //    }
-        //    else
-        //    {
-        //        validReq = true;
-        //    }
-        //    return validReq;
-
-        //}
 
         public int enoughStaff(long StaffID, long holiID)
         {
@@ -278,17 +224,21 @@ namespace HolidayManager_ClassLibrary
                 {
                     //only 40% on duty required
                     minWorkingStaff = (int)Constraint.MinimumWorkingStaff;
-                    valid = 1;
+                    if (percentBooked <= minWorkingStaff)
+                    {
+                        valid = 1;
+                    } 
                 }
                 else
                 {
                     //only 60% on duty required
                     minWorkingStaff = (int)Constraint.MinimumWorkingStaffRelaxed;
+                    if (percentBooked <= minWorkingStaff)
+                    {
+                        valid = 2;
+                    }
                 }
-                if (percentBooked < minWorkingStaff)
-                {
-                    valid = 2;
-                }
+               
             }
             return valid;
 

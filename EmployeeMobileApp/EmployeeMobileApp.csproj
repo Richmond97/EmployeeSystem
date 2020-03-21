@@ -78,6 +78,9 @@
     <None Include="Connected Services\HolidayReference\EmployeeMobileApp.HolidayReference.ArrayOfString.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
+    <None Include="Connected Services\HolidayReference\EmployeeMobileApp.HolidayReference.GetEmployeeResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Connected Services\HolidayReference\EmployeeMobileApp.HolidayReference.VerificationLoginResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
@@ -101,6 +104,10 @@
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\HolidayManager_ClassLibrary\HolidayManager_ClassLibrary.csproj">
+      <Project>{ec81a041-92d4-437a-b6e3-6a7bad144283}</Project>
+      <Name>HolidayManager_ClassLibrary</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SOAP\SOAP.csproj">
       <Project>{3f83b61e-d180-409a-977f-e33e2a51b8b7}</Project>
       <Name>SOAP</Name>

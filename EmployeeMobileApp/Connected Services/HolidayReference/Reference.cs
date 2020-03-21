@@ -44,6 +44,13 @@ namespace EmployeeMobileApp.HolidayReference {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ViewHolidayReqStatus", ReplyAction="*")]
         System.Threading.Tasks.Task<EmployeeMobileApp.HolidayReference.ViewHolidayReqStatusResponse> ViewHolidayReqStatusAsync(EmployeeMobileApp.HolidayReference.ViewHolidayReqStatusRequest request);
         
+        // CODEGEN: Generating message contract since element name GetEmployeeResult from namespace http://tempuri.org/ is not marked nillable
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetEmployee", ReplyAction="*")]
+        EmployeeMobileApp.HolidayReference.GetEmployeeResponse GetEmployee(EmployeeMobileApp.HolidayReference.GetEmployeeRequest request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetEmployee", ReplyAction="*")]
+        System.Threading.Tasks.Task<EmployeeMobileApp.HolidayReference.GetEmployeeResponse> GetEmployeeAsync(EmployeeMobileApp.HolidayReference.GetEmployeeRequest request);
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/SubmitHolidayReq", ReplyAction="*")]
         bool SubmitHolidayReq(System.DateTime startH, System.DateTime endH, long StaffID);
         
@@ -191,6 +198,74 @@ namespace EmployeeMobileApp.HolidayReference {
         }
     }
     
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class GetEmployeeRequest {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="GetEmployee", Namespace="http://tempuri.org/", Order=0)]
+        public EmployeeMobileApp.HolidayReference.GetEmployeeRequestBody Body;
+        
+        public GetEmployeeRequest() {
+        }
+        
+        public GetEmployeeRequest(EmployeeMobileApp.HolidayReference.GetEmployeeRequestBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://tempuri.org/")]
+    public partial class GetEmployeeRequestBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(Order=0)]
+        public long StaffID;
+        
+        public GetEmployeeRequestBody() {
+        }
+        
+        public GetEmployeeRequestBody(long StaffID) {
+            this.StaffID = StaffID;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class GetEmployeeResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="GetEmployeeResponse", Namespace="http://tempuri.org/", Order=0)]
+        public EmployeeMobileApp.HolidayReference.GetEmployeeResponseBody Body;
+        
+        public GetEmployeeResponse() {
+        }
+        
+        public GetEmployeeResponse(EmployeeMobileApp.HolidayReference.GetEmployeeResponseBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://tempuri.org/")]
+    public partial class GetEmployeeResponseBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
+        public string GetEmployeeResult;
+        
+        public GetEmployeeResponseBody() {
+        }
+        
+        public GetEmployeeResponseBody(string GetEmployeeResult) {
+            this.GetEmployeeResult = GetEmployeeResult;
+        }
+    }
+    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     public interface BookinFunctionalitySoapChannel : EmployeeMobileApp.HolidayReference.BookinFunctionalitySoap, System.ServiceModel.IClientChannel {
     }
@@ -276,6 +351,31 @@ namespace EmployeeMobileApp.HolidayReference {
             inValue.Body = new EmployeeMobileApp.HolidayReference.ViewHolidayReqStatusRequestBody();
             inValue.Body.staffID = staffID;
             return ((EmployeeMobileApp.HolidayReference.BookinFunctionalitySoap)(this)).ViewHolidayReqStatusAsync(inValue);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        EmployeeMobileApp.HolidayReference.GetEmployeeResponse EmployeeMobileApp.HolidayReference.BookinFunctionalitySoap.GetEmployee(EmployeeMobileApp.HolidayReference.GetEmployeeRequest request) {
+            return base.Channel.GetEmployee(request);
+        }
+        
+        public string GetEmployee(long StaffID) {
+            EmployeeMobileApp.HolidayReference.GetEmployeeRequest inValue = new EmployeeMobileApp.HolidayReference.GetEmployeeRequest();
+            inValue.Body = new EmployeeMobileApp.HolidayReference.GetEmployeeRequestBody();
+            inValue.Body.StaffID = StaffID;
+            EmployeeMobileApp.HolidayReference.GetEmployeeResponse retVal = ((EmployeeMobileApp.HolidayReference.BookinFunctionalitySoap)(this)).GetEmployee(inValue);
+            return retVal.Body.GetEmployeeResult;
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.Threading.Tasks.Task<EmployeeMobileApp.HolidayReference.GetEmployeeResponse> EmployeeMobileApp.HolidayReference.BookinFunctionalitySoap.GetEmployeeAsync(EmployeeMobileApp.HolidayReference.GetEmployeeRequest request) {
+            return base.Channel.GetEmployeeAsync(request);
+        }
+        
+        public System.Threading.Tasks.Task<EmployeeMobileApp.HolidayReference.GetEmployeeResponse> GetEmployeeAsync(long StaffID) {
+            EmployeeMobileApp.HolidayReference.GetEmployeeRequest inValue = new EmployeeMobileApp.HolidayReference.GetEmployeeRequest();
+            inValue.Body = new EmployeeMobileApp.HolidayReference.GetEmployeeRequestBody();
+            inValue.Body.StaffID = StaffID;
+            return ((EmployeeMobileApp.HolidayReference.BookinFunctionalitySoap)(this)).GetEmployeeAsync(inValue);
         }
         
         public bool SubmitHolidayReq(System.DateTime startH, System.DateTime endH, long StaffID) {

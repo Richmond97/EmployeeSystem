@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
+using HolidayManager_ClassLibrary;
 
 namespace EmployeeMobileApp
 {
@@ -13,6 +14,8 @@ namespace EmployeeMobileApp
             arrangelPanels();
         }
         HolidayReference.BookinFunctionalitySoapClient soap = new HolidayReference.BookinFunctionalitySoapClient();
+        HolidayManager_ClassLibrary.Functionality_C.PeakTimeComponent pt = new HolidayManager_ClassLibrary.Functionality_C.PeakTimeComponent();
+        ConstrainsComponent cc = new ConstrainsComponent();
         long staffID = 0;
 
         //Arange buttons 
@@ -114,26 +117,6 @@ namespace EmployeeMobileApp
             
         }
 
-        private void Button4_Click(object sender, EventArgs e)
-        {
-            if (monthCalendar1.Visible)
-            {
-                monthCalendar1.Visible = false;
-            }
-            monthCalendar1.Visible = true;
-
-        }
-
-        private void Button5_Click(object sender, EventArgs e)
-        {
-            if (monthCalendar2.Visible)
-            {
-                monthCalendar2.Visible = false;
-            }
-            monthCalendar2.Visible = true;
-
-        }
-
         private void MonthCalendar1_DateSelected(object sender, DateRangeEventArgs e)
         {
             monthCalendar1.Visible = false;
@@ -149,19 +132,101 @@ namespace EmployeeMobileApp
 
         private void BtnReqHoli_Click(object sender, EventArgs e)
         {
+            DateTime start = monthCalendar1.SelectionRange.Start;
+            DateTime end = monthCalendar2.SelectionRange.Start;
             try
             {
-                MessageBox.Show("from " + monthCalendar1.SelectionRange.Start.ToString("d") + "To" + monthCalendar1.SelectionRange.Start.ToString("d"));
-                if(soap.SubmitHolidayReq(monthCalendar1.SelectionRange.Start, monthCalendar2.SelectionRange.Start, staffID))
+                int peakValue = pt.IsPeakTime(start, end);
+                MessageBox.Show("holidays from: " + start.ToString("d") + "\n" + "To: " + end,"HOLIDAY REQUEST");
+                if (end < start || start < DateTime.Today || end < DateTime.Today)
                 {
-                    MessageBox.Show("Holiday Booking Completed sucesfully");
+                  MessageBox.Show( "The end date of your Holiday can not be before the start date, or before today");
+                }
+                else if (peakValue != 0)
+                {
+                    if (cc.IsValidHolidayRequest(start, end, staffID))
+                    {
+                        List<DateTime> newdates = new List<DateTime>();
+                        if (peakValue == 1)
+                        {
+                            newdates = pt.newSuggestion(start, end, pt.StarPeak, pt.StarPeak);
+                        }
+                        else if (peakValue == 2)
+                        {
+                            newdates = pt.newSuggestion(start, end, pt.StarPeak, pt.StarPeak);
+                        }
+                        else if (peakValue == 3)
+                        {
+                            newdates = pt.newSuggestion(start, end, pt.StarPeak, pt.StarPeak);
+                        }
+                        if (MessageBox.Show("Accept suggestion", "Your request happends to be on " + pt.Holiday + " holiday we suggest " + newdates[0].ToString("d") + "  To  " + newdates[1].ToString("d"), MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                        {
+                            if (soap.SubmitHolidayReq(newdates[0], newdates[1], staffID))
+                            {
+                                MessageBox.Show("Booking from: " + newdates[0].ToString("d") + "\n" + "To: " + end.ToString("d"), "New Suggestion");
+                            }
+                            else
+                            {
+                                MessageBox.Show("We couldn't completer yor request this time, please try later");
+                            }
+                        }
+                        else
+                        {
+                            if (soap.SubmitHolidayReq(start, end, staffID))
+                            {
+                                MessageBox.Show("Booking from: " + start.ToString("d") + "\n" + "To: " + end.ToString("d"), "New Suggestion");
+                            }
+                            else
+                            {
+                                MessageBox.Show("We couldn't completer yor request this time, please try later");
+                            }
+                        }
+                    }
+                    
+                }
+                else
+                {
+                    if (soap.SubmitHolidayReq(start, end, staffID))
+                    {
+                        MessageBox.Show("Booking from: " + start.ToString("d") + "\n" + "To: " + end.ToString("d"), "BOOKING");
+                    }
+                    else
+                    {
+                        MessageBox.Show("We couldn't completer yor request this time, please try later");
+                    }
+
                 }
             }
 
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show("WE are facinf some issues try again later" + ex.HelpLink);
             }
+        }
+
+        private void btnDateStart_Click(object sender, EventArgs e)
+        {
+            if (monthCalendar1.Visible)
+            {
+                monthCalendar1.Visible = false;
+            }
+            monthCalendar1.Visible = true;
+        }
+
+        private void BtnDateEnd_Click(object sender, EventArgs e)
+        {
+            if (monthCalendar2.Visible)
+            {
+                monthCalendar2.Visible = false;
+            }
+            monthCalendar2.Visible = true;
+        }
+
+        private void BtnPerDetails_Click(object sender, EventArgs e)
+        {
+            string text = soap.GetEmployee(staffID);
+            text = text.Replace("*", "" + System.Environment.NewLine);
+            MessageBox.Show(text,"MY DETAILS");
         }
     }
 }
