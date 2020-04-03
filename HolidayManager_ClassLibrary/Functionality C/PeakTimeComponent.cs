@@ -44,7 +44,7 @@ namespace HolidayManager_ClassLibrary.Functionality_C
                            select a).Single();
             return holiday;
         }
-        public static DateTime EasterSunday(int year)
+        public  DateTime EasterSunday(int year)
         {
             int day = 0;
             int month = 0;
@@ -65,6 +65,16 @@ namespace HolidayManager_ClassLibrary.Functionality_C
 
             return new DateTime(year, month, day);
         }
+
+        /***************************************************************************************
+        *    Title: <Easter Sunday>
+        *    Author: Jan Schreuder>
+        *    Date: <13/03/20>
+        *    Code version: <1.0>
+        *    Availability: https://www.codeproject.com/Articles/10860/Calculating-Christian-Holidays
+        *
+        ***************************************************************************************/
+
 
         public int IsPeakTime(DateTime start,DateTime end)
         {

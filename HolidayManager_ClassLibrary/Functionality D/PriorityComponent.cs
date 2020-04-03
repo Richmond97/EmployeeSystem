@@ -93,7 +93,7 @@ namespace HolidayManager_ClassLibrary.Functionality_D
                            where a.PeaktimesName == "peakTimeSummer"
                            select a).Single();
 
-            DateTime easter = EasterSunday(DateTime.Today.Year);
+            DateTime easter = pk.EasterSunday(DateTime.Today.Year);
             DateTime startEaster = easter.AddDays(-7);
             DateTime endEaster = easter.AddDays(7);
 
@@ -107,45 +107,12 @@ namespace HolidayManager_ClassLibrary.Functionality_D
             // devide the total number of holidays taken   by the max holidays aavailable [ bonus holidays not taken in consderation ]
             // devide the total number of holidays taken in Peak period  by the max holidays aavailable [ bonus holidays not taken in consderation ]
             //add the two numbes toghter 
-            // 1.3 is used aa a  weight to balance, the weght is applied on the total number
+            // 1.35 is used aa a  weight to balance, the weght is applied on the total number
             //of holidays because a higher scsore means the person comes befor on the list 
-            return (1.35 * ((double)totHol / 30.0)) + ((double)totPeak / 30.0);
+            //Assuming holidays entitle is always 30
+            return ((1.35 * (double)totHol)  + (double)totPeak) / 35.25;
 
         }
-
-       
-        public static DateTime EasterSunday(int year)  
-        {
-            int day = 0;
-            int month = 0;
-
-            int g = year % 19;
-            int c = year / 100;
-            int h = (c - (int)(c / 4) - (int)((8 * c + 13) / 25) + 19 * g + 15) % 30;
-            int i = h - (int)(h / 28) * (1 - (int)(h / 28) * (int)(29 / (h + 1)) * (int)((21 - g) / 11));
-
-            day = i - ((year + (int)(year / 4) + i + 2 - c + (int)(c / 4)) % 7) + 28;
-            month = 3;
-
-            if (day > 31)
-            {
-                month++;
-                day -= 31;
-            }
-
-            return new DateTime(year, month, day);
-        }
-
-
-        /***************************************************************************************
-        *    Title: <Easter Sunday>
-        *    Author: <author(s) names>
-        *    Date: <13/03/20>
-        *    Code version: <code version>
-        *    Availability: https://www.codeproject.com/Articles/10860/Calculating-Christian-Holidays
-        *
-        ***************************************************************************************/
-
 
     }
 
