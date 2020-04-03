@@ -509,14 +509,14 @@ namespace LoginForm
                     Selected = getSelectedRow(notValidHolidayReqGridView,0);
                 }
 
-                //holidayReqGridView.CurrentRow.Selected = true;
+
                 string decision = "Approved";
                 string type = "noPriority";
                 hm.accept_OR_rejectReq((long)Selected, decision);
                 hm.RefreshGrid(validHolidayReqGridView);
                 hm.OutstandingReq(validHolidayReqGridView, notValidHolidayReqGridView, type);
             }
-            catch (Exception ex)
+            catch 
             {
                 MessageBox.Show("Pleas selelct Holiday request");
             }
@@ -645,10 +645,6 @@ namespace LoginForm
                 {
                     Selected = (getSelectedRow(dataGridSorted, 0));
                 }
-                //else if (getSelectedRow(dataGridSorted, 0) != 0)
-                //{
-                //    Selected = getSelectedRow(dataGridSorted, 0);
-                //}
                 string decision = "Approved";
                 string type = "Priority";
                 hm.accept_OR_rejectReq((long)Selected, decision);
@@ -751,15 +747,16 @@ namespace LoginForm
             dtpStartXmas.Value = Xpeak.StartDate;
             dtpEndXmas.Value = Xpeak.EndDate;
             dtpStartSummer.Value = Speak.StartDate;
-            dtpSummerEnd.Value = Speak.StartDate;
+            dtpSummerEnd.Value = Speak.EndDate;
 
             
         }
 
-        private void Button1_Click(object sender, EventArgs e)
+
+        private void BtnSaveHoidayConfig_Click(object sender, EventArgs e)
         {
             hm.SettingsChanges(dtpStartXmas.Value, dtpEndXmas.Value, dtpStartSummer.Value, dtpSummerEnd.Value, cmbBXRoles, cmbBXDepartment, numDaysEnt, numRelaxed, numStaffReq, cmbxMonths);
-            //HolidaySettingPanel();
+            MessageBox.Show("All changes have been saved correctly ");
         }
     }
 }

@@ -281,7 +281,7 @@ namespace HolidayManager_ClassLibrary.Functionality_A
         public peaktime getSummerPeakT()
         {
             var xmasQ = (from a in db.peaktimes
-                         where a.PeaktimesName == "peakTimeXmas"
+                         where a.PeaktimesName == "peakTimeSummer"
                          select a).Single();
             return xmasQ;
         }

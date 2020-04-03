@@ -1,7 +1,4 @@
 ﻿<%@ Page Title="AMD" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="ManageAccount.aspx.cs" Inherits="EmployeeWebApp.ManageAccount" %>
-<asp:Content ID="BodyContent" ContentPlaceHolderID="UserContent" runat="server">
-   
-</asp:Content>
 <asp:Content ID="Content1" runat="server" contentplaceholderid="MainContent">
     <p>
         <br />

@@ -133,6 +133,9 @@
             this.validHolidayReqGridView = new System.Windows.Forms.DataGridView();
             this.btnSettings = new System.Windows.Forms.Button();
             this.settingsPnl = new System.Windows.Forms.Panel();
+            this.btnSaveHolidayConfig = new System.Windows.Forms.Button();
+            this.label44 = new System.Windows.Forms.Label();
+            this.cmbxMonths = new System.Windows.Forms.ComboBox();
             this.label42 = new System.Windows.Forms.Label();
             this.label43 = new System.Windows.Forms.Label();
             this.label41 = new System.Windows.Forms.Label();
@@ -156,12 +159,9 @@
             this.editEmployee1 = new Component_A_ClassLibrary.EditEmployee(this.components);
             this.deleteEmployee1 = new Component_A_ClassLibrary.DeleteEmployee(this.components);
             this.createEmployee2 = new Component_A_ClassLibrary.CreateEmployee(this.components);
-            this.cmbxMonths = new System.Windows.Forms.ComboBox();
-            this.label44 = new System.Windows.Forms.Label();
             this.calenderHighlight = new HolidayManager_ClassLibrary.Functionality_E.calenderHighlight(this.components);
             this.constrainsComponent2 = new HolidayManager_ClassLibrary.ConstrainsComponent(this.components);
             this.priorityComponent = new HolidayManager_ClassLibrary.Functionality_D.PriorityComponent(this.components);
-            this.button1 = new System.Windows.Forms.Button();
             this.createPanel.SuspendLayout();
             this.editPanel.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -1391,7 +1391,7 @@
             // 
             // settingsPnl
             // 
-            this.settingsPnl.Controls.Add(this.button1);
+            this.settingsPnl.Controls.Add(this.btnSaveHolidayConfig);
             this.settingsPnl.Controls.Add(this.label44);
             this.settingsPnl.Controls.Add(this.cmbxMonths);
             this.settingsPnl.Controls.Add(this.label42);
@@ -1417,6 +1417,39 @@
             this.settingsPnl.Name = "settingsPnl";
             this.settingsPnl.Size = new System.Drawing.Size(1028, 586);
             this.settingsPnl.TabIndex = 9;
+            // 
+            // btnSaveHolidayConfig
+            // 
+            this.btnSaveHolidayConfig.BackColor = System.Drawing.Color.White;
+            this.btnSaveHolidayConfig.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSaveHolidayConfig.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSaveHolidayConfig.ForeColor = System.Drawing.Color.DarkSlateGray;
+            this.btnSaveHolidayConfig.Location = new System.Drawing.Point(779, 413);
+            this.btnSaveHolidayConfig.Name = "btnSaveHolidayConfig";
+            this.btnSaveHolidayConfig.Size = new System.Drawing.Size(210, 37);
+            this.btnSaveHolidayConfig.TabIndex = 10;
+            this.btnSaveHolidayConfig.Text = "SUBMIT CHANGES";
+            this.btnSaveHolidayConfig.UseVisualStyleBackColor = false;
+            this.btnSaveHolidayConfig.Click += new System.EventHandler(this.BtnSaveHoidayConfig_Click);
+            // 
+            // label44
+            // 
+            this.label44.AutoSize = true;
+            this.label44.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label44.ForeColor = System.Drawing.Color.White;
+            this.label44.Location = new System.Drawing.Point(318, 201);
+            this.label44.Name = "label44";
+            this.label44.Size = new System.Drawing.Size(116, 20);
+            this.label44.TabIndex = 28;
+            this.label44.Text = "Relaxed Month";
+            // 
+            // cmbxMonths
+            // 
+            this.cmbxMonths.FormattingEnabled = true;
+            this.cmbxMonths.Location = new System.Drawing.Point(440, 203);
+            this.cmbxMonths.Name = "cmbxMonths";
+            this.cmbxMonths.Size = new System.Drawing.Size(121, 21);
+            this.cmbxMonths.TabIndex = 27;
             // 
             // label42
             // 
@@ -1452,7 +1485,7 @@
             // numStaffReq
             // 
             this.numStaffReq.BackColor = System.Drawing.SystemColors.Window;
-            this.numStaffReq.Location = new System.Drawing.Point(151, 257);
+            this.numStaffReq.Location = new System.Drawing.Point(213, 255);
             this.numStaffReq.Name = "numStaffReq";
             this.numStaffReq.Size = new System.Drawing.Size(36, 20);
             this.numStaffReq.TabIndex = 23;
@@ -1464,9 +1497,9 @@
             this.label40.ForeColor = System.Drawing.Color.White;
             this.label40.Location = new System.Drawing.Point(29, 257);
             this.label40.Name = "label40";
-            this.label40.Size = new System.Drawing.Size(116, 20);
+            this.label40.Size = new System.Drawing.Size(131, 20);
             this.label40.TabIndex = 22;
-            this.label40.Text = "Relaxed Month";
+            this.label40.Text = "% Sraff Required";
             // 
             // label39
             // 
@@ -1486,20 +1519,20 @@
             this.label38.ForeColor = System.Drawing.Color.White;
             this.label38.Location = new System.Drawing.Point(28, 212);
             this.label38.Name = "label38";
-            this.label38.Size = new System.Drawing.Size(88, 20);
+            this.label38.Size = new System.Drawing.Size(152, 20);
             this.label38.TabIndex = 20;
-            this.label38.Text = "Entitilment ";
+            this.label38.Text = "Holidays Entitilment ";
             // 
             // numDaysEnt
             // 
-            this.numDaysEnt.Location = new System.Drawing.Point(150, 210);
+            this.numDaysEnt.Location = new System.Drawing.Point(212, 208);
             this.numDaysEnt.Name = "numDaysEnt";
             this.numDaysEnt.Size = new System.Drawing.Size(36, 20);
             this.numDaysEnt.TabIndex = 19;
             // 
             // numRelaxed
             // 
-            this.numRelaxed.Location = new System.Drawing.Point(150, 167);
+            this.numRelaxed.Location = new System.Drawing.Point(212, 165);
             this.numRelaxed.Name = "numRelaxed";
             this.numRelaxed.Size = new System.Drawing.Size(36, 20);
             this.numRelaxed.TabIndex = 18;
@@ -1522,9 +1555,9 @@
             this.label36.ForeColor = System.Drawing.Color.White;
             this.label36.Location = new System.Drawing.Point(28, 167);
             this.label36.Name = "label36";
-            this.label36.Size = new System.Drawing.Size(116, 20);
+            this.label36.Size = new System.Drawing.Size(164, 20);
             this.label36.TabIndex = 16;
-            this.label36.Text = "Relaxed Month";
+            this.label36.Text = "% Required (Relaxed)";
             // 
             // label35
             // 
@@ -1542,7 +1575,7 @@
             this.label34.AutoSize = true;
             this.label34.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label34.ForeColor = System.Drawing.Color.White;
-            this.label34.Location = new System.Drawing.Point(581, 201);
+            this.label34.Location = new System.Drawing.Point(593, 201);
             this.label34.Name = "label34";
             this.label34.Size = new System.Drawing.Size(102, 20);
             this.label34.TabIndex = 12;
@@ -1551,9 +1584,9 @@
             // cmbBXDepartment
             // 
             this.cmbBXDepartment.FormattingEnabled = true;
-            this.cmbBXDepartment.Location = new System.Drawing.Point(665, 200);
+            this.cmbBXDepartment.Location = new System.Drawing.Point(699, 200);
             this.cmbBXDepartment.Name = "cmbBXDepartment";
-            this.cmbBXDepartment.Size = new System.Drawing.Size(121, 21);
+            this.cmbBXDepartment.Size = new System.Drawing.Size(135, 21);
             this.cmbBXDepartment.TabIndex = 5;
             // 
             // cmbBXRoles
@@ -1561,7 +1594,7 @@
             this.cmbBXRoles.FormattingEnabled = true;
             this.cmbBXRoles.Location = new System.Drawing.Point(896, 200);
             this.cmbBXRoles.Name = "cmbBXRoles";
-            this.cmbBXRoles.Size = new System.Drawing.Size(103, 21);
+            this.cmbBXRoles.Size = new System.Drawing.Size(120, 21);
             this.cmbBXRoles.TabIndex = 4;
             // 
             // dtpSummerEnd
@@ -1592,25 +1625,6 @@
             this.dtpStartXmas.Size = new System.Drawing.Size(200, 20);
             this.dtpStartXmas.TabIndex = 0;
             // 
-            // cmbxMonths
-            // 
-            this.cmbxMonths.FormattingEnabled = true;
-            this.cmbxMonths.Location = new System.Drawing.Point(385, 200);
-            this.cmbxMonths.Name = "cmbxMonths";
-            this.cmbxMonths.Size = new System.Drawing.Size(121, 21);
-            this.cmbxMonths.TabIndex = 27;
-            // 
-            // label44
-            // 
-            this.label44.AutoSize = true;
-            this.label44.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label44.ForeColor = System.Drawing.Color.White;
-            this.label44.Location = new System.Drawing.Point(263, 198);
-            this.label44.Name = "label44";
-            this.label44.Size = new System.Drawing.Size(116, 20);
-            this.label44.TabIndex = 28;
-            this.label44.Text = "Relaxed Month";
-            // 
             // calenderHighlight
             // 
             this.calenderHighlight.Location = new System.Drawing.Point(564, 139);
@@ -1625,20 +1639,6 @@
             // priorityComponent
             // 
             this.priorityComponent.ValidHolidayCount = 0;
-            // 
-            // button1
-            // 
-            this.button1.BackColor = System.Drawing.Color.White;
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.ForeColor = System.Drawing.Color.DarkSlateGray;
-            this.button1.Location = new System.Drawing.Point(779, 413);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(210, 37);
-            this.button1.TabIndex = 10;
-            this.button1.Text = "SUBMIT CHANGES";
-            this.button1.UseVisualStyleBackColor = false;
-            this.button1.Click += new System.EventHandler(this.Button1_Click);
             // 
             // ManageForm
             // 
@@ -1832,6 +1832,6 @@
         private System.Windows.Forms.Label label41;
         private System.Windows.Forms.Label label44;
         private System.Windows.Forms.ComboBox cmbxMonths;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnSaveHolidayConfig;
     }
 }

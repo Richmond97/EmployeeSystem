@@ -16,7 +16,6 @@ namespace HolidayManager_ClassLibrary.Functionality_C
     { 
 
         private readonly DataClasses1DataContext db = new DataClasses1DataContext();
-        private readonly Page Page;
         DateTime starPeak;
         DateTime endPeak;
         string holiday = "";

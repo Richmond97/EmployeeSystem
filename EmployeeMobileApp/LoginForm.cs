@@ -77,20 +77,24 @@ namespace EmployeeMobileApp
 
         private void BtnLogout_Click(object sender, EventArgs e)
         {
-            pnlHolidayReq.Hide();
-            pnlView.Hide();
-            pnlLogin.Show();
-            hideButtons();
+            if ((MessageBox.Show("Log Out", "Please Confirm Your Action", MessageBoxButtons.YesNo, MessageBoxIcon.Question)) == DialogResult.Yes)
+            {
+                pnlHolidayReq.Hide();
+                pnlView.Hide();
+                pnlLogin.Show();
+                hideButtons();
+            }
+                
             
 
         }
 
         private void BtnHome_Click(object sender, EventArgs e)
         {
-            pnlHolidayReq.Show();
-            pnlView.Hide();
-            pnlLogin.Hide();
-            //dataGridView1.DataSource = soap.ViewHolidayReqStatus(staffID);
+                pnlHolidayReq.Show();
+                pnlView.Hide();
+                pnlLogin.Hide();
+           
         }
 
         private void BtnView_Click(object sender, EventArgs e)
@@ -99,10 +103,25 @@ namespace EmployeeMobileApp
             pnlHolidayReq.Hide();
             pnlLogin.Hide();
 
+            if (dataGridView1.Rows.Count == 0)
+            {
+                BindDataGrid();
+            }
+            else
+            {
+                UnBindDataGrid();
+                BindDataGrid();
+            }
+ 
+            
+        }
+
+        private void BindDataGrid()
+        {
             List<string> holis = soap.ViewHolidayReqStatus(staffID);
             try
             {
-               
+
                 foreach (var item in holis)
                 {
                     string[] indivudal = item.Split('*');
@@ -114,7 +133,22 @@ namespace EmployeeMobileApp
             {
                 MessageBox.Show(ex.Message);
             }
+
             
+        }
+        private void UnBindDataGrid()
+        {
+            do
+            {
+                foreach (DataGridViewRow row in dataGridView1.Rows)
+                {
+                    try
+                    {
+                        dataGridView1.Rows.Remove(row);
+                    }
+                    catch (Exception) { }
+                }
+            } while (dataGridView1.Rows.Count > 1);
         }
 
         private void MonthCalendar1_DateSelected(object sender, DateRangeEventArgs e)

@@ -94,8 +94,8 @@ namespace HolidayManager_ClassLibrary
                                  select a).ToList();
             int count=0;
             
-            //for evry five years add one to bonus 
-            for (int i = 0; i < years; i++)
+            //for every five years add one to bonus 
+            for (int i = 1; i < years; i++)
             {
                 if (count==5)
                 {

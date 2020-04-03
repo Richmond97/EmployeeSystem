@@ -11,7 +11,7 @@
         <br>
         <br>
         <p> Password</p>
-        &nbsp;<asp:TextBox ID="txtPassword"  runat="server"  ></asp:TextBox>
+        &nbsp;<asp:TextBox ID="txtPassword" type="password" runat="server"  ></asp:TextBox>
         <br>
         <br>
         &nbsp;<asp:Button ID="btnLogin" TextMode="Password" runat="server" OnClick="btnLogin_Click" Text="Login" />

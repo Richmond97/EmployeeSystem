@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -90,14 +91,23 @@ namespace EmployeeWebApp
         }
         protected void btnSubmit_Click(object sender, EventArgs e)
         {
-         DateTime start = Calendar1.SelectedDate;
-         DateTime end = Calendar2.SelectedDate;
-         int peakValue = pt.IsPeakTime(start, end);
+             DateTime start = Calendar1.SelectedDate;
+             DateTime end = Calendar2.SelectedDate;
+            CultureInfo ci = CultureInfo.InvariantCulture;
 
-            MessageBox.Show("holidays from: " + start.ToString("d"), "To: " + end);
+            //Perio where no constrants is valid 
+             DateTime startH = DateTime.ParseExact( "22/12/2020", "dd/MM/yyyy", ci);
+             DateTime endH = DateTime.ParseExact("03/01/2021","dd/MM/yyyy", ci);
+
+            int peakValue = pt.IsPeakTime(start, end);
+
             if (end < start || start < DateTime.Today || end < DateTime.Today)
             {
                 Response.Write("<script>alert('" + "The end date of your Holiday can not be before the start date, or before today" + "');</script>");
+            }
+            else if (startH < end && start < endH)
+            {
+                Response.Write("<script>alert('" + "Pleas be aware that the the period from 22nd of December to the 3rd of January, the company is closed, SELECT NEW DATE" + "');</script>");
             }
 
             else if (cc.IsValidHolidayRequest(start, end, ((long)(Session["sesID"]))))
@@ -107,15 +117,15 @@ namespace EmployeeWebApp
                     List<DateTime> newdates = new List<DateTime>();
                     if (peakValue == 1)
                     {
-                        newdates = pt.newSuggestion(start, end, pt.StarPeak, pt.StarPeak);
+                        newdates = pt.newSuggestion(start, end, pt.StarPeak, pt.EndPeak);
                     }
                     else if (peakValue == 2)
                     {
-                        newdates = pt.newSuggestion(start, end, pt.StarPeak, pt.StarPeak);
+                        newdates = pt.newSuggestion(start, end, pt.StarPeak, pt.EndPeak);
                     }
                     else if (peakValue == 3)
                     {
-                        newdates = pt.newSuggestion(start, end, pt.StarPeak, pt.StarPeak);
+                        newdates = pt.newSuggestion(start, end, pt.StarPeak, pt.EndPeak);
                     }
                     if (MessageBox.Show("Your request happends to be on " + pt.Holiday + " holiday we suggest " + newdates[0].ToString("d") + "  To  " + newdates[1].ToString("d"),"Accept suggestion", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                     {

@@ -31,6 +31,7 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.pnlLogin = new System.Windows.Forms.Panel();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -87,7 +88,7 @@
             this.pnlLogin.ForeColor = System.Drawing.Color.White;
             this.pnlLogin.Location = new System.Drawing.Point(0, 567);
             this.pnlLogin.Name = "pnlLogin";
-            this.pnlLogin.Size = new System.Drawing.Size(92, 31);
+            this.pnlLogin.Size = new System.Drawing.Size(102, 31);
             this.pnlLogin.TabIndex = 0;
             // 
             // label3
@@ -183,9 +184,9 @@
             this.pnlHolidayReq.Controls.Add(this.groupBox2);
             this.pnlHolidayReq.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.pnlHolidayReq.ForeColor = System.Drawing.Color.White;
-            this.pnlHolidayReq.Location = new System.Drawing.Point(3, 5);
+            this.pnlHolidayReq.Location = new System.Drawing.Point(256, 567);
             this.pnlHolidayReq.Name = "pnlHolidayReq";
-            this.pnlHolidayReq.Size = new System.Drawing.Size(352, 605);
+            this.pnlHolidayReq.Size = new System.Drawing.Size(99, 43);
             this.pnlHolidayReq.TabIndex = 8;
             // 
             // button6
@@ -336,7 +337,7 @@
             this.pnlView.ForeColor = System.Drawing.Color.White;
             this.pnlView.Location = new System.Drawing.Point(12, -8);
             this.pnlView.Name = "pnlView";
-            this.pnlView.Size = new System.Drawing.Size(10, 135);
+            this.pnlView.Size = new System.Drawing.Size(324, 615);
             this.pnlView.TabIndex = 13;
             // 
             // dataGridView1
@@ -349,7 +350,7 @@
             this.dataGridView1.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.EnableWithoutHeaderText;
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = System.Drawing.Color.SeaGreen;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             dataGridViewCellStyle2.ForeColor = System.Drawing.Color.White;
             dataGridViewCellStyle2.Format = "d";
             dataGridViewCellStyle2.NullValue = null;
@@ -361,13 +362,22 @@
             this.dataGridView1.GridColor = System.Drawing.Color.ForestGreen;
             this.dataGridView1.Location = new System.Drawing.Point(6, 146);
             this.dataGridView1.Name = "dataGridView1";
-            dataGridViewCellStyle3.BackColor = System.Drawing.Color.SeaGreen;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft New Tai Lue", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.Color.DarkSlateGray;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             dataGridViewCellStyle3.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle3.Format = "d";
-            dataGridViewCellStyle3.NullValue = null;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
-            this.dataGridView1.RowsDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridView1.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            this.dataGridView1.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
+            dataGridViewCellStyle4.BackColor = System.Drawing.Color.SeaGreen;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft New Tai Lue", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle4.Format = "d";
+            dataGridViewCellStyle4.NullValue = null;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
+            this.dataGridView1.RowsDefaultCellStyle = dataGridViewCellStyle4;
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridView1.Size = new System.Drawing.Size(330, 255);
             this.dataGridView1.TabIndex = 13;
@@ -546,7 +556,6 @@
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Panel pnlView;
-        private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Button button2;
@@ -561,6 +570,7 @@
         private System.Windows.Forms.Button button5;
         private System.Windows.Forms.MonthCalendar monthCalendar2;
         private System.Windows.Forms.Button button6;
+        public System.Windows.Forms.DataGridView dataGridView1;
     }
 }
 
