@@ -628,6 +628,7 @@ namespace LoginForm
                 DateTime start = hm.HighlightBooked(req).StartDate;
                 DateTime end = hm.HighlightBooked(req).EndDate;
                 calenderHighlight.highlightBook(start, end);
+                calenderHighlight.Refresh();
             }
             catch (Exception ex)
             {
@@ -755,7 +756,7 @@ namespace LoginForm
 
         private void BtnSaveHoidayConfig_Click(object sender, EventArgs e)
         {
-            hm.SettingsChanges(dtpStartXmas.Value, dtpEndXmas.Value, dtpStartSummer.Value, dtpSummerEnd.Value, cmbBXRoles, cmbBXDepartment, numDaysEnt, numRelaxed, numStaffReq, cmbxMonths);
+            hm.SettingsChanges(dtpStartXmas.Value, dtpEndXmas.Value, dtpStartSummer.Value, dtpSummerEnd.Value, numDaysEnt, numRelaxed, numStaffReq, cmbxMonths);
             MessageBox.Show("All changes have been saved correctly ");
         }
     }

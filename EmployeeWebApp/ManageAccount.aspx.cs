@@ -91,6 +91,7 @@ namespace EmployeeWebApp
         }
         protected void btnSubmit_Click(object sender, EventArgs e)
         {
+            string appType = "web";
              DateTime start = Calendar1.SelectedDate;
              DateTime end = Calendar2.SelectedDate;
             CultureInfo ci = CultureInfo.InvariantCulture;
@@ -110,7 +111,7 @@ namespace EmployeeWebApp
                 Response.Write("<script>alert('" + "Pleas be aware that the the period from 22nd of December to the 3rd of January, the company is closed, SELECT NEW DATE" + "');</script>");
             }
 
-            else if (cc.IsValidHolidayRequest(start, end, ((long)(Session["sesID"]))))
+            else if (cc.IsValidHolidayRequest(start, end, ((long)(Session["sesID"])), appType))
             {
                 if (peakValue != 0)
                 {
@@ -129,7 +130,7 @@ namespace EmployeeWebApp
                     }
                     if (MessageBox.Show("Your request happends to be on " + pt.Holiday + " holiday we suggest " + newdates[0].ToString("d") + "  To  " + newdates[1].ToString("d"),"Accept suggestion", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                     {
-                        if (cc.IsValidHolidayRequest(newdates[0], newdates[1], ((long)(Session["sesID"]))))
+                        if (cc.IsValidHolidayRequest(newdates[0], newdates[1], ((long)(Session["sesID"])), appType))
                         {
                             if (hm.SubmitHolidayReq(newdates[0], newdates[1], ((long)(Session["sesID"]))))
                             {
@@ -143,7 +144,7 @@ namespace EmployeeWebApp
                     }
                     else
                     {
-                        if (cc.IsValidHolidayRequest(start, end, ((long)(Session["sesID"]))))
+                        if (cc.IsValidHolidayRequest(start, end, ((long)(Session["sesID"])), appType))
                         {
                             if (hm.SubmitHolidayReq(start, end, ((long)(Session["sesID"]))))
                             {

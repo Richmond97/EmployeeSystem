@@ -166,6 +166,7 @@ namespace EmployeeMobileApp
 
         private void BtnReqHoli_Click(object sender, EventArgs e)
         {
+            string appType = "mobile";
             DateTime start = monthCalendar1.SelectionRange.Start;
             DateTime end = monthCalendar2.SelectionRange.Start;
             try
@@ -178,7 +179,7 @@ namespace EmployeeMobileApp
                 }
                 else if (peakValue != 0)
                 {
-                    if (cc.IsValidHolidayRequest(start, end, staffID))
+                    if (cc.IsValidHolidayRequest(start, end, staffID, appType))
                     {
                         List<DateTime> newdates = new List<DateTime>();
                         if (peakValue == 1)
@@ -193,7 +194,7 @@ namespace EmployeeMobileApp
                         {
                             newdates = pt.newSuggestion(start, end, pt.StarPeak, pt.StarPeak);
                         }
-                        if (MessageBox.Show("Accept suggestion", "Your request happends to be on " + pt.Holiday + " holiday we suggest " + newdates[0].ToString("d") + "  To  " + newdates[1].ToString("d"), MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                        if (MessageBox.Show("Your request happends to be on " + pt.Holiday + " holiday we suggest " + newdates[0].ToString("d") + "  To  " + newdates[1].ToString("d"),"Accept suggestion", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                         {
                             if (soap.SubmitHolidayReq(newdates[0], newdates[1], staffID))
                             {
@@ -220,21 +221,13 @@ namespace EmployeeMobileApp
                 }
                 else
                 {
-                    if (soap.SubmitHolidayReq(start, end, staffID))
-                    {
-                        MessageBox.Show("Booking from: " + start.ToString("d") + "\n" + "To: " + end.ToString("d"), "BOOKING");
-                    }
-                    else
-                    {
-                        MessageBox.Show("We couldn't completer yor request this time, please try later");
-                    }
-
+                    
                 }
             }
 
             catch (Exception ex)
             {
-                MessageBox.Show("WE are facinf some issues try again later" + ex.HelpLink);
+                MessageBox.Show("WE are facing some issues try again later" + "\n" + ex.Message);
             }
         }
 

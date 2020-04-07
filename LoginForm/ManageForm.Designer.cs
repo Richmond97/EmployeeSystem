@@ -105,6 +105,7 @@
             this.label30 = new System.Windows.Forms.Label();
             this.label29 = new System.Windows.Forms.Label();
             this.pnlHolidayBkd = new System.Windows.Forms.Panel();
+            this.calenderHighlight = new HolidayManager_ClassLibrary.Functionality_E.calenderHighlight(this.components);
             this.btnSearchEmployee = new System.Windows.Forms.Button();
             this.txtEmployee = new System.Windows.Forms.TextBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
@@ -159,7 +160,6 @@
             this.editEmployee1 = new Component_A_ClassLibrary.EditEmployee(this.components);
             this.deleteEmployee1 = new Component_A_ClassLibrary.DeleteEmployee(this.components);
             this.createEmployee2 = new Component_A_ClassLibrary.CreateEmployee(this.components);
-            this.calenderHighlight = new HolidayManager_ClassLibrary.Functionality_E.calenderHighlight(this.components);
             this.constrainsComponent2 = new HolidayManager_ClassLibrary.ConstrainsComponent(this.components);
             this.priorityComponent = new HolidayManager_ClassLibrary.Functionality_D.PriorityComponent(this.components);
             this.createPanel.SuspendLayout();
@@ -906,9 +906,9 @@
             this.panelPriority.Controls.Add(this.btnAcceptP);
             this.panelPriority.Controls.Add(this.dataGridSorted);
             this.panelPriority.Controls.Add(this.label30);
-            this.panelPriority.Location = new System.Drawing.Point(40, 294);
+            this.panelPriority.Location = new System.Drawing.Point(585, 102);
             this.panelPriority.Name = "panelPriority";
-            this.panelPriority.Size = new System.Drawing.Size(590, 226);
+            this.panelPriority.Size = new System.Drawing.Size(271, 154);
             this.panelPriority.TabIndex = 58;
             // 
             // groupBox4
@@ -1023,11 +1023,17 @@
             this.pnlHolidayBkd.Controls.Add(this.groupBox2);
             this.pnlHolidayBkd.Controls.Add(this.dataGridViewBooked);
             this.pnlHolidayBkd.Controls.Add(this.label24);
-            this.pnlHolidayBkd.Location = new System.Drawing.Point(27, 440);
+            this.pnlHolidayBkd.Location = new System.Drawing.Point(103, 71);
             this.pnlHolidayBkd.Margin = new System.Windows.Forms.Padding(2);
             this.pnlHolidayBkd.Name = "pnlHolidayBkd";
-            this.pnlHolidayBkd.Size = new System.Drawing.Size(282, 83);
+            this.pnlHolidayBkd.Size = new System.Drawing.Size(805, 290);
             this.pnlHolidayBkd.TabIndex = 55;
+            // 
+            // calenderHighlight
+            // 
+            this.calenderHighlight.Location = new System.Drawing.Point(564, 139);
+            this.calenderHighlight.Name = "calenderHighlight";
+            this.calenderHighlight.TabIndex = 61;
             // 
             // btnSearchEmployee
             // 
@@ -1153,7 +1159,7 @@
             this.dataGridView3.Name = "dataGridView3";
             this.dataGridView3.RowHeadersVisible = false;
             this.dataGridView3.RowHeadersWidth = 62;
-            this.dataGridView3.Size = new System.Drawing.Size(88, 63);
+            this.dataGridView3.Size = new System.Drawing.Size(193, 49);
             this.dataGridView3.TabIndex = 53;
             // 
             // pnlHolidayOnDuty
@@ -1254,7 +1260,7 @@
             this.pnlHolidayReq.Controls.Add(this.btnReject);
             this.pnlHolidayReq.Controls.Add(this.btnAccept);
             this.pnlHolidayReq.Controls.Add(this.validHolidayReqGridView);
-            this.pnlHolidayReq.Location = new System.Drawing.Point(357, 438);
+            this.pnlHolidayReq.Location = new System.Drawing.Point(472, 353);
             this.pnlHolidayReq.Margin = new System.Windows.Forms.Padding(2);
             this.pnlHolidayReq.Name = "pnlHolidayReq";
             this.pnlHolidayReq.Size = new System.Drawing.Size(207, 89);
@@ -1413,9 +1419,9 @@
             this.settingsPnl.Controls.Add(this.dtpStartSummer);
             this.settingsPnl.Controls.Add(this.dtpEndXmas);
             this.settingsPnl.Controls.Add(this.dtpStartXmas);
-            this.settingsPnl.Location = new System.Drawing.Point(29, 12);
+            this.settingsPnl.Location = new System.Drawing.Point(817, 462);
             this.settingsPnl.Name = "settingsPnl";
-            this.settingsPnl.Size = new System.Drawing.Size(1028, 586);
+            this.settingsPnl.Size = new System.Drawing.Size(240, 136);
             this.settingsPnl.TabIndex = 9;
             // 
             // btnSaveHolidayConfig
@@ -1624,12 +1630,6 @@
             this.dtpStartXmas.Name = "dtpStartXmas";
             this.dtpStartXmas.Size = new System.Drawing.Size(200, 20);
             this.dtpStartXmas.TabIndex = 0;
-            // 
-            // calenderHighlight
-            // 
-            this.calenderHighlight.Location = new System.Drawing.Point(564, 139);
-            this.calenderHighlight.Name = "calenderHighlight";
-            this.calenderHighlight.TabIndex = 61;
             // 
             // constrainsComponent2
             // 

@@ -128,17 +128,21 @@ namespace SOAP
         [WebMethod]
         public bool SubmitHolidayReq(DateTime startH, DateTime endH, long StaffID)
         {
+            var ID = (from a in db.employees
+                      where a.StaffID == StaffID
+                      select a.EmployeeID).SingleOrDefault();
             try
             {
                
-                holidaysrequested rewHlday = new holidaysrequested
+                holidaysrequested newHlday = new holidaysrequested
                 {
-                    EmployeeID = StaffID,
+                    EmployeeID = (long)ID,
                     StartDate = Convert.ToDateTime(startH.ToShortDateString()),
                     EndDate = Convert.ToDateTime(endH.ToShortDateString()),
                     Status = "Pending"
 
                 };
+                db.holidaysrequesteds.InsertOnSubmit(newHlday);
                 db.SubmitChanges();
                 return true;
             }

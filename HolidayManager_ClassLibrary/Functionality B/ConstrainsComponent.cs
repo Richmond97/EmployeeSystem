@@ -112,9 +112,26 @@ namespace HolidayManager_ClassLibrary
             return  holidaysLeft = (holidaysLeft + bonus) - taken;
 
         }
-        public bool IsValidHolidayRequest(DateTime start, DateTime end, long EmployeeID)
+        public bool IsValidHolidayRequest(DateTime start, DateTime end, long EmployeeID,string appType)
         {
-           int daysLeft = HolidaysLeft(EmployeeID);
+            long ID = 0;
+            if (appType == "mobile")
+            {
+                var xID = (from a in db.roles
+                          where a.employee.StaffID == EmployeeID
+                          select a.EmployeeID).Single();
+                ID = xID;
+            }
+        else if (appType == "web")
+            {
+                var xID = (from a in db.roles
+                          where a.employee.EmployeeID == EmployeeID
+                          select a.EmployeeID).Single();
+                ID = xID;
+            }
+            
+            
+            int daysLeft = HolidaysLeft(ID);
            int daysRequested = (end - start).Days;
             if (daysLeft - daysRequested<0)
             {
@@ -178,8 +195,8 @@ namespace HolidayManager_ClassLibrary
                //Chech if the holiday request overlaps with an existing holiday
                 if(holiday.StartDate > h.EndDate && h.StartDate > holiday.EndDate)
                 {
-                    
-                    //if it does overalps is not valid [already set to false]
+
+                    validReq = false; //if it does overalps is not valid [already set to false]
                 }
                 else
                 {

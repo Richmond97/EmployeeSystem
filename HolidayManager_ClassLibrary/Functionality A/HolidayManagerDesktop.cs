@@ -41,7 +41,7 @@ namespace HolidayManager_ClassLibrary.Functionality_A
 
                 foreach (var holiday in result)
                 {
-                    if (cc.validHolidayReqManagerHead(holiday.RequestID, holiday.EmployeeID) && (cc.enoughStaff(holiday.EmployeeID ,holiday.RequestID) == 0))
+                    if (!cc.validHolidayReqManagerHead(holiday.RequestID, holiday.EmployeeID) && (cc.enoughStaff(holiday.EmployeeID ,holiday.RequestID) == 0))
                     {
                         validReq.Add(holiday);
                     }
@@ -73,7 +73,7 @@ namespace HolidayManager_ClassLibrary.Functionality_A
             if (cc.enoughStaff(result.EmployeeID, result.RequestID) == 1)
             {
                 message = " Constraint broken [ %40 of staff requireed for department ] ";
-                if (cc.validHolidayReqManagerHead(result.RequestID, result.EmployeeID) == false)
+                if (cc.validHolidayReqManagerHead(result.RequestID, result.EmployeeID) == true)
                 {
                     message += "  And  Constraint broken [ Either Head, Head Deputy or Manager,  Senior member must be on duty ]";
                 }
@@ -82,13 +82,13 @@ namespace HolidayManager_ClassLibrary.Functionality_A
             else if (cc.enoughStaff(result.EmployeeID, result.RequestID) == 2)
             {
                 message = " Constraint broken [ %60 of statt requireed for department ] ";
-                if (cc.validHolidayReqManagerHead(result.RequestID, result.EmployeeID) == false)
+                if (cc.validHolidayReqManagerHead(result.RequestID, result.EmployeeID) == true)
                 {
                     message += "  And Constraint broken [ Either Head Deputy or Manager or Senior member must be on duty ] ";
                 }
                 MessageBox.Show(message);
             }
-            else if (cc.validHolidayReqManagerHead(result.RequestID, result.EmployeeID) == false)
+            else if (cc.validHolidayReqManagerHead(result.RequestID, result.EmployeeID) == true)
             {
                 message = "Constraint broken [ Either Head, Head Deputy or Manager,  Senior member must be on duty ]";
                 if (cc.enoughStaff(result.EmployeeID, result.RequestID) == 1)
@@ -285,7 +285,7 @@ namespace HolidayManager_ClassLibrary.Functionality_A
                          select a).Single();
             return xmasQ;
         }
-        public void SettingsChanges(DateTime dtpStartXmas, DateTime dtpEndXmas, DateTime dtpStartSummer, DateTime dtpSummerEnd, ComboBox cmbBXRoles, ComboBox cmbBXDepartment, NumericUpDown numDaysEnt, NumericUpDown numRelaxed, NumericUpDown numStaffReq,ComboBox cmbxMonths)
+        public void SettingsChanges(DateTime dtpStartXmas, DateTime dtpEndXmas, DateTime dtpStartSummer, DateTime dtpSummerEnd,  NumericUpDown numDaysEnt, NumericUpDown numRelaxed, NumericUpDown numStaffReq,ComboBox cmbxMonths)
         {
             peaktime Xpeak = getXmasPeakT();
             peaktime Speak = getSummerPeakT();
@@ -297,8 +297,6 @@ namespace HolidayManager_ClassLibrary.Functionality_A
                 Xpeak.EndDate = dtpEndXmas;
                 Speak.StartDate = dtpStartSummer;
                 Speak.EndDate = dtpSummerEnd;
-                constraints.AvailableRoles = cmbBXRoles.ToString();
-                constraints.AvailableDepartments = cmbBXDepartment.ToString();
                 constraints.HolidayEntitlement = (int)numDaysEnt.Value;
                 constraints.MinimumWorkingStaffRelaxed = (int)numRelaxed.Value;
                 constraints.MinimumWorkingStaff = (int)numStaffReq.Value;
