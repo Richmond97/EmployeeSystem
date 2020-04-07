@@ -86,7 +86,7 @@
             this.pnlLogin.Controls.Add(this.groupBox1);
             this.pnlLogin.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.pnlLogin.ForeColor = System.Drawing.Color.White;
-            this.pnlLogin.Location = new System.Drawing.Point(0, 567);
+            this.pnlLogin.Location = new System.Drawing.Point(14, 575);
             this.pnlLogin.Name = "pnlLogin";
             this.pnlLogin.Size = new System.Drawing.Size(102, 31);
             this.pnlLogin.TabIndex = 0;
@@ -326,6 +326,7 @@
             // pnlView
             // 
             this.pnlView.BackColor = System.Drawing.Color.SeaGreen;
+            this.pnlView.Controls.Add(this.pnlLogin);
             this.pnlView.Controls.Add(this.dataGridView1);
             this.pnlView.Controls.Add(this.button1);
             this.pnlView.Controls.Add(this.label8);
@@ -350,7 +351,7 @@
             this.dataGridView1.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.EnableWithoutHeaderText;
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = System.Drawing.Color.SeaGreen;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             dataGridViewCellStyle2.ForeColor = System.Drawing.Color.White;
             dataGridViewCellStyle2.Format = "d";
             dataGridViewCellStyle2.NullValue = null;
@@ -510,7 +511,6 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(348, 661);
-            this.Controls.Add(this.pnlLogin);
             this.Controls.Add(this.btnHome);
             this.Controls.Add(this.btnLogout);
             this.Controls.Add(this.btnView);
